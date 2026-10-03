@@ -586,3 +586,231 @@ Documentation-only validation: `git diff --check --
 normal LF-to-CRLF conversion. Read/hash commands for the reconciliation exited
 0. The G0 section remains intact. This agent authored only `sa-review.md` and
 made no commit, deployment, configuration or product-code change.
+
+## G2 final-format and schema-resource advisory — 2026-10-04
+
+Owner: `sa_g2_schema` (sa-agent). Exact boundary: append only this file for
+G2-runtime fix wave 2. This is architecture advice, **not an independent review
+or PASS**. G2 has consumed two of three synthesizer cycles; this advisory does
+not consume or reset that counter. The coordinator waits for this advisory and
+the runtime owner's terminal result before deciding whether to reserve cycle 3.
+
+Sources: complete product specification and project guidance, current
+requirements/spec/design/tasks/decisions/review, previous advisories,
+`docs/api.md`, runtime request/finalization code and runtime helpers. Relevant
+authority is specification 4.1 (external response format), 6.2 (separate control
+contract), 8 (buffer/validate control before emitting payload), and the accepted
+G1 nullable final-LLM decision. The runtime owner writes only its assigned engine
+and three test files; the API owner has a disjoint nine-file scope. Neither
+their files nor shared contracts/dependencies were edited here.
+
+### Findings and recommended disposition
+
+P0/P1 below mean implementation priority, not a review severity.
+
+| ID / priority | Evidence and effect | Owner / action |
+| --- | --- | --- |
+| SA-G2-01 / P0 | Cycle-2 F4 is a real transformation defect under the pinned local validator: root `$id` empty or `#` does not establish the independent payload root assumed by the old early return. Local pointers resolve at the controller root. | `coding_runtime`: preserve reference/resource semantics in the detached provider schema; execute emitted-request good/bad tests, not shape assertions alone. |
+| SA-G2-02 / P0 | Whole-payload resource isolation fixes the simple root cases but **alone is insufficient**. Adding a root URI makes a nested empty/`#` identifier collide with the containing resource in the pinned resolver. A nested pointer intended for root definitions then resolves at the child. | `coding_runtime`: normalize same-resource empty/`#` identifiers only at actual schema locations in the detached transport copy, or demonstrate an equivalent preservation algorithm. Preserve the original policy and snapshots byte-for-byte. |
+| SA-G2-03 / P0 | Actual no-LLM input→output runs returned raw `hello` or numeric-looking `123` for JSON Schema string payloads. Both completed, with zero provider calls. Object/array/null values were already serialized. During the owner's concurrent fix, a fresh probe returned JSON string `"hello"` for `json_object`, which is still not an object. | `coding_runtime`: distinguish native payloads from ordinary provider-produced serialized text. JSON-encode native controller and pass-through values; reject a non-object native value for object-only format explicitly, without inventing a wrapper or coercion. |
+| SA-G2-04 / P1, open disposition | Actual pass-through input `{"actual":1}` with JSON Schema `{"const":{"expected":2}}` completes with `{"actual":1}` and zero provider calls. JSON serialization does not enforce arbitrary schema constraints. No provider exists on this path to enforce the requested schema. | Coordinator owns the disposition; runtime owner must not claim arbitrary local schema validation. Current `jsonschema==4.26.0` is development-only. Any production dependency/configuration/profile change requires the coordinator and sole bootstrap owner; this advisory does not authorize it or narrow accepted schemas. |
+
+### Minimal schema-embedding design
+
+Use the smallest transformation that preserves the caller schema's effective
+resource, dialect and value semantics. A copied schema is provider transport
+state, not a mutation of `RunPolicy.client_request_json` or a graph snapshot.
+
+1. Carry a declared caller `$schema` to the outer controller schema. An anonymous
+   caller retains the current default. The internal object/properties/required,
+   enum, additionalProperties and JSON-pointer reference into the generated
+   `$defs` container work in the tested Draft 4/7/2020 contexts. Do not relabel a
+   legacy caller schema as a modern dialect just to pass one validator.
+2. Determine the active identifier keyword by dialect: legacy Draft 4 `id`,
+   later standard dialects `$id`. Preserve nonempty relative/absolute identifiers
+   where they establish a resource. Do not convert all IDs to private URIs.
+3. For an anonymous or root empty/`#` identifier, a deterministic private
+   **hierarchical** URI can establish the payload resource in the detached copy.
+   Use the schema bytes/hash as stable input; no random IDs, network lookup,
+   inference caching or persisted configuration are required. A hierarchical
+   base preserves meaningful relative-URI resolution better than an opaque URN.
+4. A schema-location walk is still needed to handle nested same-resource empty
+   or `#` identifiers. Remove these redundant identifiers in the transport copy
+   before root isolation; do not touch literal objects under `const`, `enum`,
+   `default`, `examples`, or unknown annotations/extensions. Nonempty resource
+   IDs and anchor names remain intact. Dialect switches and legacy `$ref`
+   sibling rules affect whether an identifier is operative.
+5. Legacy Draft 4/6/7 have two cases where simple resource isolation is not
+   sufficient: a root `$ref` ignores identifier siblings, and a fragment-only
+   root ID such as `#root` names an anchor rather than a new document resource.
+   Preserve that ID and use schema-location pointer rebasing for its containing
+   resource. Treat empty and fragment-only IDs as same-resource locations;
+   stop rebasing at genuine nested resource boundaries. Only actual `$ref`
+   (and applicable dynamic reference) values that are `#` or `#/...` are moved;
+   preserve named anchors and literal data. Determine dialect at each schema
+   location rather than treating an ordinary property named `id` as a resource.
+6. Preserve JSON Pointer and URI-fragment encoding. Prepending a path must not
+   decode/re-encode `~0`, `~1`, percent-encoded spaces or Unicode in a way that
+   changes target identity. Never use a generic recursive replacement of every
+   object key called `$ref`.
+
+The recommendation is a bounded hybrid, not a claim of a complete new JSON
+Schema implementation. Do not introduce a dialect allowlist or new dependency
+merely to hide a failing test. Keep the existing strict control decision and
+payload separation. Unknown remote references remain untested; the local probe
+registry explicitly refuses retrieval.
+
+**Rejected simplifications:** stopping at any identifier reproduces F4;
+resource-isolating every root without nested normalization fails SA-G2-02;
+rewriting every `$ref` corrupts literals (the earlier F3); replacing legacy
+`#root` with `private-uri#root` alone loses named-anchor recursion; blindly adding
+both legacy/modern ID aliases changes schema metadata to accommodate one library
+context and is not needed for the tested same-dialect outer wrapper.
+
+### Validator context versus production evidence
+
+The installed, pinned primary-source implementation was inspected using
+`inspect.getsource`: `jsonschema.validators` generated `descend`, and
+`referencing.jsonschema` identifier, anchor and subresource functions.
+`descend` constructs a child resource with the parent's specification before
+evolving to the child's declared `$schema`. Consequently, a legacy `id` child
+under a modern wrapper can fail while the same declared legacy outer wrapper
+succeeds; the inverse also occurs. This is **local validator-context evidence**,
+not a demonstrated Ollama failure or justification for a new accepted profile.
+The final regression should use `validator_for(emitted_schema)` and test actual
+resource boundaries, rather than force Draft202012Validator on every legacy
+wrapper. Mixed-dialect nested resources remain a separate regression concern.
+
+Nonempty fragment IDs are valid in the tested Draft 4/7 meta-schemas, but
+Draft 2020-12's meta-validator rejects them. Do not label a failing original
+schema as a preservation regression. Compare original and emitted good/bad
+behavior first. Some validator implementations accept instances even for an
+invalid meta-schema; those are different observations.
+
+No network/schema retrieval, Ollama inference, tool execution, deployment,
+secret read or external write was performed. Current official online documents
+were not fetched under this handoff's no-network boundary. Findings about the
+validator are bounded to the installed pinned source and executable evidence;
+there is no claim of universal draft/provider support.
+
+### Final external format decision table
+
+| Final source | Text/default | `json_schema` | `json_object` |
+| --- | --- | --- | --- |
+| Ordinary LLM | Preserve provider text | Preserve already-serialized provider content; do not JSON-encode it a second time | Preserve serialized provider content; malformed/non-object upstream output is a provider error, not a value to coerce |
+| Final controller payload | Preserve string as text; serialize other JSON values as before | Canonically encode the payload value, never the control envelope; model constraint embedding is separate from full local schema validation | Require object payload, then encode only that object |
+| No-LLM input→output | Preserve specified pass-through behavior | Canonically encode the native JSON value; arbitrary constraint satisfaction remains the explicit SA-G2-04 gap | Require object input/output; reject incompatible native values explicitly |
+
+For deterministic pass-through incompatibility, existing `invalid_parameter`
+(400) is preferable to `upstream_error` because no upstream call occurred.
+For a provider that violates its requested final contract, existing
+`upstream_error` (502) is available. Preserve the durable failed state and
+sanitized error; do not persist or stream a successful final envelope first.
+This table proposes no new error DTO or dependency. Object validation, arbitrary
+schema validation, JSON syntactic validity and provider-native schema enforcement
+are distinct claims and must remain distinct in verification reports.
+
+### Executed evidence and required owner regressions
+
+Commands ran from `D:/Sources/creep` using
+`uv --system-certs run --project backend --locked python -c $probe`, with literal
+PowerShell here-string arguments, never stdin/TTY. Temporary directories held
+only isolated test SQLite files and were managed by Python's test context. No
+test or production source file was written by these probes.
+
+| Probe / exact invocation family | Exit | Observation |
+| --- | ---: | --- |
+| Pinned validator identifier matrix, same locked `python -c $probe` | 0 | 20 original-valid root schemas across Draft4/7/2019/2020 and absent/empty/`#`/relative/absolute IDs. Current empty-ID failures reproduced; modern isolation succeeds; legacy parent/child dialect behavior recorded separately. |
+| Dialect-parent matrix and actual pass-through runtime/SQLite probe, same invocation | 0 | 18 parent/child/alias combinations explored; five real pass-through runs. `hello` and `123` violate requested string representation; object/array/null fidelity succeeds; all have zero provider calls. |
+| Legacy fragment/recursive anchor probes, same invocation | 0 | Same-dialect legacy rebasing preserves `#root` plus local definition references: good nested instance accepted, bad nested type rejected. Blind absolute-fragment replacement was not adopted. |
+| Actual `_request`/scheduler/SQLite candidate matrix, temporary process-only method substitution, same invocation | **1** | 19 root/legacy candidate cases completed and retained caller schema; next nested empty-ID case failed. This is truthful rejected-candidate evidence, not an overall passing matrix or implemented fix. |
+| Nested same-resource normalization matrix, same invocation | 0 | Six Draft4/7/2020 empty/`#` cases preserve original good/bad validation after removing only the nested redundant ID and isolating the root. This was a schema-level candidate test, not a combined runtime rerun. |
+| Fresh actual pass-through `json_object` and mismatched `const` probe, same invocation | 0 | During concurrent encoding edits, both completed with zero provider calls: JSON string `"hello"` for object-only request, and `{"actual":1}` despite const `{"expected":2}`. Exit 0 confirms reproduction, not acceptance. |
+
+The following compact reproduction is executable against the current tree. Its
+purpose is to print the outcome without declaring an error or success accepted;
+the runtime owner may close a finding after this report is written.
+
+```powershell
+$probe = @'
+import asyncio, json, sys, tempfile
+from pathlib import Path
+sys.path[:0] = [str(Path('backend').resolve()),
+               str(Path('backend/tests/runtime').resolve())]
+from test_scheduler import (Provider, create_runtime, graph, input_node,
+                            output_node, edge, submission)
+from app.contracts.errors import CGError
+
+async def main():
+    cases = [
+        ('hello', {'type': 'json_object'}),
+        ({'actual': 1}, {'type': 'json_schema', 'json_schema': {
+            'name': 'expected', 'schema': {'const': {'expected': 2}}}}),
+    ]
+    for payload, response_format in cases:
+        with tempfile.TemporaryDirectory() as directory:
+            async def never(request):
+                raise AssertionError('A pass-through graph must not infer')
+            provider = Provider(never)
+            runtime, store = await create_runtime(Path(directory), provider)
+            try:
+                value = graph(nodes=[input_node('i'), output_node()],
+                              edges=[edge('i', 'o', 'answer')])
+                run = await runtime.submit(submission(value,
+                    inputs={'chat': payload}, client={
+                        'model': 'cg/g', 'response_format': response_format}))
+                try:
+                    result = await asyncio.wait_for(
+                        runtime.await_response(run.run_id, 'anonymous'), 3)
+                    print(response_format['type'], 'completed',
+                          repr(result.completion().choices[0].message.content))
+                except CGError as error:
+                    print(response_format['type'], error.code, error.status_code)
+                assert not provider.requests
+            finally:
+                await runtime.shutdown()
+                await store.close()
+
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $probe
+```
+
+Before the last independent review, owner tests should cover emitted schemas
+and persisted outcomes for: root/nested empty IDs; nested genuine resources;
+relative/absolute IDs; legacy named fragments and `$ref` sibling rules; declared
+dialect switches; recursive/dynamic/named-anchor references; escaped pointer
+segments; literal `$ref`/`$id` data; string/object/scalar/array/null final payloads;
+no-LLM pass-through; ordinary preformatted LLM content; replay/recovery equality;
+and no success envelope on incompatible object format. Include positive and
+negative instances and original-schema validity so a permissive or misconfigured
+validator cannot produce a false green result. Required final arbitrary-schema
+disposition must not be obscured by tests limited to matching `const` values.
+
+### Rollout, rollback and residual risk
+
+The implementation owner applies a scoped pure transformation and finalization
+change, then runs affected/full locked checks. No schema migration is proposed;
+existing policy, graph snapshots and saved response envelopes stay immutable.
+Rollback is a scoped source rollback before release, not rewriting accepted run
+history or re-executing tools. The coordinator reconciles docs and unresolved
+contract/dependency decisions; the independent reviewer alone owns cycle-3
+verdict. Findings were sent directly to the coordinator and `coding_runtime`.
+
+Residual risks: actual Ollama grammar support is not proved by jsonschema;
+mixed-dialect and remote-resource behavior may differ; extension-defined custom
+vocabularies are not established by the bounded standard-keyword walker;
+arbitrary final-schema enforcement on a no-provider path remains SA-G2-04 until
+explicitly resolved. Resource-ID normalization must be described accurately as
+transport-copy normalization, not preservation of every ID byte. Current files
+are authoritative over these observations because the owner is concurrently
+implementing corrections. No product-completion or independent-PASS claim is
+made here.
+
+Documentation verification: `git diff --check --
+.codex/specs/cognitive-graph-mvp/sa-review.md` exited 0. A locked Python prefix
+comparison against `git show HEAD:.codex/specs/cognitive-graph-mvp/sa-review.md`
+exited 0 and confirmed the entire G0/G1 text is unchanged and exactly one G2
+section was appended. The first prefix-check attempt exited 1 because Python's
+default Windows cp1252 decoder could not decode Git's UTF-8 output; rerunning
+with explicit `encoding='utf-8'` corrected the verifier, not the document.
