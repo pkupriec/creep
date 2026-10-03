@@ -34,3 +34,9 @@
 - Select React Flow `@xyflow/react@12.12.0` (MIT) based on executable comparison and simpler controlled canonical JSON mapping. No Rete runtime or frontend execution engine enters the MVP. G1 will separately own production manifest/lock pins. This selection does not claim production UI acceptance.
 - Research trace SHA256 `add3babddf3b1ea927eee687cb59d7bbe8e592853bf7734d8ba06e4db4c2545d`; actual request keys fit the specified client profile. Model-specific research thinking control is not a new accepted client parameter or universal default.
 - G0 cycle 1 consumed before spawning `review_g0_c1` as sole independent synthesizer. G0 budget 1/3, all other product groups 0/3. Scope is G0 research proof/selection/evidence; A01–A16 production acceptance remains open and must not be substituted by prototype tests. G1 stays waiting until verdict.
+
+## 2026-10-03 — G0 cycle 1 FAIL and scoped fix wave
+
+- Independent `review_g0_c1` completed and appended authoritative FAIL. No High/Critical findings; two empirical Medium acceptance-gate defects: mutable upstream trace histories distort the transmitted request, and CLI replay mismatches are recorded without enforcing a nonzero failure. Fresh real continuation itself succeeded; reviewer reproduced trace divergence and false completed replay assertion.
+- Independent evidence: 16 Hermes tests, Ruff, strict TypeScript, six unit tests, build, five behavioral browser tests and actual Hermes/Ollama combined run passed. The independent live run took 58.9422s, three client requests/two reads, compression 28→6. These successes do not waive the required evidence defects.
+- One G0 fix wave assigned to `coding_g0_fix1` with four exact research files and regression/evidence regeneration duties. No implementation or requirements change. G0 remains 1/3 consumed; G1–G6 waiting at 0/3. Cycle 2 will be reserved only after corrected evidence is reconciled. Review history is preserved.
