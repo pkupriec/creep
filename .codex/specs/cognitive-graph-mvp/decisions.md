@@ -255,3 +255,10 @@
 ## 2026-10-04 — G3 first independent review reserved
 
 - Stable G3-proxy cycle1/3 reserved before review_g3_c1 spawn; seventeen exact provider/bridge/API/integration files frozen and read directly despite untracked state. No analysts, sole review.md writer, no production edits/liveeffects/listeners. DevOps current authorized live delivery continues disjoint. Independent currentmock tests/contract/CI source review may progress while awaiting terminalactualpublic/live evidence, which mustbe harvested beforeverdict orhonestlymissingrequiredgateFAIL. G2BLOCKED3/3 is neverreset/repaired/relabelled bythisdistinctpreviouslyplannedG3 review. G0/G1/G4remain2/3; G5/G6remain0/3.
+
+
+## 2026-10-04 — actual Compose startup corrected; public verifier failure retained
+
+- Windows firstactualup--wait120 exit1 backendHealthy/frontendunhealthy, no inference/Hermes. Freshboundedstartup-onlyreproduction1 confirmed Nginx mkdir /var/cache/nginx/fastcgi_temp failed30 readonlyfilesystem, ownselectedState/frontendlogs retainedbeforeteardown. SameDevOps14fileowner routesdefaultfastcgi/uwsgi/scgi tempdirs to existing/tmp, adds safe failure-state capture preservingoriginalexit and DEVNULLstdin, configuredRuff0. No cloud/network/upstream/default mutation.
+- Fresh cg-smoke-win-fixed-20261004-674d0a1a bothservicesHealthy and EXECUTEDactualapplicationcontainerprobe0: UID10001/fsync/SQLite3.40.1WALquick_check/currentengineb8ff/main dae170/jsonschema4.26/prodpins, unchanged default host.docker.internal reaches Ollama0.33.3/pinnedGemma4digest4eb23. Prior hostprocessprobe failures didnotprovecontainerrouting; nativefallback currentlyunnecessary.
+- Correctedwholehelper thenexit1 strictfinalJSONcompletion assertion, exactdirectphase/safe metadata notretainedyet; cannotattributeproductdefect orclaimlaterHermes/restart/performance executed. Sameowner adds phase-onlyfinish/object/contentlength diagnostics pluspartialprogress and oneboundedpurefixture reproduction. Preserve strictprofile/assertions/failurehistory, neverretry effectfulcalls orweakencontracttogreen; provenproductiondefects routeowner. Threeownvolumesretained; all owncontainers/networks down(no-v)0.
