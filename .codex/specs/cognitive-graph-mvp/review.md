@@ -746,3 +746,155 @@ G1 contract/bootstrap freeze passes cycle 2 with both prior findings closed,
 no current findings and all required G1 evidence collected. G1 has consumed
 2/3 cycles. This verdict permits dependent implementation; it is not MVP
 completion or a production/live acceptance verdict.
+
+## Task Group G2-runtime - Cycle 1 - 2026-10-04
+Reviewing: Wave 2 module implementation - scheduler, admission, clock, SQLite state and durable events.
+Synthesizer: review_g2_c1. Analysts: none requested. G2 budget consumed: 1/3.
+Current files were reviewed directly: all 12 assigned runtime/storage source and test files are new untracked product files. An empty Git diff was not treated as an empty change.
+
+### Critical / Severe / High
+
+- **High F1 — terminal failure does not prevent response delivery.** [backend/app/runtime/engine.py:128](../../../backend/app/runtime/engine.py#L128) returns a saved response before checking the run's terminal status. **Empirically reproduced:** after a real SQLite-backed fake-provider run commits its first tool envelope, explicitly cancel it, confirm status `cancelled`, then call `runtime.await_response(run_id, "anonymous", 0)`: it still returns `finish_reason=tool_calls`. The probe deliberately waits on storage, without consuming the response before cancellation. A pending initial HTTP waiter can consequently receive calls after explicit cancellation; the same ordering applies to failed/interrupted runs with saved envelopes. This violates A14 and the cancellation boundary, and conflicts with the repository's failed-run replay rejection. **Correction:** reject failed/cancelled/interrupted state before delivering any saved envelope, preserving legitimate completed-success responses and the separately authorized detach-after-exposure behavior. Add deterministic cancellation/expiry/interruption-before-delivery regressions, including a waiting response task.
+
+- **High F2 — final controller string payload loses required JSON encoding.** [backend/app/runtime/engine.py:743](../../../backend/app/runtime/engine.py#L743) renders every string payload as ordinary text without considering the external response format. **Empirically reproduced:** submit the valid feedback graph with `response_format={"type":"json_schema","json_schema":{"name":"answer","strict":true,"schema":{"type":"string"}}}`. The provider receives a controller payload schema of `{"type":"string"}` and returns valid `{"payload":"hello","control":{"decision":"stop"}}`; the run completes with external content `hello`, which is invalid JSON. A numeric-looking string could silently become the wrong JSON type. This breaks section 4.1's final external response-format contract. **Correction:** render controller payloads according to the requested external format, using JSON serialization for JSON formats, while preserving ordinary text behavior and already formatted non-controller content. Cover string/escaped string/object/scalar payloads, ordinary text, persisted envelope and recovery behavior.
+
+### Medium / Low / Warning
+
+- **Medium F3 — schema rebasing changes literal data.** [backend/app/runtime/engine.py:601](../../../backend/app/runtime/engine.py#L601) recursively traverses every object/list value, treating literal objects under `const`, `enum`, `default` or `examples` as schemas. **Empirically reproduced:** the accepted schema `{"type":"object","const":{"$ref":"#/literal"}}` validates `{"$ref":"#/literal"}` before rebasing; after `_embed_payload_references`, the const becomes `{"$ref":"#/properties/payload/literal"}` and the same instance fails the pinned JSON Schema validator. Thus a legitimate client constraint is changed before inference. **Correction:** rebase references only in schema-bearing locations, or use an embedding approach that preserves schema resource/reference semantics. Add regressions proving literal data remains byte/value-equivalent alongside working actual local references.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Reviewed the complete root specification, AGENTS.md, installed team-spec-workflow/team-review-cycle procedures, current durable requirements/spec/design/tasks/decisions/acceptance, prior review history and docs/api.md. The coordinator's durable reservation identifies this as G2 cycle 1; no counter was inferred or reset.
+
+The implemented module provides meaningful evidence for R04/R05/R06/R07/R09 and deterministic portions of A03-A06/A08-A10/A13-A14/A16: concurrent diamond startup with an all-input lexical barrier; explicit optional null; immutable snapshots/context; separate scopes, seeded feedback from non-controller members and constant input members; strict controller enum and emergency failure; durable attempts, partial results, replay association, cancellation and recovery; shared bounded admission. Required/forced first activation rounds transition to auto only after durable owner results, and global none is retained.
+
+F1 and F2 leave required module behavior unsatisfied. F3 changes an accepted client schema. Existing green checks do not waive these defects. No requirement, acceptance scenario or exclusion was changed by this review.
+
+### Cross-Slice Consistency
+
+Constructors and protocol methods match current contracts. Runtime consumes the graph validator, provider and tool bridge rather than implementing their transports or external execution. Its per-owner provider_round convention matches the durable decision. Optional ActivationRecord.finish_reason is consumed and preserved; the current additive G1 review gate remains separate.
+
+Production G3 bridge/provider and G4 UI were concurrent disjoint writers. Their incomplete implementation was not used to claim G2 behavior or treated as a G2 defect. G2 tests use explicit test-only providers/bridge while executing actual scheduler, validator, admission and SQLite. No analysts were requested and no requested review result is missing.
+
+### Security And Operations
+
+No product tool executor, model-weight switch, cloud resource, secret read, deployment or live resource mutation was introduced or performed. SQLite transactions run synchronously on one dedicated thread, with WAL, foreign keys and FULL synchronization empirically queried. Persistent CAS/unique identities, first terminal reason, immutable accepted result and rollback checks were inspected and exercised. Admission retains waiting-tool capacity; production shared graph/direct inference permits belong to G3/G6.
+
+F1 is a cancellation/effect-delivery defect even though the backend itself does not execute the returned tools. No external tool was executed by the probes.
+
+### Verification And Test Adequacy
+
+Executed from `D:/Sources/creep` using the project-local environment selected by locked uv. Python 3.11.15, pytest 9.1.1, Ruff 0.16.10 and jsonschema 4.26.0 are pinned in the existing manifests/lock. The development wrapper was inspected: test-runtime dispatches the two actual runtime/storage test directories with `uv --system-certs run --project backend --locked pytest ... -q`. Scoped lint/format checks use the same repository configuration as CI; broader UI/build/live gates remain assigned to their groups.
+
+| Command | Exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py test-runtime` | 0 | 41 passed in 11.72s |
+| `uv --system-certs run --project backend --locked pytest backend/tests/contracts backend/tests/graphs backend/tests/runtime backend/tests/storage -q` | 0 | 173 passed in 13.08s |
+| `uv --system-certs run --project backend --locked ruff check backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | 12 files already formatted |
+| PowerShell inline probes via `uv --system-certs run --project backend --locked python -c $probe` | 0 | All three defects empirically reproduced; consolidated exact probe below |
+| Additional inline guard probe using the same locked Python invocation | 0 | 4 active + 20 queued leases, 25th rejected with 429, all released; SQLite 3.53.1 on a thread different from the event-loop thread with journal_mode=wal, foreign_keys=1, synchronous=2; max_tool_rounds=1 rejects the second exposure with budget_exceeded and no successful final output |
+| `git status --short --untracked-files=normal`, `git diff --stat`, source reads/hashes | 0 | New untracked product scope confirmed; peer work preserved |
+
+The guard probe used `BoundedAdmissionController(4,20)` with 24 concurrent acquisitions and a 25th acquisition, then released every lease. Its SQLite checks executed through `store._call` against the initialized production repository. Its tool budget check used `Settings(max_tool_rounds=1)`, the real runtime/repository and a provider that requests a tool every round; after accepting the first envelope, `await_response(...,1)` raised `budget_exceeded`, with saved failed status and exactly one tool round.
+
+Existing tests include real SQLite closure/reconstruction, accepted-before-resume recovery, stale-frontier CAS rejection, atomic response/claim rollback injection, owner/global identity rollback, expiry-vs-full-acceptance, committed event catch-up, concurrent duplicate claims and first-subsequent response association. These are substantial module checks, but they did not exercise the three reproduced defects. Recovery tests reconstruct objects/connections in one process; they do not prove a production process/container restart.
+
+Source SHA256 at review:
+- engine.py: `88ae07ef64c785e893397f690644cdf7b09e9d1cee49e072969efd0c097002ee`
+- repository.py: `c5254c505162dd82424089df21532642f0bd46c69ebac594c11570d1b0e31c15`
+- admission.py: `2f6e24c9ecd88aeb085724ff0c7d7cc5a8bc869bde3ab231a625dfd344c766ad`
+- events.py: `009ca00b126e399d5c279be9c254f74f2e8fbca5af6cd4963ba1ea5a662b00ff`
+- uv.lock: `21b6904c150ab4c13a02f47ab4e4c9825d5cf6d331554595381a82e8b245a9f0`
+
+Reproduce F1-F3 from the repository root in PowerShell. Exit 0 here means the assertions confirmed the defects on the reviewed implementation; it does not mean acceptance passed. Temporary SQLite fixtures are isolated and automatically removed.
+
+```powershell
+$probe = @'
+import asyncio, copy, json, sys, tempfile
+from pathlib import Path
+sys.path[:0] = [str(Path("backend").resolve()),
+               str(Path("backend/tests/runtime").resolve())]
+from test_scheduler import (Provider, create_runtime, edge, graph, input_node,
+                            llm, node_request, output_node, response, submission)
+from test_loops import loop_graph
+from test_recovery import TOOLS, tool_runtime, wait_until
+from app.runtime.engine import AsyncGraphRuntime
+from jsonschema import Draft202012Validator
+
+async def main():
+    async def text_provider(request):
+        if node_request(request) == "draft":
+            return response("draft")
+        return response('{"payload":"hello","control":{"decision":"stop"}}')
+    with tempfile.TemporaryDirectory() as path:
+        runtime, store = await create_runtime(Path(path), Provider(text_provider))
+        try:
+            policy = {"model": "cg/g", "response_format": {"type": "json_schema",
+                      "json_schema": {"name": "answer", "strict": True,
+                                      "schema": {"type": "string"}}}}
+            run = await runtime.submit(submission(loop_graph(), client=policy))
+            result = await asyncio.wait_for(
+                runtime.await_response(run.run_id, "anonymous"), 3)
+            content = result.completion().choices[0].message.content
+            assert content == "hello"
+            try:
+                json.loads(content)
+            except json.JSONDecodeError:
+                print("F2 reproduced: completed string payload is not JSON")
+            else:
+                raise AssertionError("F2 not reproduced")
+        finally:
+            await runtime.shutdown()
+            await store.close()
+
+    async def tool_provider(request):
+        return response(None, [{"id": "internal", "type": "function",
+                        "function": {"name": "read", "arguments": "{}"}}])
+    with tempfile.TemporaryDirectory() as path:
+        runtime, store, _ = await tool_runtime(Path(path), Provider(tool_provider))
+        try:
+            value = graph(nodes=[input_node("i"), llm("a", True), output_node()],
+                          edges=[edge("i", "a", "question"), edge("a", "o", "answer")])
+            run = await runtime.submit(submission(value, tools=TOOLS))
+            await wait_until(store, run.run_id, lambda cp: bool(cp.responses))
+            assert (await runtime.cancel(run.run_id, "anonymous")).status == "cancelled"
+            result = await runtime.await_response(run.run_id, "anonymous")
+            assert result.completion().choices[0].finish_reason == "tool_calls"
+            print("F1 reproduced: cancelled run still returns tool_calls")
+        finally:
+            await runtime.shutdown()
+            await store.close()
+
+    schema = {"type": "object", "const": {"$ref": "#/literal"}}
+    instance = {"$ref": "#/literal"}
+    assert Draft202012Validator(schema).is_valid(instance)
+    rewritten = copy.deepcopy(schema)
+    AsyncGraphRuntime._embed_payload_references(rewritten)
+    assert not Draft202012Validator(rewritten).is_valid(instance)
+    assert rewritten["const"]["$ref"] == "#/properties/payload/literal"
+    print("F3 reproduced: rewriting changes literal const semantics")
+
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $probe
+```
+
+Observed output:
+```text
+F2 reproduced: completed string payload is not JSON
+F1 reproduced: cancelled run still returns tool_calls
+F3 reproduced: rewriting changes literal const semantics
+```
+
+### Open Live Validation
+
+Still OPEN, owned by later integration/delivery gates: actual provider/bridge/HTTP integration; globally shared graph/direct inference under real JSON/SSE; production image SQLite 3.40.1 runtime behavior; actual process/container waiting-ID restart and persistence; real pinned Hermes/Ollama execution; Windows/WSL2 Compose routing/volume/SSE; real UI integration and target timing comparisons. Native SQLite 3.53.1 module checks and G0 experiments do not close those gates. This review does not claim A01-A16 production completion.
+
+### Verdict: FAIL
+
+Reason: two current High required-contract defects and one Medium schema-preservation defect remain empirically reproducible. G2 cycle 1/3 is consumed; the coordinator may assign one scoped fix wave before cycle 2. Reviewer changed only this review artifact, with no implementation edits or commits.
