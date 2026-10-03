@@ -814,3 +814,45 @@ exited 0 and confirmed the entire G0/G1 text is unchanged and exactly one G2
 section was appended. The first prefix-check attempt exited 1 because Python's
 default Windows cp1252 decoder could not decode Git's UTF-8 output; rerunning
 with explicit `encoding='utf-8'` corrected the verifier, not the document.
+
+### Coordinator disposition and final implementation handoff
+
+The coordinator subsequently authorized promotion of the **existing exact
+`jsonschema==4.26.0` pin** from development to production, exclusively through
+the bootstrap owner. Reason: section 4.1 applies to the legal no-LLM graph too;
+SA-G2-04 is required format compliance, not optional new product scope. This
+supersedes the earlier pending dependency disposition, not the historical
+reproduction. Runtime's existing four-file owner validates native final payloads
+before creating a success envelope: incompatible pass-through format/schema
+returns sanitized `invalid_parameter` (400); malformed controller payload
+returns `upstream_error` (502). Ordinary LLM serialized content stays unchanged.
+
+Minimal validator boundary sent to the runtime owner: select the original
+declared draft with `jsonschema.validators.validator_for` (do not silently
+substitute a different dialect), check the schema against the installed local
+meta-schema, and validate the native value with an explicit
+`referencing.Registry(retrieve=deny_remote)`. The retrieval callback must fail
+closed; use no default remote fetch. Inline definitions/resources remain
+resolvable locally. Catch schema, instance and reference-resolution errors at
+the existing sanitized error boundary. Unknown/custom dialects or unresolvable
+external resources are explicit limitations, not a reason to fetch remote
+content or falsely accept a constraint. Do not enable an additional format
+checker or change annotation semantics. The sole bootstrap owner reconciles
+the exact dependency, lock and documentation; this SA made none of those edits.
+
+One final bounded schema test was executed at the runtime owner's request:
+Draft7 `{"$ref":"#/x-schema","definitions":{"T":{"type":"string"}},
+"x-schema":{"$ref":"#/definitions/T"}}` with its declared `$schema` validates
+the original good string and rejects a number, but the current legacy fallback
+leaves the activated extension target's reference pointing at the controller
+root (`PointerToNowhere`). A process-only candidate copied that referenced
+schema into a private `definitions` entry, rebased its reference there, and
+redirected the referring schema `$ref`; it accepted the good string, rejected
+the number and left the original `x-schema` annotation unchanged. Locked
+`python -c $probe` exited 0; this confirms a bounded candidate, not a general
+bundler implementation. The recommendation is to follow local pointer targets
+as schema contexts, memoize copied target pointers for recursion, and avoid
+mutating a target in place when the same object also supplies literal
+const/enum/annotation data. This remaining regression was sent to the owner
+before the final review, rather than asserting generic preservation from the
+standard-keyword walk alone.
