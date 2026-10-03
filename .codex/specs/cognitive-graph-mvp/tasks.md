@@ -7,8 +7,8 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
-| G0-research | Proven Hermes continuation and editor choice | None | Review pending | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Waiting | 0/3 |
+| G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | In progress | 0/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | Waiting | 0/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Waiting | 0/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Waiting | 0/3 |
@@ -35,5 +35,11 @@ All three named workers must return before consolidation. No recursive delegatio
 ## Architecture advisory during G0 — no frozen contracts yet
 
 - [x] [sa] `sa_g0`, architecture advisory for future G1; writable only `.codex/specs/cognitive-graph-mvp/sa-review.md`. Read unchanged approved specification and G0 evidence; analyze loop SCC/activation initialization, durable identity/replay/restart, one external batch, cancellation/timeout accounting and external network boundaries. No production files, no edits to requirements/design/spec/tasks/decisions/review. Produce specific provisional contracts and risks, not implementation or a formal verdict. Run: evidence-linked analysis of A03–A10/A14/A16 plus current official SQLite/asyncio/Ollama documentation as needed; no runtime PASS. Peer coding research continues. Lead must wait for `coding_rd1`, `coding_rd2`, and `sa_g0` before G1 consolidation. G0 remains gated on RD1/RD2.
+
+## Planned G1 wave — gated on G0 PASS
+
+- [-] [coding] `coding_bootstrap`, G1-contracts single shared-contract/bootstrap/dependency owner. Writable exact files: `backend/app/__init__.py`, `backend/app/main.py`, `backend/app/contracts/__init__.py`, `backend/app/contracts/graph.py`, `backend/app/contracts/api.py`, `backend/app/contracts/config.py`, `backend/app/contracts/errors.py`, `backend/app/contracts/interfaces.py`, `backend/pyproject.toml`, `backend/uv.lock`, `backend/.python-version`, `backend/tests/contracts/test_contracts.py`, `frontend/package.json`, `frontend/package-lock.json`, `frontend/tsconfig.json`, `frontend/tsconfig.node.json`, `frontend/vite.config.ts`, `frontend/index.html`, `frontend/src/contracts/generated.ts`, `frontend/src/contracts/schema.json`, `frontend/src/contracts/contracts.test.ts`, `scripts/export_contracts.py`, `scripts/dev.py`, `Makefile`, `docs/api.md`, `docs/dependencies.md`. No edits to research, other product modules, configuration/authentication, durable spec/review artifacts, or peer files. Consume root sections 3–8/10 and accepted G0/SA decisions; produce exact Pydantic graph/API/config/error DTOs, activation/checkpoint/provider/storage/runtime/tool interfaces, generated JSON Schema/TypeScript consistency checks, isolated pinned Python/npm toolchains, executable development targets and API contract documentation. Preserve R01–R11/A01–A16. Structural/runtime implementation remains in later groups. Run: documented local locked setup, `make lint`, `make test-contract`, schema regeneration/consistency checks and frontend contract/type checks; Windows equivalent through `python scripts/dev.py` must execute the same commands. Targets without implemented prerequisites fail nonzero; no always-green smoke placeholders. Return files, pins/source evidence, frozen interface signatures, exact checks/exits and unresolved choices. Lead waits for terminal result and independent G1 review before dependent writers.
+
+This planned ownership is not a G1 freeze or implementation start. No worker is launched until G0 PASS. The bootstrap owner retains sole ownership of manifests/locks/shared contracts/development targets through later waves; overlapping main.py/API composition ownership is transferred explicitly and serially when needed.
 
 Section 12 of the authoritative source defines G1–G6. Exact writable files, shared bootstrap/manifest ownership and frozen contracts will be expanded here after G0 succeeds, before any implementation handoff.

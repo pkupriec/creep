@@ -233,3 +233,198 @@ remain open (two Medium findings); functional live continuation and RD2 pass
 their independently executed checks. G0 has consumed 1/3 cycles. A scoped fix
 wave and affected reruns may precede cycle 2; no severity escalation is used
 to obtain this verdict.
+
+## Task Group G0-research - Cycle 2 - 2026-10-03
+
+Reviewing: Wave 0 / fix wave 1 - corrected RD1 transport evidence and replay
+verifier, with unchanged RD2/environment cross-consistency. Independent sole
+synthesizer: `review_g0_c2`; no analysts requested or missing. Counter 2/3 was
+recorded in tasks/decisions before this spawn. Reviewed current HEAD
+`33fc75b447b481f0f2cf94f0872e93d233cb982e`, correction diff
+`d3c17d2..33fc75b`, and current working files. The four research changes are
+`experiments/hermes_bridge.py`, `experiments/test_hermes_bridge.py`,
+`experiments/hermes-traces.json`, and `docs/research/hermes-protocol.md`.
+The two other files in that committed diff are coordinator-owned task/decision
+records. No implementation or dependency file was edited by this reviewer.
+
+### Critical / Severe / High
+
+None.
+
+### Medium / Low / Warning
+
+None currently outstanding in this cycle's G0 scope. Both prior Medium
+acceptance-gate findings are closed on current evidence:
+
+- **G0-C1-F1 closed — empirically confirmed.**
+  `experiments/hermes_bridge.py:146` constructs the transmitted request before
+  recording its exact UTF-8 body and separately parsed snapshot; `:157` reads
+  the exact response bytes and independently parses the recorded response and
+  returned object. `experiments/test_hermes_bridge.py:16` intercepts the actual
+  urllib Request data, mutates history, schema and returned-message content,
+  and asserts byte and parsed-object equality for both directions. It passes.
+  All five corrected real upstream request/response pairs match their recorded
+  bodies; the first two requests contain no generated assistant tool calls.
+  The committed aggregate equals its raw live source, and the complete prior
+  aggregate is retained with an explicit trace-fidelity-invalid label rather
+  than presented as corrected wire proof.
+- **G0-C1-F2 closed — empirically confirmed.**
+  `experiments/hermes_bridge.py:725` observes model/node/upstream/tool-delivery
+  and actual Hermes tool counts plus checkpoint/mapping hashes; `:751` raises
+  on any response mismatch or changed observation. Reconstruction preserves
+  the counters at `:555`. The six injections at
+  `experiments/test_hermes_bridge.py:218` reject corruption of either serial
+  replay response and changed model/node/delivery/upstream counts. The actual
+  CLI subprocess at `:261` exits 1 with the expected mismatch error and writes
+  no success artifact. Reviewer-only checkpoint and mapping mutation probes
+  also raised the expected guard. The fresh real run independently verified
+  both original response replays with identical before/after observations.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read full root specification and AGENTS.md, requirements/spec/design/tasks/
+decisions, architecture advisory, prior review, current research source/tests,
+current protocol report and aggregate, and unchanged editor/environment
+reports. Initially truncated combined reads were followed by focused reads.
+The acceptance boundary is root section 11 RD1/RD2; production A01-A16 remains
+open. IDs R01-R11 and stable groups G0-G6 are preserved.
+
+RD1 now supplies reproducible real Hermes continuation, native model tools,
+owner isolation, serial batches, SSE and nonstream tests, durable bridge
+reconstruction, latest-segment routing, compressor behavior, exact replay,
+source/runtime pins, and corrected actual transport evidence. The eight new
+regressions' old-source failure evidence is recorded in the aggregate; the
+current reviewer independently executed all corrected cases. This closes the
+two defects in the cycle 1 research deliverable without treating a prototype
+as production acceptance.
+
+### Cross-Slice Consistency
+
+RD2 and environment files are unchanged by the correction. The cycle 1
+independent strict TypeScript, six unit tests, five behavioral browser tests,
+build, screenshot inspection and pin validation remain applicable; there is
+no new editor change that warrants repeating that suite. Current lock hash
+`058006972d96f330a17318b1cc21f16659819d7d7514f5eb1a8d9d970466d71f` and screenshot
+hash `054d3750038bdbf159cffb2efcd6ce4dce5972dd71dc9d108971105d8d2a627e` still
+match. React Flow 12.12.0/MIT selection remains consistent with RD2 evidence.
+
+The installed Hermes dirty-checkout qualification is retained: 18 exercised
+files match normalized pinned source, not a blanket clean-install claim.
+Research sequential startup, one tool per owner, partial-result test envelope,
+in-process reconstruction and model-specific thinking settings remain clearly
+qualified. The SA recommendations are provisional G1 input, not new G0 gates.
+Production loop-control JSON, process recovery and container routing remain
+explicitly open even where an environment/advisory paragraph anticipates them.
+
+### Security And Operations
+
+Fresh live tests used only new dedicated directories under `.venv`, loopback
+HTTP, isolated HERMES_HOME, suppressed dotenv discovery, and the original
+Hermes read_file implementation restricted to generated fixture paths. No
+secrets, unrelated files, global configuration, installed Hermes files,
+external service configuration or deployment resources were modified. Source
+pins and dependency versions were checked without reinstalling anything.
+Only this review file is an authored versioned change; runtime fixtures and
+test outputs are ignored local evidence. No agents were spawned.
+
+Ollama remains external. The fresh read-only inventory confirmed server
+0.33.3 and gemma4:12b digest
+`4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c`.
+The live run independently rechecked Hermes SHA
+`caed552de1c8a8f9983bc555512412a1ac0e0a9e` and all 18 normalized source matches.
+No host probe is represented as backend-container networking proof.
+
+### Verification And Test Adequacy
+
+Executed from `D:/Sources/creep` using existing project-local pinned tooling:
+
+| Exact command | Exit | Independent outcome |
+| --- | ---: | --- |
+| `$env:CG_RD1_HERMES='1'; .venv/hermes-research/Scripts/python.exe -m pytest experiments/test_hermes_bridge.py -q` | 0 | 24 passed in 47.50s; 13 contract/transport cases and 11 real Hermes cases, including negative verifier/CLI cases |
+| `.venv/hermes-research/Scripts/python.exe -m ruff check experiments/hermes_bridge.py experiments/test_hermes_bridge.py` | 0 | All checks passed |
+| `.venv/hermes-research/Scripts/python.exe -m ruff format --check experiments/hermes_bridge.py experiments/test_hermes_bridge.py` | 0 | Two files already formatted |
+| `.venv/hermes-research/Scripts/python.exe experiments/hermes_bridge.py --work-dir .venv/review-g0-c2-20261003-fresh01 --owners 2 --stream --restart --compress --serial-tools --upstream http://127.0.0.1:11434/v1 --model gemma4:12b --trace .venv/review-g0-c2-20261003-fresh01.json` | 0 | Actual completion in 55.7459s; three Hermes requests, two reads, five node/final model requests; both enforced replays unchanged; compression 28 to 6 |
+
+Fresh live trace SHA256:
+`bcad4d153a3771274f9e0af801126d972c36eb8fa98818608b75f9c83fd1460a`.
+Current aggregate SHA256:
+`72f6e6325bcdc07e42d54a1190770ef42d821b90f8c8b2a7425c9b6b52c269e6`.
+Source hashes match the protocol report and aggregate: bridge
+`b27feb69b1a543f2b3bbb8c57f49de0188128888251677bb30a8c96ecb1532f2`, tests
+`ddb0e7eb9c0d8ad6349c23a964a9377c9ffbb7eb6d1c5ef8bcc7a51ee5ac112b`.
+
+Independent Python assertions through the same interpreter on stdin exited 0:
+source hashes and all research package pins; raw authoritative trace hash and
+equality with the aggregate; historical aggregate JSON equality with
+`git show d3c17d2:experiments/hermes-traces.json`; five body/parsed pairs per
+current/fresh run; no generated assistant calls in initial requests; two
+unchanged replays; exact owner-specific fixture content/internal-ID restoration;
+all 18 source matches; compression 28-to-6 with unchanged latest IDs/results;
+and current Ollama version/model digest. These checks inspect actual records
+in addition to relying on the CLI's success summary. The separate compression
+model call is not counted among the five graph node/final requests.
+
+Reviewer-only state-mutation verification used the following exact Python
+payload piped with PowerShell `@' ... '@ | .venv/hermes-research/Scripts/python.exe -`.
+Exit 0, output `checkpoint rejected` and `mapping rejected`. Use new fixture
+names for any rerun. It patches only the reviewer process and dedicated DB:
+
+```python
+import sys
+from pathlib import Path
+from unittest.mock import patch
+sys.path.insert(0, 'experiments')
+from hermes_bridge import ResearchBridge, run_hermes
+original=ResearchBridge.handle
+for fault in ('checkpoint','mapping'):
+    call_count=[0]
+    def inject(self, request, namespace='anonymous'):
+        call_count[0]+=1
+        response=original(self, request, namespace)
+        if call_count[0]==3:
+            if fault=='checkpoint':
+                state=self.state(); state['review_fault']=True; self.save(state)
+            else:
+                self.db.execute("UPDATE calls SET arguments_hash='review_fault'"); self.db.commit()
+        return response
+    with patch.object(ResearchBridge,'handle',inject):
+        try:
+            run_hermes(Path('.venv/review-g0-c2-20261003-fault-'+fault))
+        except RuntimeError as exc:
+            assert str(exc)=='Exact replay execution or checkpoint changed',str(exc)
+            print(fault,'rejected')
+        else:
+            raise AssertionError(fault+' was not rejected')
+```
+
+The existing negative CLI test validates a real subprocess exit, not merely
+an internal return flag. Transport regression tests use the actual serialized
+Request bytes and retain response whitespace/non-ASCII request data, so they
+can detect the original aliasing fault. Source/dependency pin assertions passed.
+No repository CI workflow exists yet; required G0 Python checks ran, and the
+unchanged RD2 check evidence was reconciled. Read-only discovery of absent
+descendant AGENTS.md/.github returned no matches/missing directory; these
+discovery results are not claimed as successful verification commands.
+
+### Open Live Validation
+
+No required G0 research gate or requested analyst evidence remains open.
+
+G1-G6/A01-A16 still require production concurrent scheduling, fan-in and seeded
+loops, model control JSON, immutable revisions/snapshots, atomic durable
+continuation and actual process/container recovery, TTL/cancel/late-result
+behavior, direct-mode/SSE/error integration, full production UI, and clean
+Windows/WSL2 Compose with real backend-container Ollama routing. They also
+require clean runtime/toolchain delivery evidence and target concurrency
+measurements. Research test success closes none of these production gates.
+
+### Verdict: PASS
+
+G0-research's RD1/RD2 acceptance and required verification are demonstrated;
+both cycle 1 findings are closed, with no current blocking finding or missing
+G0 evidence. G0 has consumed 2/3 cycles. This verdict permits G1 contract work
+and is not an MVP completion verdict.
