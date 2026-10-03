@@ -1314,3 +1314,77 @@ No native Ollama, Hermes, Windows/WSL2 Compose, corrected production-image SQLit
 ### Verdict: FAIL
 
 Reason: one empirically reproduced Medium defect (F5) leaves required final-controller schema preservation unsatisfied. Counts: Critical 0, Severe 0, High 0, Medium 1, Low/Warning/Suggestion 0. G2-runtime has exhausted its non-resetting 3/3 review budget and is **BLOCKED for user disposition**. Stop this group's automatic fixes/reviews; no fourth cycle, replacement, rename or artificial split is authorized. Other independent groups may continue, but the required blocked G2 group prevents MVP completion. No implementation edits, commits, pushes or deployment were performed.
+
+
+## Task Group G4-ui - Cycle 2 - 2026-10-04
+Reviewing: Waves 2 and 3, scoped correction wave - graph files/API/compiler and React editor/history, including actual-backend browser integration.
+Synthesizer: review_g4_c2. Analysts: none requested; no missing analyst evidence. Stable G4 budget: 2/3, reserved before spawn in tasks/decisions at `0a1c615`. Both fix owners were terminal and all 24 assigned source/test/example files were frozen. This reviewer changed only this review artifact; test/build outputs are derived verification artifacts. Untracked product files were read directly, rather than treating an empty tracked diff as an empty change.
+
+### Critical / Severe / High
+
+None in the assigned G4 scope.
+
+### Medium / Low / Warning
+
+None remaining in the assigned G4 scope. Prior F1 and F2 are closed by current source and executable regressions below. The separate G2 terminal blocker is preserved under Open Live Validation and does not acquire a new group or reset its budget.
+
+### Suggestion
+
+None. Build directive/chunk-size notices and React Flow handle-update console warnings were observed during passing scenarios; these alone do not establish a material defect.
+
+### Spec Alignment
+
+Read the complete root specification, project AGENTS.md, installed team-spec-workflow/team-review-cycle skills, current durable requirements/spec/design/task/decision/acceptance state, prior G4 cycle 1 findings and G2 terminal history. Independently compared each preserved section 3-8 and 10 in spec.md with the authoritative root source: content matches after trimming section-boundary whitespace. No requirement, compatibility profile, cycle budget or acceptance criterion was relaxed.
+
+- **F1 closed; empirically confirmed, high confidence.** Current `frontend/src/App.tsx:18` and `:40` identify authoritative loads with graphLoadVersion; successful saves use `loaded(value, false)` at `:42`. Current `frontend/src/editor/Editor.tsx:30` stores unapplied generation per node, `:35` derives unchanged settings from the current graph, and `:37` rebases generation/edge/scope inspectors only at an authoritative load. Browser regression `frontend/e2e/mvp.spec.ts:275` reproduces the original same-ID sequence against actual FastAPI/file storage: external revision 2 temperature 0.7, reopen, display 0.7, Apply/Save, then GET revision 3 still 0.7. It passes. The second regression at `:297` proves unapplied temperature 0.6 survives node reselection, prompt edits, added-port measurement and a successful save while stored temperature remains 0.2; conflict preserves local drafts, explicit reload rebases to 0.7/server edge/seed/scope, same-ID import rebases to 0.9/import values, and removing imported feedback/scope clears stale selections. Persisted revisions 4-6 retain exactly the deliberately applied imported/server values. No old null overwrite remains demonstrated.
+- **F2 closed; empirically confirmed, high confidence.** Current `backend/app/api/graphs.py:71` parses duplicate-aware JSON, `:72` canonicalizes the complete decoded request and verifies UTF-8 before DTO construction/repository use, and `:74` maps invalid encoding/value/recursion to sanitized invalid_parameter/400. Current regression `backend/tests/graphs/test_api.py:182` exercises ten string/key locations, both high and low unpaired surrogates, and POST/PUT: all 40 combinations return exact 400, make no repository mutation or inference call, preserve original bytes/revision, and omit sentinel input from response/captured logs. Six positive cases at `:223` round-trip escaped supplementary-character pairs through create/get/save/validate/publish. All pass through composed production HTTP handlers and real storage.
+
+Assigned R07-R09 and G4 portions of A04/A06/A12/A13/A16 are demonstrated: named ports and immutable optional-null input preparation; duplicate-provider/forward-cycle/undeclared-feedback/seed/controller/scope validation; atomic draft revision and immutable publication boundaries; graph creation/open/save/import/export/publish; prompt/generation/tools/ports/feedback editing; API-backed reload, named-input test starts, history/readiness/node results, manual tool results and cancellation. Browser tests additionally execute a seeded loop with two continues and final output at iteration 2, immutable active snapshots and native process persistence. This is a G4 verdict, not whole-product A01-A16 closure.
+
+### Cross-Slice Consistency
+
+The reviewed surface is the original eleven graph backend/example files and thirteen frontend files; no ownership expansion or analyst substitution occurred. Graph routes retain injected composition-root authorization. UI consumes generated contracts; the independent generated-drift gate passes. Authentication remains memory-only with fetch headers, including SSE Last-Event-ID reconnection; mutation requests are not retried. Run detail is API-backed, and real browser/process tests verify completed history and original waiting tool IDs across backend restart. The mock Ollama server replaces only the external inference service; no browser request stubs replace the production API/storage boundary.
+
+Repository/validator invariants remain covered by the current 98-test graph suite: lexical port plans, multiple disjoint scopes, legal input members and noncontroller feedback sources, invalid topology/publication refusal, old snapshot/publication stability, cross-instance revision races, sanitized corrupt highest-publication refusal, safe paths, bounded payload/files and atomic replace/fsync fault behavior. Readiness/final runtime/API contracts are exercised by browser integration but remain independently owned by G2/G3/G6.
+
+### Security And Operations
+
+All six graph routes retain authorization tests. The malformed-Unicode guard runs before hashing/storage and checks nested JSON keys as well as values. Existing path tests reject traversal/device IDs and exercise an actual Windows directory junction escape; native Windows file-symlink creation privilege is unavailable, and no Linux symlink claim is derived from this Windows run. No token, user data, external connector, installed Hermes configuration, real tool executor, Ollama/model configuration, Docker resource or network infrastructure was accessed or changed.
+
+Browser fixture used synthetic token, dedicated retained data `C:/Users/pkupr/AppData/Local/Temp/cg-ui-e2e-zSbiO9`, actual backend process trees PID 49316 -> 46288 -> 39212, and a local HTTP mock Ollama. Each owned backend tree was stopped by fixture cleanup. Independent final listener query returned no listeners on 8000/5173. No further listener use is planned; ports are released to the coordinator at this terminal handoff. Vite logged expected ECONNRESET during an intentional backend process restart; the original waiting ID subsequently completed successfully.
+
+### Verification And Test Adequacy
+
+All commands below were independently executed in this cycle from D:/Sources/creep and their terminal exit codes inspected. The repository wrapper uses locked uv/Python and the pinned frontend package scripts; CI workflow and test discovery were inspected. Production build completed before Playwright. Cached pinned Chromium was used; no browser or dependency installation occurred.
+
+| Exact command | Exit | Current outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py test-graphs` | 0 | 98 passed in 3.63s, including 46 new Unicode regressions |
+| `npm --prefix frontend test` | 0 | 21 passed in three files |
+| `npm --prefix frontend run typecheck` | 0 | Both TypeScript projects passed |
+| `npm --prefix frontend run build` | 0 | Production bundle built; JS 509.13 kB / 154.03 kB gzip; directive/size notices only |
+| `npm --prefix frontend run test:e2e` | 0 | Six actual-backend Chromium scenarios passed in 15.3s, including both F1 regressions and two actual backend process restarts |
+| `python scripts/dev.py lint` | 0 | Explicit repository-config Ruff check, 49 format checks, generated-contract drift check and both TypeScript projects passed |
+| `Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue` filtered to LocalPort 8000/5173 | 0 | Empty result; fixture listeners absent |
+
+The malformed-Unicode tests assert the exact error envelope, pre-repository rejection, original bytes/revision and zero inference, rather than merely accepting any non-500 response. F1 browser tests assert displayed and persisted values against fresh GETs and preserve uncommitted drafts across unrelated edits; they are not DOM-only smoke checks. The full 522-test backend result in the coordinator handoff is attributed owner evidence, not a fresh execution by this reviewer. This review ran the affected graph suite plus full frontend and applicable CI lint/build/browser gates. Prior native Windows crash and earlier expiry-test ordering discrepancy remain in durable history; this targeted review does not claim to diagnose or erase them.
+
+Reviewer audit accounting: an initial extra source-comparison command printed the 24-file hash inventory, then exited 1 because it incorrectly expected sections 3-8 to be one contiguous substring despite extraction inserting section-boundary blank lines. A corrected read-only per-section comparison exited 0 and proved each section 3,4,5,6,7,8,10 identical after boundary trim. This was a verifier assumption failure, not a source/spec drift finding; no implementation was edited to obtain the result.
+
+Current SHA256 inventory aggregate is `90a624649afbb5da3c8ca6e08301eff55b1619f8716b2fe589bdfd81648b46ae`, computed from the ordered original 24 paths, each as `path + space + lowercase SHA256 + newline`. Key changed files, read on current disk:
+
+| File | SHA256 |
+| --- | --- |
+| backend/app/api/graphs.py | dc5bb15dcb13771700d4a580868bc86af768b733f7ce752775038d572002dab2 |
+| backend/tests/graphs/test_api.py | bc187ef4ca6149d163a8d4d3550011905e1b07df682835026da028980332e8a7 |
+| frontend/src/App.tsx | c0e3c6c8f2ddde4c49212ae5afed5c70175ba828fcb4f0a1f8c957f708dc6647 |
+| frontend/src/editor/Editor.tsx | fa28f5189f633b603b5d5bebba9b39ade56954897567ce724c002b1ec2f41bb1 |
+| frontend/e2e/mvp.spec.ts | b9a4f6fecd46687d8e08d79b63001e8d720eb8d3cfb13c0c15292802c81b3c65 |
+
+### Open Live Validation
+
+No G4-specific required check remains unexecuted or failing in this handoff. Real Hermes/Ollama/public direct-mode integration, Windows/WSL2 Compose startup/upstream connectivity, production container waiting-ID restart and target-hardware timing remain required G5/G6 gates. Native browser/backend process tests with mock Ollama close only their stated G4 portion and do not close those real-service gates. G2-runtime remains **BLOCKED at its exhausted 3/3 budget** by the separate required Draft 3 schema-valued extends/type local-reference defect F5. Nothing in this G4 PASS authorizes an automatic G2 fix, fourth review, profile narrowing or whole-MVP completion.
+
+### Verdict: PASS
+
+G4-ui cycle 2: both prior Medium findings are closed, no current Critical/Severe/High finding remains in scope, and all assigned acceptance, required verification and requested reviewer evidence are demonstrated. Current open G4 finding counts: Critical 0, Severe 0, High 0, Medium 0, Low 0, Warning 0, Suggestion 0. Budget remains 2/3 consumed. Overall MVP completion remains blocked by G2 and the separately required open integration/live gates. Reviewer performed no implementation edits, commit, push or deployment.

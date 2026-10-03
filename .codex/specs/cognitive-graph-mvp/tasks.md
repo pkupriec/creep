@@ -11,7 +11,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Baseline PASS; additive extension pending | 2/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Modules and API delivered; review/live pending | 0/3 |
-| G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Cycle 2 independent re-review assigned | 2/3 |
+| G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | In progress | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | API delivered; browser/live gates open | 0/3 |
 
@@ -142,4 +142,9 @@ G2reviewerterminal frees slot: activate graph2filefix concurrentlywithUI3filefix
 
 ## G4 independent review cycle2 reservation
 
-- [-] [review] review_g4_c2 sole synthesizer, G4-ui cycle2/3 reservedBEFOREspawn. Sameexact24fileoriginalG4scope, fivefixfiles (UI3/graph2), read-onlyactualdisk. Writable review.mdappendONLY, previousG2writerterminal. Bothrequestedfixownersterminal, baselineF1F2regressionsfirstfailed andcurrent98graphs/55API/21frontend/TS/build/6browser15.3spassed; latestbackend522 androotlint0. Reprove sameIDreopen/conflictreload/import inspector generation/edge/scope semantics withunapplieddrafts preservedwithin currentloadedgraph, invalidwholedecodedUTF8400/validSupplementary/no-write/no-tokenlogs. Requiredappropriatecommands+fresh6actualbackendE2E no browserrequeststubs; reviewer8000/5173 untilterminalcleanup, DevOpsbuildONLYdone/noSTARTuntilrootrelease. G2remainsBLOCKED3/3separateknownschemaF5,noG2repair/profilechange/groupreset. No analystmissing/peerwrites/delegation/externaltool/liveclaim. Leadwaitsterminalbeforerelease/consolidation; nonPASScycle2 permitsonescopedfixthenfinal3, nofourth.
+- [x] [review] review_g4_c2 sole synthesizer, G4-ui cycle2/3 reservedBEFOREspawn. Sameexact24fileoriginalG4scope, fivefixfiles (UI3/graph2), read-onlyactualdisk. Writable review.mdappendONLY, previousG2writerterminal. Bothrequestedfixownersterminal, baselineF1F2regressionsfirstfailed andcurrent98graphs/55API/21frontend/TS/build/6browser15.3spassed; latestbackend522 androotlint0. Reprove sameIDreopen/conflictreload/import inspector generation/edge/scope semantics withunapplieddrafts preservedwithin currentloadedgraph, invalidwholedecodedUTF8400/validSupplementary/no-write/no-tokenlogs. Requiredappropriatecommands+fresh6actualbackendE2E no browserrequeststubs; reviewer8000/5173 untilterminalcleanup, DevOpsbuildONLYdone/noSTARTuntilrootrelease. G2remainsBLOCKED3/3separateknownschemaF5,noG2repair/profilechange/groupreset. No analystmissing/peerwrites/delegation/externaltool/liveclaim. Leadwaitsterminalbeforerelease/consolidation; nonPASScycle2 permitsonescopedfixthenfinal3, nofourth.
+
+
+## G4 cycle 2 terminal consolidation and delivery release
+
+G4-ui independent cycle2 PASS; F1/F2 empirically closed, current findings zero. Reviewer independently ran graph98/frontend21/TS/build/six actual-backend Chromium scenarios15.3s and repository lint, all exit0. Current24-file aggregate SHA90a624649afbb5da3c8ca6e08301eff55b1619f8716b2fe589bdfd81648b46ae. All own fixture process trees stopped,8000/5173 verified clear; report in review.md. G4counter stays2/3. Root released already-authorized G5/G6 actualWindows smoke and freshWSL smoke after this positive terminal cleanup; preserve unavailable live gates and finish independent native fallback. No G2 fix/review is authorized; G2BLOCKED3/3F5 still prevents completion.
