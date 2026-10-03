@@ -149,3 +149,8 @@
 ## 2026-10-04 — independent actual-image persistence validation
 
 - Reuse terminal DevOps owner for actual implemented backend image SQLite/runtime checks while two coding peers continue. This is a distinct actual product-image executable gate, not a retry of the rejected preflight network diagnostic: no network GET/probe or Ollama call. Own uniquely scoped backend test container/volume only, preserve it and record residue; no deletes/globalconfiguration. G2 known defects remain queued and cannot be waived by unrelated SQL success. G5 remains0/3 until full handoff and independent review.
+
+## 2026-10-04 — actual agent lifecycle and E2E process ownership
+
+- DevOps actual-image followup dispatch returned agent thread limit reached; no new validation result is claimed. Client inventory reports root/proxy/UI running and the completed runtime recipient unexpectedly pending_init after informational send_message, despite tool documentation stating messages do not trigger a new turn. Explicit interrupt returned previous pending_init; immediate inventory still pending_init. Do not claim closure or spawn replacements; defer DevOps until actual capacity resolves. Runtime was explicitly told not to begin queued fixes before followup.
+- UI owner may implement within owned mvp.spec.ts a Node HTTP fake Ollama, actual locked uv/FastAPI/SQLite fixture, Vite same-origin and backend restart. It must refuse occupied8000/5173 rather than stop an unknown process. Root has launched no listeners and will serialize native/API/smoke ownership with E2E. Missing composed API remains an explicit prerequisite, no browser routing fake is acceptance. Real Hermes/Ollama gates remain separate.
