@@ -118,7 +118,7 @@ The same queued G1 correction must separate pinned Vitest unit discovery from Pl
 ## G4 cycle1 correction preparation (not activated before verdict)
 
 - [-] [coding] Existing coding_ui resumed exact frontend/src/editor/Editor.tsx, frontend/src/App.tsx and frontend/e2e/mvp.spec.ts ONLY for same-ID APIreload generation inspector stale overwrite, after authoritative cycle1FAIL. Preserve currentserverloadedgeneration/null/committedlocalsettings coherently and uncommittededitbehavior; regression-first actualbrowser reload0.7→Apply→Save mustretain0.7. No backend/manifests/generated/peer/review/artifactedits. Pinned frontendunit/typecheck/build/full4+newE2E and scopedlistenercleanup.
-- [ ] [coding] Existing coding_graphs queued exact backend/app/api/graphs.py and backend/tests/graphs/test_api.py ONLY for graphrequest escapedunpairedUnicode400 validation, after authoritative cycle1FAIL. Reproduce POST/PUT plusvalidate boundary andunchangedexistingdata, positivevalidUnicode; rejectstrictcanonicalUTF8 beforehash/storage, standard sanitized400 no500. No repository/schema/runtime/manifest/peer/review/artifactedits. Lockedaffected52+newgraphcases/fullchecks/Ruff.
+- [-] [coding] Existing coding_graphs resumed exact backend/app/api/graphs.py and backend/tests/graphs/test_api.py ONLY for graphrequest escapedunpairedUnicode400 validation, after authoritative cycle1FAIL. Reproduce POST/PUT plusvalidate boundary andunchangedexistingdata, positivevalidUnicode; rejectstrictcanonicalUTF8 beforehash/storage, standard sanitized400 no500. No repository/schema/runtime/manifest/peer/review/artifactedits. Lockedaffected52+newgraphcases/fullchecks/Ruff.
 
 Scopes file-disjoint but boundedslotsapply: G2 terminalcycle3 reviewer may run concurrently, sole review.mdowner only after G4cycle1terminal. Activate one codingfixowner alongside DevOps/reviewer, then other afterterminal; G4cycle2reserved onlyafterbothrequestedfixresults/currentchecks. SameG4counter1/3; no reset. DevOps integratedstartawaits correctedUI/backend readiness and explicitportrelease.
 
@@ -129,3 +129,5 @@ Scopes file-disjoint but boundedslotsapply: G2 terminalcycle3 reviewer may run c
 ### G2 terminal blocker (authoritative cycle3 review)
 
 G2-runtime BLOCKED3/3: valid Draft3 schema-valued extends/type localreferences are notrebased, causing actualscheduler failed/upstream_error despiteoriginalgood/bad constraints/publicDTOvalidity. ReviewF5sourceengine657/671, immutablecaller/no successenvelope retained. StopautomaticG2fix/review; no fourth/replacement/reset/renaming. Userdisposition required tochange thisgate; no change to acceptedprofile orbudget. ContinueonlyindependentG4fixes/G3/G5verification; cannotcompleteMVPwhileG2blocked.
+
+G2reviewerterminal frees slot: activate graph2filefix concurrentlywithUI3filefix, exactfile-disjoint; nowtwoCoding+oneDevOps=root+3children ceiling. Both G4requestedfixownersmustreturnbeforeconsolidation/cycle2. No G2fixauthorized bythiscapacitychange.
