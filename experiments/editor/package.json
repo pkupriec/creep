@@ -1,0 +1,36 @@
+{
+  "name": "cognitive-graph-editor-research",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "engines": { "node": "24.14.0", "npm": "11.9.0" },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5178 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run src/graph.test.ts",
+    "build": "vite build",
+    "test:e2e": "playwright test",
+    "browser:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "@xyflow/react": "12.12.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "rete": "2.0.6",
+    "rete-area-plugin": "2.3.2",
+    "rete-connection-plugin": "2.0.5",
+    "rete-react-plugin": "2.1.2",
+    "rete-render-utils": "2.0.3",
+    "styled-components": "6.5.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "24.10.0",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@types/stylis": "4.2.7",
+    "typescript": "5.9.3",
+    "vite": "8.3.2",
+    "vitest": "5.0.3"
+  }
+}

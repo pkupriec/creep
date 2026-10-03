@@ -1,0 +1,14 @@
+# Derived state; durable .codex configuration and specs remain versionable.
+.codex/.cache/
+.codex/logs/
+.cache/
+
+# Local research and product dependency/build output.
+.venv/
+**/node_modules/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/dist/
+**/test-results/
+**/playwright-report/
