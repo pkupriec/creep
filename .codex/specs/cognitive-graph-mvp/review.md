@@ -1055,3 +1055,119 @@ G3-G6 gates remain OPEN: completed production HTTP/provider composition and shar
 ### Verdict: FAIL
 
 Reason: F4 violates required final-controller schema preservation despite closure of the original two High and one Medium findings. Current counts: Critical 0, Severe 0, High 0, Medium 1, Low/Warning/Suggestion 0. G2 has consumed 2/3 cycles; only one terminal cycle remains after any coordinator-owned scoped fix and required regressions. No reset, replacement loophole or fourth cycle is authorized. Reviewer modified only this review artifact, with no implementation edits or commits.
+
+
+## Task Group G4-ui - Cycle 1 - 2026-10-04
+Reviewing: Waves 2 and 3 - graph files/API/compiler and React editor/history, including actual-backend browser integration.
+Synthesizer: review_g4_c1. Analysts: none requested. G4 budget: 1/3, reserved before spawn in tasks/decisions at commit `5820126`. Exactly 24 assigned current files were reviewed, including untracked implementation files; an empty tracked diff was not treated as an empty implementation. Only this artifact was changed by the reviewer. Concurrent runtime and delivery work was preserved.
+
+### Critical / Severe / High
+
+None demonstrated in the assigned scope.
+
+### Medium / Low / Warning
+
+- **Medium F1 - reopening the same graph preserves stale inspector settings and can overwrite the newly loaded generation policy.** [frontend/src/editor/Editor.tsx:29](../../../frontend/src/editor/Editor.tsx#L29), [Editor.tsx:118](../../../frontend/src/editor/Editor.tsx#L118), and [frontend/src/App.tsx:79](../../../frontend/src/App.tsx#L79). **Evidence class: empirically reproduced; high confidence.** The generation textarea is independent React state, refreshed only on node click/addition. App replaces the graph from the API while retaining the Editor component keyed only by graph ID. In real Chromium with production FastAPI/file storage, select `think` at revision 1, update temperature to 0.7 through the API at revision 2, then reopen the same graph from the list. Graph/export correctly contains 0.7, but the selected node's textarea still contains the previous null. Clicking Apply generation settings and Save writes null at revision 3, confirmed by a fresh GET. This breaks section 8/A12 API-backed reload and generation editing; backend revision checks cannot prevent applying a stale form to a newly loaded revision. Other independent inspector drafts share this static lifetime concern; the runtime proof is specifically generation. **Correction:** explicitly reset or rebase inspector drafts on authoritative graph replacement (open, conflict reload, same-ID import), preserving deliberate edits within the current loaded graph. Add browser regressions proving displayed/applied settings match the loaded revision and do not restore old generation/edge/scope values.
+
+- **Medium F2 - invalid Unicode in a node prompt returns 500 storage_error instead of 400 invalid parameter.** [backend/app/api/graphs.py:70](../../../backend/app/api/graphs.py#L70), with encoding failure at [backend/app/graphs/repository.py:146](../../../backend/app/graphs/repository.py#L146). **Evidence class: empirically reproduced; high confidence.** ASCII JSON with `nodes[1].system_prompt` containing an escaped unpaired surrogate (`invalid\ud800`) passes model validation and raises UnicodeEncodeError during snapshot UTF-8 encoding. Through actual composed `create_app`, POST create and PUT save both return HTTP 500/code `storage_error`. No invalid file is created; existing draft bytes remain unchanged. A surrogate in the constrained graph name already returns 400, so this finding is limited to the proven prompt path; equivalent unrestricted nested strings need regression coverage. Shared management `read_body` checks canonical UTF-8 encodability, while this separate graph parser does not. **Correction:** check the complete decoded graph request for canonical UTF-8 compatibility before repository operations and return sanitized `invalid_parameter`/400 for invalid input. Preserve valid supplementary Unicode, duplicate rejection, limits and prior draft bytes; cover create/save through composed HTTP handlers. Required section 4.1 invalid graph/parameter error behavior remains unsatisfied.
+
+### Suggestion
+
+None. Existing Vite dependency directive and bundle-size warnings were observed without inventing a material defect.
+
+### Spec Alignment
+
+Read the root specification/AGENTS.md, installed team-spec-workflow/team-review-cycle procedures, current durable requirements/spec/design/tasks/decisions/acceptance and prior review history. Reviewed graph contracts, generated schemas/types and API seams as needed. No acceptance/profile was weakened.
+
+Assigned R07-R09 and A04/A06/A12/A13/A16 portions have substantial evidence: strict syntax/topology, named all-provider ports, lexical plans, feedback seeds, controller-final boundaries, disjoint scopes, immutable publications/snapshots, expected revisions, path checks, import/export/publication, prompt/generation/tool fields, feedback editing, named inputs, history/filtering, readiness, manual results, cancellation and process persistence. F1 leaves reload/edit consistency open; F2 leaves malformed-request errors open. Global runtime semantics and whole-product A01-A16 closure were not assigned here.
+
+### Cross-Slice Consistency
+
+Graph routes use the composition root's shared authorization. UI consumes generated schema/types and current management responses. Tokens remain in memory and fetch headers; authenticated SSE reconnects with Last-Event-ID, validates event/run identity, and never retries mutations automatically. History/detail restore API state, and browser tests demonstrate immutable run snapshots during edits.
+
+The exact surface is graph backend eleven files plus frontend thirteen files. No analyst evidence is missing. Separate concurrent runtime corrections and final G1 additive contracts remain independent review gates; no G2/G3/G5/G6 verdict is issued here.
+
+### Security And Operations
+
+Graph tests cover all six authenticated routes, traversal/device identifiers, real Windows junction escape, corrupt highest publication refusal, bounded requests/files, atomic replacement/fsync fault preservation, immutable publications and racing revisions. Native Windows file-symlink privilege is unavailable; the test exercises an actual directory junction instead. Earlier Linux symlink/fsync evidence belongs to G5 and was not relabeled as a new reviewer execution.
+
+No user secrets, installed client configuration, real tools, user Ollama state, external connectors, Docker resources or deployment were touched. Browser tests use a synthetic token, dedicated temporary data, actual FastAPI/SQLite and a mock Ollama HTTP endpoint; no browser request stubs. They do not prove real Hermes/Ollama. Standard browser run owned backend process trees 29452 -> 49080 -> 42776, stopped all, and retained `C:/Users/pkupr/AppData/Local/Temp/cg-ui-e2e-iFiizn`. Final F1 probe owned/stopped PID 50108 and retained `.../cg-ui-e2e-4yIgXR`. Final independent listener check found no listeners on 8000/5173; ports released to coordinator, no further reviewer listener use.
+
+### Verification And Test Adequacy
+
+Pinned tools: Python 3.11.15/locked uv, pytest 9.1.1, Ruff 0.16.10, TypeScript 5.9.3, Vitest 5.0.3, Playwright 1.61.1/cached Chromium. Wrapper/package/CI were inspected for scope. Production build finished before browser execution. Frontend unit discovery correctly excludes browser tests. All required baseline commands executed; none substitute for the failing regressions below.
+
+| Command | Exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py test-graphs` | 0 | 52 passed in 0.91s |
+| `npm --prefix frontend test` | 0 | 21 passed in three files |
+| `npm --prefix frontend run typecheck` | 0 | Both TypeScript projects passed |
+| `npm --prefix frontend run build` | 0 | Production build passed; main JS 508.57 kB/153.82 kB gzip; directive/size warnings |
+| `npm --prefix frontend run test:e2e` | 0 | Four actual-backend scenarios passed in 12.7s; two actual process restarts; completed history and original pending ID survived |
+| `uv --system-certs run --project backend --locked ruff check backend/app/graphs backend/app/api/graphs.py backend/tests/graphs`, then the same invocation with `ruff format --check` | 0 | All checks passed; seven files already formatted |
+| `node frontend/node_modules/@playwright/test/cli.js test --config C:/Users/pkupr/AppData/Local/Temp/cg-g4-review-sjpw9oae/playwright.config.ts --grep 'generation reload shows'` | 1 | One failed: displayed temperature null versus actual 0.7; Apply/Save persisted null at revision 3 |
+| Temporary browser keyboard-deletion probe in the same fixture | Case passed | `think` and both attached edges absent; hypothesized deletion bug disproved |
+| F2 composed HTTP probe below via locked `python -c $cgProbe` | 0 | Reproduced POST/PUT 500 storage_error; old bytes unchanged. Exit 0 confirms the defect assertions, not acceptance |
+| `Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue` filtered for 8000/5173 | 0 | Empty final result |
+
+Exploratory accounting: initial temporary invocation used `--grep review`, which also matched the filename and ran six tests: four passed/two failed. One failure was reviewer fixture encoding (`think Â· ...` instead of `think · ...`) from an implicit Windows decode while copying the test, corrected only in the temporary copy and excluded from findings; original repository four-case suite had already passed. The other was F1, then isolated and extended to prove persisted overwrite. An initial invalid-Unicode hypothesis for graph name was disproved by 400; follow-up isolated the unrestricted prompt and final composed API proved F2 for both create/save. Discarded hypotheses are not findings. The first attempt to append this report had a PowerShell parser error from nested here-string delimiters; it executed no Python and changed no file. This successful append preserves the prior review bytes.
+
+F1 exact reproduction using retained temporary fixture/config (runnable command above): create `review-reload`, select `think`, export revision 1, PUT generation temperature 0.7/expected_revision 1, reopen its same graph-list entry, export/read textarea, Apply generation settings, Save, and GET revision 3. Observed `actual.temperature=0.7`, `displayed.temperature=null`, then persisted `temperature=null`. Assertion `expect(JSON.parse(displayed).temperature).toBe(0.7)` fails. The temporary test is a copy of repository `mvp.spec.ts` with absolute local @playwright import/root and appended scenario; original fixture lifecycle and real backend are retained. To reproduce manually, use two browser tabs or a management PUT for the concurrent update; no external service is needed beyond the existing test fixture.
+
+Exact F2 reproduction, PowerShell literal code argument, no stdin/listener requirement:
+```powershell
+$cgProbe = @"
+import asyncio, json, sys, tempfile
+from pathlib import Path
+sys.path[:0] = [str(Path('backend').resolve()),
+               str(Path('backend/tests/graphs').resolve())]
+from test_validator import make_graph
+from app.main import create_app
+from app.contracts.config import Settings
+import httpx
+async def main():
+    with tempfile.TemporaryDirectory(prefix='cg-g4-unicode-') as directory:
+        app = create_app(Settings(data_dir=directory,
+                                 ollama_base_url='http://127.0.0.1:1/v1'))
+        async with app.router.lifespan_context(app):
+            async with httpx.AsyncClient(
+                transport=httpx.ASGITransport(app=app, raise_app_exceptions=False),
+                base_url='http://test'
+            ) as client:
+                good = make_graph()
+                assert (await client.post('/api/graphs', json=good)).status_code == 201
+                file = Path(directory) / 'graphs/test.json'
+                before = file.read_bytes()
+                invalid = make_graph()
+                invalid['nodes'][1]['system_prompt'] = 'invalid\ud800'
+                for method, route, payload in [
+                    ('POST', '/api/graphs', dict(invalid, id='invalid')),
+                    ('PUT', '/api/graphs/test', {'graph': invalid, 'expected_revision': 1})
+                ]:
+                    reply = await client.request(method, route, content=json.dumps(payload),
+                                                 headers={'Content-Type': 'application/json'})
+                    print(method, reply.status_code, reply.text)
+                    assert reply.status_code == 500
+                    assert reply.json()['error']['code'] == 'storage_error'
+                assert file.read_bytes() == before
+                assert not (Path(directory) / 'graphs/invalid.json').exists()
+asyncio.run(main())
+"@
+uv --system-certs run --project backend --locked python -c $cgProbe
+```
+
+Source SHA256 (ordered 24-path/hash inventory aggregate `54ff3f31a53604c1d6fbc863570296ad02061966903231a58bdcb7fd6d4702bd`):
+- `frontend/src/editor/Editor.tsx`: `c44522d12f11a8547b97f23fe9af783170ed7eb22ebb4d802017310a17758367`
+- `frontend/src/App.tsx`: `ec628a591ccfadaf807875ad5a485f65963e3b150891b0f8972020c3dae738b3`
+- `backend/app/api/graphs.py`: `6edbc9e25bb9e8966e01eae1fd38b4841d392446b9dfbb9f423ac8c64dbc8e07`
+- `backend/app/graphs/repository.py`: `ea9dd546c16f55e9e3695fb58d9a8f7670452d180aec0a0c3acd2cbe1a721249`
+- `backend/app/graphs/validator.py`: `c1b51dde9c65de68b46aa30307726878e1cc3031d9a757a3172bcc3204f02f0e`
+- `frontend/e2e/mvp.spec.ts`: `0e506b7e077289269c9d6739e7d3d62e030bc7f9f455dc18b6204fb718b2610b`
+
+### Open Live Validation
+
+F1/F2 corrections and regressions remain required G4 gates. No requested baseline command or analyst evidence is missing. Real Hermes/Ollama, rebuilt Compose routing/Nginx SSE/volume/container restart on Windows/WSL2, target timings and final whole-product acceptance remain G5/G6 gates. Native backend/mock-upstream browser evidence does not close them.
+
+### Verdict: FAIL
+
+Reason: two empirically reproduced Medium defects violate required API-backed editor reload/generation consistency and malformed graph request error handling. Critical 0, Severe 0, High 0, Medium 2, Low/Warning/Suggestion 0. G4 consumed 1/3 cycles; coordinator may assign one scoped fix wave and regressions before cycle 2. No implementation fixes, commits, pushes or deployments were performed.

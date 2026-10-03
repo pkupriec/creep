@@ -9,9 +9,9 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Baseline PASS; additive extension pending | 2/3 |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | Final fix delivered; terminal review pending | 2/3 |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | Final cycle 3 assigned; terminal verdict pending | 3/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Modules and API delivered; review/live pending | 0/3 |
-| G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Cycle 1 independent review assigned | 1/3 |
+| G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Cycle 1 FAIL; scoped fixes queued | 1/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | In progress | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | API delivered; browser/live gates open | 0/3 |
 
@@ -113,7 +113,7 @@ The same queued G1 correction must separate pinned Vitest unit discovery from Pl
 
 ## G4 independent review cycle 1 reservation
 
-- [-] [review] review_g4_c1 sole independent synthesizer, G4-ui cycle1/3 reserved before spawn. Writable only review.md append; read-only exact24files: graph backend eleven files from coding_graphs and frontend thirteen files from coding_ui. Review currentdisk including newuntracked productfiles, entire source/AGENTS/artifacts/pinned contracts and current API seam. RequiredG4proof: schema/files/atomicrevision/publication/path validation, actualUIports/prompts/generation/tools/loop/seed/import/export/publication/history/readiness/manualresults/cancel, APIreload/tokenmemory/authSSEcursor, immutable snapshot and processpersistence. Run exact locked test-graphs/frontunit/typecheck/build/realbackendfourE2E; no mock browserrequeststubs, actual mockOllama clearly separate from Hermes. Reviewer owns native8000/5173 only during dedicated E2E, scopedownprocesscleanup, DevOpsbuild/start awaits release. Runtimefourfilecorrection concurrent but G4 files frozen; do noteditpeers/delegate/reconfigure/useusersecrets or claim realHermes/containerproof. Return prescribed PASS/FAIL/findings/evidence/openintegrationgates, missingrequiredG4evidenceFAIL. Lead waits terminal, no other review.mdwriter.
+- [x] [review] review_g4_c1 sole independent synthesizer, G4-ui cycle1/3 reserved before spawn. Writable only review.md append; read-only exact24files: graph backend eleven files from coding_graphs and frontend thirteen files from coding_ui. Review currentdisk including newuntracked productfiles, entire source/AGENTS/artifacts/pinned contracts and current API seam. RequiredG4proof: schema/files/atomicrevision/publication/path validation, actualUIports/prompts/generation/tools/loop/seed/import/export/publication/history/readiness/manualresults/cancel, APIreload/tokenmemory/authSSEcursor, immutable snapshot and processpersistence. Run exact locked test-graphs/frontunit/typecheck/build/realbackendfourE2E; no mock browserrequeststubs, actual mockOllama clearly separate from Hermes. Reviewer owns native8000/5173 only during dedicated E2E, scopedownprocesscleanup, DevOpsbuild/start awaits release. Runtimefourfilecorrection concurrent but G4 files frozen; do noteditpeers/delegate/reconfigure/useusersecrets or claim realHermes/containerproof. Return prescribed PASS/FAIL/findings/evidence/openintegrationgates, missingrequiredG4evidenceFAIL. Lead waits terminal, no other review.mdwriter.
 
 ## G4 cycle1 correction preparation (not activated before verdict)
 
@@ -121,3 +121,7 @@ The same queued G1 correction must separate pinned Vitest unit discovery from Pl
 - [ ] [coding] Existing coding_graphs queued exact backend/app/api/graphs.py and backend/tests/graphs/test_api.py ONLY for graphrequest escapedunpairedUnicode400 validation, after authoritative cycle1FAIL. Reproduce POST/PUT plusvalidate boundary andunchangedexistingdata, positivevalidUnicode; rejectstrictcanonicalUTF8 beforehash/storage, standard sanitized400 no500. No repository/schema/runtime/manifest/peer/review/artifactedits. Lockedaffected52+newgraphcases/fullchecks/Ruff.
 
 Scopes file-disjoint but boundedslotsapply: G2 terminalcycle3 reviewer may run concurrently, sole review.mdowner only after G4cycle1terminal. Activate one codingfixowner alongside DevOps/reviewer, then other afterterminal; G4cycle2reserved onlyafterbothrequestedfixresults/currentchecks. SameG4counter1/3; no reset. DevOps integratedstartawaits correctedUI/backend readiness and explicitportrelease.
+
+## G2 final independent review cycle 3 reservation
+
+- [-] [review] review_g2_c3 sole independent synthesizer, stableG2-runtime cycle3/3 reserved BEFOREspawn. Exactoriginal12runtime/storage source/testfiles read-only, current4file finalfix plus productionvalidator4.26 consumer. Writable review.md appendONLY after terminalG4reviewer. Reprove priorF1-F4 and advisoryformat/native/dialect/resource/legacy/annotation targets, originalschema good/bad and immutablepolicy, before-saving successvalidation/400native502provider/rawbytes/length, no remote fetch. Fullmodule/G1contract/stableAPI regression evidence currentroot475+21/lint0. RequiredG2modulechecks+crossseams no fakeequivalentliveproof. Correctedimage/Hermes/container/WindowsWSL/performance remainG5/G6gates and no completionclaim. Counter3terminalnonPASS=>BLOCKED stopautomaticfix/review; neverfourth/reset/split. Native modulefixtures do notneed8000/5173; codingUIfix may ownthoseports, DevOpspreparationonly.
