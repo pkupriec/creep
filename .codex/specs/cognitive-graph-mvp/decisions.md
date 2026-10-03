@@ -158,3 +158,8 @@
 ## 2026-10-04 — unit/browser runner boundary correction
 
 - UI owner reproduced npm test discovering Playwright e2e/mvp.spec.ts as Vitest:17 unit cases pass but collection fails when Playwright beforeAll executes in wrong runner. Same serial G1 bootstrap correction additionally owns frontend/vite.config.ts to preserve unit discovery and exclude E2E from Vitest, with real Playwright execution unchanged. No package/pin/generated-contract change or acceptance reduction. Typecheck shell exit1 with no diagnostics is being diagnosed separately against direct pinned tsc exit0; no speculative manifest change approved.
+
+## 2026-10-04 — G3 module handoff harvested; G2 fix dispatch
+
+- coding_proxy terminal, exact8 provider/bridge/test files. Owner locked targeted71/fullbackend244, test-contract151Python/nine frontend, scoped Ruff all exit0. Root fresh locked targeted71 passed. Actual runtime/bridge/SQLite seam tests include serialized internal-round calls, owner collisions, first-next-response binding and replay. Current default-thinking live SSE exit0: text35/native-schema83chunks, correct finish/DONE/unknown404, no tools executed. Reproducible live_probe helper in owned test_ollama.py; all-mode exit1 nonstream reasoning metadata pending serial bootstrap correction. G3 current modules delivered, public API/review/JSON live gates remain OPEN.
+- Existing runtime owner now receives the one G2 cycle1 fix wave on four exact files, with regressions for all three findings. Counter stays1/3 until independent cycle2 spawn after terminal/fresh validation. UI peer continues disjoint frontend; no additional coding worker until role capacity frees.
