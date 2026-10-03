@@ -1388,3 +1388,132 @@ No G4-specific required check remains unexecuted or failing in this handoff. Rea
 ### Verdict: PASS
 
 G4-ui cycle 2: both prior Medium findings are closed, no current Critical/Severe/High finding remains in scope, and all assigned acceptance, required verification and requested reviewer evidence are demonstrated. Current open G4 finding counts: Critical 0, Severe 0, High 0, Medium 0, Low 0, Warning 0, Suggestion 0. Budget remains 2/3 consumed. Overall MVP completion remains blocked by G2 and the separately required open integration/live gates. Reviewer performed no implementation edits, commit, push or deployment.
+
+## Task Group G3-proxy - Cycle 1 - 2026-10-04
+Reviewing: Waves 2 and 3 - external Ollama transport, durable Hermes tool bridge, composed OpenAI/management API, and their unit/contract/HTTP integration evidence.
+Synthesizer: review_g3_c1. Analysts: none requested; none missing. Stable G3 budget: 1/3, reserved before spawn in tasks/decisions at `bbcf33a`. The seventeen assigned product/test files were read directly because they are new untracked files. This reviewer owns only this append to review.md and made no implementation edits.
+
+### Critical / Severe / High
+
+None demonstrated in the assigned G3 scope.
+
+### Medium / Low / Warning
+
+- **Medium F1 - generic HTTPX line decoding changes SSE Unicode semantics.** `backend/app/providers/sse.py:165` consumes `response.aiter_lines()` before validating/re-encoding the resulting strings at `:166` and `:160`. The pinned HTTPX decoder uses replacement decoding and `str.splitlines()`, which treats U+0085/U+2028/U+2029 as line boundaries. **Evidence class: empirically reproduced, high confidence.** Through the actual composed `/v1/chat/completions` direct route and adapter, a single valid UTF-8 SSE JSON event containing `a\u2028b` or `a\u0085b` as literal Unicode content returns 502/upstream_error rather than preserving the text. A same-format ordinary `caf\u00e9` control returns 200. Separately, replacing the content bytes with `0xff` returns 200 with U+FFFD, `finish_reason=stop` and `[DONE]`, silently changing upstream content instead of enforcing the adapter's strict semantic boundary. All cases made exactly one mock upstream call and released admission/inference capacity. **Correction:** parse SSE framing on CR/LF/CRLF boundaries with an incremental UTF-8 policy that preserves valid code points, rejects malformed bytes before successful emission, and bounds buffered lines/events; do not use Unicode `splitlines()` for wire framing. Add byte-fragmented positive Unicode cases (including these separators) and malformed-byte cases in both content and tool arguments, with correct pre-header/post-header errors and cleanup. This is a required text/SSE preservation failure under R01/R02 and A02/A11, independently of its Medium severity.
+
+- **Medium F2 - nonstream upstream strings are not checked for UTF-8 encodability at the provider boundary.** `backend/app/providers/ollama.py:71` returns a parsed completion without validating that its strings can be encoded for the public response. The conversion to public JSON happens later at `backend/app/api/chat.py:164`, outside the provider's sanitizing exception block. **Evidence class: empirically reproduced, high confidence.** A syntactically parsed upstream JSON completion with `content="\ud800"` passes the current DTO and the public direct route returns HTTP 500 with `code=storage_error`; no storage operation failed. The same escaped invalid scalar in SSE is correctly rejected as 502/upstream_error. The diagnostic below exercises actual FastAPI error handling with `raise_app_exceptions=False`, one upstream call and no leaked permits/leases. **Correction:** validate the complete normalized upstream JSON payload's UTF-8 encodability before returning it and map invalid Unicode to sanitized upstream_error/502. Cover content, names/IDs and nested raw tool strings, plus valid supplementary-character pairs; preserve valid raw argument strings and known metadata behavior. Do not let malformed provider data become an unrelated internal/storage error. This is a required JSON/error-boundary failure under section 4.1 and A02/A14.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read the full authoritative root specification, project AGENTS.md, installed team-spec-workflow/team-review-cycle instructions, preserved requirement/spec/design artifacts, task/decision/acceptance state, and relevant prior G0/G1/G2/G4 review history. R01-R11/A01-A16/G0-G6 identifiers and approved ownership remain unchanged. Current source and task reservation agree on the seventeen-file G3 surface; no empty tracked diff was treated as absence of implementation.
+
+The current 212-test focused run demonstrates substantial assigned behavior: published/physical model namespaces and draft hiding; strict public parameters and standard errors; JSON/SSE tool indices/finish/DONE; model translation without substitution; immutable graph request context and final generation overrides; latest assistant/tool segment routing; opaque IDs and owner/internal-ID isolation; conservative one-call exposure; whole internal-round acceptance; exact first-next-response replay and changed-result conflicts; partial acceptance with a fixed deadline; namespace isolation; committed event replay; shared graph/direct admission and inference limits; cancellation, detach and reconstruction. These tests use the production handlers, adapter/bridge/runtime and SQLite with fake upstream HTTP or deterministic clocks. They do not prove real Hermes or Ollama acceptance.
+
+The corrected expiry tests are meaningful: an accepted partial request is demonstrably waiting before the clock crosses the original fixed deadline and receives 504/tool_wait_timeout; a new request after persisted failure receives 409/run_terminal without inference, TTL extension or checkpoint changes. They do not accept either status indiscriminately. Full-batch fixtures deliberately construct valid durable multi-call batches to cover partial semantics even though production unknown-effect calls currently serialize one per response.
+
+F1/F2 leave required proxy text/error preservation unsatisfied. They are not escalated to High merely to obtain FAIL. The separate G2 Draft 3 schema-reference defect remains owned by exhausted G2 and is neither reassigned nor fixed through G3.
+
+### Cross-Slice Consistency
+
+Composition creates one shared provider/semaphore and one shared admission controller for graph and direct jobs. Direct jobs do not invent durable graph sessions. Runtime owns execution independently of HTTP waiters; the bridge maps/exposes/accepts and reads durable claims without executing tools or inference. Inspection and focused tests confirm checkpoint-before-exposure, namespace/model checks, unchanged saved raw arguments, canonical request hashes, source-batch-to-first-next-response association, and terminal rejection. Contract factory normalization strips only declared validated transport/private reasoning metadata. G1's final additive-contract review remains separately open.
+
+DevOps concurrently owned delivery files and actual 8000/8080 listeners. This reviewer ran only in-process mock/temporary fixtures, did not touch ports or Docker resources, and did not treat changing live smoke scripts as finalized evidence. There were no analysts or missing requested slice results. On notification of the reproduced defects, the coordinator explicitly authorized immediate cycle-1 synthesis with live results still pending; no PASS is inferred from that scheduling decision.
+
+### Security And Operations
+
+Bearer authorization covers both API surfaces, hashes the configured token namespace without storing the token, rejects duplicate authorization headers, and sanitizes public validation errors. Incoming JSON rejects duplicate keys, nonfinite values and invalid Unicode; body/tool-result limits precede inference. Synthetic-token tests cover snapshots/traces/captured logs and rotated namespace isolation. Health exposes storage readiness separately from upstream availability. No backend shell/MCP/tool executor, effectful retry, generic inference disk cache, external connector, secret access or cloud integration was introduced by the reviewed code.
+
+Fresh adversarial probes confirm that the malformed/valid-Unicode cases release all admission leases and restore both inference permits. An additional in-process ASGI 2.3 disconnect probe used the protocol version actually advertised by pinned Uvicorn h11/httptools: an initial streamed graph disconnected while its provider was blocked becomes cancelled, with one upstream attempt, zero remaining leases and both permits returned. A hypothetical ASGI 2.4 behavior was not rated as a production defect. Existing tests independently cover ASGI send failure cleanup, continuation disconnection preserving shared work, and exposed tools surviving ambiguous delivery. No listener or live tool was used by this reviewer.
+
+### Verification And Test Adequacy
+
+All following commands were independently executed from `D:/Sources/creep`; reported terminal exit codes were inspected. Pinned uv/Python, Ruff and frontend package scripts were used. CI and `scripts/dev.py` were read to verify test discovery, explicit Ruff configuration, generated drift and locked tooling. Global delivery/build/browser gates are separately owned while DevOps is active; the current full-backend 522-pass owner result and G4 six-browser PASS are attributed evidence, not fresh executions by this reviewer.
+
+| Exact command | Exit | Outcome |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 0 | 212 passed in 12.26s; no skipped or live tests substituted |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --config backend/pyproject.toml --check backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py` | 0 | 17 files already formatted |
+| `uv --system-certs run --project backend --locked python scripts/export_contracts.py --check` | 0 | Generated contracts match Python DTOs; run separately to obtain its own exit code |
+| `npm --prefix frontend run test:contract` | 0 | Nine frontend contract tests passed |
+| PowerShell literal `$cgG3Probe` below, passed to `uv --system-certs run --project backend --locked python -c $cgG3Probe` | 0 | Diagnostic assertions reproduce both current defects and positive control; this is not a passing product regression |
+
+The existing multibyte-stream test builds its body through `json.dumps()` with default ASCII escaping, so its Cyrillic text is not actually fragmented UTF-8 on the wire. It therefore does not falsify F1. Malformed-stream/JSON cases exercise syntax and metadata but omit the reproduced Unicode boundary cases. Add regressions that construct and fragment actual UTF-8 bytes and assert preservation/error behavior rather than only successful DTO construction.
+
+Exact safe reproducer (literal code argument, no stdin, no listener, real inference or tool execution; only its owned temporary directories are cleaned):
+
+```powershell
+$cgG3Probe = @'
+import asyncio, json, sys, tempfile
+from pathlib import Path
+sys.path[:0] = ['backend', 'backend/tests/api', 'backend/tests/providers']
+import httpx
+from test_chat import harness, chat, completion
+from test_sse import chunk
+
+def sse(value):
+    return ('data: ' + json.dumps(chunk({'content': value}, finish='stop'), ensure_ascii=False) + '\n\ndata: [DONE]\n\n').encode('utf-8')
+
+async def main():
+    cases = [
+        ('good_unicode', sse('caf\u00e9'), True, 200),
+        ('valid_U2028', sse('a\u2028b'), True, 502),
+        ('valid_U0085', sse('a\u0085b'), True, 502),
+        ('bad_UTF8', sse('MARK').replace(b'MARK', b'\xff'), True, 200),
+        ('bad_JSON_surrogate', json.dumps(completion('\ud800')).encode(), False, 500),
+    ]
+    for label, raw, stream, observed_status in cases:
+        async def handle(_):
+            return httpx.Response(200, content=raw, headers={'content-type': 'text/event-stream' if stream else 'application/json'})
+        with tempfile.TemporaryDirectory(prefix='cg-g3-review-') as temp:
+            async with harness(Path(temp), handle) as (app, _, calls):
+                async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app, raise_app_exceptions=False), base_url='http://test') as client:
+                    result = await client.post('/v1/chat/completions', json=chat('ollama/fixture', stream=stream))
+                    assert result.status_code == observed_status
+                    assert len(calls) == 1 and not app.state.admission.leases
+                    assert app.state.provider.limiter._value == 2
+                    if label == 'bad_UTF8':
+                        assert '\ufffd' in result.text and '"finish_reason":"stop"' in result.text
+                        assert result.text.endswith('data: [DONE]\n\n')
+                    if label == 'bad_JSON_surrogate':
+                        assert result.json()['error']['code'] == 'storage_error'
+                    if label.startswith('valid_'):
+                        assert result.json()['error']['code'] == 'upstream_error'
+                    print(json.dumps({'case': label, 'observed_status':result.status_code, 'body':result.text}, ensure_ascii=True))
+    print('Confirmed current defects; this is diagnostic evidence, not a passing product regression.')
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $cgG3Probe
+```
+
+Observed status sequence: `200, 502, 502, 200, 500`; expected corrected sequence: `200, 200, 200, 502, 502`, preserving the valid content and excluding success/DONE for malformed input. If a malformed event arrives after headers/body have started, the existing documented SSE error event is required instead of an HTTP status change. The first four probe events each contain the complete text and finish in one chunk; additional regression coverage must include fragmentation and late failures.
+
+Current relevant SHA256 values, read immediately before synthesis:
+
+| File | SHA256 |
+| --- | --- |
+| backend/app/providers/ollama.py | 6dd84aeb9e8c812fffc90180ba027a10c339da538467bb995948045d4b0f73c7 |
+| backend/app/providers/sse.py | 073da1c5b68d593d325414a0bb4de543f596a9c4ac31f18e005a84dc55b7ba77 |
+| backend/app/tools/bridge.py | c21d821ebfa1309778278d3b0aaa0d51f7a44488386f1b4d01d4d22f8206dfe1 |
+| backend/app/api/chat.py | b68226b543b52fd5d2e68df634d68d64bc304c08a9d7cf63acebdae6ea68f058 |
+| backend/app/main.py | dae170c7cf7055c10a10eb0ecd3d1456ab19571d0e6a3538c1a9a5547e3deb83 |
+| backend/tests/providers/test_sse.py | fb9e302b790701691e81c7e9ca44f95570ae8b799e3f1d7b9c89111b9ec1c8a7 |
+| backend/tests/api/test_runs.py | 82b792da5cf42bcf1384b3f683bc59f5911d5fde5ef0aaf5993a4d6036f1cc6e |
+
+### Open Live Validation
+
+Required complete G3 production evidence is still pending at synthesis: the pinned Hermes continuation/compression/replay assertions on the production API, streamed Hermes behavior, and integrated waiting-ID restart. Native adapter subsets and G0 research cannot substitute for these checks. Coordinator's latest DevOps handoff reports the corrected production services healthy and an executed container probe reaching external Ollama 0.33.3/pinned gemma4:12b through unchanged host.docker.internal. It additionally reports a bounded real public reproduction exited 0: seven JSON/SSE ordinary/multiturn/native-tool-request/manual-result exchanges through real Nginx, unknown physical model 404, and zero tool executions. The subsequent Windows project ending `417276aa` also executed those seven exchanges, protection/Nginx checks, history restart and down/up with retained publications/volume. This is attributed live evidence against unchanged provider SHA256 `6dd84a...` / SSE `073da1...`, not a reviewer execution or corrected-image proof.
+
+That full Windows helper exited 1 in its Hermes observer: the native cg/synthesis run reportedly read two dedicated fixtures and compressed 28 messages to 6, but hooks on agent.client missed per-request SDK clients and recorded zero observed client calls/diagnostic IDs. Its required assertions therefore failed; waiting-tools container restart, exact replay and streamed Hermes phases were unexecuted. Do not count the reported partial activity as passing those gates. The same hardware timing phase executed: diamond wall 1.515s, queue 0.004944s, three calls, node durations 0.82994/0.599422/0.439565s; sequential wall 1.531s, queue 0.006202s, three calls, node durations 0.456379/0.45439/0.474423s. These coordinator-attributed measurements do not promise a speedup. Full Windows/WSL2 and complete production Hermes gates remain open; later corrected G3 images require appropriately fresh evidence.
+
+G2-runtime remains separately **BLOCKED at 3/3** for its terminal F5 Draft 3 reference defect. No G2 fix, fourth review, accepted-profile narrowing, artificial split or budget reset is authorized by this G3 review. No whole-MVP completion claim is possible. The prior unassigned Windows native test exception remains historical evidence; this focused passing run does not diagnose it.
+
+### Verdict: FAIL
+
+Reason: empirically reproduced F1/F2 violate required Unicode text preservation and upstream error contracts; required real production G3 acceptance evidence also remains pending.
+
+Counts: Critical 0, Severe 0, High 0, Medium 2, Low 0, Warning 0, Suggestion 0; required live acceptance gates are separately open rather than assigned invented defect severity. G3 consumed 1/3 cycles. Root may schedule one scoped G3 fix wave and affected checks before its next independent cycle; exhausted G2 is unchanged. Reviewer performed no product edits, commits, pushes, deployment, listeners or live inference/tool calls and releases sole review.md ownership at this terminal handoff.
