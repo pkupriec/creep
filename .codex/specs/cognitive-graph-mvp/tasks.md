@@ -10,7 +10,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Baseline PASS; additive extension pending | 2/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Modules and API delivered; review/live pending | 0/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Independent cycle 1 assigned; live evidence pending | 1/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | In progress | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | API delivered; browser/live gates open | 0/3 |
@@ -148,3 +148,8 @@ G2reviewerterminal frees slot: activate graph2filefix concurrentlywithUI3filefix
 ## G4 cycle 2 terminal consolidation and delivery release
 
 G4-ui independent cycle2 PASS; F1/F2 empirically closed, current findings zero. Reviewer independently ran graph98/frontend21/TS/build/six actual-backend Chromium scenarios15.3s and repository lint, all exit0. Current24-file aggregate SHA90a624649afbb5da3c8ca6e08301eff55b1619f8716b2fe589bdfd81648b46ae. All own fixture process trees stopped,8000/5173 verified clear; report in review.md. G4counter stays2/3. Root released already-authorized G5/G6 actualWindows smoke and freshWSL smoke after this positive terminal cleanup; preserve unavailable live gates and finish independent native fallback. No G2 fix/review is authorized; G2BLOCKED3/3F5 still prevents completion.
+
+
+## G3 independent review cycle 1 reservation
+
+- [-] [review] review_g3_c1 sole review-agent synthesizer, G3-proxy cycle1/3 reserved before spawn; no analysts. Sole writable review.md append, G4 previouswriter terminal. Read-only exact17files: backend/app/providers/__init__.py, ollama.py, sse.py; backend/app/tools/__init__.py, bridge.py; backend/tests/providers/test_ollama.py, test_sse.py; backend/tests/tools/test_bridge.py; backend/app/api/chat.py, runs.py, models.py, security.py; backend/app/main.py; backend/tests/api/test_chat.py, test_runs.py, test_security.py; backend/tests/integration/test_acceptance.py. Review original G3 modules and composed API seam, frozen contracts/source/profile, mocked and real public transport/continuation evidence. Fresh focused contract/provider/tool/API/integration checks, applicable CI lint; inspect strictmetadata/framing/auth/namespace/immutablepolicy/admission/opaqueIDs/partialwhole-ownerround/forcedchoice/replay/TTL/recovery/disconnect. No listeners, container actions, real inference/tools or writes beyond review; DevOps owns current actual live8000/8080 andsmoke14files. Wait root terminal-live evidence before synthesizing required real-public gates; missing required evidence meansFAIL with precisegate, never fabricatedseverity. G2BLOCKED3/3F5 separate and frozen; no G2 fixes/reset/profile narrowing underG3. Rootwaits terminalreport; onlycurrentreview.mdwriter.
