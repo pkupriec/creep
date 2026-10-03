@@ -163,3 +163,7 @@
 
 - coding_proxy terminal, exact8 provider/bridge/test files. Owner locked targeted71/fullbackend244, test-contract151Python/nine frontend, scoped Ruff all exit0. Root fresh locked targeted71 passed. Actual runtime/bridge/SQLite seam tests include serialized internal-round calls, owner collisions, first-next-response binding and replay. Current default-thinking live SSE exit0: text35/native-schema83chunks, correct finish/DONE/unknown404, no tools executed. Reproducible live_probe helper in owned test_ollama.py; all-mode exit1 nonstream reasoning metadata pending serial bootstrap correction. G3 current modules delivered, public API/review/JSON live gates remain OPEN.
 - Existing runtime owner now receives the one G2 cycle1 fix wave on four exact files, with regressions for all three findings. Counter stays1/3 until independent cycle2 spawn after terminal/fresh validation. UI peer continues disjoint frontend; no additional coding worker until role capacity frees.
+
+## 2026-10-04 — client capacity resolved; exact owners resumed
+
+- After proxy terminal handoff, followup_task successfully resumed the same pending runtime owner for its four-file fix, then the same DevOps owner for the queued actual-image check. Fresh client inventory: root/runtime/UI/DevOps running, exactly two coding and one DevOps children. No replacements/duplicate scopes/closure claims or extra review budget consumed. The earlier thread-limit rejection remains truthful historical evidence, now resolved by normal lifecycle capacity.
