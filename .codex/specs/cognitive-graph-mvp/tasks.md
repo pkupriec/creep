@@ -8,7 +8,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Awaiting cycle 1 | 1/3 |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Fix wave 1 | 1/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | Waiting | 0/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Waiting | 0/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Waiting | 0/3 |
@@ -53,6 +53,10 @@ Section 12 of the authoritative source defines G1–G6. Exact writable files, sh
 - [x] [sa] `sa_g1`, G1-contracts advisory; writable only `.codex/specs/cognitive-graph-mvp/sa-review.md`, append a distinct G1 section preserving G0 advice. Read available G1 contract drafts and approved specification/decisions, coordinate questions with `coding_bootstrap` without editing its files. Review the concrete interfaces for loop barriers, immutable snapshots, partial continuation/replay, durable recovery, claim transactions, shared admission and inference bounds. This is advisory, not a synthesizer verdict or review-budget consumption. Return actionable interface gaps tied to A03–A10/A14/A16 and exact source references. No runtime PASS claims, production/review/config edits, recursive delegation, external writes or secret access. Bootstrap is a concurrent peer and sole contract owner; never revert its edits. Lead waits for both this advisory and bootstrap before independent G1 review.
 
 ## Planned module wave — not launched; gated on G1 PASS
+
+### G1 fix wave 1 — cycle 1 findings
+
+- [-] [coding] `coding_bootstrap` retains sole contract ownership. Exact writable files for this correction: `backend/app/contracts/api.py`, `backend/tests/contracts/test_contracts.py`, `frontend/src/contracts/schema.json`, `frontend/src/contracts/generated.ts`, `frontend/src/contracts/contracts.test.ts`, `docs/api.md`. No other edits. Close G1 cycle 1 High F1 by preserving optional tool-result name and proving all three authoritative pinned Hermes client requests pass Python and generated-schema validation without changing raw arguments/results/history. Close Medium F2 by specifying and testing the strict upstream response normalization boundary against all five authoritative raw Ollama wire responses, preserving semantic fields and documenting only known transport metadata treatment. Unsupported client semantics remain strict errors; malformed/unsupported upstream semantics must not be silently dropped. Pure DTO-boundary construction/parsing is allowed; no provider/network/runtime implementation yet. Use read-only authoritative_final_experiment in existing traces; preserve research evidence, request metadata and dependency pins. Run test-first reproductions, regeneration, `python scripts/dev.py lint`, `test-contract`, `test`, and schema drift check; report exact exits/counts/hashes and unchanged lock hashes. Lead waits terminal result, reconciles current evidence, then reserves G1 cycle 2; G0 counter remains unchanged and downstream writers still wait.
 
 The following scopes are prepared for handoff. They consume the final G1 contracts, not current drafts. Every worker reads the source specification and AGENTS.md. Peer writers are concurrent and must not revert or overwrite one another. No recursive delegation. Root waits for every launched worker's terminal result before consolidating the wave. Contract/manifest/lock/development-target changes route exclusively to `coding_bootstrap` and are applied serially.
 

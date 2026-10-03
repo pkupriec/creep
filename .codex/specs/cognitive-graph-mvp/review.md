@@ -428,3 +428,188 @@ G0-research's RD1/RD2 acceptance and required verification are demonstrated;
 both cycle 1 findings are closed, with no current blocking finding or missing
 G0 evidence. G0 has consumed 2/3 cycles. This verdict permits G1 contract work
 and is not an MVP completion verdict.
+
+## Task Group G1-contracts - Cycle 1 - 2026-10-03
+
+Reviewing: Wave 1 - all 26 `coding_bootstrap` files listed in tasks.md.
+Independent sole synthesizer: `review_g1_c1`; no analysts requested or missing.
+Cycle 1/3 was reserved in commit `9952639` before this spawn. G0 remains PASS
+at 2/3; its history above is unchanged. G1 files are untracked new product
+files and were inspected directly, not treated as an empty diff. No downstream
+writer was active. Only this review file was authored here.
+
+### Critical / Severe / High
+
+- **G1-C1-F1 — High: strict client contract rejects actual Hermes tool
+  continuations.** `backend/app/contracts/api.py:55` defines ToolMessage with
+  role, tool_call_id and content but no optional name. The base at
+  `backend/app/contracts/graph.py:25` forbids extras. Of three actual Hermes
+  requests in the authoritative immutable G0 fixture, the first validates,
+  the second fails at `messages[5].tool.name`, and the third fails at
+  `messages[3].tool.name` and `messages[5].tool.name`. Generated frontend JSON
+  Schema independently rejects those same continuations under Ajv. Thus this
+  frozen request contract would return 400 before routing for the proven
+  client, breaking R01/R03 and A07-A10. **Evidence: empirically reproduced
+  DTO/schema failure using pinned real-client traces; no endpoint execution
+  claimed.** Correction: preserve optional tool-result `name`, regenerate
+  schema/TypeScript, document it, and regress all three recorded requests
+  without stripping fields. Keep other unsupported semantics rejected.
+  The synthetic fixture at `backend/tests/contracts/test_contracts.py:93`
+  omits name, explaining why the green suite missed this requirement.
+
+### Medium / Low / Warning
+
+- **G1-C1-F2 — Medium, required contract/evidence gap: known upstream wire
+  normalization is not frozen.** `backend/app/contracts/interfaces.py:471`
+  returns strict ChatCompletionResponse (`backend/app/contracts/api.py:171`),
+  but the concrete handoff at `docs/api.md:366` does not define conversion of
+  known Ollama metadata. All five authoritative G0 wire responses fail that
+  DTO: each has `system_fingerprint` and `usage.prompt_tokens_details`; both
+  tool responses also have `tool_calls[].index`. **Evidence: empirically
+  reproduced raw-response/DTO mismatch; missing policy is static-verifiable.**
+  This is not a runtime failure claim against an unimplemented G3 adapter.
+  The coordinator clarified during review that G3 must explicitly normalize
+  known transport metadata into strict internal/public DTOs, preserving
+  semantic fields and not silently dropping unknown meaningful fields. That
+  clarification is absent from the durable handoff and tests. Correction:
+  freeze the precise allowed conversion and owner in docs/api.md, and cover
+  all five pinned responses with contract fixtures asserting preserved model,
+  ID/created, content, tool IDs/names/raw argument strings, finish_reason and
+  aggregate usage. Do not use blanket extra-field ignoring. G3 must later
+  exercise actual HTTP/SSE normalization. This missing G1 acceptance evidence
+  blocks freeze independently of severity.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read the complete root specification and AGENTS.md, installed spec/review
+skills, current requirements/spec/design/tasks/decisions, acceptance ledger,
+SA advisory/reconciliation, prior review, current sources, generated outputs,
+manifests/locks and tests. Truncated reads were followed by focused reads.
+G1 is contract/bootstrap acceptance; A01-A16 remain correctly OPEN.
+
+Other reviewed boundaries align statically: mandatory null-capable feedback
+seeds, disjoint loop syntax, lexical all-port plans, optional final LLM for
+passthrough, immutable snapshot/hash and detached access, non-null activation
+identity, provider-round/call-ordinal tool ownership, quiescent exposure,
+fixed UTC deadlines, source-batch response cursors and atomic claim sealing,
+CAS/terminal guards, conditional disconnect, safe waiting recovery and shared
+admission/full-exchange permits. Their concurrency/crash/timeout behavior
+still requires downstream tests; Protocols do not prove runtime behavior.
+
+### Cross-Slice Consistency
+
+Generated outputs match Python exactly, including F1. The drift regression
+actually changes a temporary output and requires exit 1. Strict TS includes
+library checks. SA-G1-01 through SA-G1-07 resolutions are present at unchanged
+reconciliation hashes. No analyst evidence is missing. F1/F2 demonstrate why
+G0 research success cannot substitute for validating new production DTOs.
+
+Eight Python direct pins match uv.lock and installed isolated packages;
+non-project Python artifacts use PyPI and SHA256 hashes. Eleven frontend
+direct pins match npm lock and installed versions. Current hashes:
+
+- uv.lock: `21b6904c150ab4c13a02f47ab4e4c9825d5cf6d331554595381a82e8b245a9f0`
+- npm lock: `229187d9a35f662a2b508510c72736286fa555fa747de20fc5d68bb83f341242`
+- interfaces.py: `1199677d3ce6d923688ef8197b0db9545506ab2dcec1b57e5f1948302771e1b6`
+- docs/api.md: `2cc59eba0f3276b7f27f988da8ee9dabbaf2c5503f78cb05dd4440717101d8d8`
+
+### Security And Operations
+
+DTO tests demonstrate strict semantic keys, safe graph IDs, positive limits,
+finite JSON, explicit seeds, and synthetic-token repr/serialization exclusion.
+Future HTTP authentication, log redaction, symlink safety, body-size enforcement
+and actual concurrency remain implementation gates. No tool executor/cloud
+dependency/inference service is introduced. No secrets, user data, external
+service, Docker resource, global config, dependency installation or product
+file was changed here. No live call was necessary; sanitized G0 evidence was
+used read-only.
+
+### Verification And Test Adequacy
+
+Executed from `D:/Sources/creep` using current pinned local tooling:
+
+| Command / probe | Exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py lint` | 0 | Locked Ruff lint; 11 files pass format; schema drift and both strict TS projects pass |
+| `python scripts/dev.py test-contract` | 0 | 49 Python cases in 1.41s and five frontend cases; drift passes |
+| Python reproduction below, literal here-string piped to `backend/.venv/Scripts/python.exe -` | 0 | Confirms two rejected actual continuations and five rejected raw responses |
+| JavaScript reproduction below, literal here-string piped to `node -` | 0 | Generated schema confirms `[true,false,false]` for real Hermes requests |
+| Local Python manifest/lock/installed-version/hash assertions | 0 | Eight Python/eleven frontend pins and hashes above match; Python 3.11.15 |
+| `python scripts/dev.py test-runtime`, `test-graphs`, `test-e2e`, `smoke-hermes`, `smoke-compose`, `build`, `frontend` | 2 each | Missing prerequisites fail explicitly, never PASS |
+| `dev.execute([sys.executable,'-c','raise SystemExit(7)'])` in isolated Python | 7 propagated | Outer assertion probe exits 0 after checking exact propagation |
+
+Wrapper uses uv0.11.28 with `--locked`, repository Ruff config and npm scripts;
+Make delegates the same targets. No CI workflow exists yet; G5 owns it.
+An initial inline Node probe failed in PowerShell quoting at `$ref` (exit 1)
+before Node execution; corrected literal here-string succeeded. This is a
+reviewer command error, not a product defect or a passed test.
+
+Python reproduction payload (no source writes/network):
+
+```python
+import json, sys
+sys.path.insert(0, 'backend')
+from app.contracts.api import ChatCompletionRequest, ChatCompletionResponse
+from pydantic import ValidationError
+with open('experiments/hermes-traces.json', encoding='utf-8') as source:
+    trace = json.load(source)['authoritative_final_experiment']
+requests = [x['client_request'] for x in trace['client_trace']
+            if 'client_request' in x]
+accepted = []
+for request in requests:
+    try:
+        ChatCompletionRequest.model_validate(request)
+        accepted.append(True)
+    except ValidationError as error:
+        assert all(e['type'] == 'extra_forbidden' and e['loc'][-1] == 'name'
+                   for e in error.errors(include_input=False))
+        accepted.append(False)
+assert accepted == [True, False, False]
+responses = [json.loads(x['upstream_response_body_utf8'])
+             for x in trace['upstream_trace'] if 'upstream_response_body_utf8' in x]
+assert len(responses) == 5
+for response in responses:
+    try:
+        ChatCompletionResponse.model_validate(response)
+    except ValidationError as error:
+        assert all(e['type'] == 'extra_forbidden'
+                   for e in error.errors(include_input=False))
+    else:
+        raise AssertionError('Unexpectedly accepted raw response')
+```
+
+Frontend reproduction payload, piped as a literal here-string to `node -`:
+
+```javascript
+const fs = require('fs');
+const Ajv = require('./frontend/node_modules/ajv/dist/2020').default;
+const schema = JSON.parse(fs.readFileSync('frontend/src/contracts/schema.json','utf8'));
+const validate = new Ajv({strict:false,allErrors:true}).compile({
+  ...schema, $ref:'#/$defs/ChatCompletionRequest'
+});
+const trace = JSON.parse(fs.readFileSync('experiments/hermes-traces.json','utf8'))
+  .authoritative_final_experiment;
+const results = trace.client_trace.filter(x => x.client_request)
+  .map(x => validate(x.client_request));
+if (JSON.stringify(results) !== '[true,false,false]') process.exit(1);
+```
+
+### Open Live Validation
+
+G1 corrected real-client compatibility and explicit provider-normalization
+contract fixtures remain required. No G1 live runtime PASS was claimed.
+All G2-G6 production gates remain OPEN: DAG/seeded loops, SQLite transitions
+and restart, tool routing/replay, JSON/SSE/errors/auth, UI/history, production
+Hermes/Ollama and Windows/WSL2 Compose/network/volume/restart, target metrics.
+The earlier rejected Docker diagnostic proves none of these.
+
+### Verdict: FAIL
+
+Reason: one High Hermes compatibility defect and one Medium missing required
+upstream-boundary contract/evidence prevent G1 freeze. G1 consumed 1/3 cycles;
+one scoped correction wave and affected checks may precede cycle 2. Severity
+was not adjusted to force the verdict. Dependent implementation must wait.
