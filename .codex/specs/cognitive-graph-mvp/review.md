@@ -898,3 +898,160 @@ Still OPEN, owned by later integration/delivery gates: actual provider/bridge/HT
 ### Verdict: FAIL
 
 Reason: two current High required-contract defects and one Medium schema-preservation defect remain empirically reproducible. G2 cycle 1/3 is consumed; the coordinator may assign one scoped fix wave before cycle 2. Reviewer changed only this review artifact, with no implementation edits or commits.
+
+## Task Group G2-runtime - Cycle 2 - 2026-10-04
+Reviewing: Wave 2 module implementation plus fix wave 1 - all 12 assigned runtime/storage source and test files, with targeted F1-F3 regression verification.
+Synthesizer: review_g2_c2. Analysts: none requested. G2 budget consumed: 2/3, reserved in tasks/decisions before spawn (commit `40a0e67`). One cycle remains.
+Current untracked product files were read directly; the empty tracked implementation diff did not define the review surface. Concurrent API and delivery work was preserved.
+
+### Critical / Severe / High
+
+None currently demonstrated in this slice. Cycle-1 High F1 and F2 are closed by current source, fresh regression tests and independent reruns of the original probes.
+
+### Medium / Low / Warning
+
+- **Medium F4 — an empty schema resource ID breaks final-controller local references.** [backend/app/runtime/engine.py:597](../../../backend/app/runtime/engine.py#L597) treats the presence of any `$id` as establishing an independent embedded resource and returns without rebasing; the same assumption exists in nested traversal at line 603. **Evidence class: empirically reproduced, with high confidence in the schema transformation defect.** Both valid Draft 2020-12 schemas with `"$id":""` and `"$id":"#"`, a `$defs.Text` string schema and `"$ref":"#/$defs/Text"` pass the pinned schema meta-validator, validate the original payload and pass the public ChatCompletionRequest DTO. Through the actual runtime's `_request`, the emitted controller schema instead resolves the unchanged pointer at the controller root, where `Text` does not exist. The pinned validator reports `PointerToNowhere`. A deterministic schema-validating fake provider produces a real scheduler/SQLite `failed/upstream_error` outcome. This is a local executable proof; no claim is made that a real Ollama/model was exercised by this probe. **Impact:** a supported client final-response constraint becomes an unusable upstream constraint solely because the graph ends in a controller. **Correction:** preserve resource identity and reference semantics when embedding, accounting for IDs that resolve to the containing resource rather than blindly treating every ID key as a new root. Preserve caller IDs/literal data and cover root/nested empty IDs, fragment-only IDs, ordinary absolute/relative IDs and declared-dialect resource boundaries through the emitted controller schema. Do not silently narrow the accepted schema profile. This Medium defect also fails a required section 4.1/G2 format-preservation acceptance condition; no severity escalation is needed to block PASS.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read the authoritative source and AGENTS.md, installed team-spec-workflow/team-review-cycle procedures, current durable requirements/spec/design/tasks/decisions/acceptance, prior review findings and API contracts. The coordinator confirmed that no durable accepted profile restricts schemas to a single dialect; no new restriction was introduced.
+
+R04/R05/R06/R07/R09 and deterministic module portions of A03-A06/A08-A10/A13-A14/A16 remain substantially demonstrated: lexical all-input diamond barriers, disjoint seeded scopes, constant input members and non-controller feedback, strict controller decisions and budget failure, immutable snapshots, per-owner internal rounds, quiescent serial exposure, durable replay/claim association, separate wait/active/queue accounting, cancellation and uncertain recovery. F4 leaves the final response-format preservation requirement unsatisfied.
+
+Prior findings:
+- **F1 closed:** [engine.py:129](../../../backend/app/runtime/engine.py#L129) checks failed/cancelled/interrupted before saved envelopes. The original cancel-before-delivery probe now raises cancelled. Six regressions cover saved-envelope and blocked-delivery cancellation/failure/expiry/interruption; exposure-preserving detachment and completed-success replay remain covered.
+- **F2 closed:** [engine.py:802](../../../backend/app/runtime/engine.py#L802) serializes controller payloads as JSON for json_object/json_schema. The original hello string probe now returns the JSON string `"hello"`. Tests cover escaped/numeric-looking/null-looking strings, null, bool, number, object, array, ordinary text, non-controller no-double-encoding, saved envelopes and recovery/replay.
+- **F3 original literal-mutation case closed:** current traversal preserves const/enum/default/examples/extension data. The original const object containing `$ref` remains identical and validates. Resource/reference preservation is not completely correct yet, as shown by separate F4.
+
+### Cross-Slice Consistency
+
+The 12-file G2 surface and current frozen constructors/protocols remain consistent. No public signatures, dependency manifests or locks were changed by this fix wave. Runtime still delegates transport and external tool exposure to the provider/bridge; it does not execute tools. Actual current provider/bridge tests were included in the stable-module regression command, including their runtime/storage seam.
+
+No analysts were requested or missing. API composition and delivery helpers were concurrent disjoint work and were not treated as completed integration evidence. G1 additive review remains a separate open gate.
+
+### Security And Operations
+
+No external tool execution, credentials, network probe, deployment, live-resource mutation or implementation edit was performed by this reviewer. Temporary SQLite fixtures were isolated. Storage/admission/event source and tests were re-read: dedicated serialized SQLite transactions, durable identities/CAS, immutable accepted results, first-terminal handling, fixed wait deadline, atomic claim sealing/rollback, event catch-up and admission retention remain covered. The schema probe uses the existing development-only jsonschema pin; it adds no production dependency.
+
+### Verification And Test Adequacy
+
+Commands ran from `D:/Sources/creep` using the repository's locked uv environment (Python 3.11.15, pytest 9.1.1, Ruff 0.16.10, jsonschema 4.26.0). The wrapper and CI configuration were inspected. The target dispatches the actual runtime/storage tests; scoped Ruff uses repository rules. API files still being written were excluded from the stable regression scope rather than being reported as fully integrated.
+
+| Command | Exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py test-runtime` | 0 | 71 passed in 12.33s |
+| `uv --system-certs run --project backend --locked pytest backend/tests/contracts backend/tests/graphs backend/tests/runtime backend/tests/storage backend/tests/providers backend/tests/tools -q` | 0 | 286 passed in 18.77s |
+| `uv --system-certs run --project backend --locked ruff check backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | 12 files already formatted |
+| Original F1-F3 probes, inverted to assert corrected behavior, via `uv --system-certs run --project backend --locked python -c $probe` | 0 | Cancelled saved tools rejected; controller string JSON preserved; literal const unchanged |
+| Additional emitted-controller schema probes using the same locked invocation | 0 | Good instances accepted and bad rejected for escaped JSON pointers, anchors, dynamic anchors, anonymous Draft 2019 recursive references and recursive root pointers |
+| F4 full runtime reproduction below, same locked invocation | 0 | Both empty-ID cases confirmed defective; exit 0 means the assertions reproduced the defect, not acceptance passed |
+| `git status --short --untracked-files=normal`, `git diff --stat`, source reads/hashes | 0 | Current untracked implementation scope and preserved peer work confirmed |
+
+The 30 new runtime/storage cases are meaningful and close the original reproductions, but do not cover F4. Green suite results therefore do not establish all required G2 acceptance.
+
+Exploratory evidence was bounded carefully: declared Draft 4 legacy `id` handling failed a Draft4Validator wrapper probe, while one Draft202012Validator wrapper variant passed; the attempted assertion of failure for that latter variant exited 1 and was discarded as an unsupported hypothesis. A percent-encoded initial-slash reference probe also exited 1 before transformation because the pinned validator rejected the original reference, so it is not a product finding. No real Ollama failure is inferred from either. An extension-location reference probe demonstrated another transformation edge, but F4 is based on the simpler standard-keyword empty-ID reproduction below.
+
+Source SHA256 at review:
+- engine.py: `fda84f31f1108f9aedb3b0c4963d2b685854bbb51255e58efd105d9eb6a3dcb9`
+- repository.py: `c5254c505162dd82424089df21532642f0bd46c69ebac594c11570d1b0e31c15`
+- admission.py: `2f6e24c9ecd88aeb085724ff0c7d7cc5a8bc869bde3ab231a625dfd344c766ad`
+- events.py: `009ca00b126e399d5c279be9c254f74f2e8fbca5af6cd4963ba1ea5a662b00ff`
+- test_scheduler.py: `6ae10d439c2ffea63c6fefab0fe9cd3a4ce33492843584ee295e72a4c387accc`
+- test_loops.py: `0cc07e31cdb177805cd38d899ea150761ab13a2ae79e2c128d6cf48ffc0170ec`
+- test_recovery.py: `1d59c907f818b7eba546ba072bc4d417e7029b7078136f59fb0cde43922f9bd1`
+- uv.lock: `21b6904c150ab4c13a02f47ab4e4c9825d5cf6d331554595381a82e8b245a9f0`
+
+Exact F4 reproduction (PowerShell, no stdin/TTY, no network):
+```powershell
+$probe = @'
+import asyncio, json, sys, tempfile
+from pathlib import Path
+sys.path[:0] = [str(Path("backend").resolve()),
+               str(Path("backend/tests/runtime").resolve())]
+from test_scheduler import Provider, create_runtime, node_request, response, submission
+from test_loops import loop_graph
+from app.contracts.api import ChatCompletionRequest
+from app.contracts.errors import CGError, ErrorCode
+from jsonschema import Draft202012Validator
+
+async def check(identifier):
+    schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": identifier,
+        "$defs": {"Text": {"type": "string"}},
+        "type": "object",
+        "properties": {"value": {"$ref": "#/$defs/Text"}},
+        "required": ["value"],
+    }
+    payload = {"value": "ok"}
+    Draft202012Validator.check_schema(schema)
+    Draft202012Validator(schema).validate(payload)
+    assert not Draft202012Validator(schema).is_valid({"value": 123})
+    client = {
+        "model": "cg/g", "messages": [{"role": "user", "content": "test"}],
+        "response_format": {"type": "json_schema", "json_schema": {
+            "name": "answer", "schema": schema, "strict": True}},
+    }
+    ChatCompletionRequest.model_validate(client)
+    failures = []
+
+    async def handler(request):
+        if node_request(request) == "draft":
+            return response("draft")
+        emitted = request.response_format.json_schema.schema_
+        try:
+            Draft202012Validator(emitted).validate({
+                "payload": payload, "control": {"decision": "stop"}})
+        except Exception as error:
+            failures.append(type(error).__name__ + ": " + str(error))
+            raise CGError(ErrorCode.UPSTREAM_ERROR, "Invalid emitted schema") from None
+        return response(json.dumps({"payload": payload, "control": {"decision": "stop"}}))
+
+    with tempfile.TemporaryDirectory() as directory:
+        provider = Provider(handler)
+        runtime, store = await create_runtime(Path(directory), provider)
+        try:
+            run = await runtime.submit(submission(loop_graph(), client=client))
+            try:
+                await asyncio.wait_for(runtime.await_response(run.run_id, "anonymous"), 3)
+            except CGError as error:
+                assert error.code == ErrorCode.UPSTREAM_ERROR
+            else:
+                raise AssertionError("Expected embedding defect was not reproduced")
+            assert len(failures) == 1 and "PointerToNowhere" in failures[0]
+            assert len(provider.requests) == 2
+            assert (await store.get_run(run.run_id, "anonymous")).status == "failed"
+            assert client["response_format"]["json_schema"]["schema"] == schema
+            print(f"$id={identifier!r}: original valid, DTO accepted; emitted schema "
+                  "PointerToNowhere; real runtime/SQLite failed with upstream_error")
+        finally:
+            await runtime.shutdown()
+            await store.close()
+
+async def main():
+    await check("")
+    await check("#")
+
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $probe
+```
+
+Observed output:
+```text
+$id='': original valid, DTO accepted; emitted schema PointerToNowhere; real runtime/SQLite failed with upstream_error
+$id='#': original valid, DTO accepted; emitted schema PointerToNowhere; real runtime/SQLite failed with upstream_error
+```
+
+### Open Live Validation
+
+G3-G6 gates remain OPEN: completed production HTTP/provider composition and shared graph/direct JSON/SSE behavior; corrected engine/provider/HTTP inside the actual rebuilt image; real process/container waiting-ID restart; pinned real Hermes/Ollama; Windows/WSL2 Compose connectivity/volume/SSE; real UI integration and target-hardware timing. Earlier Linux/SQLite 3.40.1 persistence checks used an older image and do not establish these corrected-runtime or integrated behaviors. Current tests close/reconstruct objects and SQLite connections in one process, not a production process/container restart. This review does not claim A01-A16 production completion.
+
+### Verdict: FAIL
+
+Reason: F4 violates required final-controller schema preservation despite closure of the original two High and one Medium findings. Current counts: Critical 0, Severe 0, High 0, Medium 1, Low/Warning/Suggestion 0. G2 has consumed 2/3 cycles; only one terminal cycle remains after any coordinator-owned scoped fix and required regressions. No reset, replacement loophole or fourth cycle is authorized. Reviewer modified only this review artifact, with no implementation edits or commits.

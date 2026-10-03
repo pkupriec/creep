@@ -9,7 +9,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Baseline PASS; additive extension pending | 2/3 |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | Fixed; independent cycle 2 reserved | 2/3 |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | Cycle 2 FAIL; final fix/advisory in progress | 2/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Modules delivered; JSON boundary/API pending | 0/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | Modules delivered; real API E2E/review pending | 0/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | In progress | 0/3 |
@@ -94,4 +94,9 @@ Serial correction also owns `scripts/dev.py` and `Makefile` for the executed Win
 
 The same queued G1 correction must separate pinned Vitest unit discovery from Playwright e2e/mvp.spec.ts, preserving normal src tests and all E2E execution through the real test-e2e target. Current npm test mistakenly invokes Playwright beforeAll via Vitest and fails while17 unit cases pass. No browser check is skipped or relabeled green.
 
-- [-] [devops] Same devops_delivery owns only scripts/smoke_compose.py and docs/verification.md for noninteractive contract reconciliation: replace Compose override stdin input with a task-owned temporary parameter file passed through -f; never wait on stdin/TTY. Retain actual executed d1/d2/d3 evidence unchanged, test real validate/argv behavior and fresh persistence in new unique project if permitted. No user data deletion/network/inference/runtime/server/shared file changes.
+- [x] [devops] Same devops_delivery owns only scripts/smoke_compose.py and docs/verification.md for noninteractive contract reconciliation: replace Compose override stdin input with a task-owned temporary parameter file passed through -f; never wait on stdin/TTY. Retain actual executed d1/d2/d3 evidence unchanged, test real validate/argv behavior and fresh persistence in new unique project if permitted. No user data deletion/network/inference/runtime/server/shared file changes.
+
+## G2 fix wave 2 — final available fix before terminal cycle 3
+
+- [-] [sa] sa_g2_schema, advisory only, sole writable .codex/specs/cognitive-graph-mvp/sa-review.md (append). Analyze final controller schema embedding, empty/fragment/relative/absolute IDs, legacy/modern dialect/resource/reference/annotation semantics and final-format paths. Reproduce with pinned local validators/actual request construction, no remote schema fetch or inference. Produce a minimal supported design without changing accepted profile/dependencies or emitting PASS. Exact source requirements and cycle2 F4 remain authoritative; same G2counter2/3, advisory is not a synthesizer.
+- [-] [coding] Existing coding_runtime owns only backend/app/runtime/engine.py and backend/tests/runtime/test_scheduler.py, test_loops.py, test_recovery.py. Regression-first cycle2 F4 empty-ID reproduction plus accepted schema boundary matrix; coordinate with SA advisory before finalizing minimal correction, no caller contract narrowing or production dependency. Verify all final response-format paths including legal no-LLM pass-through and preserve ordinary already-formatted LLM text. No other edits. Run pinned affected/full/drift/Ruff. Lead waits both terminal results before reserving final G2cycle3; no fourth cycle or reset.
