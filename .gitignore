@@ -12,3 +12,10 @@
 **/dist/
 **/test-results/
 **/playwright-report/
+
+# Private local application state/settings and operator backups.
+.local-data/
+backups/
+.env
+.env.*
+!.env.example
