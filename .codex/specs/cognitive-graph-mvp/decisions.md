@@ -167,3 +167,9 @@
 ## 2026-10-04 — client capacity resolved; exact owners resumed
 
 - After proxy terminal handoff, followup_task successfully resumed the same pending runtime owner for its four-file fix, then the same DevOps owner for the queued actual-image check. Fresh client inventory: root/runtime/UI/DevOps running, exactly two coding and one DevOps children. No replacements/duplicate scopes/closure claims or extra review budget consumed. The earlier thread-limit rejection remains truthful historical evidence, now resolved by normal lifecycle capacity.
+
+## 2026-10-04 — UI independent handoff harvested; serial bootstrap correction starts
+
+- coding_ui terminal, exact13 frontend files, no manifests/locks/generated/backend edits. Owner strict typecheck/build exit0; focused src unit21 exit0 (nine contracts plus graph/client regressions). Root fresh npm --prefix frontend test -- src exit0:21 cases/three files. Native Chromium mock-API visual QA proved rendering/fetch-brand fix only, not acceptance; earlier optional screenshot is absent on current disk after test reruns, so no deliverable image claimed.
+- Actual full npm test exit1 due Playwright collected as Vitest, real E2E exit1 due missing health/ready404 with one prerequisite failure and three unexecuted cases. All remain truthful OPEN. Four backend-backed E2E scenarios prepared, current dedicated fixture retained at C:/Users/pkupr/AppData/Local/Temp/cg-ui-e2e-KmhQDe; owned listener cleanup exit0 (8000/5173/5191 absent). Build warnings use-client directive/507.62kB bundle retained for reviewer, no unrelated package expansion.
+- Freed coding slot goes to existing coding_bootstrap for queued private reasoning metadata normalization and unit/browser discovery on exact4 files. Concurrent runtime fixes and DevOps actual-image checks continue disjoint; no peer changes. Final G1 cycle3 remains held for coherent API consumer reconciliation, unchanged2/3.
