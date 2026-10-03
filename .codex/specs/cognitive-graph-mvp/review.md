@@ -1171,3 +1171,146 @@ F1/F2 corrections and regressions remain required G4 gates. No requested baselin
 ### Verdict: FAIL
 
 Reason: two empirically reproduced Medium defects violate required API-backed editor reload/generation consistency and malformed graph request error handling. Critical 0, Severe 0, High 0, Medium 2, Low/Warning/Suggestion 0. G4 consumed 1/3 cycles; coordinator may assign one scoped fix wave and regressions before cycle 2. No implementation fixes, commits, pushes or deployments were performed.
+
+## Task Group G2-runtime - Cycle 3 - 2026-10-04
+
+Reviewing: Wave 2 runtime/storage plus final fix wave 2, including the final-format production-validator consumer and G3 API seams.
+Synthesizer: `review_g2_c3`; analysts: none requested. The completed `sa_g2_schema` advisory was read and reconciled against current source and executable evidence; its recommendations are not an independent verdict. This is the terminal third cycle, reserved before spawn in tasks/decisions at `b53dbb3`. The 12 assigned runtime/storage source/test files remained frozen. The reviewer changed only this appended review section.
+
+### Critical / Severe / High
+
+None currently demonstrated in the assigned slice. Original High F1 and F2 remain closed.
+
+### Medium / Low / Warning
+
+- **Medium F5 — legacy schema rebasing omits Draft 3 schema-valued keywords.** [backend/app/runtime/engine.py:657](../../../backend/app/runtime/engine.py#L657) and [engine.py:671](../../../backend/app/runtime/engine.py#L671) enumerate schema children without Draft 3 `extends` or schema alternatives in `type`. The same function explicitly accepts Draft 3 and selects rebasing for its root `$ref` at [engine.py:611](../../../backend/app/runtime/engine.py#L611) and [engine.py:631](../../../backend/app/runtime/engine.py#L631). **Evidence class: empirically reproduced; high confidence in the transformation defect, no native Ollama claim.** For each of two valid declared Draft 3 schemas, the pinned original-schema validator accepts `"ok"` and rejects `3`, and the public request DTO accepts the schema. Through the actual runtime request builder, `#/definitions/Text` inside `extends` or a `type` schema alternative is left pointing at the outer controller root and raises `PointerToNowhere`. The actual scheduler with a schema-validating fake provider and actual SQLite then commits `failed/upstream_error`, with two provider calls, zero success envelopes and an unchanged saved client policy. This is a supported final-format preservation failure, not an invalid input or a missing live-provider capability. **Specific correction for user disposition:** make traversal and reference rebasing dialect-aware for all schema-bearing locations of each retained dialect, including Draft 3 `extends` (single/list forms) and schema-valued `type`/`disallow` alternatives; retain literal data and resource boundaries. Add original-good/original-bad versus emitted-request regressions through runtime/SQLite. Do not silently narrow the accepted dialect profile. Because this is cycle 3, this recommendation is preserved for user disposition and does not authorize another automatic fix/review cycle.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read the authoritative source specification, project guidance, installed team-spec-workflow/team-review-cycle skills, current requirements/spec/design/tasks/decisions/acceptance, relevant prior independent reviews, completed SA advisory and current API/contract documentation. The new product files are untracked; `git ls-files --others --exclude-standard` confirms the exact 12-file surface. An empty tracked implementation diff was not treated as absence of implementation.
+
+R04/R05/R06/R07/R09 and deterministic G2 portions of A03-A06/A08-A10/A13-A14/A16 have substantial current executable evidence: lexical all-input fan-in; concurrently started diamond experts; independent seeded scopes and immutable external loop inputs; controller-only exits and execution budgets; per-owner tools; immutable snapshots; durable claims, partial acceptance and first-next-response replay; fixed wait deadlines; independent queue/active/wait accounting; shared admission; cancellation/detachment; uncertain recovery and retention. The fresh 212 runtime/storage cases use actual scheduler/validator/SQLite with fake providers and clocks where appropriate. They are module evidence, not real Hermes/Ollama or container evidence.
+
+Prior findings and advisory disposition:
+
+- **F1 closed:** current `await_response` checks failed/cancelled/interrupted before reading saved envelopes (engine.py:129). Fresh saved-envelope and blocked-waiter tests cover cancellation, failure, expiry and interruption. Completed-success replay and exposure-preserving initial detach remain covered separately.
+- **F2 closed:** final controller/native string values are JSON encoded under JSON formats; raw ordinary provider JSON remains byte-equivalent. Tests exercise quoted/numeric-looking/null-looking strings, objects/scalars, saved envelopes, reconstruction and replay. Valid ordinary `length` is preserved; invalid/truncated JSON is explicitly rejected before success as documented.
+- **F3 closed for the original literal-data mutation:** const/enum/default/examples/extension literal values remain unchanged. Fresh good/bad constraint and dual-use literal/activated-reference tests execute the actual emitted schema.
+- **F4 closed for its original root/nested empty or `#` resource-ID cases:** the fresh suite exercises detached-resource normalization, declared dialects, root references, relative/absolute IDs, anchors, recursive/dynamic refs and escaped pointers. Original policy is unchanged, and good payloads survive storage/reconstruction. F5 is a remaining dialect-location omission exposed by an additional independent probe; the broad schema-preservation gate therefore remains unsatisfied.
+- **SA-G2-03/04 native-format gaps closed:** JSON string pass-through is encoded correctly; non-object `json_object` values and unsatisfied const/required/local-reference constraints fail before a success envelope, with `invalid_parameter` for no-LLM runs and `upstream_error` for provider outputs. `jsonschema==4.26.0` is now an exact production dependency through the separate bootstrap owner. Unknown dialects, malformed schemas and unresolved remote references fail explicitly and are sanitized. The local registry denies remote retrieval. No new public protocol or profile exception was approved by this review.
+
+The required section 4.1/6.2 format-preservation contract remains open because of F5. Its Medium severity independently blocks acceptance; no severity escalation is used to obtain FAIL.
+
+### Cross-Slice Consistency
+
+Current runtime constructors and frozen repository/provider/bridge/admission protocols remain consistent. Runtime owns graph scheduling and delegates upstream transport and tool exposure; it never executes tools. The actual provider/bridge seam and composed API tests were included in fresh contract/full backend checks. Shared admission is used for graph and direct jobs; inference limits remain owned by the shared provider. No generic response disk cache, additional inference concurrency or effectful retry was introduced.
+
+Concurrent UI correction and DevOps preparation owned disjoint files; no reviewer browser ports, listeners, Compose resources or production files were used or changed. Current G1 additive contracts and G3-G6 independent verdicts remain separate gates. No requested analyst evidence is missing.
+
+### Security And Operations
+
+Source inspection confirms dedicated single-thread SQLite ownership, WAL/foreign keys/FULL synchronization, short synchronous transactions, parameterized queries, durable unique identities, immutable accepted results, CAS checkpoints, and atomic response/claim sealing. Fresh tests inject a post-response/pre-claim failure and verify rollback, enforce caller/run identity, reject late/changed results, and retain committed event order. No DB transaction spans provider awaits. These are native Windows module checks; they do not replace corrected production-image SQLite checks.
+
+Final-schema validation uses a registry whose retrieval callback rejects external resources. Invalid format/schema/reference errors are sanitized before a success envelope; no tool executor, secret access, external schema fetch, network inference, live infrastructure mutation or deployment was performed by this reviewer. F5 is a valid-input compatibility defect, not a demonstrated security exploit.
+
+### Verification And Test Adequacy
+
+Commands ran from `D:/Sources/creep`. The repository wrapper resolves the local `uv` executable and invokes `--system-certs run --project backend --locked`, preserving Python 3.11.15 and exact locked pytest/Ruff/jsonschema versions. The wrapper propagates failures and its targets were inspected against the pinned CI commands. No test or implementation file was edited or weakened.
+
+| Command | Exit | Current result |
+| --- | --- | --- |
+| `python scripts/dev.py test-runtime` | 0 | 212 passed in 21.58s; all assigned runtime/storage cases |
+| `python scripts/dev.py test-contract` | 0 | Generated schema drift clean; 163 Python contract/provider/tool cases in 5.18s and 9 frontend contract cases |
+| First `python scripts/dev.py test` | 1 | Incomplete: progress contained one `F`, followed by Windows fatal access violation in jsonschema validation; no final pytest summary and frontend unexecuted |
+| `uv --system-certs run --project backend --locked pytest backend/tests -x -q` | 0 | Bounded diagnostic after the preceding failure: all 475 passed in 34.00s; first failure/native exception not reproduced |
+| One exact `python scripts/dev.py test` rerun | 0 | All 475 backend cases in 34.39s and 21 frontend cases across 3 files |
+| `python scripts/dev.py lint` | 0 | Ruff check, 49-file format check, generated-contract drift check and both strict TypeScript projects |
+| Independent F5 helper-level good/bad comparison via locked `python -c $cgProbe` | 0 | Both `extends` and schema-valued `type` originals valid; both transformed wrappers raise PointerToNowhere |
+| Independent F5 actual runtime/SQLite reproduction below, same locked invocation | 0 | Both cases commit failed/upstream_error with no response envelope; zero external tools, caller policy unchanged. Exit 0 confirms defect assertions, not acceptance |
+| `git diff --check` before report append | 0 | No whitespace errors in tracked changes |
+
+The initial full-suite failure is preserved rather than relabeled green. The exposed stack ran through jsonschema `evolve`, `descend`, `ref`, `allOf`, `dynamicRef` and `properties`. The wrapper reported exit 1; a child native exit code was not exposed. Output truncation and absence of a final summary prevent identifying the initial `F` or exact crashing case. Both bounded subsequent executions passed without source changes to G2. Cause remains unassigned; this is a verification discrepancy/residual risk, not an invented product-defect finding or proof that the earlier failure was fixed. No further repeated full-suite runs were used to seek a preferred outcome.
+
+The suite's Draft 3 parameter matrix tests declared dialects/IDs and ordinary properties/definitions, but does not exercise the schema-bearing keywords in F5. Thus its green result is insufficient for the required preservation contract. The standalone reproduction below is outside the existing suite and supplies that missing negative evidence.
+
+Exact F5 reproduction (PowerShell literal code argument; no stdin, listener or network):
+
+```powershell
+$cgProbe = @'
+import asyncio,copy,json,sys,tempfile
+from pathlib import Path
+sys.path[:0]=['backend','backend/tests/runtime']
+from jsonschema.validators import validator_for
+from referencing import Registry
+from app.contracts.api import ChatCompletionRequest
+from app.contracts.errors import CGError
+from test_loops import loop_graph
+from test_scheduler import Provider,create_runtime,node_request,response,submission
+async def check(keyword):
+    answer={keyword:[{'$ref':'#/definitions/Text'}] if keyword=='type' else {'$ref':'#/definitions/Text'}}
+    schema={'$schema':'http://json-schema.org/draft-03/schema#','$ref':'#/definitions/Answer','definitions':{'Text':{'type':'string'},'Answer':answer}}
+    original=copy.deepcopy(schema)
+    v=validator_for(schema); v.check_schema(schema)
+    assert v(schema,registry=Registry()).is_valid('ok')
+    assert not v(schema,registry=Registry()).is_valid(3)
+    client={'model':'cg/g','messages':[{'role':'user','content':'test'}],'response_format':{'type':'json_schema','json_schema':{'name':'answer','schema':schema}}}
+    ChatCompletionRequest.model_validate(client)
+    errors=[]
+    async def handler(request):
+        if node_request(request)=='draft':return response('draft')
+        emitted=request.response_format.json_schema.schema_
+        actual=validator_for(emitted);actual.check_schema(emitted)
+        try: actual(emitted,registry=Registry()).validate({'payload':'ok','control':{'decision':'stop'}})
+        except Exception as error:
+            errors.append(type(error).__name__+': '+str(error).split(' does not exist')[0]);raise
+        return response(json.dumps({'payload':'ok','control':{'decision':'stop'}}))
+    with tempfile.TemporaryDirectory(prefix='cg-g2-c3-review-') as directory:
+        provider=Provider(handler);runtime,repository=await create_runtime(Path(directory),provider)
+        try:
+            run=await runtime.submit(submission(loop_graph(),client=client))
+            try: await asyncio.wait_for(runtime.await_response(run.run_id,'anonymous'),3)
+            except CGError as error: assert error.code.value=='upstream_error'
+            else: raise AssertionError('Expected broken emitted schema')
+            checkpoint=await repository.load_checkpoint(run.run_id,'anonymous')
+            assert checkpoint.run.status=='failed' and not checkpoint.responses
+            assert len(provider.requests)==2 and errors
+            assert json.loads(checkpoint.run.policy.client_request_json)==client and schema==original
+            print(json.dumps({'case':keyword,'original_good':True,'original_bad_rejected':True,'emitted_error':errors[0],'run':checkpoint.run.status,'code':json.loads(checkpoint.run.error_json)['code'],'responses':len(checkpoint.responses),'provider_calls':len(provider.requests),'policy_unchanged':True}))
+        finally:await runtime.shutdown();await repository.close()
+async def main():
+    for keyword in ('extends','type'):await check(keyword)
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $cgProbe
+```
+
+Both observed records report `original_good=true`, `original_bad_rejected=true`, `_WrappedReferencingError: PointerToNowhere: '/definitions/Text'`, `run=failed`, `code=upstream_error`, `responses=0`, `provider_calls=2`, and `policy_unchanged=true`. Dedicated temporary SQLite fixtures were cleaned by their own context managers; no user data was accessed or removed.
+
+Reviewed SHA256 values (re-read unchanged before report):
+
+| File under backend/ | SHA256 |
+| --- | --- |
+| app/runtime/__init__.py | acc9a4b043216b2fb1b87e8600fa87871f9b0f6921611546e8bc5ae12296c403 |
+| app/runtime/admission.py | 2f6e24c9ecd88aeb085724ff0c7d7cc5a8bc869bde3ab231a625dfd344c766ad |
+| app/runtime/clock.py | 47053388204b0d7bca5737307c50dc3efd9976164d6a1a70b2bae75e4e7d51e8 |
+| app/runtime/engine.py | b8ff723dea5338d3c56d88413e89936e81c105c46991ae914517dbbd049d2cd6 |
+| app/storage/__init__.py | b5dd58e1c1e743acb4eb635f94c303613faab2f249ffb4e20fde9a9e7d49c7fa |
+| app/storage/events.py | 009ca00b126e399d5c279be9c254f74f2e8fbca5af6cd4963ba1ea5a662b00ff |
+| app/storage/repository.py | c5254c505162dd82424089df21532642f0bd46c69ebac594c11570d1b0e31c15 |
+| tests/runtime/test_admission.py | 40ddc7092547e8c1c77b39c753bf377f05f438896116be1e3124958f478fb22f |
+| tests/runtime/test_loops.py | e8f48ae83c881f95f117921f48e6f1beb063be0c772f6754ec55447da04bf536 |
+| tests/runtime/test_recovery.py | e025646715f75896378015620a9dab0c08c45f06e9dab302cbf0f637a66be520 |
+| tests/runtime/test_scheduler.py | 198246a3c9730bb9e70cf9d3db150ef3758157cb3fa65ecf2db9389367341891 |
+| tests/storage/test_sqlite.py | 96afa27f1d8e0bfbe34c603edd4066b86ab38e1eba7e48d0298b5ef0edd0ff85 |
+
+### Open Live Validation
+
+No native Ollama, Hermes, Windows/WSL2 Compose, corrected production-image SQLite, container waiting-tools restart, or target performance check was executed in this review. Those remain required G5/G6 integration gates, as planned before this review; native module fixtures and the prior older-image storage proof cannot close them. The initial native test exception remains an unassigned verification discrepancy. F5 is an executed G2 acceptance failure and does not depend on any live gate being available.
+
+### Verdict: FAIL
+
+Reason: one empirically reproduced Medium defect (F5) leaves required final-controller schema preservation unsatisfied. Counts: Critical 0, Severe 0, High 0, Medium 1, Low/Warning/Suggestion 0. G2-runtime has exhausted its non-resetting 3/3 review budget and is **BLOCKED for user disposition**. Stop this group's automatic fixes/reviews; no fourth cycle, replacement, rename or artificial split is authorized. Other independent groups may continue, but the required blocked G2 group prevents MVP completion. No implementation edits, commits, pushes or deployment were performed.

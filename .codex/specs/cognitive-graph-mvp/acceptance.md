@@ -39,3 +39,7 @@ G0 research PASS proves only its pinned experiment, not these production gates.
 - Native adapter default-thinking SSE text/tools passed; bounded real JSON text plus native toolrequest/manualresult passed against Ollama0.33.3/gemma4:12b pinned digest, zero tools executed. These are transport subsets, not public production proxy/Hermes acceptance.
 
 - Latest ROOT `python scripts/dev.py test` exit0:475allbackend in33.93s and21frontend; ROOT `python scripts/dev.py lint` exit0:Ruff49files/generateddrift/strictTS. Includes finalruntime212cases, API48, graph52 and contract/provider/tools163. Earlier concurrentfailfirst combinedfailures are closed; G2lastreview/G4reloadcorrection/otherindependentreviews/livegates remainOPEN.
+
+## Required runtime blocker
+
+G2-runtime independentterminalreview3/3 FAIL/BLOCKED: reviewF5 validDraft3 localreference traversal omission. PriorF1–F4closed, current212/475+21/Ruff/contractchecks pass but requiredfinal-controllerformatpreservation remainsfailed. Noautomaticfourthcycle/fix/narrowedprofile; userdispositionrequired. WholeMVPacceptancecannotclosewhilethisrequiredgroupblocked. InitialunreproducedWindowsnativefulltestexception retained as separateverificationdiscrepancy.
