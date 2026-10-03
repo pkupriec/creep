@@ -613,3 +613,136 @@ Reason: one High Hermes compatibility defect and one Medium missing required
 upstream-boundary contract/evidence prevent G1 freeze. G1 consumed 1/3 cycles;
 one scoped correction wave and affected checks may precede cycle 2. Severity
 was not adjusted to force the verdict. Dependent implementation must wait.
+
+## Task Group G1-contracts - Cycle 2 - 2026-10-03
+
+Reviewing: Wave 1 correction - the six files in G1 fix wave 1, with regression
+consistency against the existing contract/bootstrap surface.
+Independent sole synthesizer: `review_g1_c2`; no analysts requested or missing.
+Cycle 2/3 was reserved in commit `cc6ac73` before this spawn. G0 remains PASS
+at 2/3. This is targeted verification of the prior findings, not a new group
+or counter. Current untracked product files were inspected directly.
+
+### Critical / Severe / High
+
+None remaining. **G1-C1-F1 (High) closed.**
+`backend/app/contracts/api.py:59` preserves optional tool-result name;
+`frontend/src/contracts/generated.ts:55` and the generated JSON Schema agree.
+All three `authoritative_final_experiment.client_trace` requests validate in
+Python and Ajv, including both previously rejected continuations. Exact
+serialized histories, schemas, names, raw arguments and result strings remain
+unchanged; validation does not mutate the fixture. Additional unknown tool
+message fields and unsupported client `reasoning_effort` remain rejected.
+Evidence class: empirically confirmed DTO/generated-schema behavior, not
+production HTTP or live Hermes execution.
+
+### Medium / Low / Warning
+
+None remaining in this correction. **G1-C1-F2 (Medium required G1 gate) closed.**
+`backend/app/contracts/api.py:181` supplies the pure strict upstream factory.
+Private DTOs validate metadata before removal; nonstream tool indices are
+checked against array order at `backend/app/contracts/api.py:214`. The factory
+removes only the declared fingerprint, prompt-token detail container and
+nonstream call index. Unknown nested metadata and malformed semantic fields
+are rejected rather than ignored. All five authoritative UTF-8 wire response
+bodies normalize successfully, preserving ID, model, time, object, choices,
+content, call IDs/names/raw arguments, finish reason and aggregate usage.
+Inputs are unchanged, and later input mutation cannot alter the parsed DTO.
+`docs/api.md:98` freezes the conversion and sanitized error responsibility;
+`docs/api.md:123` explicitly leaves HTTP/SSE normalization and cleanup to G3;
+`docs/api.md:395` names the consuming adapter. Evidence class: empirically
+confirmed pure-boundary behavior plus static-verifiable handoff, not an
+implemented transport claim.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Read the authoritative specification, AGENTS.md, installed spec/review skills,
+durable requirements/design/tasks/decisions and relevant spec contracts,
+prior review and SA reconciliation. The correction preserves R01/R03's
+actual pinned client profile without broadening accepted client semantics.
+No product requirement or A01-A16 acceptance criterion was removed. G1's
+required corrected fixture and normalization evidence is now demonstrated.
+Other unchanged G1 contracts retain their prior reviewed boundaries; their
+scheduler/storage/HTTP implementations remain downstream work.
+
+### Cross-Slice Consistency
+
+Schema regeneration/drift checks match Python, and both strict TypeScript
+projects pass. The frontend uses the generated optional-name type and validates
+the actual fixtures. Tests use only `authoritative_final_experiment`, never
+the explicitly invalid historical trace. The trace, both dependency locks,
+and interfaces.py retain the previously reconciled SHA256 values:
+
+- trace: `72f6e6325bcdc07e42d54a1190770ef42d821b90f8c8b2a7425c9b6b52c269e6`
+- uv.lock: `21b6904c150ab4c13a02f47ab4e4c9825d5cf6d331554595381a82e8b245a9f0`
+- npm lock: `229187d9a35f662a2b508510c72736286fa555fa747de20fc5d68bb83f341242`
+- interfaces.py: `1199677d3ce6d923688ef8197b0db9545506ab2dcec1b57e5f1948302771e1b6`
+
+Current corrected api.py is
+`681b38303bc8d495eeed6d3886bc8665e2de960020ec18b45cdc3d79e86a6c83`;
+docs/api.md is
+`2b058eee0815e9a0cfbe96093d151991ab572e35bdc2e937a2b7c71b47cc698a`.
+
+### Security And Operations
+
+The shared base still forbids extras and coercion. The public response
+constructor continues to reject raw upstream metadata; normalization is an
+explicit separate boundary. No blanket extra-field ignoring, tool executor,
+network call, retry, secret access or runtime configuration change was added
+by this fix or review. The reviewer wrote only this review record; no product
+source, fixture, lock, configuration or external resource was changed.
+
+### Verification And Test Adequacy
+
+Executed from `D:/Sources/creep` with current project-local pinned tooling:
+
+| Command / probe | Exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py lint` | 0 | Ruff lint, 11-file format check, schema drift, both strict TypeScript projects pass |
+| `python scripts/dev.py test-contract` | 0 | 71 Python tests in 1.46s; nine frontend tests in 217ms; generated contracts match |
+| Independent literal Python probe piped to `backend/.venv/Scripts/python.exe -` | 0 | Three exact client histories and five exact normalized wire responses; strict public constructor, input immutability and detached parsed output verified |
+| Same Python probe, adversarial metadata/semantic mutations | 0 | 15 additional negative cases rejected; ordered two-call response and four documented allowed metadata combinations accepted |
+| Independent literal JavaScript probe piped to `node -` using `frontend/node_modules/ajv/dist/2020` | 0 | All three untouched actual requests accepted; unsupported top-level semantics, tool-message extras and numeric names rejected |
+| `Get-FileHash ... -Algorithm SHA256` for the six evidence files above | 0 | All expected hashes match |
+
+The Python regressions at `backend/tests/contracts/test_contracts.py:69` and
+`:81` compare entire parsed payloads with exact original data after only the
+three documented metadata removals. The 13 committed negative cases at
+`:112` and strict tool-message regression at `:122` execute actual validation.
+Frontend fixtures at `frontend/src/contracts/contracts.test.ts:18` exercise
+all three actual requests through Ajv without fixture rewriting. The suite
+also retains the prior real schema-drift failure regression.
+
+The independent additional Python negatives tested object-valued fingerprint,
+array-valued token details, fractional/nonfinite cached tokens, boolean/float/
+negative call index, unknown call/function/choice fields, wrong call type or
+message role, inconsistent finish reason, choice index 1, and duplicate call
+ordinals in a two-call response. Accepted metadata combinations included null,
+empty detail object, null cached count and integer zero. These are executed
+boundary checks, not inferred results or production runtime tests.
+
+The wrapper was inspected: it invokes uv with `--locked`, repository Ruff
+configuration and npm scripts; Make delegates the same targets. There is no
+CI workflow yet; G5 owns its implementation. Owner-reported fail-first runs
+are preserved in decisions.md; this reviewer independently ran the corrected
+current regressions and probes, not a reconstructed pre-fix tree.
+
+### Open Live Validation
+
+No required G1 gate remains open. All G2-G6 production/live gates remain OPEN:
+DAG/seeded loops and concurrency, SQLite transactions/recovery/replay,
+production JSON/SSE/error/auth transport, UI/history, actual Hermes/Ollama,
+Windows/WSL2 Compose/container routing/volume/restart, and target performance
+measurements. A01-A16 are not closed by this contract review or G0 prototypes.
+The previously rejected Docker diagnostic proves none of these behaviors.
+
+### Verdict: PASS
+
+G1 contract/bootstrap freeze passes cycle 2 with both prior findings closed,
+no current findings and all required G1 evidence collected. G1 has consumed
+2/3 cycles. This verdict permits dependent implementation; it is not MVP
+completion or a production/live acceptance verdict.
