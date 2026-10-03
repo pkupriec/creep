@@ -7,7 +7,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
-| G0-research | Proven Hermes continuation and editor choice | None | Fix wave 1 | 1/3 |
+| G0-research | Proven Hermes continuation and editor choice | None | Review pending | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Waiting | 0/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | Waiting | 0/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Waiting | 0/3 |
@@ -30,7 +30,7 @@ All three named workers must return before consolidation. No recursive delegatio
 
 ## G0 fix wave 1 — cycle 1 findings
 
-- [-] [coding] `coding_g0_fix1` owns ONLY `experiments/hermes_bridge.py`, `experiments/test_hermes_bridge.py`, `experiments/hermes-traces.json`, `docs/research/hermes-protocol.md`. Address G0 cycle 1 Medium findings: immutable wire request/response trace snapshots; replay mismatch and changed execution/delivery counters must fail nonzero. Add regression tests for both defects, re-run pinned actual-Hermes suite/Ruff and documented live two-owner SSE/reconstruction/compression/serial experiment with unique dedicated directory, regenerate truthful aggregate traces/current source hashes. Preserve historical failed evidence and all source pins. No product/config/editor/dependency/spec/review edits, no change in semantics or scope. Required proof: trace remains byte/content-equivalent to wire after history mutation; injected false replay/counter changes cause failure; corrected live continuation remains successful. Lead waits terminal result, verifies current evidence, then reserves cycle 2 for G0 only.
+- [x] [coding] `coding_g0_fix1` owns ONLY `experiments/hermes_bridge.py`, `experiments/test_hermes_bridge.py`, `experiments/hermes-traces.json`, `docs/research/hermes-protocol.md`. Address G0 cycle 1 Medium findings: immutable wire request/response trace snapshots; replay mismatch and changed execution/delivery counters must fail nonzero. Add regression tests for both defects, re-run pinned actual-Hermes suite/Ruff and documented live two-owner SSE/reconstruction/compression/serial experiment with unique dedicated directory, regenerate truthful aggregate traces/current source hashes. Preserve historical failed evidence and all source pins. No product/config/editor/dependency/spec/review edits, no change in semantics or scope. Required proof: trace remains byte/content-equivalent to wire after history mutation; injected false replay/counter changes cause failure; corrected live continuation remains successful. Lead waits terminal result, verifies current evidence, then reserves cycle 2 for G0 only.
 
 ## Architecture advisory during G0 — no frozen contracts yet
 

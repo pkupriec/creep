@@ -1,11 +1,48 @@
 """RD1 regression cases. Actual Hermes tests are separately opt-in."""
 
 import copy
+import io
+import json
 import os
+from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
 from hermes_bridge import BridgeError, ResearchBridge, latest_segment, run_hermes
+
+
+def test_upstream_trace_retains_exact_wire_after_history_mutation(
+    tmp_path, monkeypatch
+):
+    bridge = ResearchBridge(
+        tmp_path / "db",
+        tmp_path / "fixture",
+        upstream="http://fixture/v1",
+        model="fixture",
+    )
+    messages = [{"role": "user", "content": "fixture café"}]
+    tools = [{"type": "function", "function": {"name": "read_file"}}]
+    response_body = b'{ "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": "fixture answer"}}] }'
+    transmitted = []
+
+    def transport(wire, timeout):
+        assert timeout == 300
+        transmitted.append(wire.data)
+        return io.BytesIO(response_body)
+
+    monkeypatch.setattr("urllib.request.urlopen", transport)
+    answer = bridge.model_request(messages, tools)
+    messages.append(answer)
+    messages[0]["content"] = "changed history"
+    tools[0]["function"]["name"] = "changed schema"
+    answer["content"] = "changed returned message"
+    assert bridge.trace[0]["upstream_request"] == json.loads(transmitted[0])
+    assert bridge.trace[0]["upstream_request_body_utf8"].encode() == transmitted[0]
+    assert bridge.trace[1]["upstream_response"] == json.loads(response_body)
+    assert bridge.trace[1]["upstream_response_body_utf8"].encode() == response_body
+    bridge.close()
 
 
 def request():
@@ -173,3 +210,89 @@ def test_actual_hermes_client(tmp_path, owners, stream, serial):
     assert result["tool_results"] == owners
     if serial:
         assert result["api_calls"] == 3
+
+
+@pytest.mark.skipif(
+    os.getenv("CG_RD1_HERMES") != "1", reason="Requires the pinned real Hermes client"
+)
+@pytest.mark.parametrize(
+    "fault,replay_index",
+    [
+        ("response", 4),
+        ("response", 5),
+        ("model_calls", 4),
+        ("node_executions", 4),
+        ("tool_deliveries", 4),
+        ("upstream_trace", 4),
+    ],
+)
+def test_actual_hermes_replay_verifier_rejects_faults(
+    tmp_path, monkeypatch, fault, replay_index
+):
+    original = ResearchBridge.handle
+    calls = 0
+
+    def inject(self, request, namespace="anonymous"):
+        nonlocal calls
+        calls += 1
+        response = original(self, request, namespace)
+        if calls == replay_index:
+            if fault == "response":
+                response = copy.deepcopy(response)
+                response["choices"][0]["message"]["content"] = (
+                    "REPLAY_REGRESSION_SENTINEL"
+                )
+            elif fault == "upstream_trace":
+                self.trace.append(
+                    {"upstream_request": {"fault": "unexpected inference"}}
+                )
+            else:
+                setattr(self, fault, getattr(self, fault, 0) + 1)
+        return response
+
+    monkeypatch.setattr(ResearchBridge, "handle", inject)
+    with pytest.raises(RuntimeError, match="Exact replay"):
+        run_hermes(tmp_path, owners=2, serial_tools=True)
+
+
+@pytest.mark.skipif(
+    os.getenv("CG_RD1_HERMES") != "1", reason="Requires the pinned real Hermes client"
+)
+def test_actual_hermes_cli_replay_mismatch_exits_nonzero(tmp_path):
+    experiments = Path(__file__).resolve().parent
+    script = """
+import copy, sys
+from unittest.mock import patch
+sys.path.insert(0, sys.argv[1])
+import hermes_bridge
+original = hermes_bridge.ResearchBridge.handle
+count = 0
+def corrupt(self, request, namespace='anonymous'):
+    global count
+    count += 1
+    response = original(self, request, namespace)
+    if count == 3:
+        response = copy.deepcopy(response)
+        response['choices'][0]['message']['content'] = 'REPLAY_REGRESSION_SENTINEL'
+    return response
+sys.argv = ['hermes_bridge.py', '--work-dir', sys.argv[2], '--trace', sys.argv[3]]
+with patch.object(hermes_bridge.ResearchBridge, 'handle', corrupt):
+    hermes_bridge.main()
+"""
+    output_trace = tmp_path / "must-not-claim-success.json"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            script,
+            str(experiments),
+            str(tmp_path / "work"),
+            str(output_trace),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=90,
+    )
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "Exact replay response mismatch" in result.stderr
+    assert not output_trace.exists()

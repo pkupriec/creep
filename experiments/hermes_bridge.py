@@ -77,6 +77,8 @@ class ResearchBridge:
         self.upstream = upstream
         self.model = model
         self.model_calls = 0
+        self.node_executions = 0
+        self.tool_deliveries = 0
         self.trace = []
         self.db.executescript(
             "CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY,state TEXT NOT NULL);"
@@ -141,17 +143,24 @@ class ResearchBridge:
                 "type": "function",
                 "function": {"name": "read_file"},
             }
-        self.trace.append({"upstream_request": request})
         wire = urllib.request.Request(
             self.upstream.rstrip("/") + "/chat/completions",
             data=canonical(request).encode(),
             headers={"Content-Type": "application/json"},
         )
-        with urllib.request.urlopen(wire, timeout=300) as response:
-            result = json.load(response)
         self.trace.append(
             {
-                "upstream_response": result,
+                "upstream_request": json.loads(wire.data),
+                "upstream_request_body_utf8": wire.data.decode("utf-8"),
+            }
+        )
+        with urllib.request.urlopen(wire, timeout=300) as response:
+            response_body = response.read()
+        result = json.loads(response_body)
+        self.trace.append(
+            {
+                "upstream_response": json.loads(response_body),
+                "upstream_response_body_utf8": response_body.decode("utf-8"),
                 "elapsed_seconds": round(time.perf_counter() - started, 4),
             }
         )
@@ -185,6 +194,7 @@ class ResearchBridge:
                 "results": [],
                 "payload": None,
             }
+            self.node_executions += 1
             if self.upstream:
                 message = self.model_request(
                     node["messages"], state["tools"], require_read=True
@@ -241,6 +251,7 @@ class ResearchBridge:
             for row in pending:
                 self.db.execute("UPDATE calls SET delivered=1 WHERE id=?", (row["id"],))
             self.db.commit()
+            self.tool_deliveries += len(calls)
             return completion(
                 {"role": "assistant", "content": None, "tool_calls": calls},
                 "tool_calls",
@@ -253,6 +264,7 @@ class ResearchBridge:
             {"node_id": owner, "port": owner, "payload": node["payload"]}
             for owner, node in sorted(state["nodes"].items())
         ]
+        self.node_executions += 1
         if self.upstream:
             state["status"] = "running"
             self.save(state)
@@ -330,6 +342,7 @@ class ResearchBridge:
                 (canonical(result["content"]), row["id"]),
             )
             self.save(state)
+            self.node_executions += 1
             if self.upstream:
                 state["status"] = "running"
                 self.save(state)
@@ -541,11 +554,21 @@ def run_hermes(
                 trace.append({"proxy_response": response})
                 if restart and response["choices"][0]["finish_reason"] == "tool_calls":
                     old_trace = bridge.trace
+                    old_counts = (
+                        bridge.model_calls,
+                        bridge.node_executions,
+                        bridge.tool_deliveries,
+                    )
                     bridge.close()
                     bridge = ResearchBridge(
                         work / "checkpoint.sqlite", fixture, owners, upstream, model
                     )
                     bridge.trace = old_trace
+                    (
+                        bridge.model_calls,
+                        bridge.node_executions,
+                        bridge.tool_deliveries,
+                    ) = old_counts
                     trace.append({"checkpoint_reopened_before_tool_results": True})
                     restart = False
                 self.send_response(200)
@@ -698,20 +721,44 @@ def run_hermes(
                 raise RuntimeError(
                     "Actual Hermes fixture read did not produce expected token"
                 )
-        for request_trace in trace:
+
+        def replay_observation():
+            return {
+                "model_calls": bridge.model_calls,
+                "node_executions": bridge.node_executions,
+                "upstream_requests": sum("upstream_request" in t for t in bridge.trace),
+                "tool_deliveries": bridge.tool_deliveries,
+                "hermes_tool_executions": len(calls),
+                "checkpoint_hash": digest(bridge.state()),
+                "mappings_hash": digest(bridge.mappings()),
+            }
+
+        replay_count = 0
+        for index, request_trace in enumerate(trace):
             request = request_trace.get("client_request")
             if request and latest_segment(request["messages"])[0]:
+                before = replay_observation()
                 cached = bridge.handle(request)
                 request_trace["exact_replay_matches"] = cached == next(
                     t["proxy_response"]
-                    for t in trace[trace.index(request_trace) + 1 :]
+                    for t in trace[index + 1 :]
                     if "proxy_response" in t
                 )
+                after = replay_observation()
+                request_trace["replay_observation_before"] = before
+                request_trace["replay_observation_after"] = after
+                request_trace["replay_execution_unchanged"] = before == after
+                if not request_trace["exact_replay_matches"]:
+                    raise RuntimeError("Exact replay response mismatch")
+                if before != after:
+                    raise RuntimeError("Exact replay execution or checkpoint changed")
+                replay_count += 1
         state = bridge.state()
         if (
             not result.get("completed")
             or state["status"] != "completed"
             or count != owners
+            or replay_count == 0
         ):
             raise RuntimeError("Real Hermes graph continuation did not complete")
         output = {
@@ -719,6 +766,8 @@ def run_hermes(
             "final_response": result.get("final_response"),
             "api_calls": result.get("api_calls"),
             "tool_results": count,
+            "execution_counts": replay_observation(),
+            "verified_replay_count": replay_count,
             "stream": stream,
             "owners": owners,
             "upstream": upstream,
