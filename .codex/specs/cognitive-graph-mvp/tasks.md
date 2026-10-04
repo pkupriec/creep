@@ -8,7 +8,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Baseline PASS; additive extension pending | 2/3 |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Final cycle 3 independent review assigned | 3/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F1/F2 correction delivered; live/re-review pending | 1/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
@@ -157,7 +157,7 @@ G4-ui independent cycle2 PASS; F1/F2 empirically closed, current findings zero. 
 
 ## G1 final current-state documentation handoff
 
-- [-] [coding] Existing coding_bootstrap sole owner docs/api.md and docs/dependencies.md ONLY. Replace stale API timing/G4 pending claims with terminal522backend/49API+integration/21frontend/98graphs/sixrealbackendbrowser/G4independentPASS2/3. Preserve G2BLOCKED3/3validDraft3F5/noautomaticfourth/frozenprofile and G1lastreviewpending2/3. Current actualWindows correctedhealthy/defaultcontainerroute probe andsevenreal directJSONSSE/native-toolrequest+manualresult phases passed, but fullHermes/restart/performance/WSL session stillactive; reference deliveryverification for changing live details, never advertisefullPASS. Retain historical475/firstnativeexception/verifier failures with clear attribution, current22prodjsonschema4.26/unchangedlocks. No otherfiles/tests/manifest/lock/contracts/review/artifacts/listeners/liveeffects. Directsource/UTF8/link/whitespaceaudit exactcommands/exits; rootwaitsterminal before G1finalcycle3 reservation. PeerDevOps14files+G3reviewsole review.mdwriter active, disjoint; no agentdelegation.
+- [x] [coding] Existing coding_bootstrap sole owner docs/api.md and docs/dependencies.md ONLY. Replace stale API timing/G4 pending claims with terminal522backend/49API+integration/21frontend/98graphs/sixrealbackendbrowser/G4independentPASS2/3. Preserve G2BLOCKED3/3validDraft3F5/noautomaticfourth/frozenprofile and G1lastreviewpending2/3. Current actualWindows correctedhealthy/defaultcontainerroute probe andsevenreal directJSONSSE/native-toolrequest+manualresult phases passed, but fullHermes/restart/performance/WSL session stillactive; reference deliveryverification for changing live details, never advertisefullPASS. Retain historical475/firstnativeexception/verifier failures with clear attribution, current22prodjsonschema4.26/unchangedlocks. No otherfiles/tests/manifest/lock/contracts/review/artifacts/listeners/liveeffects. Directsource/UTF8/link/whitespaceaudit exactcommands/exits; rootwaitsterminal before G1finalcycle3 reservation. PeerDevOps14files+G3reviewsole review.mdwriter active, disjoint; no agentdelegation.
 
 
 FinalG1docs dispatch returned agentthreadlimitreached, no newwork/result claimed. Freshinventory root/DevOps/G3review running, bootstrap absent/terminal; defer sameowner resume until terminal capacityrelease ratherthan spawnreplacement/reconfigure. No reviewbudgetconsumed.
@@ -169,3 +169,8 @@ FinalG1docs dispatch returned agentthreadlimitreached, no newwork/result claimed
 
 
 G3fixownerTERMINAL:65newcases; affected109/focused277/fullbackend58757.11s/Ruff4files/drift/ninefrontendcontracts all0. Rootcurrenthashesverifiedollama660797ab43282dba990d8ef69e8214009606d87d0d9861c28997a07182152dff/sse99b8128918baca052f969f897e9049ced87128766cc66a3afd5ec7a8c69ece75/tests54a9979b.../69272cff..., chatb68226/engineb8ff/uv431c/npm229187 unchanged. ReleaseDevOpscorrected-sourceimagebuild/live Windows+freshWSL withauthenticobserver; no inheritedoldproviderproof/independentPASSyet. FinalG1docs sameownerresumeafterpositivecodingterminalcapacityrelease updateslatest587/277/109 asappropriate, nopeer/sourceedits.
+
+
+## G1 final independent review cycle 3 reservation
+
+- [-] [review] review_g1_c3 sole synthesizer G1-contracts FINALcycle3/3 reserved BEFOREspawn, noanalysts. Solewrite review.mdappend (G3priorwriterterminal), exact25originalcontract/bootstrap/manifests/locks/generated/docs filesread-only, excludingmain.pyseriallytransferredAPI. CurrentoptionalActivationRecord.finish_reason/privateknownreasoningnormalization/Vitestdiscovery/WinWSLwrapper/jsonschema4.26production/docscurrentstates reviewedwithcoherentterminalG3/API/G4consumers. ReprovebaselineF1toolresultname/F2strictupstreammetadata; generatedschema consistency, exactpins/locks/config/error/profile/scheduler+store+bridgeinterfaces/Makewrapper meaningfultargetchecks. No productionedits/liveeffects/listeners/containerstarts/globaltoolinstall/peerwrites. DevOps14filesactualWindowsWSLsourcecoherentlive maycontinue disjoint; realservicesgate belongsG5/G6 and mustnotbeclaimedbyG1static checks. G2BLOCKED3/3F5separatefrozen, noacceptedprofilenarrowing/budgetreset. Counter3terminalnonPASS=>G1BLOCKED/nofourth; leadwaits authoritative terminalreport beforeconsolidation.
