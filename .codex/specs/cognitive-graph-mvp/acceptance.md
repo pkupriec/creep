@@ -21,7 +21,18 @@ G0 research PASS proves only its pinned experiment, not these production gates.
 | A13 | Revision conflict leaves file unchanged; editing draft during run leaves canonical snapshot/hash unchanged; drafts absent from model list | G2, G4, G6 | OPEN required G2/G6 gates; current graph98/runtime212/API+integration49 plus six actual-backend browser scenarios verify immutable publication/snapshot, conflict no-write and draft hiding; assigned G4 portion independently PASS2/3 |
 | A14 | Deterministic timeout/upstream failure/cancel/late-result tests; fixed tool TTL, queue overflow 429, separate queue/active/wait time | G2, G3, G6 | OPEN required G2/G3/G6 gates; current deterministic provider/runtime/API tests prove fixed TTL, before-deadline waiting504 versus after-persisted-failure409, cancellation/late results/queue overflow and separate timing without extra inference or checkpoint mutation |
 | A15 | Built production Compose on Windows/WSL2: external Ollama reachability, API/UI/Hermes smoke and restart history persistence | G5, G6 | OPEN required G5/G6 independent reviews; complete current-source Windows and WSL2 production smokes terminal exit0, both digest-pinned images healthy, actual external Ollama route, API/UI, original Hermes JSON/SSE, waiting-ID restart/compression/replay and history/retained-volume recreation passed. WSL invokes Windows-native Hermes explicitly outside Compose. |
-| A16 | Strict HTTP/schema/path limits, auth namespace isolation, synthetic-token log checks, global inference/admission bounds across graph/direct jobs | G1, G2, G3, G4, G5, G6 | OPEN required cross-group gates; current backend587/focused277/contract228Python+ninefrontend/graph98/API+integration49 and six real-browser cases pass. Strict auth/namespace/size/global-admission tests and live non-root/read-only/cap-drop/loopback/proxy protection checks executed. G1/G2 BLOCKED3/3; G3/G5/G6 reviews remain OPEN. |
+| A16 | Strict HTTP/schema/path limits, auth namespace isolation, synthetic-token log checks, global inference/admission bounds across graph/direct jobs | G1, G2, G3, G4, G5, G6 | OPEN required cross-group gates; current backend593/focused283/contract231Python+ninefrontend/graph98/API+integration49 and six real-browser cases pass. Strict auth/namespace/size/global-admission tests and live non-root/read-only/cap-drop/loopback/proxy protection checks executed. G1 PASS4/4; G2 BLOCKED3/3; G3 BLOCKED3/3 with no terminal verdict; G5/G6 reviews remain OPEN0/3. |
+
+## Latest terminal review status — 2026-10-04
+
+The G3-proxy terminal cycle3/3 reviewer was resumed after the F3 correction and
+current-image Windows/WSL inventory proof, then immediately hit the positive
+account usage-limit error. No independent report or verdict was produced and
+`review.md` was not changed. G3 is terminal BLOCKED3/3 under the non-resetting
+three-cycle rule; coordinator tests and image probes remain supporting evidence
+only. G2 is separately terminal BLOCKED3/3 on F5. G5 backup/restore remains
+owner evidence without an independent review, and G6 remains held by its
+dependencies.
 
 ## Evidence rules
 
@@ -77,10 +88,10 @@ Freshfull cg-smoke-win-final-20261004-5f34c9e2 terminalexit0 againstcurrentactua
 
 ## Final current-source evidence and open acceptance — 2026-10-04
 
-- Current backend587 passed57.11s and focused277 passed20.07s, provider109
-  passed5.38s; exact pinned commands and ownership appear in completion.md.
-  Final G1 reviewer executed test-contract228Python/ninefrontend/drift exit0
-  before account-limit termination; no final review verdict exists.
+- Current backend593 passed39.70s and focused283 passed15.03s, affected61
+  passed3.68s; exact pinned commands and ownership appear in completion.md.
+  User-authorized G1 cycle4 independently PASSed with zero findings; its
+  historical cycle3 quota failure remains recorded.
 - Complete Windows and WSL smoke commands each terminal0, source/image/run IDs
   and native case proofs in live-windows-compose.json/live-windows-hermes.json
   and live-wsl-compose.json/live-wsl-hermes.json. Each native case proves
@@ -91,9 +102,10 @@ Freshfull cg-smoke-win-final-20261004-5f34c9e2 terminalexit0 againstcurrentactua
   Single samples do not establish universal speedup; deterministic concurrency
   barriers remain the concurrency proof. Earlier failed attempts stay recorded.
 - All whole A01–A16 acceptance remains OPEN: required G2 final-format F5 is
-  BLOCKED3/3, G1 final review unable to complete is BLOCKED3/3, G3 correction
-  independent re-review OPEN1/3 and G5/G6 independent reviews OPEN0/3. Account
-  usage failure is not a PASS or authorization to reset budgets/change models.
+  BLOCKED3/3, G3 terminal cycle3 reviewer hit the account limit with no
+  verdict and is BLOCKED3/3, and G5/G6 independent reviews remain OPEN0/3.
+  Account usage failure is not a PASS or authorization to reset budgets/change
+  models.
 - Operator backup/restore drill and actual remote GitHub CI remain unexecuted;
   exact procedures are in docs/runbook.md and docs/verification.md. No push
   or production-data access is authorized. Unassigned historical Windows

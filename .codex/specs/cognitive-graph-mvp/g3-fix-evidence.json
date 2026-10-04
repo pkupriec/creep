@@ -54,5 +54,5 @@
   ],
   "baseline": "g3-inventory-baseline.json proves all provider methods except models() and the surrounding module AST are unchanged",
   "live_validation": "Current-source Windows/WSL inventory and health/image reconciliation passed in image sha256:e7c64ea53ed76dd3418cce32c3748be569a2113a4138aaa01d8133fd224f339; previous full Hermes/Ollama proof remains attributed to the pre-fix provider image.",
-  "review": "G3 cycle 2 FAIL remains recorded; terminal cycle 3 is required and no verdict is claimed here."
+  "review": "G3 cycle 2 FAIL remains recorded; reserved terminal cycle 3/3 reviewer immediately hit the account usage limit and produced no report or verdict. G3 is terminal BLOCKED3/3; no fourth/replacement review or budget reset is permitted."
 }

@@ -361,9 +361,11 @@
   No contract/source/lock edit under exhausted G1/G2; review.md stays exclusively
   reviewer-authored. completion.md records commands/proofs/blockers/deviations.
 - All requested agents terminal completed/errored; no required worker active.
-  G0/G4 independent PASS2/3; G1/G2 BLOCKED3/3; G3 re-review OPEN1/3; G5/G6 review
-  OPEN0/3. User disposition required for exhausted groups; no fourth/reset/
-  artificial split or generic-model replacement. Whole acceptance incomplete.
+  G0/G4 independent PASS2/3; G1 PASS4/4 via the explicit user exception;
+  G2/G3 BLOCKED3/3 (G3 has no terminal reviewer verdict); G5/G6 review
+  OPEN0/3. User disposition is required for the exhausted G2/G3 groups; no
+  fourth/reset/artificial split or generic-model replacement. Whole acceptance
+  remains incomplete.
 
 - Final coordinator artifact/source audit exit0:10 UTF8/whitespace files,34
   existing local links, exact current backend source equality in both live
@@ -487,3 +489,21 @@
   Cycle3 non-PASS is terminal with no fourth attempt. Review.md remains the
   only writable review file; coding/API/runtime/contracts/locks and G2 F5 are
   frozen. Root waits the terminal result before any G5/G6 reviewer.
+
+## 2026-10-04 — G3 terminal review could not complete
+
+- The reserved G3-proxy cycle3/3 synthesizer was resumed only after the
+  current three-file correction, full locked tests, and current-image
+  Windows/WSL inventory probes passed. `review_g1_c3` immediately terminated
+  with the positive account usage-limit error (“You’ve hit your usage limit…
+  try again at 10:46 PM.”). There is no reviewer-authored report or verdict;
+  `review.md` remains unchanged. Coordinator tests and image probes cannot
+  substitute for independent review.
+- G3 is therefore terminal **BLOCKED3/3**, with no fourth/replacement spawn,
+  reset, artificial split, model-matrix change, or profile narrowing. The
+  delivered F3 UTF-8 model-ID boundary correction, source AST baseline, 593
+  full backend tests, repository lint/contract checks, and isolated current
+  Windows/WSL image probes remain preserved as non-review evidence.
+- G2 F5 remains independently frozen **BLOCKED3/3**. G5 delivery backup /
+  restore logical audit remains owner evidence only; G5/G6 independent review
+  counters remain 0/3 and no PASS is inferred from the delivery drill.

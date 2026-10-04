@@ -10,7 +10,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F3 correction delivered; current-image inventory validation pending | 2/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | BLOCKED: terminal cycle 3/3 reviewer quota error; no verdict | 3/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
@@ -190,7 +190,13 @@ Root temporarilyowns ONLY scripts/smoke_compose.py nativeinteropversionguard, so
 
 ## Final administrative documentation consolidation
 
-After confirmedquotaERROREDdeliveryowner/reviewer andterminalWSLvalidation, rootsolewriterofstatus/evidence ONLY in README.md, docs/runbook.md, docs/hermes-compatibility.md, docs/verification.md, docs/api.md anddocs/dependencies.md. Re-readbeforeedits; preservehistoricalrows/failedchecks/source/pins/contracts. RecordcompletecurrentWindows+WSLsmokeandG1unablefinalreview3/3BLOCKED, G2F5BLOCKED3/3, G3fixdeliveredre-reviewOPEN1/3,G5/G6reviewOPEN0/3, knownunexecutedbackuprestore/remoteCI/nativeexception. No automaticG1/G2implementationfix/newreview/reset/profilechange, no source/API/contract/manifest/lock/docsredesign. Thisis truthfulclosureevidence afterworkertermination, cannotcreateindependentPASS. Allworkerscompleted/errored; rootowns artifactcompletionreport+safeproofJSON.
+After confirmed quota-errored delivery owner/reviewer and terminal WSL
+validation, root was the sole status/evidence writer for the listed docs.
+This historical handoff preserved failed checks/source/pins/contracts and
+recorded G1's then-unable cycle3, G2 F5 BLOCKED3/3, G3 correction with review
+OPEN1/3, G5/G6 OPEN0/3, and known unexecuted backup/restore/remote-CI gates.
+The later user-authorized G1 cycle4 PASS and terminal G3 cycle3 quota outcome
+are recorded below; no automatic reset or profile change occurred.
 
 
 ## Final local verification consolidation — 2026-10-04
@@ -218,8 +224,8 @@ This is no independent verdict or G1 fix/fourth-cycle attempt.
 
 Current versioned evidence: live-windows-compose.json, live-windows-hermes.json,
 live-wsl-compose.json, live-wsl-hermes.json, wsl-client-guard.json and
-completion.md. G1/G2 remain BLOCKED3/3; G3 re-review OPEN1/3 and G5/G6 reviews
-OPEN0/3. G0/G4 preserve independent PASS2/3. All requested workers are terminal
+completion.md. G1 is PASS4/4; G2 is BLOCKED3/3; G3 is BLOCKED3/3 with no
+terminal verdict; G5/G6 reviews remain OPEN0/3. G0/G4 preserve independent PASS2/3. All requested workers are terminal
 completed/errored; no required worker is active. Native Linux Hermes was not
 installed: WSL Compose invokes the original Windows client explicitly.
 
@@ -314,7 +320,8 @@ full review and verified17 current source hashes before any correction.
   contract export and repository lint/test-contract all exit0. No listeners,
   live inference/tools, docs/review edits or product scope expansion. Current
   image Windows/WSL inventory validation passes in
-  g3-current-image-evidence.json; terminal G3 review cycle3 is now ready.
+  g3-current-image-evidence.json; terminal G3 review cycle3 was then ready and
+  is superseded by the terminal quota outcome below.
 
 Delivery source reconciliation for this inventory-only change completed with a
 current backend image and isolated Windows/WSL callers. Direct composed app
@@ -340,5 +347,23 @@ not an independent G5 verdict. G2 engine/profile remains frozen and
   recheck prior F1/F2 closure and focused/API/contract/Ruff/drift evidence.
   Windows/WSL current image evidence is attributed coordinator execution, not
   reviewer live inference. G2 F5 remains frozen BLOCKED3/3 and is outside this
-  group. Cycle3 non-PASS is terminal: no fourth G3 review or automatic fix.
-  Root waits the terminal verdict before scheduling G5/G6 review-file writers.
+  group. Cycle3 non-PASS or inability to complete is terminal: no fourth G3
+  review, replacement, automatic fix, budget reset, or artificial split.
+  Root records the reviewer outcome before scheduling any G5/G6 review-file
+  writers.
+
+## G3 terminal cycle 3/3 quota outcome
+
+- [!] [review] Existing custom `review_g1_c3` was resumed for the reserved
+  terminal G3-proxy cycle3/3. The agent immediately terminated with the
+  positive account usage-limit error: “You’ve hit your usage limit. Upgrade to
+  Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage
+  to purchase more credits or try again at 10:46 PM.” No reviewer report,
+  verdict, or `review.md` append was produced. This is a terminal inability to
+  complete under the three-cycle rule; it is not PASS and no severity is
+  fabricated. Current correction tests and Windows/WSL inventory evidence are
+  retained as coordinator evidence only.
+- G3 is **BLOCKED3/3**. Do not spawn a fourth/replacement review, reset the
+  counter, rename/split the group, or widen the degraded coordinator fallback.
+  The F3 correction remains source- and image-validated; the required
+  independent synthesizer gate is open.

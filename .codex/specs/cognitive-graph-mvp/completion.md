@@ -11,12 +11,15 @@ the accepted product profile remain unchanged.
   schema-valued extends/type local references are omitted by controller-schema
   embedding, causing upstream_error. Prior F1–F4 are closed. The accepted
   schema is not reclassified as unsupported; no automatic fix/fourth review.
-- **G1-contracts BLOCKED3/3:** the final reviewer terminated with an account
-  usage-limit error before its verdict. Baseline cycle2 PASS and partial final
-  test-contract228Python/ninefrontend are evidence, not a final PASS.
-- **G3-proxy OPEN1/3:** cycle1 FAIL's two Unicode defects were corrected and
-  regression-tested; independent re-review was not executed after account limits.
-- **G0-research and G4-ui PASS2/3.** G5/G6 independent reviews remain OPEN0/3.
+- **G1-contracts PASS4/4:** the user-authorized additional review attempt
+  produced the authoritative PASS with zero findings. The original cycle3
+  quota failure remains historical evidence; no fifth attempt is allowed.
+- **G3-proxy BLOCKED3/3:** cycle1 and cycle2 findings are corrected and
+  regression-tested; the reserved terminal cycle3 reviewer immediately hit the
+  account usage limit and produced no verdict. Current image evidence does not
+  substitute for that independent gate.
+- **G0-research and G4-ui PASS2/3.** G5/G6 independent reviews remain OPEN0/3;
+  the delivery owner’s logical backup/restore audit is evidence, not a review.
 
 The installed team plugin/workflow/custom roles were verified before work, with
 16 maintained files matching installed0.1.0-creep.3 and reviewed baseline
@@ -106,10 +109,10 @@ All rows below inspected terminal exit0; owner/reviewer attribution is explicit.
 
 | Command | Outcome / source |
 | --- | --- |
-| `uv --system-certs run --project backend --locked pytest backend/tests -q` | 587 passed57.11s, final provider owner; no backend code changed afterward |
-| `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 277 passed20.07s, provider owner |
-| `uv --system-certs run --project backend --locked pytest backend/tests/providers/test_ollama.py backend/tests/providers/test_sse.py -q` | 109 passed5.38s;65 new Unicode/bounds/error/cleanup cases |
-| `python scripts/dev.py test-contract` | 228 backend8.26s/nine frontend/generated drift, final G1 reviewer before quota termination |
+| `uv --system-certs run --project backend --locked pytest backend/tests -q` | 593 passed39.70s after one unrelated timing-sensitive admission assertion was rerun alone and passed |
+| `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 283 passed15.03s after the G3 F3 correction |
+| `uv --system-certs run --project backend --locked pytest backend/tests/providers/test_ollama.py backend/tests/api/test_chat.py -q` | 61 passed3.68s; strict high/low surrogate rejection and valid supplementary-ID regression coverage |
+| `python scripts/dev.py test-contract` | 231 backend/provider/tool plus nine frontend/generated drift checks, exit0 |
 | `python scripts/dev.py test-graphs` | 98 passed3.63s, independent G4 cycle2 |
 | `npm --prefix frontend test` | 21 passed, independent G4 |
 | `npm --prefix frontend run typecheck` and `npm --prefix frontend run build` | Strict TS and production509.13kB bundle, independent G4 |
@@ -157,10 +160,11 @@ smokes scoped down(no-v)0, no own container/network residue, volumes retained.
 
 ## Remaining blockers, deviations and residual risk
 
-- Required G2 format preservation and G1 final review are BLOCKED3/3 as above;
-  their automatic fix/review loops stop. No fourth/replacement/reset/split.
-- G3 re-review/G5/G6 initial independent reviews remain unexecuted due account
-  usage limits. Runtime/API live successes do not substitute for their verdicts.
+- Required G2 format preservation is BLOCKED3/3 as above; its automatic
+  fix/review loop stops. G1 is PASS4/4 through the explicit user exception.
+- G3 terminal re-review is BLOCKED3/3 because its reviewer could not complete
+  under the account usage limit; G5/G6 initial independent reviews remain
+  OPEN0/3. Runtime/API/live successes do not substitute for those verdicts.
 - Operator backup/restore drill and actual remote GitHub CI remain unexecuted;
   documented procedures/local equivalents are not labeled live PASS.
 - Earlier unreproduced Windows native test exception remains unassigned despite
@@ -180,8 +184,9 @@ smokes scoped down(no-v)0, no own container/network residue, volumes retained.
 
 Current requirements/spec/design/tasks/decisions/acceptance/review artifacts
 are the source of truth. review.md preserves reviewer-authored verdicts only;
-no G1cycle3 verdict was fabricated after its agent failed. User disposition is
-required for exhausted G1/G2 gates.
+no G3cycle3 verdict was fabricated after its agent failed. G1cycle4 is the
+explicit user-authorized exception and is exhausted at PASS4/4. User
+disposition is required for the exhausted G2/G3 gates.
 
 ## Final evidence audit
 
@@ -195,14 +200,14 @@ project, no localhost8000/8080/5173 listeners or owned final smoke process.
 Volumes remain retained; unrelated resources are preserved. Agent inventory
 confirmed only root active, with all requested workers completed/errored.
 
-## Usage recovery in progress — supersedes quota status above
+## Historical usage recovery record
 
 The user reported refreshed account usage and explicitly authorized one
 additional G1 review attempt only. Historical attempts1–3 remain consumed;
-G1 cycle4 is a bounded user exception now running, with no automatic fifth
-attempt or fix if non-PASS. G2 F5 remains BLOCKED3/3 and runtime unchanged.
-Original custom reviewer and DevOps sessions resumed; model matrix preserved.
-DevOps closes the independent backup/restore drill on new isolated test data.
-G3 re-review/G5 initial review follow serialized review-file ownership; G6
-remains held by its required G2 dependency. No new verdict is yet claimed.
-Reservation and exact ownership are in tasks.md/decisions.md at cfa1214.
+G1 cycle4 subsequently returned PASS4/4, with no automatic fifth attempt.
+G2 F5 remains BLOCKED3/3 and runtime unchanged. The resumed G3 terminal
+review subsequently hit the account limit and returned no verdict; G3 is
+BLOCKED3/3. The delivery owner’s logical backup/restore drill is retained as
+owner evidence, while G5/G6 independent reviews remain OPEN0/3. Reservation
+and exact ownership are in tasks.md/decisions.md at cfa1214 and the later
+terminal entries.
