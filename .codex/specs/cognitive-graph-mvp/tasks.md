@@ -10,7 +10,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Independent cycle2 re-review running; current Windows/WSL live proof delivered | 2/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Cycle2 FAIL F3 model-inventory Unicode; scoped correction running | 2/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
@@ -290,3 +290,39 @@ this is individual result harvesting, not premature wave completion.
   G2F5BLOCKED3/3 separate/frozen. DevOps four docs/newignored backup fixtures
   active on disjoint writes; root waits all requested results before final
   wave consolidation. No other review.md writer.
+
+
+## G3 cycle2 FAIL harvested; final available scoped correction
+
+G3 reviewer terminal FAIL/oneMedium F3: escaped unpaired high/low model IDs
+accepted by HttpOllamaAdapter.models lead to public /v1/models500 storage_error
+instead of sanitized502 upstream_error. Valid supplementary pair200; eachone
+mock inventory call/no inference/effects/leases. Prior completion/SSE F1/F2
+CLOSED, required previous real live gates source-matched/executed. Root read
+full review and verified17 current source hashes before any correction.
+
+- [-] [coding] Existing coding-agent coding_api sole owner ONLY
+  backend/app/providers/ollama.py, backend/tests/providers/test_ollama.py and
+  backend/tests/api/test_chat.py for G3-C2-F3. Original proxy owner terminal;
+  explicit narrow transfer to actual custom coding role, no competing source
+  writer. Regression-first adapter+actual composed GET/v1/models high/low
+  unpaired scalars and valid supplementary pairs; coherent health availability,
+  exact502/upstream_error sanitized/no substitution/retry/effects/leaks. Minimal
+  provider models() UTF8 validation inside existing error boundary; preserve
+  all other provider/module AST, contracts/profile/API implementation/pins/
+  locks/bridge/runtime/SSE. Baseline g3-inventory-baseline.json records methods
+  and module AST excluding models for immutable call-path reconciliation.
+  Run locked affected tests/focused277+new/fullbackend/configuredRuff/drift,
+  no listeners/liveinference/tools/docs/artifact/review edits. G3counter2/3;
+  finalcycle3 only after terminal fix and adequate current-source live delta.
+
+Delivery source reconciliation for this inventory-only change is held until
+terminal coding result: rebuild current backend and execute real inventory/
+health/model namespaces through direct API and Nginx on Windows AND WSL new
+owned projects; no inference/tool execution required for models(). Record new
+images/source hashes and unchanged all other inference/stream/tool/runtime
+paths; earlier full native proof remains attributed to old provider bytes,
+never relabeled current-source. Independently assess adequacy before terminal
+G3 review, no required live criterion silently waived. DevOps existing backup
+drill/documentation still active/disjoint; root awaits all requested results.
+G2 engine/profile remains frozen and BLOCKED3/3.

@@ -1729,3 +1729,246 @@ Severe 0, High 0, Medium 0, Low 0, Warning 0, Suggestion 0. G1 has consumed four
 attempts under its explicit cap-four exception; cycle3's no-verdict history is
 preserved. This is a scoped G1 verdict, not MVP acceptance. The reviewer releases
 sole review.md ownership at this terminal handoff.
+
+## Task Group G3-proxy - Cycle 2 - 2026-10-04
+
+Reviewing: Waves 2/3 correction and integrated provider/tool/API consistency.
+Independent sole synthesizer: existing custom `review_g1_c3`, now assigned to
+G3; no analysts requested or missing. G3 cycle 2/3 was reserved in `3aaf318`
+before this invocation. The group retains its ordinary maximum of three;
+the earlier explicit G1-only exception does not apply here. All seventeen
+assigned current product/test files were inspected directly despite being
+untracked. Only this append is writable; no implementation was edited.
+
+### Critical / Severe / High
+
+None demonstrated in the assigned G3 scope.
+
+### Medium / Low / Warning
+
+- **Medium G3-C2-F3 — malformed Unicode model inventory crosses the provider
+  boundary and becomes an internal/storage error.** At
+  `backend/app/providers/ollama.py:147`, inventory validation checks type,
+  whitespace and schema but not model-ID UTF-8 encodability; line 157 appends
+  the invalid scalar and line 160 returns it. The actual models route at
+  `backend/app/api/models.py:25` subsequently fails while serializing the
+  response. **Evidence class: empirically reproduced, high confidence.** With
+  a mock upstream returning an escaped unpaired high surrogate in its model
+  ID, actual composed `GET /v1/models` returns HTTP500 `storage_error` rather
+  than the required sanitized upstream502. The expected-502 probe exited 1.
+  A bounded follow-up confirmed the same result for a low surrogate; a valid
+  supplementary-character model ID round-trips with HTTP200. Each case makes
+  one inventory request, zero inference/tool calls, leaves zero admission
+  leases and both permits available. No storage operation failed. The
+  completion fix at `ollama.py:74` correctly handles this class of malformed
+  data for completions, but does not cover inventory. **Correction:** reject
+  unencodable model IDs inside the inventory provider's sanitizing boundary
+  before returning names, preserving valid Unicode exactly. Add focused
+  adapter and composed `/v1/models` regressions for high/low unpaired scalars
+  and a valid supplementary pair, with correct 502/error code, no retries or
+  model substitution, cleanup, and coherent health behavior. This is an
+  additional gap in the assigned inventory/error boundary under R02, section
+  4.1 and A14; it is not claimed to have been introduced by the prior fix.
+  The executed failing required error-contract assertion blocks PASS without
+  escalating the finding beyond Medium.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+The full root specification, AGENTS.md, installed spec/review skills, current
+durable requirements/spec/design/tasks/decisions/acceptance/completion and
+G3-cycle1/G1-cycle4 history informed this review. R01-R11/A01-A16/G0-G6,
+approved profiles, exact ownership and group counters remain unchanged.
+
+**Prior G3-C1-F1 is closed.** Current `providers/sse.py:147` uses strict
+incremental UTF-8 decoding and CR/LF/CRLF wire delimiters. The executed cases
+at `tests/providers/test_sse.py:372` feed one-byte fragments containing
+U+0085/U+2028/U+2029, multibyte and supplementary text across all three line
+endings, preserving exact content. Raw tool fragments remain unchanged.
+Tests at line 448 exercise malformed content/tool-argument bytes both before
+and after headers: 502 or standard error event respectively, without fake
+finish/DONE or replacement characters. Line/event bounds at lines 496/520
+and permit/transport cleanup are asserted. Evidence: fresh executable tests
+of actual adapter/HTTP routes with mock byte transport, plus current source.
+
+**Prior G3-C1-F2 is closed for its completion scope.** Current
+`providers/ollama.py:74` validates the entire normalized completion's UTF-8
+encodability inside the provider error boundary. Cases at
+`tests/providers/test_ollama.py:271` cover high/low invalid scalars in IDs,
+model, content, names, text parts, tool IDs/names and raw argument strings;
+composed routes at line 288 return 502/upstream_error rather than storage500.
+Valid Unicode pairs and original raw argument strings survive. Fresh 277-case
+focused execution passes these regressions. F3 concerns the adjacent inventory
+method, not an unclosed copy of the already-fixed completion finding.
+
+The current suite also demonstrates graph/direct model routing and draft
+hiding; strict known metadata/public semantic rejection; JSON/SSE indexed
+tools/finish/DONE; immutable publication/snapshot/client policy and final
+overrides; opaque owner IDs/internal collisions; latest-segment/namespace
+routing; conservative serial exposure and whole internal-round results;
+partial acceptance, concurrent claims, exact first-next replay and conflicting
+results; shared admission/inference bounds; durable events, cancellation,
+disconnect, recovery and fixed TTL. The expiry tests use explicit barriers:
+accepted waiting requests receive 504 at their original deadline, whereas new
+submissions after persisted failure receive 409 without mutations or inference.
+No assertion accepts either status indiscriminately.
+
+### Cross-Slice Consistency
+
+One shared provider/semaphore and admission controller serve graph and direct
+requests. Runtime owns reducers independently of request lifetime; the bridge
+owns durable classification/exposure/acceptance and does not execute tools.
+Current APIs consume the G1 contracts independently passed in cycle4. Generated
+drift and nine frontend contract tests pass. No schema, dependency, API profile,
+lock, runtime or storage file was changed during this review. G2's accepted
+Draft 3 controller-reference defect remains a distinct exhausted-group blocker.
+
+Source SHA256 values read immediately before synthesis:
+
+| File | SHA256 |
+| --- | --- |
+| backend/app/providers/__init__.py | e8a4d6f7785a5a3f54c0ab14bacb30163a33216b29ff7dfb7010aeace5b4d870 |
+| backend/app/providers/ollama.py | 660797ab43282dba990d8ef69e8214009606d87d0d9861c28997a07182152dff |
+| backend/app/providers/sse.py | 99b8128918baca052f969f897e9049ced87128766cc66a3afd5ec7a8c69ece75 |
+| backend/app/tools/__init__.py | 0a6a8bbdf4d8709478d05086c1d44f8b8ccea91931db21776d5b766724438cf1 |
+| backend/app/tools/bridge.py | c21d821ebfa1309778278d3b0aaa0d51f7a44488386f1b4d01d4d22f8206dfe1 |
+| backend/tests/providers/test_ollama.py | 54a9979b7a6fe36232269d2490f9496f37bf2f3acedd385755bc6bf3480815b4 |
+| backend/tests/providers/test_sse.py | 69272cff09b7adc0a8ee53bf9f3a254ec4c9eb233b8868e6e3b394e8346cfa2d |
+| backend/tests/tools/test_bridge.py | f381916461ab671b7a770fe110e7103deb88a7824df777fbd03a0ac47ecaeb82 |
+| backend/app/api/chat.py | b68226b543b52fd5d2e68df634d68d64bc304c08a9d7cf63acebdae6ea68f058 |
+| backend/app/api/runs.py | 981b9aef1c3a5d274f80f71ee38aa5e1278cb1a473f0f901d6bb4758c4a71ec0 |
+| backend/app/api/models.py | 9c5c58bd01d624b041048cf799c33461a3c1fccdd1c14badfa440dc811f2c178 |
+| backend/app/api/security.py | dbfc177c776fa2cf9100418eaec087b45c295b71daa77a45d96d5f42e8b88dd2 |
+| backend/app/main.py | dae170c7cf7055c10a10eb0ecd3d1456ab19571d0e6a3538c1a9a5547e3deb83 |
+| backend/tests/api/test_chat.py | 11ba35738fa7a665f8cb43ca27512556ea55f7a94045c13b0d002b970f6cc974 |
+| backend/tests/api/test_runs.py | 82b792da5cf42bcf1384b3f683bc59f5911d5fde5ef0aaf5993a4d6036f1cc6e |
+| backend/tests/api/test_security.py | bf2a8df33a6320d2987fc7b4d0fae98d4fb054e95d2bdf2bcca1ed77bcc613a7 |
+| backend/tests/integration/test_acceptance.py | 13b5f35a7f6ebef0f502dc4e504a63359c228b367b624064255b636e710fe5f7 |
+
+### Security And Operations
+
+Focused tests retain bearer coverage for API/SSE, duplicate-header rejection,
+namespace separation, synthetic-token log/state exclusion, strict request JSON
+and body/result limits before effects. No executor, cloud integration, generic
+inference cache, effectful retry or model fallback was added. Adversarial
+malformed upstream cases are isolated in temporary reviewer-owned SQLite/graph
+directories and in-process HTTP transports; no service listener or external
+request is involved. F3 currently produces a sanitized but incorrect internal
+error code, not a demonstrated secret leak or data corruption.
+
+### Verification And Test Adequacy
+
+Fresh exact commands from `D:/Sources/creep` (terminal exits inspected):
+
+| Command | Exit | Outcome |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 0 | 277 passed in 13.65s |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api/test_chat.py backend/tests/api/test_runs.py backend/tests/api/test_security.py backend/tests/integration/test_acceptance.py` | 0 | All assigned Python source/tests pass |
+| `uv --system-certs run --project backend --locked ruff format --config backend/pyproject.toml --check backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api/test_chat.py backend/tests/api/test_runs.py backend/tests/api/test_security.py backend/tests/integration/test_acceptance.py` | 0 | 17 files already formatted |
+| `uv --system-certs run --project backend --locked python scripts/export_contracts.py --check` | 0 | Generated artifacts match current Python |
+| `npm --prefix frontend run test:contract` | 0 | Nine passed, 223ms |
+| `uv --system-certs run --project backend --locked python -c $cgG3InventoryProbe` with command-local PYTHONPATH=backend | 1 | Required expected-502 assertion fails: valid pair200, unpaired high500/storage_error |
+| `uv --system-certs run --project backend --locked python -c $cgG3InventoryDiagnostic` | 0 diagnostic only | Confirms observed 200/500/500, one inventory call per case and no effects/leaks; **not passing product acceptance** |
+| `python -c $cgG3LiveAudit` | 0 | Both recorded backend source inventories match disk; four native cases, pins, counters, restart/compression assertions verified from evidence |
+| `python -c $cgG3Hashes` | 0 | Current seventeen-file inventory above |
+
+The regression tests genuinely exercise literal wire bytes and one-byte
+fragmentation rather than default ASCII-escaped JSON alone. Malformed cases
+assert exact early/late error behavior and absence of fabricated success;
+buffer cases assert bounded consumption and cleanup. The inventory test at
+`backend/tests/providers/test_ollama.py:150` exercises a normal ASCII model
+and health, but no invalid Unicode inventory; the completion tests cannot
+cover this distinct method. F3 identifies that missing required boundary case.
+The owner-reported 65 new cases and fail-first 32-failed/20-passed selector are
+historical evidence; this reviewer independently ran the corrected current
+suite, not a reconstructed old tree. G4 browser/build and full backend587
+results remain attributed and were not needlessly repeated.
+
+Reproducer for the bounded current-state diagnostic (literal PowerShell
+here-string, no stdin, listeners, real inference or source edits):
+
+```powershell
+$cgG3InventoryDiagnostic = @'
+import asyncio,json,sys,tempfile
+sys.path.insert(0,'backend')
+import httpx
+from app.contracts.config import Settings
+from app.main import create_app
+from app.providers.ollama import HttpOllamaAdapter
+async def main():
+ observed=[]
+ for label,model in [('valid_pair','model\U0001f600'),('unpaired_high','model\ud800'),('unpaired_low','model\udfff')]:
+  calls=[]
+  def handler(request):
+   calls.append(request.url.path)
+   assert request.url.path=='/v1/models'
+   return httpx.Response(200,content=json.dumps({'object':'list','data':[{'id':model,'object':'model','created':0,'owned_by':'ollama'}]}).encode())
+  with tempfile.TemporaryDirectory(prefix='cg-g3-review-inventory-') as directory:
+   settings=Settings(data_dir=directory)
+   async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as wire:
+    provider=HttpOllamaAdapter(settings,client=wire); app=create_app(settings,provider=provider)
+    async with app.router.lifespan_context(app):
+     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app,raise_app_exceptions=False),base_url='http://test') as client:
+      result=await client.get('/v1/models')
+     assert calls==['/v1/models'] and provider.limiter._value==2 and not app.state.admission.leases
+     observed.append(result.status_code)
+     if label=='valid_pair':assert result.status_code==200 and result.json()['data'][0]['id']=='ollama/'+model
+     else:assert result.status_code==500 and result.json()['error']['code']=='storage_error'
+     print(json.dumps({'case':label,'status':result.status_code,'body':result.json(),'inventory_calls':len(calls),'inference_calls':0},ensure_ascii=True))
+ assert observed==[200,500,500]
+ print('Confirmed current defect; corrected required statuses are [200,502,502].')
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $cgG3InventoryDiagnostic
+```
+
+### Open Live Validation
+
+Unlike cycle1, complete corrected-source Windows and WSL live proof is now
+available and inspected in the four versioned compose/Hermes reports,
+`wsl-client-guard.json`, `final-residue-audit.json`, and delivery verification.
+All nine recorded backend source hashes on both platforms match current disk,
+including provider660797ab/SSE99b81289 and unchanged contracts/API/runtime.
+Both full smoke commands have recorded terminal0. Seven actual direct
+JSON/SSE/multiturn/native-tool-request/manual-result exchanges, unknown-model
+404, Nginx behavior and history/volume recreation are attributed evidence.
+
+Each platform's original Hermes JSON and SSE cases record three SDK requests,
+two native fixture reads, two exact continuation replays and 3/5/2 node/
+upstream/tool-round counts. The JSON case selects literal cg/synthesis,
+restarts the actual owned backend before the first external effect, preserves
+original run/IDs/owners/checkpoint/counters, and compresses 28 messages to six
+with unchanged pending IDs/results. Nineteen exercised native files match the
+pinned Hermes revision after normalization. The observer calls the original
+SDK factory and keeps original clients/transport/executor; replay assertions
+compare responses/state rather than merely noting successful status. The
+restart verifier checks owned project/service/volume labels and changed PID/
+start time. WSL explicitly uses the Windows-native Hermes client via interop,
+not an unexecuted Linux-native installation. These are source-matched
+**attributed live results**, not fresh reviewer live execution.
+
+No previously missing G3 live gate is used as the reason for this FAIL; F3 is
+an independently reproduced required local contract failure. A future provider
+change needs appropriately scoped source reconciliation and regression proof;
+do not silently relabel prior image evidence as evidence of changed bytes.
+Separate G5 backup/restore/review and G6 acceptance remain outside this verdict.
+G2 F5 remains BLOCKED3/3 with frozen engine
+`b8ff723dea5338d3c56d88413e89936e81c105c46991ae914517dbbd049d2cd6`;
+no fix, profile narrowing, budget reset or exception is authorized here.
+The older unassigned Windows native test exception remains undiagnosed.
+
+### Verdict: FAIL
+
+Reason: G3-C2-F3 leaves required model-inventory upstream error handling
+incorrect despite closure of the original completion/SSE findings and passing
+current suites/live subsets.
+
+Counts: Critical 0, Severe 0, High 0, Medium 1, Low 0, Warning 0, Suggestion 0.
+G3 has consumed 2/3 cycles. One scoped correction wave and affected verification
+may precede its terminal third cycle; no automatic fourth is available. G1's
+exception and G2's blocker are unchanged. This reviewer made no product edits,
+commits, pushes, listener/Docker actions or live inference/tool calls, and
+releases sole review.md ownership at this terminal handoff.

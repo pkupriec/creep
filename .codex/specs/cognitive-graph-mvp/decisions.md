@@ -420,3 +420,26 @@
   positive terminal/source audit. Same17 read-only original G3 files, no
   analysts/product/live writes, no G2 defect reassignment. Root waits all
   outstanding requested results before recovery-wave consolidation.
+
+
+## G3 cycle2 required inventory defect — final scoped fix wave
+
+- Custom reviewer terminalG3cycle2 FAIL/oneMedium F3, originalF1/F2closed.
+  Fresh focused27713.65s/configuredRuff17/drift/frontcontract9 all0 but required
+  adversarial /v1/models502 assertion exit1: escaped high/low ID becomes
+  500storage_error, validpair200; diagnostic only confirms failure, noeffects.
+  Root full report/17 current SHA256s validated. G3counter2/3 unchanged.
+- Delegate EXACTthree provider/API test files to existing terminal custom
+  coding_api, explicit ownership transfer after original proxy completion.
+  Minimal models() encoding guard and meaningful regression-first provider/
+  composedAPI/health tests, no acceptedprofile/pin/dependency/runtime changes.
+  g3-inventory-baseline.json preserves reviewed660797ab provider hash and
+  all method/module AST outside models() for fresh source reconciliation.
+- Inventory-only change justifies new target inventory/health/model namespace
+  production image checks on Windows+WSL, not automatic replay of past live
+  inference/tool effects. Earlier full native proof remains source-attributed;
+  all unaffected paths must be empirically/static unchanged and new current
+  images/routes verified before final G3cycle3. Reviewer may retain a gate
+  if evidence inadequate; do not hide changed bytes or weaken acceptance.
+  G5 backup logical-state audit reported0; exact terminal owner handoff/docs
+  and verification evidence still awaited, no G5 independent verdict inferred.

@@ -1,0 +1,16 @@
+{
+  "source_sha256": "660797ab43282dba990d8ef69e8214009606d87d0d9861c28997a07182152dff",
+  "module_ast_without_models_sha256": "37a7c7ffdc6d3944158527d0e1d5bf471e19f74d4d7f70e4d754e638f9b84b95",
+  "method_ast_sha256": {
+    "__init__": "2d6b8ba55a48759c0ac9ed05ff7a33c693b5d943f718dc9f04d18df29f34b85a",
+    "_url": "6f3fc444e574722c270e8b2252c1e5cc5e0100fcdad7d6f975552fd5a4f548c6",
+    "_status": "0b49fc1bfcc58b7b7aa324fbeaec41b54a769b67834c1eed63dba7821460a9f1",
+    "_payload": "90766b89890346bc6ad04af6e014046b180275284b2885bedf9507f9ec3adc36",
+    "complete": "49457e7350ad27426889173c17892e6786eea6eb5bd1e184e7bd0939b9277ccf",
+    "stream": "99b39bcdd1c22677d895398d2e9f167732790ab3f68e77d52074c8239aa6de97",
+    "models": "64798c4dfc80cbec80e159bf9bee1d0b9128dda4b72aaab83084bff7bf7cee98",
+    "health": "e554f8418ca1045d0d9b02feb94d95725a8067809cbd6534411e1b8f37d026e1",
+    "close": "c936cdea53b3eef76aebea50d2b2b1bd82f0f7fe3d2d31ffb42f1d9105db00b3"
+  },
+  "scope": "Cycle2 reviewed provider before scoped models() UTF8 correction; all other provider/module AST must remain unchanged."
+}
