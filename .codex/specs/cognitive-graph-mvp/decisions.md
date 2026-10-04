@@ -373,3 +373,31 @@
   localhost8000/8080/5173 and final WSL smoke process. Retained volumes and
   unrelated resources preserved. git diff --check0; no remaining required
   worker active. Root versioning scope is durable artifacts/evidence only.
+
+
+## Usage recovery — user-authorized G1 attempt only
+
+- Human user states usage limit refreshed and authorizes quota-blocked work.
+  Explicit clarification response: "Authorize one additional G1 review
+  attempt", question specified G2/all other budgets unchanged. This is one
+  bounded exception for quota-failed G1, not automatic budget reset. G1
+  consumed3 historical attempts; reserve fourth attempt/cap4 before existing
+  review_g1_c3 synthesizer resume. Cycle4 non-PASS is terminal/no automatic
+  fix/fifth. G2 requiredF5 remains BLOCKED3/3 and exactengine b8ff723... frozen.
+- Fresh client inventory confirms original review_g1_c3/devops_delivery
+  ERRORED quota, all other named workers completed, no quiet in-flight scope.
+  Resume actual original custom roles, no duplicate writers or configuration/
+  model fallback. Static verify-team.py exit0 confirms maintained modelmatrix/
+  plugins/skills/rules/hooks/role files; execution requires actual role results.
+- G1 sole review.md writer; DevOps four documentation files +newignored own
+  recovery fixture proof only, no overlapping writes. G1 original25 files
+  read-only; shared schemas/bootstrap/pins remain single-owner/frozen. Root
+  waits both before consolidation; queued G3 then G5 reviewers serialize the
+  shared review file. G6 review awaits dependencies including blockedG2.
+- Already-passing actual Windows/WSL realHermes/Ollama proof retained. DevOps
+  closes independent operator backup/restore drill using new own data/copy/
+  empty-volume fixtures only, no production-data/user-resource overwrite.
+  Cached immutable image, bounded originalAPI/mock or zero-inference fixture
+  data, graceful stop/copy/separate restore/integrity/permissions/readiness/
+  graphhash/history/residue evidence; originals/backups/restored copies retained.
+  No push/cloud/remoteCI/modeldownload/globalinstall or repeated live effects.

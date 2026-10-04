@@ -8,7 +8,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | BLOCKED: cycle 3 agent errored; no final verdict | 3/3 |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Authorized quota-recovery review attempt 4 in progress | 4/4 (one explicit user exception) |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F1/F2 correction delivered; Windows/WSL live PASS; independent re-review OPEN | 1/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
@@ -227,3 +227,43 @@ Final read-only residue proof is final-residue-audit.json; all exact own
 container/network/listener/process queries exited0 and were empty. Root
 artifact audit0 checked10 UTF8/whitespace files,34 local links, live source
 equality/four native cases and unchanged R01–R11/A01–A16/G0–G6 counters.
+
+
+## Usage recovery wave — explicit user G1 exception
+
+User reports account usage refreshed and authorizes proceeding with quota-
+blocked work. In the explicit clarification, user selected: "Authorize one
+additional G1 review attempt" with G2/all other budgets unchanged. Historical
+G1 cycle3 remains unable to complete; its counter is not reset. Reserve G1
+cycle4/user-exception attempt BEFORE resumed synthesizer invocation, cap4
+for this group only. Non-PASS/cannot-complete cycle4 is terminal; no automatic
+fix/fifth attempt. G2 remains BLOCKED3/3, engine frozen at b8ff723dea5338d3c56d88413e89936e81c105c46991ae914517dbbd049d2cd6.
+
+- [-] [review] Existing custom review-agent instance review_g1_c3 resumes as
+  G1-contracts cycle4, one explicit quota-recovery attempt, no analysts. Sole
+  writable file review.md append. Exact25 read-only G1 files are original26
+  bootstrap files minus main.py serially transferred to API; enumerated in
+  resumed handoff. Current compatible addons/strict pinned interfaces and
+  baselineF1/F2 revalidated through actual pinned test-contract/lint/dev
+  target checks and coherent consumers. Source/profile/pins frozen; no live
+  effects/listeners/production edits. G2 F5 remains a separate blocker. Root
+  waits terminal before any G3/G5/G6 reviewer writes review.md.
+- [-] [devops] Existing custom devops-agent devops_delivery resumes narrowly
+  for G5-delivery final evidence reconciliation and own-fixture backup/restore
+  drill. Writable only README.md, docs/runbook.md, docs/hermes-compatibility.md
+  and docs/verification.md; ignored newly-owned .venv delivery-recovery fixture/
+  log/proof files only. Remaining original delivery/source files are read-only,
+  especially smoke_compose.py root guard correction. No contract/manifest/
+  locks/API/runtime/review/artifact/config/model edits. Use already-cached
+  immutable production images and unique new owned projects/empty volumes,
+  no user volume/data access or replacement; retain own originals/backups/
+  restored copies and scoped down(no-v). Prove actual production stop/copy/
+  isolated restore/permissions/integrity/readiness/graph/hash/history checks.
+  Historical Windows/WSL live proof/source equality must be harvested, not
+  needlessly rerun inference/tool effects. Exact commands/exits/source/image
+  identities/residue returned; remote CI remains unexecuted/no push. Root
+  waits both requested workers before wave consolidation.
+
+G3 re-review remains next within unchanged1/3 budget; G5 initial independent
+review0/3 follows coherent delivery evidence. G6 requires G2–G5 and remains
+held on the known G2 terminal blocker, not renamed or consumed prematurely.
