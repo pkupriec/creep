@@ -367,3 +367,28 @@ not an independent G5 verdict. G2 engine/profile remains frozen and
   counter, rename/split the group, or widen the degraded coordinator fallback.
   The F3 correction remains source- and image-validated; the required
   independent synthesizer gate is open.
+
+## User-authorized one-time recovery exceptions — 2026-10-04
+
+The user explicitly requested one more attempt for both listed blockers. This
+is a recorded exception to the normal terminal-cycle rule, not a reset: the
+original G2 and G3 counters remain 3/3, all prior findings stay authoritative,
+and each group receives at most one bounded recovery attempt. G2 implementation
+and G3 review are file-disjoint and may run concurrently. Any further attempt
+requires a new explicit user disposition.
+
+- [-] [coding] `coding_g2_exception` owns only
+  `backend/app/runtime/engine.py` and the existing runtime tests needed to
+  close F5. Preserve accepted Draft 3 support; add dialect-aware traversal and
+  rebasing for schema-valued `extends` and `type` alternatives, literal data,
+  resource boundaries, and original-good/original-bad runtime/SQLite proof.
+  No profile narrowing, DTO/contract/lock/API/provider edits, or review-file
+  writes. Run the exact locked runtime/focused/full tests and Ruff; return
+  source hashes and exit codes. Root waits for this terminal result before any
+  G2 exception review.
+- [-] [review] `review_g3_exception` is the sole writer of `review.md` for one
+  user-authorized G3 recovery review. Read-only exact G3 provider/bridge/API
+  scope plus current correction evidence; independently recheck F1/F2/F3,
+  current focused/full/contract checks, and current Windows/WSL inventory
+  evidence. No product edits, no G2 files, no fourth automatic retry, and no
+  review verdict before the agent returns.

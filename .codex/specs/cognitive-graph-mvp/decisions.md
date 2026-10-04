@@ -507,3 +507,17 @@
 - G2 F5 remains independently frozen **BLOCKED3/3**. G5 delivery backup /
   restore logical audit remains owner evidence only; G5/G6 independent review
   counters remain 0/3 and no PASS is inferred from the delivery drill.
+
+## 2026-10-04 — Explicit one-time recovery exceptions
+
+- The user explicitly requested one more attempt for G2 and G3. Preserve the
+  non-resetting historical counters at 3/3 and all prior review findings; this
+  authorizes exactly one bounded recovery attempt per group, with no automatic
+  fifth attempt or artificial group split.
+- `coding_g2_exception` owns only the runtime engine and its existing runtime
+  tests for F5. It must preserve accepted Draft 3 semantics and prove
+  schema-valued `extends`/`type` local-reference rebasing through scheduler and
+  SQLite. `review_g3_exception` owns only the independent G3 review append to
+  `review.md`; its read-only source/evidence scope excludes G2 files. Root
+  waits for both requested workers and records quota or verdict evidence before
+  any further action.
