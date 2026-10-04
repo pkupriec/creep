@@ -1,0 +1,58 @@
+{
+  "group": "G3-proxy",
+  "finding": "G3-C2-F3",
+  "status": "correction_delivered_current_image_validation_passed",
+  "scope": [
+    "backend/app/providers/ollama.py",
+    "backend/tests/providers/test_ollama.py",
+    "backend/tests/api/test_chat.py"
+  ],
+  "source_sha256": {
+    "backend/app/providers/ollama.py": "f58033ca681cdb84d53a83208c1095c1bee4c9775e5f0674aeea18c9cb3b174b",
+    "backend/tests/providers/test_ollama.py": "802b1a6e1ad0d37405c29eddf78929924e429165fe5e994a3dec2a4bbb43e420",
+    "backend/tests/api/test_chat.py": "bad432727c0cb8323d0c87a9ccd2ac6f9909ee70fd6ab8d3159c33c2c96b6cfe"
+  },
+  "behavior": {
+    "unpaired_high_or_low_model_id": "502 upstream_error",
+    "valid_supplementary_model_id": "200 exact round-trip",
+    "inventory_calls_per_case": 1,
+    "inference_calls": 0,
+    "tool_effects": 0,
+    "admission_leaks": 0
+  },
+  "verification": [
+    {
+      "command": "uv --system-certs run --project backend --locked pytest backend/tests/providers/test_ollama.py backend/tests/api/test_chat.py -q",
+      "exit_code": 0,
+      "result": "61 passed in 3.68s"
+    },
+    {
+      "command": "uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q",
+      "exit_code": 0,
+      "result": "283 passed in 15.03s"
+    },
+    {
+      "command": "uv --system-certs run --project backend --locked pytest backend/tests -q",
+      "exit_code": 0,
+      "result": "593 passed in 39.70s"
+    },
+    {
+      "command": "python scripts/dev.py lint",
+      "exit_code": 0,
+      "result": "Ruff, 49-file format, generated drift and strict TypeScript"
+    },
+    {
+      "command": "python scripts/dev.py test-contract",
+      "exit_code": 0,
+      "result": "231 backend provider/tool/contract tests and 9 frontend contract tests"
+    },
+    {
+      "command": "uv --system-certs run --project backend --locked python scripts/export_contracts.py --check",
+      "exit_code": 0,
+      "result": "Generated contracts match Python DTOs"
+    }
+  ],
+  "baseline": "g3-inventory-baseline.json proves all provider methods except models() and the surrounding module AST are unchanged",
+  "live_validation": "Current-source Windows/WSL inventory and health/image reconciliation passed in image sha256:e7c64ea53ed76dd3418cce32c3748be569a2113a4138aaa01d8133fd224f339; previous full Hermes/Ollama proof remains attributed to the pre-fix provider image.",
+  "review": "G3 cycle 2 FAIL remains recorded; terminal cycle 3 is required and no verdict is claimed here."
+}

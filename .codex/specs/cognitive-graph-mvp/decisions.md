@@ -443,3 +443,47 @@
   if evidence inadequate; do not hide changed bytes or weaken acceptance.
   G5 backup logical-state audit reported0; exact terminal owner handoff/docs
   and verification evidence still awaited, no G5 independent verdict inferred.
+
+## G3 F3 correction delivered under quota fallback
+
+- Both resumed coding-agent attempts (`coding_api` and replacement
+  `coding_g3_fix`) positively errored immediately with the account usage limit.
+  User's prior explicit approval to proceed with this part authorizes a narrow
+  degraded coordinator fallback, recorded in tasks.md; no broad takeover or
+  model/config change occurred. Root edited only the three reserved G3 files.
+- `HttpOllamaAdapter.models()` now strict-UTF8-encodes each upstream model ID
+  inside its existing sanitizing boundary. High/low escaped unpaired scalars
+  produce sanitized 502/upstream_error; valid supplementary IDs remain exact.
+  No retry, substitution, inference, tool execution, or admission leak was
+  introduced. `g3-inventory-baseline.json` AST comparison proves all provider
+  methods except models() and the surrounding module unchanged.
+- Regression-first affected61 passed3.68s; focused provider/tool/API/
+  integration/contracts283 passed15.03s; full backend593 passed39.70s after a
+  first unrelated timing-sensitive admission assertion failure was rerun and
+  passed alone; Ruff check/format3 and export-contracts passed. Repository
+  `python scripts/dev.py lint` and `test-contract` both passed (lint49 files,
+  generated drift, strict TS; test-contract231 Python/provider/tool plus9
+  frontend contract). Current three source hashes are F58033CA...B3B174B,
+  802B1A6E...43E420 and BAD43272...6B6CFE (exact full values recorded in the
+  next evidence artifact).
+- DevOps delivery owner terminal quota error prevented its current-image run,
+  so root used the already-authorized narrow local validation fallback. Current
+  pinned backend image e7c64ea53ed76dd3418cce32c3748be569a2113a4138aaa01d8133fd224f339
+  passed isolated Windows and WSL callers: valid supplementary ID200/healthy,
+  malformed high/low IDs502/upstream_error/unhealthy, two inventory calls for
+  route-plus-health, zero inference/tools/leaks, non-root/read-only/cap-drop/
+  network-none controls. Three owned volumes remain retained; no containers or
+  networks remain. Prior full Hermes/Ollama evidence remains attributed to old
+  provider bytes and is not relabeled. Backup/restore logical audit0 and docs
+  audit0 are retained; no G5 independent PASS is inferred. G3 terminal cycle3
+  is now ready.
+
+## G3 terminal cycle3 reservation
+
+- Reserve existing custom review_g1_c3 as the sole G3-proxy cycle3/3
+  synthesizer before invocation. G3's ordinary three-cycle budget is preserved:
+  cycle1 FAIL/F1-F2, cycle2 FAIL/F3, one scoped correction, now current tests
+  and Windows/WSL image inventory proof. No G1 exception carries over to G3.
+  Cycle3 non-PASS is terminal with no fourth attempt. Review.md remains the
+  only writable review file; coding/API/runtime/contracts/locks and G2 F5 are
+  frozen. Root waits the terminal result before any G5/G6 reviewer.

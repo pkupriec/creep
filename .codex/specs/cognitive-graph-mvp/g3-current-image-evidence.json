@@ -1,0 +1,37 @@
+{
+  "result": "current-source Windows and WSL image inventory boundary passed",
+  "image": {
+    "tag": "cg-g3-backend-current:20261004",
+    "id": "sha256:e7c64ea53ed76dd3418c8ce32c3748be569a2113a4138aaa01d8133fd224f339",
+    "user": "10001:10001",
+    "build": "docker --context desktop-linux build --pull=false -f backend/Dockerfile -t cg-g3-backend-current:20261004 ."
+  },
+  "source_sha256": {
+    "backend/app/providers/ollama.py": "f58033ca681cdb84d53a83208c1095c1bee4c9775e5f0674aeea18c9cb3b174b",
+    "backend/tests/providers/test_ollama.py": "802b1a6e1ad0d37405c29eddf78929924e429165fe5e994a3dec2a4bbb43e420",
+    "backend/tests/api/test_chat.py": "bad432727c0cb8323d0c87a9ccd2ac6f9909ee70fd6ab8d3159c33c2c96b6cfe"
+  },
+  "platforms": {
+    "windows_desktop_linux": {
+      "caller": "Windows PowerShell",
+      "context": "desktop-linux",
+      "project_volume": "cg-g3-inventory-20261004-1a107da3685",
+      "result": "three cases passed"
+    },
+    "wsl2": {
+      "caller": "Ubuntu WSL2",
+      "context": "default unix:///var/run/docker.sock",
+      "project_volume": "cg-g3-inventory-wsl-20261004-1a107db1595",
+      "result": "three cases passed"
+    }
+  },
+  "cases": [
+    {"model_id": "model\\ud83d\\ude00", "http_status": 200, "health": true, "inventory_calls": 2},
+    {"model_id": "model\\ud800", "http_status": 502, "error_code": "upstream_error", "health": false, "inventory_calls": 2},
+    {"model_id": "model\\udfff", "http_status": 502, "error_code": "upstream_error", "health": false, "inventory_calls": 2}
+  ],
+  "container_controls": ["network none", "read-only root", "tmpfs /tmp", "UID/GID 10001", "cap-drop ALL", "no-new-privileges"],
+  "effects": {"inference_calls": 0, "tool_effects": 0, "admission_leaks": 0},
+  "residue": "No containers or networks matched the cg-g3-inventory label; three owned test volumes retained for evidence.",
+  "scope": "Inventory and health boundary only. Earlier full Windows/WSL Hermes/Ollama proof remains attributed to the previous provider image and is not relabeled."
+}

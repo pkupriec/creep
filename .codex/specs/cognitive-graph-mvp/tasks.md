@@ -10,7 +10,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Cycle2 FAIL F3 model-inventory Unicode; scoped correction running | 2/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F3 correction delivered; current-image inventory validation pending | 2/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
@@ -301,28 +301,44 @@ mock inventory call/no inference/effects/leases. Prior completion/SSE F1/F2
 CLOSED, required previous real live gates source-matched/executed. Root read
 full review and verified17 current source hashes before any correction.
 
-- [-] [coding] Existing coding-agent coding_api sole owner ONLY
+- [x] [coding] Root degraded fallback owns ONLY
   backend/app/providers/ollama.py, backend/tests/providers/test_ollama.py and
-  backend/tests/api/test_chat.py for G3-C2-F3. Original proxy owner terminal;
-  explicit narrow transfer to actual custom coding role, no competing source
-  writer. Regression-first adapter+actual composed GET/v1/models high/low
-  unpaired scalars and valid supplementary pairs; coherent health availability,
-  exact502/upstream_error sanitized/no substitution/retry/effects/leaks. Minimal
-  provider models() UTF8 validation inside existing error boundary; preserve
-  all other provider/module AST, contracts/profile/API implementation/pins/
-  locks/bridge/runtime/SSE. Baseline g3-inventory-baseline.json records methods
-  and module AST excluding models for immutable call-path reconciliation.
-  Run locked affected tests/focused277+new/fullbackend/configuredRuff/drift,
-  no listeners/liveinference/tools/docs/artifact/review edits. G3counter2/3;
-  finalcycle3 only after terminal fix and adequate current-source live delta.
+  backend/tests/api/test_chat.py for G3-C2-F3 after both replacement coding
+  agents positively errored from the account usage limit. User's earlier
+  explicit “You may proceed this part” authorizes this exact fallback. Regression
+  first adapter+composed GET/v1/models high/low unpaired scalars and valid
+  supplementary pairs pass with exact 502/upstream_error or 200 behavior,
+  one inventory call and no effects/leaks. Minimal provider models() UTF8
+  validation only; baseline g3-inventory-baseline.json proves all other
+  provider/module AST unchanged. Affected61, focused283, full593, Ruff3,
+  contract export and repository lint/test-contract all exit0. No listeners,
+  live inference/tools, docs/review edits or product scope expansion. Current
+  image Windows/WSL inventory validation passes in
+  g3-current-image-evidence.json; terminal G3 review cycle3 is now ready.
 
-Delivery source reconciliation for this inventory-only change is held until
-terminal coding result: rebuild current backend and execute real inventory/
-health/model namespaces through direct API and Nginx on Windows AND WSL new
-owned projects; no inference/tool execution required for models(). Record new
-images/source hashes and unchanged all other inference/stream/tool/runtime
-paths; earlier full native proof remains attributed to old provider bytes,
-never relabeled current-source. Independently assess adequacy before terminal
-G3 review, no required live criterion silently waived. DevOps existing backup
-drill/documentation still active/disjoint; root awaits all requested results.
-G2 engine/profile remains frozen and BLOCKED3/3.
+Delivery source reconciliation for this inventory-only change completed with a
+current backend image and isolated Windows/WSL callers. Direct composed app
+inventory/health probes passed valid supplementary IDs as200 and high/low
+unpaired IDs as502/upstream_error, with zero inference/tool effects and no
+admission leaks. Image/source IDs are in g3-current-image-evidence.json. Earlier
+full native proof remains source-attributed to old provider bytes and is not
+relabeled current-source. Terminal G3 review cycle3 is ready; no required live
+criterion was silently waived. DevOps backup logical audit0 remains evidence,
+not an independent G5 verdict. G2 engine/profile remains frozen and
+  BLOCKED3/3.
+
+## G3 terminal independent review reservation — cycle 3/3
+
+- [-] [review] Existing custom review-agent review_g1_c3 resumes as the sole
+  G3-proxy synthesizer for terminal cycle3/3, reserved before invocation after
+  the scoped F3 correction and current-image Windows/WSL inventory proof. Only
+  `.codex/specs/cognitive-graph-mvp/review.md` may be appended. Read-only scope
+  is the same exact17 G3 files plus current three-file source delta,
+  g3-inventory-baseline.json, g3-fix-evidence.json and
+  g3-current-image-evidence.json. Reprove F3 high/low invalid inventory IDs,
+  valid supplementary ID, health/error mapping, cleanup and no substitution;
+  recheck prior F1/F2 closure and focused/API/contract/Ruff/drift evidence.
+  Windows/WSL current image evidence is attributed coordinator execution, not
+  reviewer live inference. G2 F5 remains frozen BLOCKED3/3 and is outside this
+  group. Cycle3 non-PASS is terminal: no fourth G3 review or automatic fix.
+  Root waits the terminal verdict before scheduling G5/G6 review-file writers.
