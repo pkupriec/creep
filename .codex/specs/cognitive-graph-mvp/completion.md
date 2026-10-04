@@ -165,6 +165,9 @@ smokes scoped down(no-v)0, no own container/network residue, volumes retained.
 - G3 terminal re-review is BLOCKED3/3 because its reviewer could not complete
   under the account usage limit; G5/G6 initial independent reviews remain
   OPEN0/3. Runtime/API/live successes do not substitute for those verdicts.
+- The user-authorized one-time G2 implementation and G3 review recovery
+  attempts were both dispatched and immediately quota-errored. No additional
+  code, review verdict, or budget reset resulted.
 - Operator backup/restore drill and actual remote GitHub CI remain unexecuted;
   documented procedures/local equivalents are not labeled live PASS.
 - Earlier unreproduced Windows native test exception remains unassigned despite

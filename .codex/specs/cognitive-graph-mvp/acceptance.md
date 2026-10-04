@@ -32,7 +32,9 @@ account usage-limit error. No independent report or verdict was produced and
 three-cycle rule; coordinator tests and image probes remain supporting evidence
 only. G2 is separately terminal BLOCKED3/3 on F5. G5 backup/restore remains
 owner evidence without an independent review, and G6 remains held by its
-dependencies.
+dependencies. The later user-authorized one-time recovery dispatches for G2
+implementation and G3 review also immediately hit the same quota error; no
+source change or verdict resulted.
 
 ## Evidence rules
 

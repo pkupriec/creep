@@ -377,7 +377,10 @@ and each group receives at most one bounded recovery attempt. G2 implementation
 and G3 review are file-disjoint and may run concurrently. Any further attempt
 requires a new explicit user disposition.
 
-- [-] [coding] `coding_g2_exception` owns only
+- [!] [coding] `coding_g2_exception` was dispatched with the exact scope below
+  and immediately terminated with the account usage-limit error. No G2 source
+  or test file changed, and no F5 fix/review evidence was produced.
+- [!] [coding] `coding_g2_exception` owns only
   `backend/app/runtime/engine.py` and the existing runtime tests needed to
   close F5. Preserve accepted Draft 3 support; add dialect-aware traversal and
   rebasing for schema-valued `extends` and `type` alternatives, literal data,
@@ -386,9 +389,21 @@ requires a new explicit user disposition.
   writes. Run the exact locked runtime/focused/full tests and Ruff; return
   source hashes and exit codes. Root waits for this terminal result before any
   G2 exception review.
-- [-] [review] `review_g3_exception` is the sole writer of `review.md` for one
+- [!] [review] `review_g3_exception` was dispatched with the exact scope below
+  and immediately terminated with the account usage-limit error. No reviewer
+  report or `review.md` append was produced.
+- [!] [review] `review_g3_exception` is the sole writer of `review.md` for one
   user-authorized G3 recovery review. Read-only exact G3 provider/bridge/API
   scope plus current correction evidence; independently recheck F1/F2/F3,
   current focused/full/contract checks, and current Windows/WSL inventory
   evidence. No product edits, no G2 files, no fourth automatic retry, and no
   review verdict before the agent returns.
+
+## User-authorized recovery outcome
+
+The one G2 implementation attempt and one G3 review attempt authorized above
+were both consumed by immediate positive account usage-limit failures. The
+original counters remain G2 3/3 and G3 3/3; the exceptions do not create a
+new automatic budget. No product files, contracts, profiles, locks, or review
+verdicts were changed. Further work requires a later explicit disposition and
+available agent quota.

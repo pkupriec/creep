@@ -521,3 +521,15 @@
   `review.md`; its read-only source/evidence scope excludes G2 files. Root
   waits for both requested workers and records quota or verdict evidence before
   any further action.
+
+## 2026-10-04 — Recovery exceptions consumed by quota failures
+
+- The dispatched `coding_g2_exception` terminated immediately with the
+  account usage-limit error. No engine/test edit, F5 correction, or G2 review
+  reservation followed.
+- The dispatched `review_g3_exception` terminated immediately with the same
+  account usage-limit error. No independent report or `review.md` append was
+  produced. G3 remains without a verdict.
+- The user-authorized exceptions are therefore consumed without changing the
+  historical 3/3 counters. No fourth automatic retry, replacement, budget
+  reset, model change, or profile narrowing is allowed in this run.
