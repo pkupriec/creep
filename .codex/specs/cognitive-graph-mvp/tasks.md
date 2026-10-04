@@ -8,12 +8,12 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Final cycle 3 independent review assigned | 3/3 |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | BLOCKED: cycle 3 agent errored; no final verdict | 3/3 |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F1/F2 correction delivered; live/re-review pending | 1/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F1/F2 correction delivered; Windows/WSL live PASS; independent re-review OPEN | 1/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
-| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | In progress | 0/3 |
-| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | API delivered; browser/live gates open | 0/3 |
+| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
+| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
 Each product group has its own maximum three synthesizer spawns. Record consumption before spawn. Cycle 3 non-PASS is terminal.
@@ -173,4 +173,57 @@ G3fixownerTERMINAL:65newcases; affected109/focused277/fullbackend58757.11s/Ruff4
 
 ## G1 final independent review cycle 3 reservation
 
-- [-] [review] review_g1_c3 sole synthesizer G1-contracts FINALcycle3/3 reserved BEFOREspawn, noanalysts. Solewrite review.mdappend (G3priorwriterterminal), exact25originalcontract/bootstrap/manifests/locks/generated/docs filesread-only, excludingmain.pyseriallytransferredAPI. CurrentoptionalActivationRecord.finish_reason/privateknownreasoningnormalization/Vitestdiscovery/WinWSLwrapper/jsonschema4.26production/docscurrentstates reviewedwithcoherentterminalG3/API/G4consumers. ReprovebaselineF1toolresultname/F2strictupstreammetadata; generatedschema consistency, exactpins/locks/config/error/profile/scheduler+store+bridgeinterfaces/Makewrapper meaningfultargetchecks. No productionedits/liveeffects/listeners/containerstarts/globaltoolinstall/peerwrites. DevOps14filesactualWindowsWSLsourcecoherentlive maycontinue disjoint; realservicesgate belongsG5/G6 and mustnotbeclaimedbyG1static checks. G2BLOCKED3/3F5separatefrozen, noacceptedprofilenarrowing/budgetreset. Counter3terminalnonPASS=>G1BLOCKED/nofourth; leadwaits authoritative terminalreport beforeconsolidation.
+- [!] [review] review_g1_c3 sole synthesizer G1-contracts FINALcycle3/3 reserved BEFOREspawn, noanalysts. Solewrite review.mdappend (G3priorwriterterminal), exact25originalcontract/bootstrap/manifests/locks/generated/docs filesread-only, excludingmain.pyseriallytransferredAPI. CurrentoptionalActivationRecord.finish_reason/privateknownreasoningnormalization/Vitestdiscovery/WinWSLwrapper/jsonschema4.26production/docscurrentstates reviewedwithcoherentterminalG3/API/G4consumers. ReprovebaselineF1toolresultname/F2strictupstreammetadata; generatedschema consistency, exactpins/locks/config/error/profile/scheduler+store+bridgeinterfaces/Makewrapper meaningfultargetchecks. No productionedits/liveeffects/listeners/containerstarts/globaltoolinstall/peerwrites. DevOps14filesactualWindowsWSLsourcecoherentlive maycontinue disjoint; realservicesgate belongsG5/G6 and mustnotbeclaimedbyG1static checks. G2BLOCKED3/3F5separatefrozen, noacceptedprofilenarrowing/budgetreset. Counter3terminalnonPASS=>G1BLOCKED/nofourth; leadwaits authoritative terminalreport beforeconsolidation.
+
+
+## Account-usage terminal failures and local verification recovery
+
+Clientpositiveevidence: review_g1_c3 anddevops_delivery agentstatusERRORED accountusagelimit, no normalterminalreview/deliveryhandoff. G1finalcycle3unablecompleteisBLOCKED3/3; freshtest-contract228Python/ninefrontend/drift0 partialonly, NOauthoritativecycle3verdict/PASS. DoNOTrespawn/retry/fourth/reset/reclassifyG1. G2BLOCKED3/3F5 unchanged. G3re-reviewandG5/G6initialindependentreviews unexecuted dueaccountlimits, counters1/3/0/3/0/3 stayunchanged. No modelmatrixchange/purchase/globalapproval/externalwrites. Allrequestedworkersnowterminalcompletedorerrored, noquietinflighttakeover.
+
+Rootonlyexecutesalreadyimplementedlocalvalidation/no productedits: freshconfiguredlint0 all49formatchecks/drift/TS; ownWindows/Linuxsmokeprocessqueriesempty, no ownactiveCompose/listeners; existingunrelatedcontainerspreserved. PreparedfullWSLhelperrunning uniquelyownedcg-smoke-wsl-root-20261004-81cd29e6 viaexistingnativeWindowsHermesinterop, currentsourceprobe/newownedvolume, sameoriginalassertions, noeffectretries. Thisis localverification recovery afterconfirmedworkerfailure, no independentreviewsubstitution. Exactlog .venv/root-wsl-smoke-20261004-81cd29e6.log; nativeWindows evidence versioned live-windows-hermes.json.
+
+
+## Narrow G5 helper recovery after confirmed quota termination
+
+Root temporarilyowns ONLY scripts/smoke_compose.py nativeinteropversionguard, solewriterafterpositiveDevOpsterminalERRORED/noactiveworker. ActualWSLfullattempt81cd29e6exit1 after currentcontainer/public/Nginx/history/targetpassed, nativeguardPackageNotFound beforeHermes; rootreadonlyactualnativeWSLdiagnostic0 provesmetadatahermes-agent/OpenAI/httpx absentbeforeexistingnativesitepath and exact0.18.2/2.24.0/0.28.1 aftersameHermesvenvLibsitepathalreadyusedbypinnedload_hermes. Correctguardappendexplicitnativehermesrootexistingpackagepath beforemetadata; preserve strictversions/same-daemon/sourcechecks, no install/globalenv/pin/profile/client/executor/configchange. Exactcurrent3-line-equivalenthelpercorrectiononly, no broadimplementationtakeover/nopeers/G1/G2edits. Actualextractedguard +configuredRuff +onefreshfullWSL rerunrequired; oldfailure/evidence/volumeretained, noeffectsreplayed. G5counter0/3 stillindependentreviewOPENdueusage.
+
+
+## Final administrative documentation consolidation
+
+After confirmedquotaERROREDdeliveryowner/reviewer andterminalWSLvalidation, rootsolewriterofstatus/evidence ONLY in README.md, docs/runbook.md, docs/hermes-compatibility.md, docs/verification.md, docs/api.md anddocs/dependencies.md. Re-readbeforeedits; preservehistoricalrows/failedchecks/source/pins/contracts. RecordcompletecurrentWindows+WSLsmokeandG1unablefinalreview3/3BLOCKED, G2F5BLOCKED3/3, G3fixdeliveredre-reviewOPEN1/3,G5/G6reviewOPEN0/3, knownunexecutedbackuprestore/remoteCI/nativeexception. No automaticG1/G2implementationfix/newreview/reset/profilechange, no source/API/contract/manifest/lock/docsredesign. Thisis truthfulclosureevidence afterworkertermination, cannotcreateindependentPASS. Allworkerscompleted/errored; rootowns artifactcompletionreport+safeproofJSON.
+
+
+## Final local verification consolidation — 2026-10-04
+
+Root completed the already-authorized WSL validation after confirmed DevOps
+termination. The first 81cd29e6 attempt exited1 before native Hermes at the
+metadata guard; its earlier real service/transport/history/target proof remains
+attributed to that attempt. The narrow guard correction was exercised with
+the original Windows interpreter through WSL, exact pinned versions and the
+same Docker daemon, then configured Ruff check/format-check passed0.
+
+Fresh cg-smoke-wsl-final-20261004-369c51ea full smoke terminal exit0: current
+provider/source equality, both production services, external Ollama, seven
+public exchanges, Nginx, completed-history restart, retained-volume recreation,
+original Hermes JSON/SSE continuation/replay, actual waiting-tools restart
+before effects, compression and target measurements all executed. Windows
+full cg-smoke-win-final-20261004-5f34c9e2 exit0 is preserved separately. Scoped
+down(no-v)0 removed each smoke's containers/network and retained its volume.
+
+Root administrative consolidation owns ONLY README.md, docs/runbook.md,
+docs/hermes-compatibility.md, docs/verification.md, docs/api.md and
+docs/dependencies.md status/evidence text, after confirmed owner termination.
+No shared contract, manifests/lockfiles, runtime, API or accepted-profile edit.
+This is no independent verdict or G1 fix/fourth-cycle attempt.
+
+Current versioned evidence: live-windows-compose.json, live-windows-hermes.json,
+live-wsl-compose.json, live-wsl-hermes.json, wsl-client-guard.json and
+completion.md. G1/G2 remain BLOCKED3/3; G3 re-review OPEN1/3 and G5/G6 reviews
+OPEN0/3. G0/G4 preserve independent PASS2/3. All requested workers are terminal
+completed/errored; no required worker is active. Native Linux Hermes was not
+installed: WSL Compose invokes the original Windows client explicitly.
+
+Final read-only residue proof is final-residue-audit.json; all exact own
+container/network/listener/process queries exited0 and were empty. Root
+artifact audit0 checked10 UTF8/whitespace files,34 local links, live source
+equality/four native cases and unchanged R01–R11/A01–A16/G0–G6 counters.

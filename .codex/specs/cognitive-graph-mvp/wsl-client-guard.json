@@ -1,0 +1,17 @@
+{
+  "result": "actual WSL original helper client guard passed",
+  "client": {
+    "platform": "Windows",
+    "python": "3.11.15",
+    "versions": {
+      "hermes-agent": "0.18.2",
+      "openai": "2.24.0",
+      "httpx": "0.28.1"
+    },
+    "daemon_id": "7f6ed163-9102-4041-85eb-959c8952577e"
+  },
+  "linux_daemon_id": "7f6ed163-9102-4041-85eb-959c8952577e",
+  "same_daemon": true,
+  "source_sha256": "3bf4204d8d0626c524cdc807703f83db07d96bba4e383829a6ff54f2e7feeedb",
+  "scope": "native metadata and Docker daemon identity only; no stack, inference, tools or installation"
+}

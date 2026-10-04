@@ -1,0 +1,52 @@
+{
+  "result": "final owned-resource residue audit passed",
+  "checks": [
+    {
+      "project": "cg-smoke-win-final-20261004-5f34c9e2",
+      "kind": "containers",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "project": "cg-smoke-win-final-20261004-5f34c9e2",
+      "kind": "networks",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "project": "cg-smoke-wsl-final-20261004-369c51ea",
+      "kind": "containers",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "project": "cg-smoke-wsl-final-20261004-369c51ea",
+      "kind": "networks",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "project": "cg-smoke-wsl-root-20261004-81cd29e6",
+      "kind": "containers",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "project": "cg-smoke-wsl-root-20261004-81cd29e6",
+      "kind": "networks",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "kind": "Windows localhost listeners8000/8080/5173",
+      "exit_code": 0,
+      "resources": []
+    },
+    {
+      "kind": "WSL owned final smoke processes",
+      "exit_code": 0,
+      "resources": []
+    }
+  ],
+  "retained_volumes": "Preserved; no volume removal or unrelated resource mutation."
+}

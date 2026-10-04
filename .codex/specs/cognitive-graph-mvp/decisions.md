@@ -309,3 +309,67 @@
 - DevOpspositiveTERMINAL fresh cg-smoke-win-final-20261004-5f34c9e2 fullhelperexit0. Correctedactualcontainerprovider660797ab/SSE99b812 sourceequalitybeforeinference, healthyservices/defaultupstreamroute/currentpinneddeps/storage, sevenrealpublicexchanges/Nginx/protections/completedhistoryrestart/volume-recreation/publication/target checks allpass. OriginalHermesJSONliteralcg/synthesis andSSE each3observedoriginalper-requestSDKcalls/2guardednativeRead/2verifiedexactreplayedcontinuations, durable3nodeexec/5upstreamattempts/2toolrounds. JSONactualwaitingtoolsbackendrestart afterfulloriginalresponsebeforeeffects retainedsame run6cc9ba.../pendingcg_691d.../IDs/owners/checkpoints/counters, PID89993→90603, zeroeffects before restart. Realnativecompression28→6 preservespendingID/rawresult.
 - Scopedownteardownexit0, no owncontainers/network, retainednamedvolume. Thiscloses executedWindowscurrentimage/nativeHermes/restart/replay/compression/JSONSSEcomponentgates, not separateWSL/independentreviews/G2BLOCKED3/3F5. EarlierNginx/directfixture/observerfailures remainrecorded; strictassertionskept andtruefixture instruction correctedaftervalidadditionaltoolcalldiagnosis. SeparatefreshWSLCompose+existingnativeWindowsclientinteropnowactive; finalexactcommands/hashes/metrics/evidence/docs awaitDevOpsterminalfullhandoff.
 - User PLZCONTINU steers continuationofauthorizedplanned independentwork; itdoesnotexplicitlyoverrideG2nonresettingthreecyclebudget orauthorizeautomaticfourth/reclassification. No G2fix/review spawned.
+
+
+## 2026-10-04 — account limit stops reviewers; preserve final-cycle gate
+
+- ClientinventorypositiveTERMINALERRORED bothreview_g1_c3 anddevops_delivery withaccountusagelimit. G1last3/3consumedandunablecomplete=>BLOCKED/noautomaticfourth/retry/reset; latestfresh228Python/ninefrontendtest-contract/drift0 ispartial, no synthesizedverdict. Review.mdhasnoG1cycle3append; rootwillnotfabricateoneoruseitsselfreview asPASS. G3currentcorrectiontested587butindependentcycle2unexecuted1/3; G5/G6review0/3unexecutedbecauseusage. ExistingcustomSol/Astramodelmatrixpreserved. Do notconvertquotaresetmessage7:09AM to localtimewithoutverifiedtimezone; no purchase/newautomation/modelsubstitution.
+- Leadverifiedcurrentconfigured `python scripts/dev.py lint` exit0 Ruff49formats/drift/TS. Dockerinitialformattedinventorycommandfailedtemplatequoting, correctedreadonlyinventory0; no cg-smoke ownactivecontainers, onlyretainedexitedG0persistfixtures andunrelatedusercontainers. WinPython/Listensmokeports8000/8080/5173 empty andactualWSL/proc ownsmokequery0empty. No productiondata/secret/configaccess or unrelatedcleanup.
+- RootmayfinishalreadyimplementedrequiredlocalWSLvalidation withoutagent/model: exactpreparedcommandfresh cg-smoke-wsl-root-20261004-81cd29e6 currentcorrectedprovidersourceprobe, originalassertions/contextinteropguard/fixture/toolboundary. No broadimplementationtakeover/productedits/newresearch/independentPASS/effectretry. Runninglogownignoredpath, ownedvolumeretained/scopeddown(no-v). NativeWindows originalevidence readfromownsafe .venv/hermes-production-e0b7ce915466/evidence.json andcopiedversioned live-windows-hermes.json forreproducibleproof.
+
+
+## 2026-10-04 — WSL native metadata guard defect and narrow recovery
+
+- RootWSLfull81cd29e6exit1 afteractualcurrentbothserviceshealthy/route/source/protection/sevenpublicexchanges/historybackendrestart/samevolumerecreation/target; failureatnativeinteropmetadata guard beforeHermes. SafereadonlydiagnosticthroughactualWSLWininterpreter0: PackageNotFoundforallthreebeforepath, thenhermes0.18.2/OpenAI2.24/httpx0.28.1 afterexistinghermes/venv/Lib/site-packages path usedby originalpinnedload_hermes. Thisis helperguardenvironment mismatch, not unavailablepackage/client/proxydefect. Originalguard suppressedcapturederrorsbydesigntoprotecttokens; no generalerrorstdoutpolicychanged.
+- PositivequotaTERMINALfailure permits narrowly scoped recovery: leadsolewriter scripts/smoke_compose.py existingnativepackagepathguardonly, no broad delivery/API/runtime/bootstraptakeover/modelconfigchange. Strictsame-daemon/pin/sourcechecksremain; onefreshWSLcurrent-sourcevalidation afteractualguard/Ruffchecks. Old81cd29e6volumeretained, no owncontainers/networkafterdown0; nativeHermesunexecutedinfailedattempt.
+- Windowsnativeevidencecopy firstrootassert expectedincorrectsuccesslabel (copyexit1), correctedafterreading actualproducerliteral executedrealHermessmokepassed andcheckedbothcases3SDKcalls2reads2replays pluszeroeffects-before-restart/compressionunchanged. Copyaudit0; no product/source/assertionweakening orduplicateartifactappend.
+
+
+## 2026-10-04 — final WSL proof and evidence consolidation
+
+- Narrow scripts/smoke_compose.py native metadata guard appends the same
+  existing Hermes venv/Lib/site-packages used by pinned load_hermes, taking
+  explicit native Hermes-root argument. Exact helper SHA256
+  3bf4204d8d0626c524cdc807703f83db07d96bba4e383829a6ff54f2e7feeedb.
+  No install, configuration, transport, executor, inference limits or pins
+  changed. Configured Ruff check/format-check0 and actual AST-extracted original
+  helper executed through WSL/Windows0: Hermes0.18.2/OpenAI2.24.0/httpx0.28.1,
+  nativePython3.11.15, same daemon7f6ed163-9102-4041-85eb-959c8952577e.
+- Fresh cg-smoke-wsl-final-20261004-369c51ea full helper terminal0. Current
+  provider660797ab/SSE99b812 equality, real direct/proxy/history/target and
+  original native JSON/SSE tools/restart/replay/compression all executed.
+  JSON run a06c7a256a954e3cb32ed18b2dd3ab44; SSE run
+  9c9cbc2a0cc541d983f1235d9805d7dc. Each three original SDK calls/two native
+  fixture reads/two verified replay continuations. Actual backend waiting
+  restart before effects and compression28→6 preserve pending IDs/raw results.
+  WSL caller is Linux; native client is Windows, not a Linux Hermes claim.
+- Actual WSL backend/frontend images
+  sha256:8b8d3dff39e04a1c6bd9be9741d5e45adf728e0b41a736aca8470e4df3d2c7a2 /
+  sha256:7317138d495e0e9ce09b9da252e12886cb11c541a20e3b5c4d1ef1fd822aac43.
+  Diamond1.534s/queue0.005343 versus sequential1.510s/queue0.005594, three calls
+  each; no universal speed promise. Scoped down(no-v)0, own containers/network
+  removed, volume retained; failed initial81cd29e6 remains attributed separately.
+- Full native/container proof is versioned as live-windows-compose.json,
+  live-windows-hermes.json, live-wsl-compose.json, live-wsl-hermes.json and
+  wsl-client-guard.json. Windows report copied read-only from its own retained
+  fixture volume using existing immutable image, pull never/network none/
+  read-only/cap-drop/auto-removed container; no user volume access.
+- Root status/evidence-only documentation consolidation exact six files:
+  README.md, docs/runbook.md, docs/hermes-compatibility.md, docs/verification.md,
+  docs/api.md, docs/dependencies.md. Correct stale live/G1 pending claims while
+  preserving historical failures, required review gates and immutable profile.
+  No contract/source/lock edit under exhausted G1/G2; review.md stays exclusively
+  reviewer-authored. completion.md records commands/proofs/blockers/deviations.
+- All requested agents terminal completed/errored; no required worker active.
+  G0/G4 independent PASS2/3; G1/G2 BLOCKED3/3; G3 re-review OPEN1/3; G5/G6 review
+  OPEN0/3. User disposition required for exhausted groups; no fourth/reset/
+  artificial split or generic-model replacement. Whole acceptance incomplete.
+
+- Final coordinator artifact/source audit exit0:10 UTF8/whitespace files,34
+  existing local links, exact current backend source equality in both live
+  reports, four native JSON/SSE cases,11 requirement IDs/16 acceptance IDs/
+  seven unchanged group counters. Fresh final-residue-audit.json read-only
+  queries all exit0/empty for three exact own projects' containers/networks,
+  localhost8000/8080/5173 and final WSL smoke process. Retained volumes and
+  unrelated resources preserved. git diff --check0; no remaining required
+  worker active. Root versioning scope is durable artifacts/evidence only.
