@@ -401,3 +401,22 @@
   data, graceful stop/copy/separate restore/integrity/permissions/readiness/
   graphhash/history/residue evidence; originals/backups/restored copies retained.
   No push/cloud/remoteCI/modeldownload/globalinstall or repeated live effects.
+
+
+## G1 authorized recovery PASS; reserve G3 cycle2
+
+- Existing review_g1_c3 terminal G1cycle4 PASS, zero findings; independently
+  executed test-contract228Python7.87s/ninefrontend, lint49/drift/strictTS,
+  five runtime finish-reason seams0, actual native/WSL wrapper exit7/path/env/
+  missinggate probes0, exact30-lock-record/22production-closure/audit0. Root
+  read authoritative append and verified all25 current recorded SHA256s.
+  Reviewer's first missingMake shell-exit assumption failure is preserved,
+  not a product edit. G1 historical cycle3 still consumed/noverdict; scoped
+  one-extra exception4/4 now PASS. Post-verdict docs status still to reconcile.
+- DevOps backupdrill still active; no wave completion claimed. G3 review is
+  independently ready with nowG1PASS and existing complete current-source
+  Windows/WSL public/native proof. Reserve G3cycle2/3 BEFORE same custom
+  reviewer session resumes, sole review.md ownership transferred afterG1
+  positive terminal/source audit. Same17 read-only original G3 files, no
+  analysts/product/live writes, no G2 defect reassignment. Root waits all
+  outstanding requested results before recovery-wave consolidation.

@@ -8,9 +8,9 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
-| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | Authorized quota-recovery review attempt 4 in progress | 4/4 (one explicit user exception) |
+| G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
 | G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | F1/F2 correction delivered; Windows/WSL live PASS; independent re-review OPEN | 1/3 |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | Independent cycle2 re-review running; current Windows/WSL live proof delivered | 2/3 |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
@@ -267,3 +267,26 @@ fix/fifth attempt. G2 remains BLOCKED3/3, engine frozen at b8ff723dea5338d3c56d8
 G3 re-review remains next within unchanged1/3 budget; G5 initial independent
 review0/3 follows coherent delivery evidence. G6 requires G2–G5 and remains
 held on the known G2 terminal blocker, not renamed or consumed prematurely.
+
+
+## G1 result harvested; independent G3 recovery review
+
+G1 cycle4 customreviewer terminal PASS/zero findings; root read full section,
+verified all25 recorded current source hashes, latest test-contract228+9/lint/
+five targeted runtime/wrapper/pin/evidence probes all0. Historical cycle3
+quota failure preserved; current cap4 exception exhausted with PASS, no reset.
+Whole recovery wave remains pending DevOps and following requested G3 result;
+this is individual result harvesting, not premature wave completion.
+
+- [-] [review] Existing review-agent review_g1_c3 reused as the unique sole
+  synthesizer for G3-proxy cycle2/3, reserved BEFORE resume; no analysts.
+  Writable review.md appendONLY; exact17 G3 files read-only from original
+  review_g3_c1 handoff. Independently verify corrected strict UTF8 SSE framing/
+  normalized JSON encoding F1/F2 and complete current API/bridge semantics,
+  required production native/direct gates through source-matched Windows/WSL
+  proof. Fresh focused277/provider109/contract/drift/configuredRuff or necessary
+  targeted adversarial cases; no listeners/inference/tools/containers/source
+  edits. OriginalG3cycle1 FAIL remains history, current counter2/3. G1PASS4/4;
+  G2F5BLOCKED3/3 separate/frozen. DevOps four docs/newignored backup fixtures
+  active on disjoint writes; root waits all requested results before final
+  wave consolidation. No other review.md writer.

@@ -1517,3 +1517,215 @@ G2-runtime remains separately **BLOCKED at 3/3** for its terminal F5 Draft 3 ref
 Reason: empirically reproduced F1/F2 violate required Unicode text preservation and upstream error contracts; required real production G3 acceptance evidence also remains pending.
 
 Counts: Critical 0, Severe 0, High 0, Medium 2, Low 0, Warning 0, Suggestion 0; required live acceptance gates are separately open rather than assigned invented defect severity. G3 consumed 1/3 cycles. Root may schedule one scoped G3 fix wave and affected checks before its next independent cycle; exhausted G2 is unchanged. Reviewer performed no product edits, commits, pushes, deployment, listeners or live inference/tool calls and releases sole review.md ownership at this terminal handoff.
+
+## Task Group G1-contracts - Cycle 4 - 2026-10-04
+
+Reviewing: final Wave 1 contract/bootstrap reconciliation after consumer integration.
+Independent sole synthesizer: existing custom `review_g1_c3`; no analysts requested or missing.
+This is the **one explicit user-authorized quota-recovery attempt**, reserved in
+`cfa1214` before resumption. Historical cycle 3 consumed its attempt and failed
+to return a verdict because of the account limit; its partial evidence is not
+a PASS. The human authorization raises only G1's cap to four. No counter is
+reset, and no automatic fifth attempt is authorized. G2 remains separately
+BLOCKED at 3/3. The exact 25 read-only files are the original G1 scope excluding
+`main.py`, whose ownership was transferred to API integration. New untracked
+product files were inspected directly; an empty Git diff was not treated as
+an empty implementation. Only this review record is authored by this reviewer.
+
+### Critical / Severe / High
+
+None. Prior **G1-C1-F1 remains closed**: `backend/app/contracts/api.py:55`
+preserves optional tool-result `name`. Fresh Python and generated-schema/Ajv
+tests validate all three authoritative pinned Hermes requests without deleting
+fields or changing history, tool schemas, raw arguments or result strings.
+Unknown client semantics remain rejected. Evidence class: empirically confirmed
+DTO/schema behavior against recorded real-client requests, not fresh inference.
+
+### Medium / Low / Warning
+
+None in the assigned G1 scope. Prior **G1-C1-F2 remains closed**:
+`backend/app/contracts/api.py:181` validates the private upstream DTO before
+removing the explicitly declared metadata. All five pinned wire responses
+preserve semantic fields; malformed or unknown metadata remains rejected.
+The additive string/null `reasoning` field at `api.py:212` is excluded from
+serialization and repr; public assistant/client DTOs still reject it. The
+provider's distinct UTF-8 wire correction belongs to G3 and is not assigned a
+G1 verdict here. Evidence class: empirically confirmed pure boundary and
+current provider contract tests; independent G3 review remains separate.
+
+### Suggestion
+
+None. Post-verdict consolidation should replace the historical quota-blocked
+G1 status text in `docs/api.md` and `docs/dependencies.md` with this outcome,
+while retaining cycle 3's consumed/no-verdict history and all other blockers.
+Those status paragraphs are not themselves an independent verdict.
+
+### Spec Alignment
+
+Reviewed the authoritative specification, AGENTS.md, installed spec-workflow
+and review-cycle instructions, durable requirements/spec/design/tasks/decisions,
+acceptance/completion records, prior G1 findings and later cross-group history.
+A fresh executable text comparison confirms root sections 2, 3-8, 10, 9 and
+11 are preserved in their respective durable artifacts. R01-R11, A01-A16,
+G0-G6 and the accepted compatibility profile are unchanged.
+
+The added `ActivationRecord.finish_reason` at
+`backend/app/contracts/interfaces.py:215` preserves stop/tool_calls/length,
+defaults to None for older/non-provider records, and rejects unknown values.
+Fresh checkpoint round-trip tests cover the additive field; five targeted
+actual runtime/SQLite tests confirm final length, final client settings and
+formatted string preservation through the durable frontier. This does not
+prove the separately failing Draft 3 controller embedding behavior.
+
+Strict graph/API/config/error shapes, mandatory null-capable feedback seeds,
+safe IDs, one-provider/all-input interfaces, loop-local activation identity,
+immutable snapshot/hash/context/policy, durable response-sequence/claim
+association, quiescent tool exposure and single shared admission/provider
+boundaries remain consistent with frozen consumer contracts. Their full
+operational semantics are owned by G2/G3/G5/G6, not proven by Protocols alone.
+
+### Cross-Slice Consistency
+
+Generated JSON Schema and TypeScript match current Python DTOs exactly.
+The drift test generates into a temporary directory, deliberately alters an
+output, and requires nonzero detection; it does not merely compare two copies
+of a fixture. Both strict TypeScript projects pass with library checks enabled.
+`frontend/vite.config.ts:5` restricts Vitest to source tests and excludes E2E;
+the separate Playwright target remains intact. This review did not rerun UI
+listeners or browser scenarios. G4's 98 graph/21 frontend/six browser evidence
+and the provider owner's full 587 backend cases are attributed prior evidence.
+
+All eight direct Python pins and eleven frontend pins match their locks and
+installed isolated packages. Every external Python artifact has its pinned
+PyPI source/hash; npm packages have exact resolved versions, registry URLs and
+integrity entries. The 30 external Python records retain canonical SHA256
+`673f02608ef1a1584b9c68a7f8502e2e578d6cb06f007c94b9309f0cd559c54e`.
+`jsonschema==4.26.0` is a production dependency at
+`backend/pyproject.toml:11`, with a 22-package production closure; it imports
+in the locked Python 3.11.15 environment. Promotion did not update a version,
+URL or artifact hash. No extra package manager, cache, executor or effectful
+retry was introduced.
+
+Current G1 source inventory, read immediately before synthesis (SHA256):
+
+| File | SHA256 |
+| --- | --- |
+| backend/app/__init__.py | 6609cbe4d78dd2651b7f35c13173a05049a7019bf138b81903e6e68e083755d4 |
+| backend/app/contracts/__init__.py | 786ff542c562452f866620f8e5070db2aee68732e34581d74430ad63319f8106 |
+| backend/app/contracts/graph.py | 5689267856ca5fef107054066e2995356ff7d2093203849d9209f0e64e6c4e4b |
+| backend/app/contracts/api.py | 19fb6fc72ef296dda1387d78ab82859982ff69029d470492721327e1c48718fc |
+| backend/app/contracts/config.py | bd4cad3e08c46bdf4c80d0e58b09c0148d5e509f51dbe500ed3f5a328c797f17 |
+| backend/app/contracts/errors.py | 09c56e897d4d2887a9dffb79ec7e32601cdeff423fd80b0390ccce5a105b4841 |
+| backend/app/contracts/interfaces.py | 9a5d59c2a85f02e28ae72059c26cd7b39d97e9e03c0fc69aa7a304343834d902 |
+| backend/pyproject.toml | 131dfaccd1d5a32136f19a3751a792f3838e57f114e04f7882b11a4175471acd |
+| backend/uv.lock | 431c899b24fb68a2c5189dac324ef48ea63c690926d8934a1e54cb3bc84e1b07 |
+| backend/.python-version | db82937e1f1830581a9553c7814f5c5fcacb6dfdef8310b43e9a812c887acaf5 |
+| backend/tests/contracts/test_contracts.py | a3a84123d45266b44136a64f4517ec8cfe0e249c3d91ca7db00b19153241b4dd |
+| frontend/package.json | 49381b49d7bfafcc1e9ff7be807d1e3267eebe1a938a3b7429b3b99b819090fd |
+| frontend/package-lock.json | 229187d9a35f662a2b508510c72736286fa555fa747de20fc5d68bb83f341242 |
+| frontend/tsconfig.json | 6ce4f15f5c94a4d25ac9365d6591eaabbdd41ada164641ff344f18dd69546085 |
+| frontend/tsconfig.node.json | 8fc459036d3dd6cd26549ed893fd92257ec59a636bd363561b5c76cce50289f6 |
+| frontend/vite.config.ts | 106ac622a9d1d64d1c7ec93107007afc1fd496b523d154f0dd83edb717e3cca1 |
+| frontend/index.html | bb93b9a88ec07882fb8f2a2a0c7438a9dce95d085463783e304bfcaedca1b10c |
+| frontend/src/contracts/generated.ts | 082535df6f312d20edcf449071d948d3c63d80689a6020934a9b127b9066651f |
+| frontend/src/contracts/schema.json | d571712d96513938f52ec74f57d455e7315483b1f55abecaf1617d9d6b9a9763 |
+| frontend/src/contracts/contracts.test.ts | 8d8252a11b577e9cbfe6485e7181e7b6190f00643a55570f47cd644ecff961c5 |
+| scripts/export_contracts.py | e2f124ca6fa48ffe2a898d197c24df4818a2e6fb09a7aafb73bb9cdf3cfcb43b |
+| scripts/dev.py | e8d87d001e71f30b9379088d2fc574304cb3164946a0730edb83c622d91bab1c |
+| Makefile | 30d90e469dc3a0aa5fae4521727fce85d4616588921a5210822299a46d406df2 |
+| docs/api.md | c783d4e78f74c9f35164ecddb4ef2d84422acaa95db4f39b90359d9648e7c165 |
+| docs/dependencies.md | 785ee66e52e4187909bf515138096249c05fd2b663e59be4aa8620c58b1e03d6 |
+
+### Security And Operations
+
+Configuration defaults retain global inference 2, active 4, queue 20, separate
+300/1800/1800-second budgets, 100 executions, 20 exposed batches and 30-day
+retention. Strict positive limits, one-worker guard, credential-free /v1 URL,
+secret exclusion and domain-separated caller namespace remain tested. No token
+value was read; wrapper probes used only a synthetic token. Public schema
+generation excludes private upstream metadata and settings secrets.
+
+The wrapper at `scripts/dev.py:111` uses argument arrays, forward-slash Windows
+paths, child-only allowlisted WSLENV forwarding and controlled path conversion.
+Independent actual wslpath conversion includes a path with spaces and a
+semicolon-separated COMPOSE_FILE list. A capture of final invocation proves
+argv preservation and parent-environment immutability without running the smoke
+helper. Actual native Python and WSL Python subprocesses exiting 7 propagate
+exactly through `execute` at line 35. Missing file/test gates fail with 2.
+No listeners, Docker resources, native Hermes, live inference, tools, installs,
+global settings, commits, pushes or deployment were executed by this review.
+
+### Verification And Test Adequacy
+
+Fresh executions after the explicit cycle 4 authorization, from repository root:
+
+| Exact command / probe | Terminal exit | Outcome |
+| --- | ---: | --- |
+| `python scripts/dev.py test-contract` | 0 | Generated drift; 228 Python tests in 7.87s; nine frontend cases in 330ms |
+| `python scripts/dev.py lint` | 0 | Repository-config Ruff check; 49 files format-clean; generated drift; both strict TypeScript projects |
+| `uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_scheduler.py -q -k 'final_length_and_client_settings or ordinary_final_formatted_content'` | 0 | Five passed, 51 deselected, 0.90s; actual runtime/SQLite with deterministic fake provider |
+| `uv --system-certs run --project backend --locked python -c $cgAudit` | 0 | Eight Python/eleven frontend pins and installed versions, all lock artifact records, production closure, schema meta-validation, both live backend source inventories |
+| `uv --system-certs run --project backend --locked python -c $cgWrapperProbe` | 0 | Actual wslpath plus controlled final argv/env capture, native and WSL child exit7 propagation, absent-file/test exit2; native/WSL GNU Make unavailable |
+| `uv --system-certs run --project backend --locked python -c $cgEvidence` | 0 | Preserved authoritative sections, external-record canonical hash, live JSON parsing, WSL daemon guard consistency, local API/dependency documentation links |
+| `python -c $cgLive` and `python -c $cgHashes` | 0 | Read-only four-case live evidence inspection and 25-file current SHA256 inventory |
+| `git diff --check` | 0 | Whitespace check only; untracked product files inspected separately |
+
+The audit probes are literal PowerShell here-string variables passed by `-c`,
+not stdin. `$cgAudit` parses both complete locks, compares direct requirements
+to lock/installed versions, traverses production dependency names, checks every
+artifact source/hash/integrity, validates the generated schema and compares
+every recorded Windows/WSL backend source hash with current disk.
+`$cgEvidence` compares authoritative root sections to the extracted artifacts
+and recomputes the stated 30-record canonical hash using sorted compact JSON.
+No network lookup or dependency resolution is substituted for local evidence.
+
+The wrapper probe's first attempt exited 1 because the reviewer asserted that
+`sh -c 'command -v make'` would return 1 when Make is absent; this shell returned
+127. Earlier path/argv/env/exit7/missing-gate assertions had passed. Correcting
+only that reviewer availability query to the documented Bash shell produced
+the expected absent-Make exit1 and whole-probe exit0. This was a reviewer probe
+assumption, not a product change or hidden failing product check. The historical
+cycle3 checks remain partial prior evidence; they were rerun above. The older
+unassigned Windows native full-suite exception remains undiagnosed by these
+passing focused checks.
+
+Make itself is unavailable on native Windows and this Ubuntu installation;
+no GNU Make execution is claimed or installation performed. The inspected
+Makefile delegates to the identical Python wrapper targets executed above.
+The closest safe executable equivalent demonstrates those pinned gates and
+their failure behavior. CI invokes those same Python targets directly; no
+remote GitHub CI run is claimed. Separate build/E2E/full-suite evidence is
+attributed to its owners/reviewers rather than rerun unnecessarily here.
+
+### Open Live Validation
+
+No required G1 contract/bootstrap evidence remains missing. Current versioned
+`live-windows-compose.json` and `live-wsl-compose.json` contain backend source
+inventories matching all nine current recorded files, including contracts,
+provider and frozen G2 engine. Their production jsonschema pin matches 4.26.0.
+Both corresponding Hermes reports record JSON and SSE cases, each three
+original SDK calls/two native reads/two verified continuations and 3/5/2
+node/attempt/tool-round counters. JSON cases record actual waiting-backend
+restart before tool effects and real compression 28 to 6 with unchanged IDs
+and results. WSL explicitly uses the Windows-native client via interoperability;
+the guard records equal daemon identities. These are inspected, source-matched
+**attributed G5/G6 live results**, not this reviewer's fresh live execution or
+an independent delivery/integration verdict.
+
+G3's corrected provider re-review and G5/G6 independent gates remain separate.
+The concurrent delivery owner's backup/restore drill is not claimed complete
+by this report. Remote CI is unexecuted. Most importantly, G2 F5 remains a
+required failed schema-preservation gate at exhausted 3/3, with engine SHA256
+`b8ff723dea5338d3c56d88413e89936e81c105c46991ae914517dbbd049d2cd6` unchanged.
+This review neither fixes nor reclassifies that accepted Draft 3 defect and
+does not authorize any G2 budget exception. Whole-MVP completion remains blocked.
+
+### Verdict: PASS
+
+G1-contracts passes this single user-authorized fourth attempt: both historical
+findings remain closed, current additive contracts and required G1 checks are
+demonstrated, and no requested analyst evidence is missing. Counts: Critical 0,
+Severe 0, High 0, Medium 0, Low 0, Warning 0, Suggestion 0. G1 has consumed four
+attempts under its explicit cap-four exception; cycle3's no-verdict history is
+preserved. This is a scoped G1 verdict, not MVP acceptance. The reviewer releases
+sole review.md ownership at this terminal handoff.

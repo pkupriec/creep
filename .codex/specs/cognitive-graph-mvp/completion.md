@@ -194,3 +194,15 @@ no containers/networks for either successful smoke or failed initial WSL
 project, no localhost8000/8080/5173 listeners or owned final smoke process.
 Volumes remain retained; unrelated resources are preserved. Agent inventory
 confirmed only root active, with all requested workers completed/errored.
+
+## Usage recovery in progress — supersedes quota status above
+
+The user reported refreshed account usage and explicitly authorized one
+additional G1 review attempt only. Historical attempts1–3 remain consumed;
+G1 cycle4 is a bounded user exception now running, with no automatic fifth
+attempt or fix if non-PASS. G2 F5 remains BLOCKED3/3 and runtime unchanged.
+Original custom reviewer and DevOps sessions resumed; model matrix preserved.
+DevOps closes the independent backup/restore drill on new isolated test data.
+G3 re-review/G5 initial review follow serialized review-file ownership; G6
+remains held by its required G2 dependency. No new verdict is yet claimed.
+Reservation and exact ownership are in tasks.md/decisions.md at cfa1214.
