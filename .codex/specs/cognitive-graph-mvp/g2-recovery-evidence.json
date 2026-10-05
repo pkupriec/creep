@@ -1,0 +1,22 @@
+{
+  "group": "G2-runtime",
+  "date": "2026-10-05",
+  "status": "correction_verified_independent_review_pending",
+  "owner": "coding_g2_medium",
+  "execution": "generic instance using installed coding-agent instructions, gpt-6.1-sol medium, explicit user override",
+  "changed_files": ["backend/app/runtime/engine.py", "backend/tests/runtime/test_loops.py"],
+  "source_sha256": {
+    "backend/app/runtime/engine.py": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
+    "backend/tests/runtime/test_loops.py": "f574690ba105d27ae700ab1602a46b75433e6bc72ab20944cf3c9dc3db3f0f5f"
+  },
+  "verification": [
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -k draft3_controller_schema_alternatives -q --tb=line", "phase": "before engine edit", "exit_code": 1, "result": "8 failed, 6 passed, 119 deselected"},
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -k draft3_controller_schema_alternatives -q --tb=short", "phase": "after correction", "exit_code": 0, "result": "14 passed, 119 deselected"},
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime -q", "exit_code": 0, "result": "219 passed in 22.35s"},
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q", "exit_code": 0, "result": "612 passed in 40.31s"},
+    {"command": "uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/runtime/engine.py backend/tests/runtime/test_loops.py backend/tests/runtime/test_scheduler.py backend/tests/runtime/test_recovery.py", "exit_code": 0, "result": "All checks passed"},
+    {"command": "uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml backend/app/runtime/engine.py backend/tests/runtime/test_loops.py backend/tests/runtime/test_scheduler.py backend/tests/runtime/test_recovery.py", "exit_code": 0, "result": "4 files already formatted"}
+  ],
+  "historical_fixture_diagnostics": "Initial 16 failures included tuple/list assertion error; corrected 10 failures included two original-schema failures from pinned referencing nested single-extends crawling. Two invalid reproduction fixtures excluded before definitive fail-first; valid single-extends, literals and scope cases remain covered. Accepted profile unchanged.",
+  "live_gate": "Prior Windows/WSL images do not prove changed engine bytes; current-engine production reconciliation remains open."
+}

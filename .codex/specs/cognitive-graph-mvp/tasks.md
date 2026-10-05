@@ -435,3 +435,27 @@ are not reconfigured. These executions are not claimed as custom-role spawns.
   correction/source/image/live evidence are read-only. Reprove F1/F2/F3 and
   assigned acceptance via pinned focused, contract and lint checks; no product
   edits, listeners or inference/tool effects. Root waits for both workers.
+
+## 2026-10-05 — Recovery wave harvested; G2 attempt4 reserved
+
+Both requested medium agents returned terminal results. G3 attempt5 independent
+PASS with zero findings; reviewer freshly ran focused283, contract231+9/drift,
+Ruff17, inventory/health ASGI and AST/live-source audits. Root read the full
+review append. G3 review ownership is released; earlier attempts remain consumed.
+
+G2 coding owner changed only engine.py and test_loops.py. Definitive F5
+fail-first8failed/6passed exit1; corrected14passed exit0; runtime219 and full
+backend612 passed; Ruff4 check/format exit0. Root verified new engine SHA
+7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f and
+test_loops SHA f574690ba105d27ae700ab1602a46b75433e6bc72ab20944cf3c9dc3db3f0f5f.
+Earlier reproduction fixture mistakes are preserved in g2-recovery-evidence.json.
+No independent G2 PASS or current-engine live image claim is made yet.
+
+- [-] [review] Reserve `review_g2_medium` as sole G2-runtime synthesizer
+  attempt4 (one explicit user exception) before spawn. Writable review.md
+  append only; read-only original twelve runtime/storage files plus current
+  two-file F5 delta and evidence. Reprove accepted Draft3 schema locations,
+  original-good/original-bad emitted requests, scheduler/SQLite/replay/policy
+  invariance, prior F1–F4 closure; locked runtime/full backend/contracts/lint
+  as appropriate. No product edits or effects. G3 PASS5/5 is separate. Root
+  waits the final verdict; no automatic attempt5 or new fix wave.

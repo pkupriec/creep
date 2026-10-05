@@ -544,3 +544,19 @@ role execution or alter configured profiles. Prior quota failures remain
 consumed. G3 attempt5 is reserved before launch (second explicit exception);
 G2 correction precedes any reserved fourth independent review. Exact disjoint
 scopes are recorded in tasks.md. No new automatic retry budget is created.
+
+Fresh read-only `docker --context desktop-linux image inspect
+cg-g3-backend-current:20261004 --format '{{.Id}}'` exits0 and confirms image
+sha256:e7c64ea53ed76dd3418c8ce32c3748be569a2113a4138aaa01d8133fd224f339.
+The earlier decisions prose and g3-fix-evidence.json omitted one `8`; the
+dedicated g3-current-image-evidence.json already recorded the correct ID.
+Correct the derivative JSON transcription; retain this historical discrepancy.
+
+Both requested medium agents returned. G3 reviewer attempt5 PASS/zero findings
+is harvested after reading its full append and verification. G2 two-file
+correction passes runtime219/full612/Ruff and closes its reproduced F5 cases
+locally; its independent verdict remains open. Reserve G2 review attempt4
+before spawn under the current user's explicit retry, without resetting its
+three historical reviews. One medium Astra synthesizer owns review.md after
+positive G3 terminal ownership release. Live evidence from older images is
+not reattributed to corrected engine bytes.

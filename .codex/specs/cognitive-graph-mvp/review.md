@@ -1972,3 +1972,95 @@ may precede its terminal third cycle; no automatic fourth is available. G1's
 exception and G2's blocker are unchanged. This reviewer made no product edits,
 commits, pushes, listener/Docker actions or live inference/tool calls, and
 releases sole review.md ownership at this terminal handoff.
+
+## Task Group G3-proxy — Attempt 5 (explicit user exception) — 2026-10-05
+
+Reviewing: terminal targeted F1/F2/F3 verification and G3 provider/bridge/API acceptance. Sole independent synthesizer: review_g3_medium, generic instance consuming installed review-agent and team-review-cycle instructions, Astra/medium as explicitly requested. No analysts were requested; no analyst evidence is missing. Only this review append is writable.
+
+The original cycles 1 and 2 FAIL, cycle 3 quota failure, and user-exception attempt 4 quota failure remain consumed. This is the separately authorized fifth attempt reserved in tasks.md and decisions.md, not a reset or automatic extra cycle. The G2 coding peer owns engine.py and three runtime tests; this review issues no G2 verdict.
+
+### Critical / Severe / High
+
+None.
+
+### Medium / Low / Warning
+
+None in the assigned G3 slice. The initially observed image-ID transcription discrepancy in g3-fix-evidence.json was re-read immediately before synthesis: line 56 now agrees with g3-current-image-evidence.json at `sha256:e7c64ea53ed76dd3418c8ce32c3748be569a2113a4138aaa01d8133fd224f339`. The coordinator also supplied a fresh read-only image-inspect confirmation. This reviewer did not edit that artifact or treat the earlier typo as executable image evidence.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Reviewed the root requirements and relevant durable specification, design, task/decision reservations, acceptance/completion ledgers and prior G3 findings. R01–R11, A01–A16, the accepted profile and exact group boundaries remain unchanged.
+
+- **G3-C1-F1 closed, empirically confirmed.** `backend/app/providers/sse.py:147` implements strict incremental UTF-8 and only CR/LF/CRLF delimiters. Current `backend/tests/providers/test_sse.py:372` exercises literal U+0085/U+2028/U+2029, multibyte/supplementary text and one-byte fragmentation with each delimiter. Raw tool argument fragments remain exact. Malformed/truncated byte and escaped-surrogate cases exercise the actual adapter and ASGI route before and after stream start, asserting early 502 or late error event, no fabricated finish/DONE/replacement character, closed upstream and released semaphore/admission permits. Line/event bounds stop oversized input consumption.
+- **G3-C1-F2 closed, empirically confirmed.** `backend/app/providers/ollama.py:74` encodes the complete normalized completion inside the sanitizing provider boundary. `backend/tests/providers/test_ollama.py:311` covers high/low invalid scalars in IDs, model, content, name, text parts, tool IDs/names and raw argument strings; composed HTTP cases at line 328 assert upstream502 rather than storage500. Valid supplementary pairs and original raw argument strings survive.
+- **G3-C2-F3 closed, empirically confirmed.** `backend/app/providers/ollama.py:161` checks each inventory ID before it escapes the boundary. Provider regressions at `backend/tests/providers/test_ollama.py:168` and composed API regressions at `backend/tests/api/test_chat.py:135` demonstrate high/low rejection and supplementary-ID exact round-trip. An additional independent in-process ASGI probe below confirms route/health behavior together: valid200/healthy, high502/unhealthy, low502/unhealthy; sanitized upstream_error, exact valid namespace, two inventory calls per case, no inference, no run history or leaked admission/semaphore permits.
+
+Fresh focused execution also covers physical/virtual namespace routing and draft hiding, unknown model404 without substitution, full client history/tools/raw arguments, JSON/SSE tool indices/finish/DONE, final-only payloads, opaque owner IDs/internal collisions, latest-segment/namespace routing, conservative one-call exposure, partial/full results, immutable policy, exact first-next replay and changed-result conflict. Deadline tests use explicit barriers: an accepted waiting request gets504 at its original deadline; a new submission after saved failure gets409 without mutation or inference. No assertion merely accepts either code.
+
+### Cross-Slice Consistency
+
+G3 consumes the shared G1 contracts and one runtime/admission/provider composition. The bridge checkpoints/classifies/accepts/results without executing tools. Actual HTTP/SQLite mocked-upstream tests exercise these seams, including recovery, cancellation, disconnect and shared graph/direct bounds. Generated contracts match and nine frontend contract checks pass.
+
+A fresh AST/hash audit verified all eight provider methods other than models() and the surrounding module against g3-inventory-baseline.json. The current provider delta from the live-smoked `660797ab...` source is limited to inventory validation. All three hashes in g3-fix-evidence.json and g3-current-image-evidence.json match disk. The remaining recorded G3 transport/bridge/composition and shared-contract hashes match the prior Windows/WSL reports. The peer-owned G2 engine hash now differs from the historical `b8ff723d...` source; this is explicitly excluded from any claim that those images represent the entire current tree. Its correction and current-image/live reconciliation belong to G2/G6 consolidation.
+
+Current assigned source/test SHA256 inventory:
+
+| File | SHA256 |
+| --- | --- |
+| backend/app/providers/__init__.py | e8a4d6f7785a5a3f54c0ab14bacb30163a33216b29ff7dfb7010aeace5b4d870 |
+| backend/app/providers/ollama.py | f58033ca681cdb84d53a83208c1095c1bee4c9775e5f0674aeea18c9cb3b174b |
+| backend/app/providers/sse.py | 99b8128918baca052f969f897e9049ced87128766cc66a3afd5ec7a8c69ece75 |
+| backend/app/tools/__init__.py | 0a6a8bbdf4d8709478d05086c1d44f8b8ccea91931db21776d5b766724438cf1 |
+| backend/app/tools/bridge.py | c21d821ebfa1309778278d3b0aaa0d51f7a44488386f1b4d01d4d22f8206dfe1 |
+| backend/tests/providers/test_ollama.py | 802b1a6e1ad0d37405c29eddf78929924e429165fe5e994a3dec2a4bbb43e420 |
+| backend/tests/providers/test_sse.py | 69272cff09b7adc0a8ee53bf9f3a254ec4c9eb233b8868e6e3b394e8346cfa2d |
+| backend/tests/tools/test_bridge.py | f381916461ab671b7a770fe110e7103deb88a7824df777fbd03a0ac47ecaeb82 |
+| backend/app/api/chat.py | b68226b543b52fd5d2e68df634d68d64bc304c08a9d7cf63acebdae6ea68f058 |
+| backend/app/api/runs.py | 981b9aef1c3a5d274f80f71ee38aa5e1278cb1a473f0f901d6bb4758c4a71ec0 |
+| backend/app/api/models.py | 9c5c58bd01d624b041048cf799c33461a3c1fccdd1c14badfa440dc811f2c178 |
+| backend/app/api/security.py | dbfc177c776fa2cf9100418eaec087b45c295b71daa77a45d96d5f42e8b88dd2 |
+| backend/app/main.py | dae170c7cf7055c10a10eb0ecd3d1456ab19571d0e6a3538c1a9a5547e3deb83 |
+| backend/tests/api/test_chat.py | bad432727c0cb8323d0c87a9ccd2ac6f9909ee70fd6ab8d3159c33c2c96b6cfe |
+| backend/tests/api/test_runs.py | 82b792da5cf42bcf1384b3f683bc59f5911d5fde5ef0aaf5993a4d6036f1cc6e |
+| backend/tests/api/test_security.py | bf2a8df33a6320d2987fc7b4d0fae98d4fb054e95d2bdf2bcca1ed77bcc613a7 |
+| backend/tests/integration/test_acceptance.py | 13b5f35a7f6ebef0f502dc4e504a63359c228b367b624064255b636e710fe5f7 |
+
+### Security And Operations
+
+Fresh tests cover bearer protection on both API surfaces/SSE, duplicate authorization rejection, rotated caller namespaces, synthetic-token log/state exclusion and strict JSON/body/tool-result limits before effects. No secret access, product edits, listeners, containers, inference/tool effects, global installation, commits, external writes or delegation were performed by this reviewer. Temporary test state is isolated by the existing fixtures. Tools remain exclusively external to the proxy.
+
+### Verification And Test Adequacy
+
+All commands ran from D:/Sources/creep; terminal exits were inspected. The locked wrapper uses the existing backend environment and exact manifest/lock pins (pytest9.1.1, Ruff0.16.10). CI routes to the same wrapper targets. No live_probe helper was invoked.
+
+| Exact command | Exit | Fresh outcome |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 0 | 283 passed in14.32s |
+| `python scripts/dev.py test-contract` | 0 | Generated drift matches;231 backend/provider/tool checks passed7.38s;9 frontend checks passed321ms |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api/test_chat.py backend/tests/api/test_runs.py backend/tests/api/test_security.py backend/tests/integration/test_acceptance.py` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --config backend/pyproject.toml --check backend/app/providers backend/app/tools backend/app/api/chat.py backend/app/api/runs.py backend/app/api/models.py backend/app/api/security.py backend/app/main.py backend/tests/providers backend/tests/tools backend/tests/api/test_chat.py backend/tests/api/test_runs.py backend/tests/api/test_security.py backend/tests/integration/test_acceptance.py` | 0 |17 files already formatted |
+| `uv --system-certs run --project backend --locked python -c $cgG3Probe` | 0 | Independent three-case inventory/health/error/no-effect assertions;200/502/502 |
+| `python -c $cgG3Audit` | 0 | Unchanged non-inventory provider AST;current fix/image source hashes;historical live G3 source and Hermes source-pin reconciliation |
+| `python -c $cgG3Evidence` | 0 | Four native case counters/versions/source/restart/compression assertions;17-file hash inventory |
+
+The independent probe uses httpx.MockTransport containing ASCII-escaped inventory JSON, create_app's real lifespan/repository, ASGITransport(raise_app_exceptions=False), a temporary directory per case, GET /v1/models and GET /health/ready. Cases are model+U1F600, PRIVATE+UD800 and PRIVATE+UDFFF. It requires exact namespaced supplementary output, error code upstream_error and absence of PRIVATE for invalid cases, storage_ready=true, availability true/false/false, exactly two /v1/models upstream paths, semaphore value2, empty admission leases and zero /api/runs history. Thus it cannot pass merely because the same expected exception bypasses public serialization.
+
+The AST audit hashes ast.dump nodes without location attributes using SHA256, checks every non-models method against method_ast_sha256, removes only models() and checks module_ast_without_models_sha256. The live audit asserts each native case has3 SDK calls/2 tool executions/2 verified continuations and counts3/5/2; nineteen source matches and exact Hermes0.18.2/OpenAI2.24.0/httpx0.28.1; JSON selects synthesis, changes backend PID/start time before any effect with unchanged counts, compresses28 to6 while preserving pending IDs/results. Both platform reports were parsed, not inferred from filenames.
+
+Full backend593 and previous full UI/lint/build/live runs remain attributed historical evidence. They are not claimed as this review's fresh results. The scoped current checks satisfy this handoff; a concurrent full-suite run against G2 fail-first edits was intentionally avoided. Whole-tree CI and the G2 corrected-state evidence remain the coordinator's separate consolidation responsibility.
+
+### Open Live Validation
+
+No unclosed live gate remains **for the assigned G3 correction/slice**. The four live-windows/live-wsl compose/Hermes JSON reports provide attributed production proof for the unchanged completion/SSE/bridge/API paths: seven direct JSON/SSE/multiturn/native-tool/manual-result exchanges per platform, unknown404, Nginx streaming, actual waiting-ID backend restart, original native SDK/executor calls, compression and exact replay. Hermes source pin is caed552de1c8a8f9983bc555512412a1ac0e0a9e; external Ollama0.33.3/gemma4:12b. WSL explicitly invokes the Windows-native Hermes client via interop; no Linux-native Hermes execution is claimed.
+
+The inventory-only provider delta has separate current-source image evidence in g3-current-image-evidence.json: Windows and WSL callers, strict supplementary/high/low cases and health, zero inference/tools/leaks, image e7c64ea53ed76dd3418c8ce32c3748be569a2113a4138aaa01d8133fd224f339, non-root/read-only/network-none controls. This is attributed coordinator execution, not fresh reviewer Docker/live execution. The unchanged-path AST audit plus independently executed corrected boundary tests makes that scoped reconciliation adequate without re-executing external effects.
+
+The prior full images do not represent the concurrently corrected G2 engine. G2 independent review/current-runtime source reconciliation, G5/G6 independent reviews and whole-product acceptance remain separate open gates. No full-MVP completion, remote GitHub CI run, fresh real Ollama inference, fresh native tool execution or current entire-tree image PASS is asserted. The older unassigned Windows native exception remains historical residual risk rather than a newly reproduced G3 defect.
+
+### Verdict: PASS
+
+G3-proxy attempt5 PASS under the explicit user exception: F1/F2/F3 are closed, assigned required contracts/checks are demonstrated, no current blocking findings or missing requested reviewer evidence remain. Counts: Critical0, Severe0, High0, Medium0, Low0, Warning0, Suggestion0. Prior consumed attempts and FAILs remain preserved; this grants no automatic sixth review/fix budget. Changed file in this review: review.md only (append). Sole review.md ownership is released at this terminal handoff; the coordinator must still wait for the requested G2 worker before consolidating the wave.
