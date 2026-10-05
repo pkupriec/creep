@@ -560,3 +560,29 @@ before spawn under the current user's explicit retry, without resetting its
 three historical reviews. One medium Astra synthesizer owns review.md after
 positive G3 terminal ownership release. Live evidence from older images is
 not reattributed to corrected engine bytes.
+
+## 2026-10-05 — Bounded retries completed; new G2 blocker
+
+G3 attempt5 independently PASSed with zero findings. G2 attempt4 independently
+FAILed with one Medium F6: accepted modern-root/Draft3-child single-extends
+schema breaks during controller resource isolation/pinned referencing crawling.
+Original F5 is fixed. Reviewer demonstrates original-good/original-bad validity,
+public DTO acceptance, emitted-schema AttributeError, and scheduler/SQLite
+failed/upstream_error with two fake provider calls, zero success envelopes and
+unchanged policy. Exact reproducible command resides in the authoritative
+G2 attempt4 review. No accepted profile reduction or dependency change is made.
+
+Counters are G2 4 consumed / explicit cap4 and G3 5 consumed / explicit cap5;
+preserve their three original cycles plus individually authorized exceptions.
+Quota did not prevent these medium-reasoning executions. No automatic fifth
+G2 attempt or fix wave is authorized. Root status-only documentation updates
+reconcile current outcomes; old full Windows/WSL/Hermes proof remains historical
+and changed-engine production validation plus G5/G6 independent gates stay
+OPEN. This concrete F6 blocks whole-product completion.
+
+Final coordinator artifact audit exits0: eleven UTF8/whitespace documents,
+fifty existing local links, all seventeen current G3 and twelve current G2
+review source hashes, three JSON evidence/source maps verified. Git diff
+--check exits0. Documentation status-only edits preserve launch commands and
+older phase-specific history. Product files remain local; only durable spec /
+review/evidence artifacts are committed, with no push or live deployment.

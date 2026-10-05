@@ -1,7 +1,7 @@
 {
   "group": "G2-runtime",
   "date": "2026-10-05",
-  "status": "correction_verified_independent_review_pending",
+  "status": "original_F5_fixed_independent_attempt4_FAIL_new_F6",
   "owner": "coding_g2_medium",
   "execution": "generic instance using installed coding-agent instructions, gpt-6.1-sol medium, explicit user override",
   "changed_files": ["backend/app/runtime/engine.py", "backend/tests/runtime/test_loops.py"],
@@ -18,5 +18,6 @@
     {"command": "uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml backend/app/runtime/engine.py backend/tests/runtime/test_loops.py backend/tests/runtime/test_scheduler.py backend/tests/runtime/test_recovery.py", "exit_code": 0, "result": "4 files already formatted"}
   ],
   "historical_fixture_diagnostics": "Initial 16 failures included tuple/list assertion error; corrected 10 failures included two original-schema failures from pinned referencing nested single-extends crawling. Two invalid reproduction fixtures excluded before definitive fail-first; valid single-extends, literals and scope cases remain covered. Accepted profile unchanged.",
+  "review": "Independent review_g2_medium attempt4 FAIL on 2026-10-05; F5 closed, one Medium F6: valid modern-root/Draft3-child single-extends schema causes emitted-schema AttributeError, actual scheduler/SQLite failed/upstream_error, two fake calls, zero success envelopes, unchanged policy. Exact reproducer is in review.md. Fresh reviewer runtime/storage231, full612, contracts231+9 and Ruff12 passed. No automatic fifth attempt.",
   "live_gate": "Prior Windows/WSL images do not prove changed engine bytes; current-engine production reconciliation remains open."
 }

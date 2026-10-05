@@ -21,20 +21,24 @@ G0 research PASS proves only its pinned experiment, not these production gates.
 | A13 | Revision conflict leaves file unchanged; editing draft during run leaves canonical snapshot/hash unchanged; drafts absent from model list | G2, G4, G6 | OPEN required G2/G6 gates; current graph98/runtime212/API+integration49 plus six actual-backend browser scenarios verify immutable publication/snapshot, conflict no-write and draft hiding; assigned G4 portion independently PASS2/3 |
 | A14 | Deterministic timeout/upstream failure/cancel/late-result tests; fixed tool TTL, queue overflow 429, separate queue/active/wait time | G2, G3, G6 | OPEN required G2/G3/G6 gates; current deterministic provider/runtime/API tests prove fixed TTL, before-deadline waiting504 versus after-persisted-failure409, cancellation/late results/queue overflow and separate timing without extra inference or checkpoint mutation |
 | A15 | Built production Compose on Windows/WSL2: external Ollama reachability, API/UI/Hermes smoke and restart history persistence | G5, G6 | OPEN required G5/G6 independent reviews; complete current-source Windows and WSL2 production smokes terminal exit0, both digest-pinned images healthy, actual external Ollama route, API/UI, original Hermes JSON/SSE, waiting-ID restart/compression/replay and history/retained-volume recreation passed. WSL invokes Windows-native Hermes explicitly outside Compose. |
-| A16 | Strict HTTP/schema/path limits, auth namespace isolation, synthetic-token log checks, global inference/admission bounds across graph/direct jobs | G1, G2, G3, G4, G5, G6 | OPEN required cross-group gates; current backend593/focused283/contract231Python+ninefrontend/graph98/API+integration49 and six real-browser cases pass. Strict auth/namespace/size/global-admission tests and live non-root/read-only/cap-drop/loopback/proxy protection checks executed. G1 PASS4/4; G2 BLOCKED3/3; G3 BLOCKED3/3 with no terminal verdict; G5/G6 reviews remain OPEN0/3. |
+| A16 | Strict HTTP/schema/path limits, auth namespace isolation, synthetic-token log checks, global inference/admission bounds across graph/direct jobs | G1, G2, G3, G4, G5, G6 | OPEN required cross-group gates; current backend612/focused283/contract231Python+ninefrontend/graph98/API+integration49 and six real-browser cases pass. Strict auth/namespace/size/global-admission tests and live non-root/read-only/cap-drop/loopback/proxy protection checks executed. G1 PASS4/4; G2 BLOCKED4/4 on F6; G3 PASS5/5; G5/G6 reviews and current-engine production reconciliation remain OPEN. |
 
-## Latest terminal review status — 2026-10-04
+## Latest terminal review status — 2026-10-05
 
-The G3-proxy terminal cycle3/3 reviewer was resumed after the F3 correction and
-current-image Windows/WSL inventory proof, then immediately hit the positive
-account usage-limit error. No independent report or verdict was produced and
-`review.md` was not changed. G3 is terminal BLOCKED3/3 under the non-resetting
-three-cycle rule; coordinator tests and image probes remain supporting evidence
-only. G2 is separately terminal BLOCKED3/3 on F5. G5 backup/restore remains
-owner evidence without an independent review, and G6 remains held by its
-dependencies. The later user-authorized one-time recovery dispatches for G2
-implementation and G3 review also immediately hit the same quota error; no
-source change or verdict resulted.
+The user-authorized medium-reasoning retries executed successfully. G3
+attempt5 independently PASSed with zero findings. G2's original F5 correction
+is verified, but independent attempt4 FAILed on new Medium F6: a valid modern
+root / Draft3 child single-extends schema fails during emitted controller
+validation and scheduler/SQLite commits failed/upstream_error with no success
+envelope. Current full612 tests pass but miss this required valid-input case.
+G2 is BLOCKED4/4, G3 PASS5/5; prior consumed attempts and quota failures remain
+preserved. G5/G6 review gates remain OPEN0/3. Changed-engine production source
+reconciliation is OPEN; older live images do not represent current engine bytes.
+
+The table above includes historical source-scoped evidence. This latest status
+supersedes older G2 F5 / G3 pending status prose below without discarding its
+failure history. All whole-product A01–A16 remain OPEN because G2 F6 and
+G5/G6 required gates remain unclosed.
 
 ## Evidence rules
 
@@ -88,7 +92,7 @@ Owner exact `uv --system-certs run --project backend --locked pytest backend/tes
 
 Freshfull cg-smoke-win-final-20261004-5f34c9e2 terminalexit0 againstcurrentactualprovider660797ab/SSE99b812 images. AllsevenpublicJSON/SSE/multiturn/native-toolrequest+manualresult/Nginx/protection/currentstorage/historyrestart/samevolume-recreation/publication/target assertions passed. NativeoriginalHermesJSONliteralcg/synthesis andSSE each3SDKcalls/2actualguardedRead/2exactreplaycontinuations, durable3nodeexec5upstreamattempts2toolrounds. Beforefirsttool effect actualbackendPID89993→90603 atdurablewaiting_tools; originalrun6cc9ba.../pendingcg_691d.../owner/checkpoint/counters invariant andcompletedwithoriginalIDs. RealContextCompressor28→6 keptpendingID/rawresult. This is actualnativeSDK/HTTPX/executor evidence, notfakebrowser/client/adapter reconstruction. Ownteardown0/no owncontainersnetwork/volumeretained. WSLseparatefreshinteropandindependentreviews stillpending; allwholeMVPgates remainOPENbecause G2mandatoryBLOCKED3/3F5. Fullnativeproof legitimatelycloses statedWindows/Hermes liveportions ofA01/A02/A07/A08/A09/A10/A11/A15only whenconsolidatedwithfinalsource/hash evidence andreview.
 
-## Final current-source evidence and open acceptance — 2026-10-04
+## Historical current-source evidence and open acceptance — 2026-10-04
 
 - Current backend593 passed39.70s and focused283 passed15.03s, affected61
   passed3.68s; exact pinned commands and ownership appear in completion.md.

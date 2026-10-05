@@ -1,23 +1,25 @@
-# Cognitive Graph MVP completion report — 2026-10-04
+# Cognitive Graph MVP completion report — updated 2026-10-05
 
 ## Outcome
 
-The local implementation and complete corrected-source Windows/WSL2 production
-smokes are delivered. Whole-MVP acceptance is **BLOCKED**, with no completion
+The local implementation and historical Windows/WSL2 production smokes are
+delivered. The latest runtime correction has fresh deterministic verification;
+changed-engine production reconciliation remains open. Whole-MVP acceptance is
+**BLOCKED**, with no completion
 or final independent PASS claim. All R01–R11, A01–A16 and G0–G6 identifiers and
 the accepted product profile remain unchanged.
 
-- **G2-runtime BLOCKED3/3:** terminal independent FAIL F5; valid Draft3
-  schema-valued extends/type local references are omitted by controller-schema
-  embedding, causing upstream_error. Prior F1–F4 are closed. The accepted
-  schema is not reclassified as unsupported; no automatic fix/fourth review.
+- **G2-runtime BLOCKED4/4:** user-authorized medium-reasoning review attempt4
+  FAILed on new Medium F6. Original F5 is fixed. A valid Draft2020-12 root /
+  Draft3 child single-extends schema fails after controller embedding, causing
+  upstream_error. Prior F1–F5 are closed; no automatic fifth review/fix wave.
 - **G1-contracts PASS4/4:** the user-authorized additional review attempt
   produced the authoritative PASS with zero findings. The original cycle3
   quota failure remains historical evidence; no fifth attempt is allowed.
-- **G3-proxy BLOCKED3/3:** cycle1 and cycle2 findings are corrected and
-  regression-tested; the reserved terminal cycle3 reviewer immediately hit the
-  account usage limit and produced no verdict. Current image evidence does not
-  substitute for that independent gate.
+- **G3-proxy PASS5/5:** user-authorized medium Astra attempt5 independently
+  confirms F1/F2/F3 closure with zero findings. Original quota failures remain
+  recorded. Scoped historical/current inventory evidence is adequate for G3;
+  it does not prove the changed G2 engine in production.
 - **G0-research and G4-ui PASS2/3.** G5/G6 independent reviews remain OPEN0/3;
   the delivery owner’s logical backup/restore audit is evidence, not a review.
 
@@ -25,6 +27,9 @@ The installed team plugin/workflow/custom roles were verified before work, with
 16 maintained files matching installed0.1.0-creep.3 and reviewed baseline
 90b05ba04cbd49b0fb0e4f2ad7faecafad61ebb6. No reinstall/update/configuration change.
 Setup's Solhigh lead/coding/DevOps and Astrahigh review/SA matrix is preserved.
+For the explicit 2026-10-05 retry, generic instances consumed installed coding /
+review role instructions with the same Sol/Astra models and medium reasoning;
+custom roles have fixed high reasoning. No persisted team profile was changed.
 Session approval/exposed-connector mismatch was recorded; no external connector
 or automatic tool approval was enabled for this workflow.
 
@@ -109,7 +114,7 @@ All rows below inspected terminal exit0; owner/reviewer attribution is explicit.
 
 | Command | Outcome / source |
 | --- | --- |
-| `uv --system-certs run --project backend --locked pytest backend/tests -q` | 593 passed39.70s after one unrelated timing-sensitive admission assertion was rerun alone and passed |
+| `uv --system-certs run --project backend --locked pytest backend/tests -q` | 612 passed40.31s coding owner, independently612 passed39.37s G2 reviewer; F6 additional probe still fails |
 | `uv --system-certs run --project backend --locked pytest backend/tests/providers backend/tests/tools backend/tests/api backend/tests/integration/test_acceptance.py backend/tests/contracts -q` | 283 passed15.03s after the G3 F3 correction |
 | `uv --system-certs run --project backend --locked pytest backend/tests/providers/test_ollama.py backend/tests/api/test_chat.py -q` | 61 passed3.68s; strict high/low surrogate rejection and valid supplementary-ID regression coverage |
 | `python scripts/dev.py test-contract` | 231 backend/provider/tool plus nine frontend/generated drift checks, exit0 |
@@ -160,10 +165,9 @@ smokes scoped down(no-v)0, no own container/network residue, volumes retained.
 
 ## Remaining blockers, deviations and residual risk
 
-- Required G2 format preservation is BLOCKED3/3 as above; its automatic
+- Required G2 format preservation is BLOCKED4/4 on F6 as above; its automatic
   fix/review loop stops. G1 is PASS4/4 through the explicit user exception.
-- G3 terminal re-review is BLOCKED3/3 because its reviewer could not complete
-  under the account usage limit; G5/G6 initial independent reviews remain
+- G3 attempt5 independently PASSed; G5/G6 initial independent reviews remain
   OPEN0/3. Runtime/API/live successes do not substitute for those verdicts.
 - The user-authorized one-time G2 implementation and G3 review recovery
   attempts were both dispatched and immediately quota-errored. No additional
@@ -187,9 +191,26 @@ smokes scoped down(no-v)0, no own container/network residue, volumes retained.
 
 Current requirements/spec/design/tasks/decisions/acceptance/review artifacts
 are the source of truth. review.md preserves reviewer-authored verdicts only;
-no G3cycle3 verdict was fabricated after its agent failed. G1cycle4 is the
-explicit user-authorized exception and is exhausted at PASS4/4. User
-disposition is required for the exhausted G2/G3 gates.
+no G3cycle3 verdict was fabricated after its agent failed. G1cycle4 and G3
+attempt5 are explicit user-authorized exceptions, exhausted at PASS4/4 and
+PASS5/5. User disposition is required for exhausted G2 attempt4 FAIL on F6.
+
+## Latest retry evidence — 2026-10-05
+
+G2 coding owner changed only engine.py and test_loops.py; original F5 cases
+definitively reproduced8failed/6passed before the correction, then14passed.
+Runtime219/full612/Ruff4 passed. Independent G2 reviewer ran runtime/storage231,
+full612, contract231+9, drift and Ruff12 successfully, then reproduced valid
+mixed-dialect F6 through emitted requests and actual scheduler/SQLite. Original
+policy remained unchanged; run failed/upstream_error with zero response
+envelopes and two fake provider calls. Exact runnable probe is in review.md.
+
+G3 reviewer independently ran focused283, contract231+9/drift, Ruff17 and
+inventory/health/AST/live-source probes before PASS5/5. Root repository lint
+exit0 confirms Ruff49, contract drift and both TypeScript projects. Old full
+native/live evidence remains correctly attributed; no fresh real inference or
+tool execution was performed during these retries. See g2-recovery-evidence.json
+and the two new independent review sections for hashes and exact commands.
 
 ## Final evidence audit
 

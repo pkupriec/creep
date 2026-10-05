@@ -2064,3 +2064,129 @@ The prior full images do not represent the concurrently corrected G2 engine. G2 
 ### Verdict: PASS
 
 G3-proxy attempt5 PASS under the explicit user exception: F1/F2/F3 are closed, assigned required contracts/checks are demonstrated, no current blocking findings or missing requested reviewer evidence remain. Counts: Critical0, Severe0, High0, Medium0, Low0, Warning0, Suggestion0. Prior consumed attempts and FAILs remain preserved; this grants no automatic sixth review/fix budget. Changed file in this review: review.md only (append). Sole review.md ownership is released at this terminal handoff; the coordinator must still wait for the requested G2 worker before consolidating the wave.
+
+## Task Group G2-runtime - Attempt 4 (explicit user exception) - 2026-10-05
+
+Reviewing: bounded F5 recovery, original twelve-file runtime/storage scope and composed contracts/API seams. Sole independent synthesizer: review_g2_medium, generic instance consuming installed review-agent and team-review-cycle/team-spec-workflow instructions, same Astra model with explicitly requested medium reasoning. No analysts requested or missing. Only review.md append is writable.
+
+The three original cycles remain consumed. The earlier quota-failed coding exception did not spawn a fourth G2 reviewer. This fourth attempt was reserved before spawn in tasks.md/decisions.md under the user's new explicit retry; no automatic fifth attempt or further fix wave is authorized.
+
+### Critical / Severe / High
+
+None currently demonstrated. Prior High F1/F2 remain closed.
+
+### Medium / Low / Warning
+
+- **Medium F6 — resource isolation breaks a valid mixed-dialect single-extends schema.** `backend/app/runtime/engine.py:570` embeds the detached payload schema; its non-rebasing branch at `:702` adds a synthetic resource ID at `:704` for a modern root. A Draft 2020-12 root referring to definitions/Answer, which declares Draft 3 and uses single-schema extends referring to definitions/Text, is accepted by the public DTO and pinned original-schema validator: `"ok"` passes, `3` fails. The actual emitted controller schema passes check_schema but validation of the good wrapped payload raises `AttributeError: 'str' object has no attribute 'get'` in pinned referencing resource crawling. A schema-validating fake provider through the actual scheduler and temporary SQLite commits failed/upstream_error, with two provider calls, zero success envelopes/output, no pending tools and unchanged client policy. **Evidence: empirically reproduced; high confidence in pinned emitted-schema preservation failure, no native Ollama claim.** Unlike owner-excluded fixtures whose ORIGINAL schemas failed, this original schema demonstrably accepts/rejects the expected values. **Correction for user disposition:** preserve accepted mixed-dialect reference behavior during embedding, accounting for pinned single-extends crawling; add original-good/original-bad versus actual emitted-request and scheduler/SQLite/recovery regressions while preserving literals, resource boundaries and policy. Do not narrow the accepted profile or change dependency ownership. This recommendation does not authorize another automatic fix/review loop.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Consulted authoritative root specification, AGENTS.md, durable requirements/spec/design/tasks/decisions, prior G2 reviews, role/workflow instructions and g2-recovery-evidence.json. R01-R11/A01-A16 remain unchanged. G2 is the planned deterministic DAG/loops/state/recovery group; corrected production-image/live reconciliation remains separately owned by G5/G6.
+
+- **Original F5 closed for the reported homogeneous Draft 3 cases.** engine.py:657-668 now traverses single/list extends and schema alternatives in type/disallow only under inherited/declared Draft 3. Fresh runtime tests include fourteen emitted-schema/scheduler/SQLite/replay cases and five non-Draft3 literal guards. Owner fail-first8failed/6passed exit1 and corrected14 exit0 are attributed evidence, not reviewer runs. Earlier tuple/list and original-invalid fixture diagnostics remain preserved.
+- Independent eight-run probe covered single extends, extends list, type and disallow, each with valid/invalid final payloads. Original and emitted validators retained good/bad outcomes. Four good runs committed one completed JSON-string envelope; four invalid outputs committed failed/upstream_error with no envelope/output. Every run retained policy, made two fake provider calls and exposed no tools.
+- Prior F1 remains closed: failed/cancelled/interrupted states precede saved-envelope delivery; blocked delivery-waiter regressions pass. F2/native-format cases preserve exact JSON serialization, ordinary raw JSON and length, reject malformed/non-object/constraint-breaking output before success, and retain recovery/replay behavior.
+- Original F3 literal mutation and F4 empty/hash-ID cases remain covered and passing, including dual-use literals, anchors, dynamic/recursive references, escaped pointers and existing mixed resource tests. F6 is an additional interaction absent from that matrix.
+- Fresh 231 runtime/storage cases also cover concurrent diamond/all-input readiness, lexical synthesis, seeded/disjoint loops and immutable external inputs, budgets/timeouts, owner-only tool history, single exposed batch, claims/CAS, partial/replayed results, fixed TTL, cancellation/detachment, uncertain recovery and retention.
+
+Required section4.1/6.2 format preservation remains unsatisfied by F6. Its Medium severity is not escalated to obtain FAIL.
+
+### Cross-Task Consistency
+
+Runtime/storage protocols remain consistent with current shared contracts; full backend tests exercise composed API/provider/bridge seams. Twelve-file SHA audit matches cycle3 for all files except the two declared recovery edits, engine.py/test_loops.py. G3 attempt5 PASS remains separate and intact. No other source, dependency, API, UI or delivery file was edited.
+
+### Security And Operations
+
+Runtime delegates inference/tool delivery without executing tools. Storage retains dedicated single-thread SQLite ownership, WAL/foreign keys/FULL synchronization, short parameterized transactions, immutable identities and atomic response/claim sealing. Rollback, stale-frontier, identity, expiry-race and committed-event checks pass. Final validation denies remote resource retrieval and sanitizes failures. This reviewer used fake providers and temporary SQLite only; no listeners, containers, live inference/tool effects, secret access, global installs, deployments or commits. F6 is a compatibility failure, not a demonstrated security exploit.
+
+### Verification And Test Adequacy
+
+Commands ran from D:/Sources/creep. Inspected scripts/dev.py, backend/pyproject.toml and CI for pinned tooling, actual scope and failure propagation. No test was weakened.
+
+| Command | Exit | Fresh result |
+| --- | --- | --- |
+| `python scripts/dev.py test-runtime` | 0 | 231 runtime/storage passed in22.27s |
+| `python scripts/dev.py test-contract` | 0 | Generated drift clean;231 Python contract/provider/tool passed in7.00s;9 frontend contract passed |
+| `uv --system-certs run --project backend --locked pytest backend/tests -q` | 0 | 612 passed in39.37s |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage` | 0 | 12 files already formatted |
+| Locked `python -c $cgProbe`, eight-run four-keyword probe described above | 0 | Four valid completed outputs/four invalid-output failures; emitted-schema, SQLite/policy assertions pass |
+| Locked `python -c $cgDialectProbe`, exploratory dialect matrix | 1 | 03/03,03/04,04/03 passed;2020-12/03 emitted wrapper raised AttributeError; later03/2020-12 not reached or claimed passed |
+| Locked `python -c $cgMixedProbe`, exact reproduction below | 0 | Defect assertions confirmed;failed/upstream_error,zero envelopes,two fake provider calls,policy unchanged. Exit0 proves negative reproduction, not acceptance |
+
+Coordinator separately reports fresh `python scripts/dev.py lint` exit0 (Ruff,49-file format,drift,both TS projects); attributed evidence, not reviewer execution. Historical Windows native exception remains unexplained; one current full-suite PASS does not erase/diagnose it. Green suite omits F6 and cannot prove that remaining preservation criterion. No requested module baseline command or analyst result is missing. Initial report append hit a PowerShell nested-here-string parser error before execution and made no write; corrected with apply_patch.
+
+Exact F6 reproduction (literal PowerShell argument, no stdin/network/listener):
+
+```powershell
+$cgMixedProbe = @'
+import asyncio,copy,json,sys,tempfile
+from pathlib import Path
+sys.path[:0]=['backend','backend/tests/runtime']
+from jsonschema.validators import validator_for
+from referencing import Registry
+from app.contracts.api import ChatCompletionRequest
+from app.contracts.errors import CGError
+from test_loops import loop_graph
+from test_scheduler import Provider,create_runtime,node_request,response,submission
+async def main():
+    schema={'$schema':'https://json-schema.org/draft/2020-12/schema','$ref':'#/definitions/Answer','definitions':{'Text':{'type':'string'},'Answer':{'$schema':'http://json-schema.org/draft-03/schema#','extends':{'$ref':'#/definitions/Text'}}}}
+    original=copy.deepcopy(schema);v=validator_for(schema);v.check_schema(schema)
+    assert v(schema,registry=Registry()).is_valid('ok') and not v(schema,registry=Registry()).is_valid(3)
+    client={'model':'cg/g','messages':[{'role':'user','content':'test'}],'response_format':{'type':'json_schema','json_schema':{'name':'answer','schema':schema}}};ChatCompletionRequest.model_validate(client)
+    observed=[]
+    async def handler(request):
+        if node_request(request)=='draft':return response('draft')
+        emitted=request.response_format.json_schema.schema_;ev=validator_for(emitted);ev.check_schema(emitted)
+        try:ev(emitted,registry=Registry()).validate({'payload':'ok','control':{'decision':'stop'}})
+        except Exception as error:
+            observed.append(type(error).__name__+': '+str(error));raise
+        return response('{"payload":"ok","control":{"decision":"stop"}}')
+    with tempfile.TemporaryDirectory(prefix='cg-g2-mixed-review-') as d:
+        provider=Provider(handler);runtime,repository=await create_runtime(Path(d),provider)
+        try:
+            run=await runtime.submit(submission(loop_graph(),client=client))
+            try:await asyncio.wait_for(runtime.await_response(run.run_id,'anonymous'),3)
+            except CGError as error:assert error.code.value=='upstream_error'
+            else:raise AssertionError('expected invalid emitted schema')
+            cp=await repository.load_checkpoint(run.run_id,'anonymous')
+            assert cp.run.status=='failed' and not cp.responses and cp.run.output_json is None
+            assert len(provider.requests)==2 and observed and not cp.pending_tools
+            assert json.loads(cp.run.policy.client_request_json)==client and original==schema
+            print(json.dumps({'original_good':True,'original_bad_rejected':True,'emitted_error':observed[0],'run':cp.run.status,'code':json.loads(cp.run.error_json)['code'],'responses':len(cp.responses),'provider_calls':len(provider.requests),'policy_unchanged':True}))
+        finally:await runtime.shutdown();await repository.close()
+asyncio.run(main())
+'@
+uv --system-certs run --project backend --locked python -c $cgMixedProbe
+```
+
+Observed: original_good=true,original_bad_rejected=true,emitted_error=`AttributeError: 'str' object has no attribute 'get'`,run=failed,code=upstream_error,responses=0,provider_calls=2,policy_unchanged=true.
+
+Reviewed SHA256 values:
+
+| File under backend/ | SHA256 |
+| --- | --- |
+| app/runtime/__init__.py | acc9a4b043216b2fb1b87e8600fa87871f9b0f6921611546e8bc5ae12296c403 |
+| app/runtime/engine.py | 7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f |
+| app/runtime/admission.py | 2f6e24c9ecd88aeb085724ff0c7d7cc5a8bc869bde3ab231a625dfd344c766ad |
+| app/runtime/clock.py | 47053388204b0d7bca5737307c50dc3efd9976164d6a1a70b2bae75e4e7d51e8 |
+| app/storage/__init__.py | b5dd58e1c1e743acb4eb635f94c303613faab2f249ffb4e20fde9a9e7d49c7fa |
+| app/storage/repository.py | c5254c505162dd82424089df21532642f0bd46c69ebac594c11570d1b0e31c15 |
+| app/storage/events.py | 009ca00b126e399d5c279be9c254f74f2e8fbca5af6cd4963ba1ea5a662b00ff |
+| tests/runtime/test_scheduler.py | 198246a3c9730bb9e70cf9d3db150ef3758157cb3fa65ecf2db9389367341891 |
+| tests/runtime/test_loops.py | f574690ba105d27ae700ab1602a46b75433e6bc72ab20944cf3c9dc3db3f0f5f |
+| tests/runtime/test_recovery.py | e025646715f75896378015620a9dab0c08c45f06e9dab302cbf0f637a66be520 |
+| tests/runtime/test_admission.py | 40ddc7092547e8c1c77b39c753bf377f05f438896116be1e3124958f478fb22f |
+| tests/storage/test_sqlite.py | 96afa27f1d8e0bfbe34c603edd4066b86ab38e1eba7e48d0298b5ef0edd0ff85 |
+
+### Open Live Validation
+
+No fresh real Ollama/Hermes, Windows/WSL2 Compose or production-container execution. Historical images used pre-fix b8ff723d engine and cannot prove current7a9ccb1e bytes. Current-engine production reconciliation and independent G5/G6 acceptance remain open with original provenance preserved. Those separate gates do not cause this G2 FAIL: F6 is an executed deterministic preservation failure. No whole-MVP or remote-CI PASS is asserted.
+
+### Verdict: FAIL
+
+G2-runtime attempt4 FAIL under the explicit user exception: original F5 is corrected, but empirically reproduced Medium F6 leaves required accepted-schema preservation unsatisfied. Counts: Critical0,Severe0,High0,Medium1,Low0,Warning0,Suggestion0. All requested reviewer evidence is present. Original three cycles plus this exception are consumed; G2 remains BLOCKED for user disposition. No automatic attempt5, replacement, fix wave, profile narrowing or artificial split is authorized. Changed file: review.md only (append). Sole review.md ownership is released at this terminal handoff.

@@ -9,11 +9,11 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: terminal cycle 3 FAIL (F5) | 3/3 |
-| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | BLOCKED: terminal cycle 3/3 reviewer quota error; no verdict | 3/3 |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: attempt4 FAIL (F6); original F5 fixed | 4/4 (one explicit user review exception) |
+| G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
-| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Deterministic/UI/live proof delivered; independent review OPEN; G1/G2 BLOCKED | 0/3 |
+| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Historical deterministic/UI/live proof delivered; current-engine reconciliation/review OPEN; G2 F6 BLOCKED | 0/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
 Each product group has its own maximum three synthesizer spawns. Record consumption before spawn. Cycle 3 non-PASS is terminal.
@@ -459,3 +459,29 @@ No independent G2 PASS or current-engine live image claim is made yet.
   invariance, prior F1–F4 closure; locked runtime/full backend/contracts/lint
   as appropriate. No product edits or effects. G3 PASS5/5 is separate. Root
   waits the final verdict; no automatic attempt5 or new fix wave.
+
+## 2026-10-05 — Terminal medium-reasoning outcomes
+
+- [x] [coding] G2 F5 correction delivered in engine.py/test_loops.py, exactly
+  the two declared edits; definitive fail-first and successful module/full
+  checks preserved in g2-recovery-evidence.json. Independent G2 attempt4
+  confirms original F5 closure, not whole-group acceptance.
+- [x] [review] G3 attempt5 PASS/zero findings, authoritative review.md section;
+  no sixth attempt or new automatic budget. Generic Astra/medium execution
+  follows installed review instructions under the explicit user override.
+- [!] [review] G2 attempt4 FAIL/one Medium F6. Original-good/original-bad
+  validation and public DTO accept a Draft2020-12 root referencing a Draft3
+  child with single-valued extends. Controller embedding adds a resource ID;
+  pinned referencing crawling then raises AttributeError. Real scheduler /
+  temporary SQLite commits failed/upstream_error with two fake provider calls,
+  zero success envelopes and unchanged policy. Exact reproducer and hashes in
+  review.md. Preserve accepted profile; no automatic fifth attempt/fix wave.
+- [x] [documentation] Root owns status-only reconciliation in README.md,
+  docs/api.md, docs/dependencies.md, docs/verification.md, docs/runbook.md and
+  docs/hermes-compatibility.md, after all requested workers returned. No
+  contracts/locks or remaining product changes. Older delivery evidence is
+  historical; changed engine production reconciliation remains OPEN.
+
+Root independently ran repository lint exit0, read both complete reviewer
+reports, and checked source hashes. Current G2/G3 retry is concluded with the
+concrete F6 acceptance blocker. G5/G6 reviews remain OPEN0/3; no whole-MVP PASS.
