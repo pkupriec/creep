@@ -533,3 +533,14 @@
 - The user-authorized exceptions are therefore consumed without changing the
   historical 3/3 counters. No fourth automatic retry, replacement, budget
   reset, model change, or profile narrowing is allowed in this run.
+
+## 2026-10-05 — Lower-reasoning recovery authorized
+
+The user requests another retry at one step lower reasoning. Execute medium
+instead of high with the same Sol coding / Astra review models. The tool's
+custom roles are fixed at high, so generic instances consume installed role
+instructions and explicit model/medium overrides; do not mislabel them custom
+role execution or alter configured profiles. Prior quota failures remain
+consumed. G3 attempt5 is reserved before launch (second explicit exception);
+G2 correction precedes any reserved fourth independent review. Exact disjoint
+scopes are recorded in tasks.md. No new automatic retry budget is created.

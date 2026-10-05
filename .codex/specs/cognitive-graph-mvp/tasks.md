@@ -407,3 +407,31 @@ original counters remain G2 3/3 and G3 3/3; the exceptions do not create a
 new automatic budget. No product files, contracts, profiles, locks, or review
 verdicts were changed. Further work requires a later explicit disposition and
 available agent quota.
+
+## 2026-10-05 — User-authorized medium-reasoning retry
+
+The user explicitly said “TRY AGAIN. Use 1 step lower reasoning.” Authorize
+one new bounded G2 correction and subsequent independent review, and one G3
+independent review. Preserve every prior attempt and consumed counter. G2 has
+three historical synthesizer attempts; G3 has four (the original three plus
+the quota-failed user exception). Reserve G3's fifth synthesizer attempt now
+as the second explicit user exception; G2's fourth review will be reserved
+only after its correction passes verification. No automatic follow-on retry.
+
+Installed role profiles fix reasoning at high. Generic agents explicitly
+using the installed role instructions will execute at medium, preserving
+coding model gpt-6.1-sol and review model gpt-6-astra. Project/plugin profiles
+are not reconfigured. These executions are not claimed as custom-role spawns.
+
+- [-] [coding] `coding_g2_medium` owns exactly
+  backend/app/runtime/engine.py, backend/tests/runtime/test_loops.py,
+  backend/tests/runtime/test_scheduler.py, backend/tests/runtime/test_recovery.py.
+  Close F5 accepted Draft3 schema-reference rebasing without changing accepted
+  semantics, literals or resource boundaries. Contracts, locks, other product
+  modules and all artifacts are read-only. Regression-first runtime/SQLite
+  proof; locked runtime/full backend and scoped Ruff checks. No live effects.
+- [-] [review] `review_g3_medium` owns only review.md append for G3 attempt5,
+  under this explicit exception. The original seventeen G3 files and current
+  correction/source/image/live evidence are read-only. Reprove F1/F2/F3 and
+  assigned acceptance via pinned focused, contract and lint checks; no product
+  edits, listeners or inference/tool effects. Root waits for both workers.
