@@ -485,3 +485,26 @@ No independent G2 PASS or current-engine live image claim is made yet.
 Root independently ran repository lint exit0, read both complete reviewer
 reports, and checked source hashes. Current G2/G3 retry is concluded with the
 concrete F6 acceptance blocker. G5/G6 reviews remain OPEN0/3; no whole-MVP PASS.
+
+## 2026-10-05 — User authorizes step 1: F6 fix and independent review
+
+The user explicitly requests validation step1 (fix G2 F6 and pass independent
+review). Authorize one scoped correction and one subsequent G2 review attempt5
+as a second explicit review exception. Prior four synthesizer attempts remain
+consumed. Medium reasoning and the same Sol/Astra model assignments persist;
+reuse the terminal medium instances. No step2 production smoke or step3 G5/G6
+review is included in this request. No automatic further fix/review if non-PASS.
+
+- [-] [coding] Existing `coding_g2_medium` owns exactly
+  backend/app/runtime/engine.py and backend/tests/runtime/test_loops.py.
+  Reproduce exact accepted modern-root/Draft3-child single-extends F6 through
+  original and emitted validation, scheduler/SQLite and reconstruction/replay;
+  preserve literals, resource boundaries, references, dialects, immutable
+  policy, invalid-output rejection and F1–F5 fixes. No dependency/contract/API
+  or other product/artifact writes. Run regression-first, locked runtime/full
+  tests and scoped Ruff; return commands/exits/hashes and remaining gates.
+- [ ] [review] Existing `review_g2_medium` queued as sole independent G2
+  attempt5 reviewer after stable correction. Writable review.md append only;
+  original12 runtime/storage files and exact new2file delta are read-only.
+  Reprove F6 plus F1–F5 closure and assigned G2 acceptance; root reserves the
+  counter before dispatch and waits for every requested result.

@@ -586,3 +586,13 @@ review source hashes, three JSON evidence/source maps verified. Git diff
 --check exits0. Documentation status-only edits preserve launch commands and
 older phase-specific history. Product files remain local; only durable spec /
 review/evidence artifacts are committed, with no push or live deployment.
+
+## 2026-10-05 — F6 correction and review explicitly authorized
+
+User says “do 1.” in response to step1 (fix F6, meaningful regression and
+independent G2 PASS). One scoped engine/test_loops correction and one subsequent
+G2 attempt5 review are authorized, retaining four consumed reviews and all
+earlier findings. Reuse terminal medium Sol coder/Astra reviewer; no installed
+profiles, dependencies or accepted product profile change. Steps2/3 remain
+open and are not included in this bounded request. Record attempt5 before
+review dispatch; non-PASS receives no automatic sixth attempt or fix wave.
