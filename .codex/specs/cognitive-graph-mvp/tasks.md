@@ -495,7 +495,11 @@ consumed. Medium reasoning and the same Sol/Astra model assignments persist;
 reuse the terminal medium instances. No step2 production smoke or step3 G5/G6
 review is included in this request. No automatic further fix/review if non-PASS.
 
-- [-] [coding] Existing `coding_g2_medium` owns exactly
+- [!] [coding] Existing `coding_g2_medium` was dispatched for this exact
+  scope and immediately terminated with the account usage-limit error (retry
+  available after Oct 6, 2026 12:13 AM). No engine/test/artifact file changed,
+  so the F6 fix and its attempt5 review were never started.
+- [!] [coding] Existing `coding_g2_medium` owns exactly
   backend/app/runtime/engine.py and backend/tests/runtime/test_loops.py.
   Reproduce exact accepted modern-root/Draft3-child single-extends F6 through
   original and emitted validation, scheduler/SQLite and reconstruction/replay;

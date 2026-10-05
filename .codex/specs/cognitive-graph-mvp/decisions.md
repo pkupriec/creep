@@ -596,3 +596,8 @@ earlier findings. Reuse terminal medium Sol coder/Astra reviewer; no installed
 profiles, dependencies or accepted product profile change. Steps2/3 remain
 open and are not included in this bounded request. Record attempt5 before
 review dispatch; non-PASS receives no automatic sixth attempt or fix wave.
+
+The coding dispatch for this authorized exception immediately hit the account
+usage limit and produced no source change or verification. The queued G2
+review cannot start without a successful correction handoff. Step1 therefore
+remains open at the exact F6 blocker; no further retry was attempted.
