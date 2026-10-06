@@ -856,3 +856,222 @@ mutating a target in place when the same object also supplies literal
 const/enum/annotation data. This remaining regression was sent to the owner
 before the final review, rather than asserting generic preservation from the
 standard-keyword walk alone.
+
+## G2 F6 bounded architecture advisory — 2026-10-06
+
+Owner: `sa_g2_f6_oct6`, delegated architecture advisory using installed
+`.codex/agents/sa-agent.toml`, team-coordination, team-spec-workflow and
+team-documentation. Sole write: this append. Coding owner:
+`coding_g2_f6_oct6` for engine.py/test_loops.py. This is neither a review verdict
+nor review-counter consumption. The coordinator waits for both delegated results.
+
+Contract: spec sections 4.1/6.2 require preserving final response_format
+constraints while internal control has its own envelope. Consulted AGENTS.md,
+spec.md, F6 in review.md attempt 4, current in-flight engine.py/test_loops.py,
+and installed jsonschema/referencing source. Fresh local runtime reports
+jsonschema 4.26.0 and referencing 0.37.0; no dependency change was made.
+
+The candidate retains payload resource isolation and changes Draft3 single
+`extends` objects to equivalent one-element arrays. Source evidence:
+jsonschema `_legacy_keywords.extends_draft3` descends once for an object or
+once per array member, whereas referencing's legacy subresource walker
+iterates the single object as keys. Normalization avoids that crawl defect.
+Keeping the isolated root preserves the original recursive-reference root;
+the owner's earlier whole-payload pointer-relocation attempt failed its
+recursive fixture. That failure is attributed owner evidence, not an SA run.
+
+Two fresh bounded probes identified details the normalization must preserve:
+
+1. A modern root references `#/definitions/A%252FB/extends`, where the actual
+   key is `A%2FB`, and that definition declares Draft3 with
+   `extends: {type: string}`. Original validation accepts `"ok"` and rejects 3.
+   Initial normalized output referenced `A%2FB` without URI re-encoding and
+   raised PointerToNowhere. JSON Pointer escaping must be followed by URI
+   fragment encoding, preserving delimiter slashes. Sent to the owner, who
+   reports adding that correction and a scheduler/recovery regression; this
+   advisory does not independently certify that subsequent edit.
+2. Lexical resource context can differ from actual reference context. Exact
+   original-valid fixture (D = 2020-12 URI, L = Draft3 URI):
+
+   ```python
+   s = {
+       "$schema": D,
+       "$ref": "#/definitions/A/definitions/B/definitions/C",
+       "definitions": {"A": {
+           "$schema": L,
+           "definitions": {"B": {
+               "id": "nested", "extends": {"type": "string"},
+               "definitions": {"C": {
+                   "$ref": "#/definitions/A/definitions/B/extends"
+               }},
+           }},
+       }},
+   }
+   ```
+
+   Original validation accepts `"ok"` and rejects 3. The inspected candidate
+   treats C's base as `nested`, leaves its reference unchanged, and emitted
+   validation raises AttributeError (`list` has no `items`) on both inputs.
+   Pinned `Resource.pointer` retains its starting Specification throughout
+   the pointer walk: the modern pointer traversal does not recognize B's
+   legacy `id`. Schema-location traversal alone cannot establish that base.
+
+Recommended direction for the coding owner: determine reference remaps from
+original resolver contexts, not target existence or lexical namespace guesses.
+Memoize schema location/base/dialect contexts; follow original reference edges
+and model applicator descent using the parent's Specification, matching pinned
+`validators.descend`. A fresh process-only probe used
+`Registry().with_resource('', Resource.from_contents(s)).resolver()`, resolved
+the root reference and then C's reference, and confirmed the target was the
+original B.extends object by identity. Rewriting C to
+`#/definitions/A/definitions/B/extends/0` in the detached normalized copy
+restored good acceptance/bad rejection. This proves the contextual correction
+for this fixture, not a generic bundler.
+
+Preserve original IDs, anchors, recursive/dynamic reference scope and literal
+data. Rewrite a shared reference in place only when its reachable contexts
+agree on the remap. Selecting a resource merely because its pointer exists
+does not prove equivalence when multiple resources contain that pointer.
+Different required remaps imply context-specific representation/cloning;
+cloning is not yet shown to preserve identity or dynamic scope and must not be
+presented as a proven small fix. No universal bounded representation was
+established by this advisory. The fixture and limitation were sent directly to
+both coder and coordinator before independent review.
+
+Verification: three isolated commands using the existing
+`backend/.venv/Scripts/python.exe -c $saProbe` (first two) and
+`backend/.venv/Scripts/python.exe -c $saContextProbe` (third) each exited 0.
+The first two printed original good/bad outcomes and caught the emitted
+failures described above; their exit zero confirms reproduction, not
+acceptance. The third asserted original good/bad, target identity and
+process-only corrected emitted good/bad, and printed installed versions.
+One read-only combined source-inspection command exited 1 because rg was
+given an unsupported Windows glob path to metadata; the final Python metadata
+query supplied the version evidence instead. No network, listeners, live
+inference/tools, global installation, containers, commits or product writes.
+
+Rollout/rollback remains the coding owner's scoped detached-copy change, with
+original-schema versus actual emitted-request, scheduler/SQLite, policy and
+recovery regressions required before independent review. Current code is
+concurrently evolving; this record identifies the observed candidate and does
+not assert its final state. Open assurance: arbitrary multi-context schema
+equivalence, anchors/dynamic scope across any additional cloning, and the
+separately owned native Ollama/live gates.
+
+Terminal disposition from coordinator: accept the bounded-solution blocker;
+coder restores only its engine candidate to the reviewed baseline and retains
+failing regression evidence. Restoration is coder-owned and was not verified
+by this advisory. No dependency change or context-cloning redesign is authorized.
+This is lack of a demonstrated safe fix in the current two-file representation
+approach, not a claim that a semantics-preserving solution is impossible.
+
+Smallest next-scope options for explicit disposition:
+
+- A dependency-owner investigation of a narrowly corrected, exactly pinned
+  referencing implementation for Draft3 single-extends resource crawling.
+  This may avoid all emitted pointer/shape transformations while retaining
+  isolated resources. No compatible version or patch is selected or proven
+  here; lock/manifest ownership, upstream diff review, no-remote retrieval,
+  original/emitted dialect matrix and provider behavior need explicit scope.
+- A separately designed resolver-context-aware schema representation within
+  the runtime, starting from original reference-context analysis and explicit
+  tests for multiple paths to one node. This has broader complexity and
+  requires proof that any cloning preserves IDs, literals and dynamic scope.
+  Existing green fixtures alone cannot establish that contract.
+
+Neither option permits profile narrowing, validation bypass or dependency
+installation under the current advisory. Root owns the next scope decision.
+
+### F6 dependency-packaging continuation — 2026-10-06
+
+Coordinator-authorized read-only continuation; same SA instance and sole
+sa-review.md append ownership. Coordinator reports the isolated crawler fix
+passed all 28 owner cases with engine unchanged. This is attributed evidence;
+SA did not rerun the owner's temporary package experiment. Coordinator also
+reports upstream main still has the bug and no released fix was found; SA has
+not independently certified that release search.
+
+**Selected recommendation:** a deterministic, repository-local patched wheel
+with exact distribution version `referencing==0.37.0+cg.1`, consumed through a
+relative `[tool.uv.sources]` path. Coordinator accepted this option conditional
+on runtime success and will assign dependency-build ownership. Local-wheel
+sources are supported by [uv's dependency documentation](https://docs.astral.sh/uv/concepts/projects/dependencies/#path).
+The existing local/CI uv is 0.11.28; backend Python is pinned to 3.11.15. Preserve
+jsonschema 4.26.0 and all unrelated locked dependencies. Its installed metadata
+requires referencing >=0.28.4, compatible with the proposed local version.
+
+Reproduction/provenance requirements for the implementation owner:
+
+- Start from the exact existing upstream universal wheel in uv.lock:
+  `referencing-0.37.0-py3-none-any.whl`, SHA256
+  `381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231`.
+  Record its full source URL from the lock, upstream version, artifact hash,
+  patch reason and local artifact hash. Do not silently source current HEAD.
+- Preserve upstream runtime files, type markers, metadata/dependency fields
+  and MIT COPYING (copyright Julian Berman), except the scoped crawler fix and
+  the version/dist-info/RECORD adjustments required for the local distribution.
+  Keep a readable patch and provenance document beside the artifact. If source
+  comes from the wheel, describe it as wheel-derived runtime source rather
+  than claiming a complete upstream source checkout.
+- Supply a deterministic, stdlib-only reproduction/verifier script: accept
+  the upstream artifact as an explicit input, verify its hash before patching,
+  require the exact expected patch context, and fail closed on unexpected
+  input. Sort ZIP members, fix timestamps/attributes, regenerate valid RECORD
+  hashes/sizes and consistent version metadata. ZIP_STORED avoids compressor
+  variation. Byte-for-byte rebuild and SHA256 verification must succeed using
+  pinned Python without network or extra build dependencies. Verify the full
+  archive diff allows only the declared source and metadata changes. Artifact
+  maintenance is the explicit tradeoff for avoiding a new build-tool chain.
+- Keep the patch restricted to a mapping-valued `extends` being one schema,
+  with list-valued extends still iterated. The helper is shared by Draft3 and
+  Draft4; do not broaden changes to all object-valued array keywords.
+  Regression evidence must include Draft4 allOf/anyOf/oneOf crawling and the
+  original/emitted mixed-dialect, recursive, pointer and literal fixtures.
+
+Docker parity requires explicit wheel COPY before the existing
+`uv sync --locked --no-dev` dependency layer. Current .dockerignore starts
+with `**` and does not allow vendor files; add the exact artifact path and
+needed ancestor allowlist entries, retaining exclusions for environments,
+credentials and user data. Install the same wheel into the image's virtualenv;
+copying a host virtualenv is not parity. The [uv Docker guide](https://docs.astral.sh/uv/guides/integration/docker/#installing-a-project)
+describes locked installation from files present in the build context. The
+application still imports the normal installed referencing/jsonschema modules.
+
+A registry-only application workaround cannot demonstrate the required
+default-verifier behavior: pinned Resource.from_contents selects the dialect
+via module-global specification_with, so a private registry in application
+validation does not repair a separately created default jsonschema validator.
+Avoid global runtime monkeypatches and import-order dependence. A noneditable
+source-path package was also considered, but requires exactly pinned build
+backend and transitive build requirements; runtime uv.lock alone should not
+be assumed to lock isolated builds. [uv build constraints](https://docs.astral.sh/uv/reference/settings/#build-constraint-dependencies)
+provide that control. No source-path package or build-tool installation was
+performed; the coordinator's final decision is the local wheel.
+
+This narrow dependency correction serves the existing F6 preservation
+requirement without narrowing accepted schemas or redesigning the product.
+Its manifest/lock/vendor/reproduction/Docker support files exceed the prior
+engine/test ownership boundary, so coordinator reassignment is required and
+is being recorded separately. No publication or deployment is implied.
+
+Required rollout evidence: clean locked install of the local artifact, version
+and import-path inspection, artifact/diff verification, unmodified default
+validator original-good/original-bad versus emitted envelope behavior, focused
+and repository runtime/contract checks, and image build plus the same focused
+validator smoke inside the image under its runtime user. Source-only checks
+do not close the image gate. Confirm unrelated lock entries did not drift.
+Rollback is removal of the local source override/pin and restoration of the
+previous referencing lock entry; that reopens F6 and is not a successful fix.
+Residual risks are patched-dependency maintenance, default-verifier parity,
+and unchanged separately owned native Ollama/live gates.
+
+SA verification was read-only: inspected pyproject.toml, uv.lock, Dockerfile,
+.dockerignore, scripts/dev.py, CI and installed referencing/jsonschema metadata
+and source; `uv --version` reported 0.11.28 and source/help reads completed.
+One initial search command returned 1 for unsupported Windows glob operands
+`Dockerfile*`/`compose*`; direct file reads and the subsequent repository paths
+provided the intended evidence. Official uv documentation was consulted; no
+dependencies, code, manifests, containers or global settings were changed.
+This append is advisory only, consumes no group review cycle and assigns no
+acceptance verdict. SA ownership is released at terminal return; coordinator
+waits for both requested results before consolidation.

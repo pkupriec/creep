@@ -9,7 +9,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | BLOCKED: attempt4 FAIL (F6); original F5 fixed | 4/4 (one explicit user review exception) |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 correction delivered; independent attempt5 IN REVIEW | 5/5 (two explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
@@ -532,3 +532,80 @@ during the previous quota-failed correction. Review consumption remains4.
 - [ ] [review] Queue one independent generic Astra/medium reviewer for G2
   attempt5 after correction succeeds. Only review.md append writable. Reserve
   counter before spawn; no automatic sixth attempt or scope expansion.
+
+## F6 reference-preservation advisory during correction
+
+- [-] [sa] `sa_g2_f6_oct6` owns only sa-review.md append, generic Astra/medium
+  consuming installed sa-agent instructions. Read current engine/tests and
+  pinned jsonschema/referencing implementation; advise a bounded fix for
+  Draft3 single-extends crawling without altering recursive/dynamic anchors,
+  literal data, escaped/local/absolute references or caller policy. No product,
+  dependency, other artifact or review.md writes; no verdict/counter consumed.
+  Coding owner remains sole engine/test_loops writer. Root waits both terminal
+  handoffs before the queued independent G2 attempt5.
+
+## F6 bounded dependency investigation — 2026-10-06
+
+- [x] [coding] Initial two-file correction terminated without a safe fix.
+  Engine restored to reviewed SHA2567a9ccb1e; 28 unweakened new regressions
+  remain. Existing backend612 and runtime/storage231 pass only with those
+  regressions explicitly excluded; no F6 acceptance or new review consumed.
+- [-] [coding] Reuse `coding_g2_f6_oct6` for isolated copied-package experiment
+  under `.f6-probe/` only. Narrow referencing0.37.0 Draft3 crawler object/array
+  correction; no production, venv, dependency manifest/lock or global edits.
+  Confirm import provenance, run all28 regressions unchanged plus existing
+  runtime/storage using locked tooling. Engine/test ownership released.
+- [-] [sa] Reuse `sa_g2_f6_oct6`, only sa-review.md append, for reproducible
+  deployment recommendation if probe succeeds. No verdict/review consumed.
+  Root waits both results. Any implementation needs a new exact single-owner
+  dependency/bootstrap handoff; current experiment grants no such writes.
+
+## F6 dependency correction ownership — 2026-10-06
+
+Isolated copied referencing experiment:28 F6 cases and259 runtime/storage
+cases pass, baseline engine unchanged. Proceed with the proven narrow patch
+as a local exact wheel; no schema rewriting/profile narrowing.
+
+- [-] [coding/bootstrap] `coding_bootstrap_f6_oct6`, sole writer of
+  backend/pyproject.toml, backend/uv.lock,
+  backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl,
+  backend/vendor/referencing-provenance.json, backend/vendor/README.md,
+  scripts/rebuild_referencing.py, backend/tests/contracts/test_referencing_patch.py,
+  docs/dependencies.md. Reproduce from prior locked upstream wheel/hash,
+  retain MIT license, deterministic metadata/RECORD, exact direct pin/path;
+  preserve all other dependency pins. Native locked sync, import/source audit,
+  reproduction and wrong-hash failure; Draft3 object/array and Draft4 crawler
+  regression, new28 cases, full backend/contracts/lint. No engine, shared
+  contracts, API, Docker, other docs/artifacts or frontend writes.
+- [-] [devops] `devops_f6_oct6`, separate owner for backend/Dockerfile, .dockerignore,
+  docs/api.md and README.md only; precise handoff follows bootstrap wave.
+  Copy only exact corrected wheel before locked install, production import
+  assertion; truthful known-issue/docs status. Native/Linux build/install proof
+  required, not a source-matched Hermes/Ollama live claim.
+- [ ] [review] Authorized G2 attempt5 remains unspawned4 consumed. Reserve
+  after successful stable implementation; include dependency/delivery delta
+  in the same group review. No sixth attempt/automatic fix after non-PASS.
+
+## G2 authorized attempt5 reservation — 2026-10-06
+
+Both bootstrap/delivery owners returned terminal success and released files.
+Production wheel version0.37.0+cg.1 is reproducible; native650/backend,
+259/runtime-storage,241Python+9frontend/contracts, root lint and Docker image
+offline F6 proof pass. Engine remains unchanged7a9ccb1e. Source provenance
+and commands are in g2-f6-evidence.json; no real inference/tool execution.
+
+- [-] [review] `review_g2_f6_oct6`, sole independent synthesizer, generic
+  Astra/medium consuming installed review-role instructions. Reserve and
+  consume G2 attempt5 here before spawn, retaining original1–3 plus exception4
+  and all historical findings. Authorized by user step1/refresh continuation;
+  no sixth automatic attempt or post-terminal automatic fix wave.
+  Writable review.md append only; all runtime/storage12 files, regression
+  delta, bootstrap8/delivery4 files and proof artifacts are read-only. Verify
+  F1–F6 closure and assigned A03–A06/A08–A10/A13–A14/A16 with fresh locked
+  tests, installed source/wheel/provenance/default-validator parity, no remote
+  retrieval, literal/reference/dialect/resource/immutable policy preservation,
+  archive and exact dependency delta, Docker proof adequacy. Independent
+  targeted/full/runtime/contracts/lint and adversarial counterexamples; no
+  missing required G2 evidence on PASS. G5/G6/source-matched live gates remain
+  separate OPEN; no whole-MVP PASS from this group's verdict. Root waits
+  reviewer terminal return before consolidation or closure.

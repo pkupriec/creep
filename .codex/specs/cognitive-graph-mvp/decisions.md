@@ -611,3 +611,67 @@ match last reviewed bytes. Replace only unfinished engine/test_loops work with
 Sol/medium coding instance; independent Astra/medium review follows verified
 correction. No team profile change, accepted-schema narrowing or live step2 /
 G5/G6 step3 expansion. Original quota failure remains historical.
+
+During F6 correction the coder detected its first pointer-relocation candidate
+would alter an accepted recursiveRef binding; candidate is not released as
+success. A narrowly scoped medium Astra SA advisory can examine representation
+and pinned resolver semantics, writing only sa-review.md. It is independent
+of the coding writer and is not a synthesizer/review-budget attempt. Wait both
+returned results before G2 review; no dependency or accepted-profile expansion.
+
+The representation candidates were rejected by valid recursive and mixed-base
+counterexamples. Engine is restored byte-exact, with 28 failing regression
+cases retained. This is a concrete unresolved defect, not a quota failure.
+All existing backend612/runtime-storage231 tests pass when the new failures
+are explicitly excluded; those passes do not close F6.
+
+A bounded isolated dependency probe follows before declaring the correction
+blocked. The installed referencing0.37.0 Draft3 crawler iterates an object
+under `extends` as keys, whereas the validator descends the object as a schema.
+Official upstream main still has this shape and official release metadata
+lists0.37.0: https://github.com/python-jsonschema/referencing/releases and
+https://raw.githubusercontent.com/python-jsonschema/referencing/main/referencing/jsonschema.py
+(inspected2026-10-06). No speculative upgrade or dependency edit is authorized
+by the probe handoff. A narrow exactly pinned crawler correction, if proven,
+would preserve product semantics; the lead's earlier two-file limit was task
+ownership rather than a user prohibition on routine dependency bug fixes.
+Keep all other pins/profile/team settings unchanged. Broader resolver redesign
+is not justified without additional equivalence evidence.
+
+## F6 dependency correction decision — 2026-10-06
+
+The copied referencing0.37.0 patch handles only object-valued Draft3 `extends`
+as one schema; all other traversal remains byte-equivalent. With baseline
+engine and unmodified28 regressions it passes28/28 plus259 runtime/storage
+tests. This preserves schema documents, references and IDs rather than
+rewriting them. Select deterministic repo-local pure-Python wheel version
+0.37.0+cg.1, exact direct pin and uv source path. Reproduce from prior locked
+upstream wheel SHA256381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231;
+preserve all upstream members/license except crawler source plus necessary
+version/dist-info/RECORD changes. Stdlib-only reproduction avoids adding build
+backend dependencies. Preserve other30 pins; no global monkeypatch/update.
+Ownership changes are declared in tasks.md before delegation. This routine
+dependency bug correction implements the authorized F6 behavior, with no
+new product feature or accepted-schema narrowing. Review and native/Linux
+install proof must precede acceptance. Real production Hermes/Ollama/WSL
+reconciliation remains separate step2 and OPEN; G5/G6 review remains step3.
+
+Bootstrap/delivery terminal evidence closes the bounded installation gates:
+native28 regressions/259 runtime-storage/650 backend, contracts241Python+9
+frontend/drift, Ruff51/bothTS, deterministic wheel and negative-integrity
+probes pass. Other29 package blocks byte-identical; root direct metadata and
+referencing are sole lock-block changes. Docker build/image import proof and
+offline original/emitted F6 good/bad, invalid control, immutable input, Draft3
+object/list and Draft4 crawling pass under UID10001. Root durable container
+probe additionally demonstrates deliberately rejected remote retrieval under
+network-none. Initial direct mounted-script invocation failed import because
+script location omitted /app from Python path; the corrected python-c file
+compilation uses image cwd and passes, with no application/image change.
+
+Reserve G2 fifth synthesizer attempt now for `review_g2_f6_oct6`, preserving
+non-resetting consumed history5/5 under two explicit user exceptions. Generic
+Astra/medium retains configured model and user's reasoning reduction; role
+profiles are unchanged. Only review.md append is writable. Both implementers
+are terminal/released; root waits independent verdict. No automatic sixth
+attempt or corrective wave after non-PASS. Product completion and source-
+matched live/G5/G6 gates remain OPEN independently of this module verdict.

@@ -1,0 +1,66 @@
+{
+  "group": "G2-runtime",
+  "date": "2026-10-06",
+  "status": "correction_installed_required_checks_passed_independent_attempt5_reserved",
+  "authority": "user-authorized step1 F6 correction and one independent G2 attempt5; no sixth automatic attempt",
+  "models": {"coding": "gpt-6.1-sol medium", "architecture": "gpt-6-astra medium", "review": "gpt-6-astra medium queued"},
+  "baseline_engine_sha256": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
+  "regression_test_sha256": "95c7a6ad4e4931cf2b3d92252cd3723ee82d2f55aaf2ed110a0a23f50cc01562",
+  "discarded_candidates": [
+    "Pointer relocation changed an accepted recursiveRef binding to the controller wrapper.",
+    "Single-extends normalization failed percent-encoded pointers and a resolver-context/lexical-base counterexample. Unsafe engine candidates restored byte-exact."
+  ],
+  "returned_coding_evidence": {
+    "owner": "coding_g2_f6_oct6",
+    "verification": [
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=no", "phase": "restored baseline engine and installed upstream dependency", "exit_code": 1, "result": "28 failed, 138 deselected"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q -k 'not mixed_draft3_single_extends'", "phase": "baseline excludes known failing regressions", "exit_code": 0, "result": "231 passed, 28 deselected in 28.50s"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q -k 'not mixed_draft3_single_extends'", "phase": "baseline excludes known failing regressions", "exit_code": 0, "result": "612 passed, 28 deselected in 62.07s"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=short", "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation", "exit_code": 0, "result": "28 passed, 138 deselected in 4.65s"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q", "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation", "exit_code": 0, "result": "259 passed in 46.59s"}
+    ],
+    "probe_import_provenance": "referencing and referencing.jsonschema __file__ under D:/Sources/creep/.codex/specs/cognitive-graph-mvp/.f6-probe/referencing; metadata remained upstream0.37.0",
+    "upstream_jsonschema_source_sha256": "8d767ab7ac7da13bd31cc202d2d4726858d6e6bdaa78739b62ebbb52149f2b74",
+    "patched_jsonschema_source_sha256": "d71d7e00650fa3411b1957b1517d95a515461d7d428753eaf7a2719c10482c86",
+    "patch": "Only _subresources_of_with_crazy_aP_items_dependencies in_subarray: if each == extends and value is Mapping, yield the schema once; otherwise preserve yield-from.",
+    "copy_audit": "15 non-cache copied files checked; sole source delta jsonschema.py"
+  },
+  "selected_dependency": {"version": "0.37.0+cg.1", "upstream_version": "0.37.0", "upstream_wheel_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231", "local_wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c", "status": "installed backend-local and Linux image; default-validator parity demonstrated"},
+  "bootstrap_evidence": {
+    "owner": "coding_bootstrap_f6_oct6",
+    "native_import": "D:/Sources/creep/backend/.venv/Lib/site-packages/referencing/jsonschema.py; Python3.11.15; no PYTHONPATH",
+    "lock_sha256": "f5240c215933c6b12858f1edb3afbdd122f45b7aa2b2429ca8d09d6fe2e94902",
+    "lock_delta": "31 package names unchanged;29 unrelated blocks byte-identical; only referencing version/source and root direct dependency metadata change",
+    "verification": [
+      {"command": "uv --system-certs lock --project backend --offline", "exit_code": 0, "result": "31 packages; sole referencing version delta"},
+      {"command": "uv --system-certs sync --project backend --locked --offline --python 3.11.15", "exit_code": 0, "result": "local wheel installed into backend/.venv"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/contracts/test_referencing_patch.py -q", "exit_code": 0, "result": "10 passed"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -k mixed_draft3_single_extends -q", "exit_code": 0, "result": "28 passed,138 deselected"},
+      {"command": "python scripts/dev.py test-runtime", "exit_code": 0, "result": "259 passed in42.14s"},
+      {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q", "exit_code": 0, "result": "650 passed in74.08s"},
+      {"command": "python scripts/dev.py test-contract", "exit_code": 0, "result": "241Python+9frontend; drift clean"},
+      {"command": "python scripts/dev.py lint", "exit_code": 0, "result": "Ruff,51file format,drift,bothTS projects pass"},
+      {"command": "backend Python scripts/rebuild_referencing.py --input <hash-verified exact upstream wheel> --output backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl --check", "exit_code": 0, "result": "byte-identical wheel/provenance; wrong hash/nonmatching wheel/nonmatching provenance each expected exit1 without writes"}
+    ],
+    "intermediate_failures": "Fail-first contract2failed/6passed; one incorrect literal license-heading assertion corrected to actual unchanged upstream copyright/permission text. Not a license or acceptance weakening."
+  },
+  "delivery_evidence": {
+    "owner": "devops_f6_oct6",
+    "image_id": "sha256:ffc31653bf7e2ea11ed9cf22497bb67c739ae918c412232f76ebd91cd5c5e07d",
+    "verification": [
+      {"command": "docker --context desktop-linux compose -p cg-f6-image-proof-20261006 -f compose.yaml config --quiet", "exit_code": 0, "result": "Compose parses"},
+      {"command": "docker --context desktop-linux build --file backend/Dockerfile --tag cg-f6-backend-proof:20261006-local1 .", "exit_code": 0, "result": "22 production packages; exact corrected wheel installed; crawler assertions pass"},
+      {"command": "docker --context desktop-linux image inspect cg-f6-backend-proof:20261006-local1 --format '{{.Id}} {{.Config.User}}'", "exit_code": 0, "result": "recorded image ID, user10001:10001"}
+    ],
+    "offline_container": "owner network-none/read-only/UID10001/removed disposable container validates exact installed source, baseline engine, original/emitted good/bad F6, invalid control, immutable schema,Draft3 object/list,Draft4 combinators; no services/volumes/inference/tools"
+  },
+  "coordinator_container_verification": {
+    "probe": ".codex/specs/cognitive-graph-mvp/g2-f6-container-probe.py",
+    "command": "docker --context desktop-linux run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges:true --mount 'type=bind,source=D:\\Sources\\creep\\.codex\\specs\\cognitive-graph-mvp\\g2-f6-container-probe.py,target=/proof.py,readonly' --entrypoint python cg-f6-backend-proof:20261006-local1 -c \"exec(compile(open('/proof.py').read(), '/proof.py', 'exec'))\"",
+    "exit_code": 0,
+    "result": "all stated assertions and deliberately attempted/rejected remote reference pass; _WrappedReferencingError, no network request",
+    "initial_invocation_failure": "Direct /proof.py invocation exit1 ModuleNotFoundError app.contracts due script-directory sys.path. Corrected python-c uses /app cwd; same image/probe assertions pass."
+  },
+  "independent_review": {"consumed": 5, "authorized_attempt": 5, "status": "reserved_before_spawn"},
+  "open_gates": ["independent G2 attempt5 verdict", "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation", "separate G5/G6 independent review"]
+}
