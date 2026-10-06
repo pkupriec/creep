@@ -8,7 +8,7 @@ authoritative requirements and acceptance definitions remain in
 ## Product status
 
 The implementation is locally testable, but the MVP is not fully accepted.
-The remaining blockers are the missing independent G2 attempt-5 verdict, fresh
+The remaining blockers are the pending independent G2 retry verdict, fresh
 current-source Hermes/Ollama Windows/WSL2 validation, and independent G5/G6
 reviews. Do not report whole-product PASS from the green local suites.
 
@@ -16,7 +16,7 @@ reviews. Do not report whole-product PASS from the green local suites.
 | --- | --- | ---: | --- |
 | G0 research | PASS | 2/3 | Hermes continuation and React Flow selection recorded |
 | G1 contracts | PASS | 4/4 | User-authorized quota recovery; exhausted |
-| G2 runtime | F6 implementation PASS locally; review verdict unavailable | 5/5 | Attempt 5 quota-terminated before review.md verdict; user disposition required |
+| G2 runtime | F6 tests pass; authorized review retry pending | 6/6 | Attempt 6 reserved after user's explicit proceed; prior quota termination retained |
 | G3 proxy | PASS | 5/5 | User-authorized medium retry; exhausted |
 | G4 UI | PASS | 2/3 | Independent cycle 2 closed assigned findings |
 | G5 delivery | OPEN | 0/3 | Independent review remains; historical/live evidence is separate |
@@ -61,8 +61,8 @@ deliberately denied remote retrieval. Image ID:
 
 Read this file plus the relevant requirement/spec sections and evidence JSON.
 Read the full historical ledgers only when reviewing their assigned history.
-Do not spawn a sixth G2 review automatically: attempt 5 was consumed despite
-the quota termination. A new G2 review requires explicit user disposition.
+The user authorized one retry after attempt 5's quota termination; attempt 6
+is reserved. No seventh G2 review or new fix wave is authorized automatically.
 Do not rerun live inference or tool effects merely to reproduce historical
 evidence. Source-matched live validation must record current source/image
 hashes and remain distinct from static or mock tests.

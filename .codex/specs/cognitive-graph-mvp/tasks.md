@@ -9,11 +9,23 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+Active reservation 2026-10-06: `review_g2_compact` is sole synthesizer for
+G2-runtime attempt6, authorized by user's "Ok. Now with shorter context plz
+proceed" after the missing verdict/retry requirement was explained. Writes:
+review.md append only. Read-only exact scope: the24 file keys in
+g2-f6-evidence.json/stable_implementation_source_sha256. Check F1–F6 and G2
+module acceptance A03–A06/A08–A10/A13–A14/A16; evaluate current locked evidence,
+run focused regressions and any necessary pinned checks. Consume6/6 before
+spawn, preserve all prior cycles; no seventh attempt/fix automatically.
+Expected output: independent findings, commands/exits, PASS/FAIL and remaining
+separate live/G5/G6 gates. Root waits terminal result; no concurrent review
+writer. Other owners may perform disjoint live preflight without product edits.
+
 | Group | Outcome | Dependency | State | Synthesizer spawns consumed |
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 correction delivered; attempt5 quota-terminated without verdict | 5/5 (two explicit user review exceptions) |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 delivered; authorized attempt6 reserved | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |

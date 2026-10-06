@@ -1,5 +1,15 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-06 — Compact continuation / G2 retry authorization
+
+The user's explicit "proceed" follows the explained missing G2 verdict and
+retry-authorization gate. Treat it as one review-only quota retry, attempt6,
+preserving consumed attempts1–5. Usage currently permits ordinary work. One
+generic Astra/medium synthesizer consumes installed review-role instructions;
+models/config stay unchanged. Read compact status plus relevant sections and
+exact evidence; do not reload unrelated history. No automatic seventh review
+or post-terminal fix wave. Original required live and G5/G6 gates stay OPEN.
+
 > Coordination shortcut: read [`current-state.md`](current-state.md) first.
 > This file retains historical decisions and evidence; consult only the
 > sections relevant to the active task.
