@@ -3,7 +3,11 @@
   "date": "2026-10-06",
   "status": "correction_installed_required_checks_passed_independent_attempt5_reserved",
   "authority": "user-authorized step1 F6 correction and one independent G2 attempt5; no sixth automatic attempt",
-  "models": {"coding": "gpt-6.1-sol medium", "architecture": "gpt-6-astra medium", "review": "gpt-6-astra medium queued"},
+  "models": {
+    "coding": "gpt-6.1-sol medium",
+    "architecture": "gpt-6-astra medium",
+    "review": "gpt-6-astra medium queued"
+  },
   "baseline_engine_sha256": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
   "regression_test_sha256": "95c7a6ad4e4931cf2b3d92252cd3723ee82d2f55aaf2ed110a0a23f50cc01562",
   "discarded_candidates": [
@@ -13,11 +17,36 @@
   "returned_coding_evidence": {
     "owner": "coding_g2_f6_oct6",
     "verification": [
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=no", "phase": "restored baseline engine and installed upstream dependency", "exit_code": 1, "result": "28 failed, 138 deselected"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q -k 'not mixed_draft3_single_extends'", "phase": "baseline excludes known failing regressions", "exit_code": 0, "result": "231 passed, 28 deselected in 28.50s"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q -k 'not mixed_draft3_single_extends'", "phase": "baseline excludes known failing regressions", "exit_code": 0, "result": "612 passed, 28 deselected in 62.07s"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=short", "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation", "exit_code": 0, "result": "28 passed, 138 deselected in 4.65s"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q", "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation", "exit_code": 0, "result": "259 passed in 46.59s"}
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=no",
+        "phase": "restored baseline engine and installed upstream dependency",
+        "exit_code": 1,
+        "result": "28 failed, 138 deselected"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q -k 'not mixed_draft3_single_extends'",
+        "phase": "baseline excludes known failing regressions",
+        "exit_code": 0,
+        "result": "231 passed, 28 deselected in 28.50s"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests -q -k 'not mixed_draft3_single_extends'",
+        "phase": "baseline excludes known failing regressions",
+        "exit_code": 0,
+        "result": "612 passed, 28 deselected in 62.07s"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=short",
+        "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation",
+        "exit_code": 0,
+        "result": "28 passed, 138 deselected in 4.65s"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime backend/tests/storage -q",
+        "phase": "isolated copied dependency under explicit .f6-probe PYTHONPATH; not production installation",
+        "exit_code": 0,
+        "result": "259 passed in 46.59s"
+      }
     ],
     "probe_import_provenance": "referencing and referencing.jsonschema __file__ under D:/Sources/creep/.codex/specs/cognitive-graph-mvp/.f6-probe/referencing; metadata remained upstream0.37.0",
     "upstream_jsonschema_source_sha256": "8d767ab7ac7da13bd31cc202d2d4726858d6e6bdaa78739b62ebbb52149f2b74",
@@ -25,22 +54,64 @@
     "patch": "Only _subresources_of_with_crazy_aP_items_dependencies in_subarray: if each == extends and value is Mapping, yield the schema once; otherwise preserve yield-from.",
     "copy_audit": "15 non-cache copied files checked; sole source delta jsonschema.py"
   },
-  "selected_dependency": {"version": "0.37.0+cg.1", "upstream_version": "0.37.0", "upstream_wheel_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231", "local_wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c", "status": "installed backend-local and Linux image; default-validator parity demonstrated"},
+  "selected_dependency": {
+    "version": "0.37.0+cg.1",
+    "upstream_version": "0.37.0",
+    "upstream_wheel_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231",
+    "local_wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c",
+    "status": "installed backend-local and Linux image; default-validator parity demonstrated"
+  },
   "bootstrap_evidence": {
     "owner": "coding_bootstrap_f6_oct6",
     "native_import": "D:/Sources/creep/backend/.venv/Lib/site-packages/referencing/jsonschema.py; Python3.11.15; no PYTHONPATH",
     "lock_sha256": "f5240c215933c6b12858f1edb3afbdd122f45b7aa2b2429ca8d09d6fe2e94902",
     "lock_delta": "31 package names unchanged;29 unrelated blocks byte-identical; only referencing version/source and root direct dependency metadata change",
     "verification": [
-      {"command": "uv --system-certs lock --project backend --offline", "exit_code": 0, "result": "31 packages; sole referencing version delta"},
-      {"command": "uv --system-certs sync --project backend --locked --offline --python 3.11.15", "exit_code": 0, "result": "local wheel installed into backend/.venv"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/contracts/test_referencing_patch.py -q", "exit_code": 0, "result": "10 passed"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -k mixed_draft3_single_extends -q", "exit_code": 0, "result": "28 passed,138 deselected"},
-      {"command": "python scripts/dev.py test-runtime", "exit_code": 0, "result": "259 passed in42.14s"},
-      {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q", "exit_code": 0, "result": "650 passed in74.08s"},
-      {"command": "python scripts/dev.py test-contract", "exit_code": 0, "result": "241Python+9frontend; drift clean"},
-      {"command": "python scripts/dev.py lint", "exit_code": 0, "result": "Ruff,51file format,drift,bothTS projects pass"},
-      {"command": "backend Python scripts/rebuild_referencing.py --input <hash-verified exact upstream wheel> --output backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl --check", "exit_code": 0, "result": "byte-identical wheel/provenance; wrong hash/nonmatching wheel/nonmatching provenance each expected exit1 without writes"}
+      {
+        "command": "uv --system-certs lock --project backend --offline",
+        "exit_code": 0,
+        "result": "31 packages; sole referencing version delta"
+      },
+      {
+        "command": "uv --system-certs sync --project backend --locked --offline --python 3.11.15",
+        "exit_code": 0,
+        "result": "local wheel installed into backend/.venv"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/contracts/test_referencing_patch.py -q",
+        "exit_code": 0,
+        "result": "10 passed"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -k mixed_draft3_single_extends -q",
+        "exit_code": 0,
+        "result": "28 passed,138 deselected"
+      },
+      {
+        "command": "python scripts/dev.py test-runtime",
+        "exit_code": 0,
+        "result": "259 passed in42.14s"
+      },
+      {
+        "command": "uv --system-certs run --project backend --locked pytest backend/tests -q",
+        "exit_code": 0,
+        "result": "650 passed in74.08s"
+      },
+      {
+        "command": "python scripts/dev.py test-contract",
+        "exit_code": 0,
+        "result": "241Python+9frontend; drift clean"
+      },
+      {
+        "command": "python scripts/dev.py lint",
+        "exit_code": 0,
+        "result": "Ruff,51file format,drift,bothTS projects pass"
+      },
+      {
+        "command": "backend Python scripts/rebuild_referencing.py --input <hash-verified exact upstream wheel> --output backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl --check",
+        "exit_code": 0,
+        "result": "byte-identical wheel/provenance; wrong hash/nonmatching wheel/nonmatching provenance each expected exit1 without writes"
+      }
     ],
     "intermediate_failures": "Fail-first contract2failed/6passed; one incorrect literal license-heading assertion corrected to actual unchanged upstream copyright/permission text. Not a license or acceptance weakening."
   },
@@ -48,9 +119,21 @@
     "owner": "devops_f6_oct6",
     "image_id": "sha256:ffc31653bf7e2ea11ed9cf22497bb67c739ae918c412232f76ebd91cd5c5e07d",
     "verification": [
-      {"command": "docker --context desktop-linux compose -p cg-f6-image-proof-20261006 -f compose.yaml config --quiet", "exit_code": 0, "result": "Compose parses"},
-      {"command": "docker --context desktop-linux build --file backend/Dockerfile --tag cg-f6-backend-proof:20261006-local1 .", "exit_code": 0, "result": "22 production packages; exact corrected wheel installed; crawler assertions pass"},
-      {"command": "docker --context desktop-linux image inspect cg-f6-backend-proof:20261006-local1 --format '{{.Id}} {{.Config.User}}'", "exit_code": 0, "result": "recorded image ID, user10001:10001"}
+      {
+        "command": "docker --context desktop-linux compose -p cg-f6-image-proof-20261006 -f compose.yaml config --quiet",
+        "exit_code": 0,
+        "result": "Compose parses"
+      },
+      {
+        "command": "docker --context desktop-linux build --file backend/Dockerfile --tag cg-f6-backend-proof:20261006-local1 .",
+        "exit_code": 0,
+        "result": "22 production packages; exact corrected wheel installed; crawler assertions pass"
+      },
+      {
+        "command": "docker --context desktop-linux image inspect cg-f6-backend-proof:20261006-local1 --format '{{.Id}} {{.Config.User}}'",
+        "exit_code": 0,
+        "result": "recorded image ID, user10001:10001"
+      }
     ],
     "offline_container": "owner network-none/read-only/UID10001/removed disposable container validates exact installed source, baseline engine, original/emitted good/bad F6, invalid control, immutable schema,Draft3 object/list,Draft4 combinators; no services/volumes/inference/tools"
   },
@@ -61,6 +144,42 @@
     "result": "all stated assertions and deliberately attempted/rejected remote reference pass; _WrappedReferencingError, no network request",
     "initial_invocation_failure": "Direct /proof.py invocation exit1 ModuleNotFoundError app.contracts due script-directory sys.path. Corrected python-c uses /app cwd; same image/probe assertions pass."
   },
-  "independent_review": {"consumed": 5, "authorized_attempt": 5, "status": "reserved_before_spawn"},
-  "open_gates": ["independent G2 attempt5 verdict", "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation", "separate G5/G6 independent review"]
+  "independent_review": {
+    "consumed": 5,
+    "authorized_attempt": 5,
+    "status": "quota_terminated_before_verdict_or_review_append",
+    "fresh_evidence_before_termination": "259 runtime/storage and241 Python+9 frontend contract tests passed",
+    "review_file_appended": false
+  },
+  "open_gates": [
+    "independent G2 attempt5 verdict unavailable after quota termination; user disposition required",
+    "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation",
+    "separate G5/G6 independent review"
+  ],
+  "stable_implementation_source_sha256": {
+    "backend/app/runtime/__init__.py": "acc9a4b043216b2fb1b87e8600fa87871f9b0f6921611546e8bc5ae12296c403",
+    "backend/app/runtime/engine.py": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
+    "backend/app/runtime/admission.py": "2f6e24c9ecd88aeb085724ff0c7d7cc5a8bc869bde3ab231a625dfd344c766ad",
+    "backend/app/runtime/clock.py": "47053388204b0d7bca5737307c50dc3efd9976164d6a1a70b2bae75e4e7d51e8",
+    "backend/app/storage/__init__.py": "b5dd58e1c1e743acb4eb635f94c303613faab2f249ffb4e20fde9a9e7d49c7fa",
+    "backend/app/storage/repository.py": "c5254c505162dd82424089df21532642f0bd46c69ebac594c11570d1b0e31c15",
+    "backend/app/storage/events.py": "009ca00b126e399d5c279be9c254f74f2e8fbca5af6cd4963ba1ea5a662b00ff",
+    "backend/tests/runtime/test_scheduler.py": "198246a3c9730bb9e70cf9d3db150ef3758157cb3fa65ecf2db9389367341891",
+    "backend/tests/runtime/test_loops.py": "95c7a6ad4e4931cf2b3d92252cd3723ee82d2f55aaf2ed110a0a23f50cc01562",
+    "backend/tests/runtime/test_recovery.py": "e025646715f75896378015620a9dab0c08c45f06e9dab302cbf0f637a66be520",
+    "backend/tests/runtime/test_admission.py": "40ddc7092547e8c1c77b39c753bf377f05f438896116be1e3124958f478fb22f",
+    "backend/tests/storage/test_sqlite.py": "96afa27f1d8e0bfbe34c603edd4066b86ab38e1eba7e48d0298b5ef0edd0ff85",
+    "backend/pyproject.toml": "21d023bf18eb9d48d28acee0853416c86af0ab9a18dfc8caed4bfb91addad4b1",
+    "backend/uv.lock": "f5240c215933c6b12858f1edb3afbdd122f45b7aa2b2429ca8d09d6fe2e94902",
+    "backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c",
+    "backend/vendor/referencing-provenance.json": "1167e6fc28594f849a46a55b9e4a89f8f90388ffb80badab43bfbf86d1d134c8",
+    "backend/vendor/README.md": "fcd8e99f30f9f8406d6f7a05bd3bea9ab27707e2b641f4d4506f8657898fba24",
+    "scripts/rebuild_referencing.py": "62920da8f03a79e36757cfe6b21d716442aa577f03851cca1d0ff2fe1ab13015",
+    "backend/tests/contracts/test_referencing_patch.py": "bd5cf62dea040603b81e759536a6ce7e89ec3288d722ef4d1399ee296993fa87",
+    "docs/dependencies.md": "c0d635e65b71e7ef940348a6fdbc910d45fe9f89807d5731b01887ae9d4976ca",
+    "backend/Dockerfile": "031e6d968d9e1e57dd3a45fc90f3bed6d5b47fca7c079215003f9e444d59d3f7",
+    ".dockerignore": "c706e9b2fcc874d9968f9f3401ffc49d17ccbd3b1021493b21d85e27360320b9",
+    "docs/api.md": "b0c99929ae0d164d5bb2045097ca0c84166471dde741993acbb984d313ad9914",
+    "README.md": "f799227eaf9e02fc94ad8431f5e44e52780c755afdb88a18b29a6e641f6950d1"
+  }
 }

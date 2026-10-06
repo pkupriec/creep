@@ -9,7 +9,7 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 correction delivered; independent attempt5 IN REVIEW | 5/5 (two explicit user review exceptions) |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 correction delivered; attempt5 quota-terminated without verdict | 5/5 (two explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
@@ -582,9 +582,21 @@ as a local exact wheel; no schema rewriting/profile narrowing.
   Copy only exact corrected wheel before locked install, production import
   assertion; truthful known-issue/docs status. Native/Linux build/install proof
   required, not a source-matched Hermes/Ollama live claim.
-- [ ] [review] Authorized G2 attempt5 remains unspawned4 consumed. Reserve
-  after successful stable implementation; include dependency/delivery delta
-  in the same group review. No sixth attempt/automatic fix after non-PASS.
+- [x] [review] Authorized G2 attempt5 was reserved and spawned after stable
+  implementation. It terminated at the account usage-limit error before a
+  verdict or review.md append. The fifth attempt is consumed under the
+  non-resetting G2 budget; no sixth automatic attempt/fix or budget reset.
+
+## G2 attempt5 quota outcome — 2026-10-06
+
+`review_g2_f6_oct6` ran as the sole independent synthesizer with Astra/medium
+after the exact reservation above. It independently returned fresh runtime/
+storage259 and contract241Python+9frontend evidence before the account usage
+limit terminated the turn. It did not append review.md or issue PASS/FAIL.
+The attempt is nevertheless consumed because the synthesizer was spawned.
+This is missing required reviewer evidence, not a PASS and not an
+implementation defect. G2 remains blocked pending user disposition or a new
+explicitly authorized exception; automatic sixth review/fix is forbidden.
 
 ## G2 authorized attempt5 reservation — 2026-10-06
 

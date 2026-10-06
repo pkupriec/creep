@@ -668,10 +668,12 @@ network-none. Initial direct mounted-script invocation failed import because
 script location omitted /app from Python path; the corrected python-c file
 compilation uses image cwd and passes, with no application/image change.
 
-Reserve G2 fifth synthesizer attempt now for `review_g2_f6_oct6`, preserving
-non-resetting consumed history5/5 under two explicit user exceptions. Generic
-Astra/medium retains configured model and user's reasoning reduction; role
-profiles are unchanged. Only review.md append is writable. Both implementers
-are terminal/released; root waits independent verdict. No automatic sixth
-attempt or corrective wave after non-PASS. Product completion and source-
-matched live/G5/G6 gates remain OPEN independently of this module verdict.
+G2 fifth synthesizer attempt was reserved and spawned as
+`review_g2_f6_oct6`, preserving non-resetting consumed history5/5 under two
+explicit user exceptions. Generic Astra/medium retained configured model and
+the user's reasoning reduction; role profiles were unchanged. The reviewer
+returned fresh test evidence, then the account usage limit terminated it before
+review.md append or verdict. This is missing independent acceptance evidence,
+not PASS or FAIL evidence. No automatic sixth attempt/corrective wave or
+budget reset is permitted. Product completion and source-matched live/G5/G6
+gates remain OPEN independently of this missing G2 verdict.
