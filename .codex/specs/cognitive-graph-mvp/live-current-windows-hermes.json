@@ -1,0 +1,323 @@
+{
+  "result": "executed real Hermes smoke passed",
+  "base_url": "http://127.0.0.1:8080",
+  "native_platform": "Windows",
+  "cases": [
+    {
+      "stream": false,
+      "run_id": "eb1ead21d5ee4a45a5e14b7a1fe2399d",
+      "graph_id": "synthesis",
+      "hermes_source": {
+        "git_sha": "caed552de1c8a8f9983bc555512412a1ac0e0a9e",
+        "dirty_entries": 3175,
+        "sources": {
+          "run_agent.py": {
+            "sha256": "2d0592e65218bc90ab6f8152da41a666b513db1666815e175102f8e4a11dfd36",
+            "normalized_sha256": "92cc09fa750f01c89b273dd3b619384a4658d6dc1066187641a97b2f75df7594",
+            "matches_revision_normalized": true
+          },
+          "model_tools.py": {
+            "sha256": "e217e5f4191316c9ea330d0116814304220729f43e7d51a58dc8f6920226ff2f",
+            "normalized_sha256": "30a2dcb33685783935f66abef6839d06736c90196a89dd034c91c4e6eb65c2db",
+            "matches_revision_normalized": true
+          },
+          "toolsets.py": {
+            "sha256": "f72c3642c219bf2b3f61091db3c877617e151f4d77f78c40a28526f732fee692",
+            "normalized_sha256": "4571bf63115fd29bb3254f51b6096a93d4cb3a5af0e17d2ada15422eed47fdb6",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/env_loader.py": {
+            "sha256": "03e9a421e0c956ee94676d0c9aaf860b3a1ba70c209121d52ff52463ff06f563",
+            "normalized_sha256": "e33e716285a0cf472b5e68b47d629e2d0f8f8c1757057771c8aa3bd2fa07bfaf",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/timeouts.py": {
+            "sha256": "c79ba7ae22245a7852d68ddf50f5db093cce0574b784c91684a8e7cac226af1d",
+            "normalized_sha256": "731e886d67541b9b19363633c2435ebd5cbc423526c2634e9681fe267d829784",
+            "matches_revision_normalized": true
+          },
+          "agent/agent_init.py": {
+            "sha256": "70e24d5916ee4ca18e9d3f07c78c76af9f4d36f4e0ffb760915574bb859fbec2",
+            "normalized_sha256": "377f55cc9e8bdec3cd0363b01b52eebe6d8dd580f8f57c33c282c4e0095dbe8f",
+            "matches_revision_normalized": true
+          },
+          "agent/conversation_loop.py": {
+            "sha256": "b8e338f38ade1333703042563786643fe2dda04b4688125db24b44ba5d6e2f70",
+            "normalized_sha256": "cc68d371a70bd2c774b5f447d82a7b5e02bec18249a7498ee0a8dac4815a0225",
+            "matches_revision_normalized": true
+          },
+          "agent/chat_completion_helpers.py": {
+            "sha256": "42f53e6ee086479d44f55744ec54ff7f6abb37c8f8185c53e8b2f83346205d4e",
+            "normalized_sha256": "745e249211465eab0390f55844881a8f3a71b154902c9b02de393f5a2c4d314b",
+            "matches_revision_normalized": true
+          },
+          "agent/agent_runtime_helpers.py": {
+            "sha256": "d41483979b46386b5d5a2fc66bc145544fdf2918e25eda7127cc0340b9a6c201",
+            "normalized_sha256": "bd8288c188703595785b402c9d20109699ab9f77b0d5b5fe30064bba0c221c7f",
+            "matches_revision_normalized": true
+          },
+          "agent/context_compressor.py": {
+            "sha256": "6c5fc0aaaedf5c5087dea84f73da4275791706c0e07bc42a1991b06bac0acee4",
+            "normalized_sha256": "a6ea90046eb2da1429f6fc9b0dee9a29dd19cf96294a22ac4adb32e3b6b285ed",
+            "matches_revision_normalized": true
+          },
+          "agent/auxiliary_client.py": {
+            "sha256": "0a5ca40b525d2572b7dcea2b422eea2872e3d554de46a03623c848acd74586ac",
+            "normalized_sha256": "fa0b4ced568b05a4a71e6f40f5b95c943c06eb5bbb81b8fff473e45505990d7b",
+            "matches_revision_normalized": true
+          },
+          "agent/model_metadata.py": {
+            "sha256": "18c895896ad9ec9624c1bb3e5420cd9e276ac25b10cfe4727ed26b1da5df1df5",
+            "normalized_sha256": "25389eb7d4d5c3da2bb23a6fee04977732c69a8526329bae9a045f63362bea2e",
+            "matches_revision_normalized": true
+          },
+          "agent/conversation_compression.py": {
+            "sha256": "2d8456db64b0d0b92801c21c1a733eb554971f4648f6ee7511bc37e2ce553ddc",
+            "normalized_sha256": "67dab8f37f430848da2a7f33754631150f3510e6c0c4aa9aec0e14f7ad407de8",
+            "matches_revision_normalized": true
+          },
+          "agent/tool_executor.py": {
+            "sha256": "f5dbfd09bb09d4184a4b4e6f7a943357300f32a4691a0c0bd5ec0444fbd62d9f",
+            "normalized_sha256": "f82ab202dc4847b40528ea2fa9b90d8a3a85827ab2e5795d21be4724f46cdd8f",
+            "matches_revision_normalized": true
+          },
+          "agent/transports/chat_completions.py": {
+            "sha256": "d892982129b44096737859525bec04e491666a0e24241c337567d4077d7848ea",
+            "normalized_sha256": "c8ff7ce328af24561ac9793f4fddb15e09e8b1408fe0e47b1a46ccf36e8bc297",
+            "matches_revision_normalized": true
+          },
+          "tools/file_tools.py": {
+            "sha256": "2c9700226472811a5ac7c7f68a36af80248e670fba4d213c8d0bf9ed8b519cac",
+            "normalized_sha256": "32acc895ca53ae0408e0458009ec51585e0023f0d2d6ef8dc7f60059e30b91af",
+            "matches_revision_normalized": true
+          },
+          "tools/file_operations.py": {
+            "sha256": "48baa8c3988dad8eba0fe93dc0f5a4a00e5d4db85f83166d600f6999ee78a1e8",
+            "normalized_sha256": "ea9f82e26f635ee6d6fb8d974aacc9141363417d595897043994d81797d65475",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/runtime_provider.py": {
+            "sha256": "aac833278b79189e803e633aba612697f9412bbf5ff9d8b7c43ca39210ef4591",
+            "normalized_sha256": "7cfe430cdb923dfc54a57cd93b68ad2e1671a22a46337c0fcd49c7145b3c2b65",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/plugins.py": {
+            "sha256": "1be0b0574e14c92e9c30697ec0cba819b4671fed074611cec93f020aec243322",
+            "matches_revision_normalized": true
+          }
+        }
+      },
+      "physical_model": "gemma4:12b",
+      "api_calls": 3,
+      "original_sdk_client_lifecycle": [
+        {
+          "reason": "chat_completion_request",
+          "shared": false
+        },
+        {
+          "reason": "chat_completion_request",
+          "shared": false
+        },
+        {
+          "reason": "chat_completion_request",
+          "shared": false
+        }
+      ],
+      "tool_executions": 2,
+      "verified_continuations": 2,
+      "counts": {
+        "node_executions": 3,
+        "upstream_attempts": 5,
+        "tool_rounds": 2,
+        "hermes_tool_executions": 2
+      },
+      "owner_map": {
+        "cg_1a1ec434ae0d4b1a8b0f175b147fb4d4": "owner0",
+        "cg_a1438b886e3c49be84e4bfe535c9748f": "owner1"
+      },
+      "waiting_backend_restart": {
+        "project": "cg-smoke-win-current-20261006-86e89fd047bc",
+        "container": "df1f6dd50295657d911fc0ab0dd22f41e396f9f6d36d0aac49b553518be7775e",
+        "run_id": "eb1ead21d5ee4a45a5e14b7a1fe2399d",
+        "started_at_before": "2026-10-06T18:55:00.229838644Z",
+        "started_at_after": "2026-10-06T18:55:32.633398466Z",
+        "pid_before": 72379,
+        "pid_after": 73110,
+        "pending_ids": [
+          "cg_a1438b886e3c49be84e4bfe535c9748f"
+        ],
+        "counts_unchanged_before_effects": true,
+        "tool_effects_before_restart": 0
+      },
+      "native_compression": {
+        "before_messages": 28,
+        "after_messages": 6,
+        "compression_count": 1,
+        "pending_ids_before": [
+          "cg_a1438b886e3c49be84e4bfe535c9748f"
+        ],
+        "pending_ids_after": [
+          "cg_a1438b886e3c49be84e4bfe535c9748f"
+        ],
+        "results_unchanged": true,
+        "summary_model": "gemma4:12b",
+        "summary_endpoint": "http://127.0.0.1:11434/v1",
+        "fixture_tail_token_budget": 512
+      },
+      "native_guard_path": "PluginContext.register_hook(pre_tool_call) -> resolve_pre_tool_block",
+      "wall_seconds": 30.485,
+      "versions": {
+        "hermes-agent": "0.18.2",
+        "openai": "2.24.0",
+        "httpx": "0.28.1"
+      }
+    },
+    {
+      "stream": true,
+      "run_id": "10fea3dd52bf4d30bd978254c635af3d",
+      "graph_id": "hermes-ced4b6c2a3be4ea5afcf",
+      "hermes_source": {
+        "git_sha": "caed552de1c8a8f9983bc555512412a1ac0e0a9e",
+        "dirty_entries": 3175,
+        "sources": {
+          "run_agent.py": {
+            "sha256": "2d0592e65218bc90ab6f8152da41a666b513db1666815e175102f8e4a11dfd36",
+            "normalized_sha256": "92cc09fa750f01c89b273dd3b619384a4658d6dc1066187641a97b2f75df7594",
+            "matches_revision_normalized": true
+          },
+          "model_tools.py": {
+            "sha256": "e217e5f4191316c9ea330d0116814304220729f43e7d51a58dc8f6920226ff2f",
+            "normalized_sha256": "30a2dcb33685783935f66abef6839d06736c90196a89dd034c91c4e6eb65c2db",
+            "matches_revision_normalized": true
+          },
+          "toolsets.py": {
+            "sha256": "f72c3642c219bf2b3f61091db3c877617e151f4d77f78c40a28526f732fee692",
+            "normalized_sha256": "4571bf63115fd29bb3254f51b6096a93d4cb3a5af0e17d2ada15422eed47fdb6",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/env_loader.py": {
+            "sha256": "03e9a421e0c956ee94676d0c9aaf860b3a1ba70c209121d52ff52463ff06f563",
+            "normalized_sha256": "e33e716285a0cf472b5e68b47d629e2d0f8f8c1757057771c8aa3bd2fa07bfaf",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/timeouts.py": {
+            "sha256": "c79ba7ae22245a7852d68ddf50f5db093cce0574b784c91684a8e7cac226af1d",
+            "normalized_sha256": "731e886d67541b9b19363633c2435ebd5cbc423526c2634e9681fe267d829784",
+            "matches_revision_normalized": true
+          },
+          "agent/agent_init.py": {
+            "sha256": "70e24d5916ee4ca18e9d3f07c78c76af9f4d36f4e0ffb760915574bb859fbec2",
+            "normalized_sha256": "377f55cc9e8bdec3cd0363b01b52eebe6d8dd580f8f57c33c282c4e0095dbe8f",
+            "matches_revision_normalized": true
+          },
+          "agent/conversation_loop.py": {
+            "sha256": "b8e338f38ade1333703042563786643fe2dda04b4688125db24b44ba5d6e2f70",
+            "normalized_sha256": "cc68d371a70bd2c774b5f447d82a7b5e02bec18249a7498ee0a8dac4815a0225",
+            "matches_revision_normalized": true
+          },
+          "agent/chat_completion_helpers.py": {
+            "sha256": "42f53e6ee086479d44f55744ec54ff7f6abb37c8f8185c53e8b2f83346205d4e",
+            "normalized_sha256": "745e249211465eab0390f55844881a8f3a71b154902c9b02de393f5a2c4d314b",
+            "matches_revision_normalized": true
+          },
+          "agent/agent_runtime_helpers.py": {
+            "sha256": "d41483979b46386b5d5a2fc66bc145544fdf2918e25eda7127cc0340b9a6c201",
+            "normalized_sha256": "bd8288c188703595785b402c9d20109699ab9f77b0d5b5fe30064bba0c221c7f",
+            "matches_revision_normalized": true
+          },
+          "agent/context_compressor.py": {
+            "sha256": "6c5fc0aaaedf5c5087dea84f73da4275791706c0e07bc42a1991b06bac0acee4",
+            "normalized_sha256": "a6ea90046eb2da1429f6fc9b0dee9a29dd19cf96294a22ac4adb32e3b6b285ed",
+            "matches_revision_normalized": true
+          },
+          "agent/auxiliary_client.py": {
+            "sha256": "0a5ca40b525d2572b7dcea2b422eea2872e3d554de46a03623c848acd74586ac",
+            "normalized_sha256": "fa0b4ced568b05a4a71e6f40f5b95c943c06eb5bbb81b8fff473e45505990d7b",
+            "matches_revision_normalized": true
+          },
+          "agent/model_metadata.py": {
+            "sha256": "18c895896ad9ec9624c1bb3e5420cd9e276ac25b10cfe4727ed26b1da5df1df5",
+            "normalized_sha256": "25389eb7d4d5c3da2bb23a6fee04977732c69a8526329bae9a045f63362bea2e",
+            "matches_revision_normalized": true
+          },
+          "agent/conversation_compression.py": {
+            "sha256": "2d8456db64b0d0b92801c21c1a733eb554971f4648f6ee7511bc37e2ce553ddc",
+            "normalized_sha256": "67dab8f37f430848da2a7f33754631150f3510e6c0c4aa9aec0e14f7ad407de8",
+            "matches_revision_normalized": true
+          },
+          "agent/tool_executor.py": {
+            "sha256": "f5dbfd09bb09d4184a4b4e6f7a943357300f32a4691a0c0bd5ec0444fbd62d9f",
+            "normalized_sha256": "f82ab202dc4847b40528ea2fa9b90d8a3a85827ab2e5795d21be4724f46cdd8f",
+            "matches_revision_normalized": true
+          },
+          "agent/transports/chat_completions.py": {
+            "sha256": "d892982129b44096737859525bec04e491666a0e24241c337567d4077d7848ea",
+            "normalized_sha256": "c8ff7ce328af24561ac9793f4fddb15e09e8b1408fe0e47b1a46ccf36e8bc297",
+            "matches_revision_normalized": true
+          },
+          "tools/file_tools.py": {
+            "sha256": "2c9700226472811a5ac7c7f68a36af80248e670fba4d213c8d0bf9ed8b519cac",
+            "normalized_sha256": "32acc895ca53ae0408e0458009ec51585e0023f0d2d6ef8dc7f60059e30b91af",
+            "matches_revision_normalized": true
+          },
+          "tools/file_operations.py": {
+            "sha256": "48baa8c3988dad8eba0fe93dc0f5a4a00e5d4db85f83166d600f6999ee78a1e8",
+            "normalized_sha256": "ea9f82e26f635ee6d6fb8d974aacc9141363417d595897043994d81797d65475",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/runtime_provider.py": {
+            "sha256": "aac833278b79189e803e633aba612697f9412bbf5ff9d8b7c43ca39210ef4591",
+            "normalized_sha256": "7cfe430cdb923dfc54a57cd93b68ad2e1671a22a46337c0fcd49c7145b3c2b65",
+            "matches_revision_normalized": true
+          },
+          "hermes_cli/plugins.py": {
+            "sha256": "1be0b0574e14c92e9c30697ec0cba819b4671fed074611cec93f020aec243322",
+            "matches_revision_normalized": true
+          }
+        }
+      },
+      "physical_model": "gemma4:12b",
+      "api_calls": 3,
+      "original_sdk_client_lifecycle": [
+        {
+          "reason": "chat_completion_stream_request",
+          "shared": false
+        },
+        {
+          "reason": "chat_completion_stream_request",
+          "shared": false
+        },
+        {
+          "reason": "chat_completion_stream_request",
+          "shared": false
+        }
+      ],
+      "tool_executions": 2,
+      "verified_continuations": 2,
+      "counts": {
+        "node_executions": 3,
+        "upstream_attempts": 5,
+        "tool_rounds": 2,
+        "hermes_tool_executions": 2
+      },
+      "owner_map": {
+        "cg_d012e25dd8d246fbb492a2844f8b9840": "owner0",
+        "cg_71e3bf024438401d8985ac0c981671f0": "owner1"
+      },
+      "waiting_backend_restart": null,
+      "native_compression": null,
+      "native_guard_path": "PluginContext.register_hook(pre_tool_call) -> resolve_pre_tool_block",
+      "wall_seconds": 9.188,
+      "versions": {
+        "hermes-agent": "0.18.2",
+        "openai": "2.24.0",
+        "httpx": "0.28.1"
+      }
+    }
+  ],
+  "fixtures_retained": "D:\\Sources\\creep\\.venv\\hermes-production-cad11789f8ea",
+  "scope": "Real JSON/SSE/two-owner serialized continuation/replay/literal cg/synthesis; restart/compression are measured only when requested",
+  "waiting_restart_gate": "EXECUTED",
+  "compression_gate": "EXECUTED",
+  "native_backend": null
+}

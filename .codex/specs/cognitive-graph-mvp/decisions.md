@@ -1,5 +1,14 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-06 — Live harvest and G5 cycle1
+
+Both current Windows/WSL full smokes passed with actual application/wheel
+identity and independent empty container/network residue; volumes retained.
+No live rerun or unsupported speedup claim. G5-delivery now consumes1/3 before
+review_g5_compact spawn; sole review.md owner, generic Astra/medium under the
+user's reasoning preference, installed role instructions, no config change.
+G6 remains0/3, all exhausted group budgets preserved. Root waits reviewer.
+
 ## 2026-10-06 — Compact continuation / G2 retry authorization
 
 The user's explicit "proceed" follows the explained missing G2 verdict and

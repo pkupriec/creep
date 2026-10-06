@@ -1,0 +1,293 @@
+{
+  "date": "2026-10-06",
+  "scope": "G5/G6 delivery-owner current-source Windows then WSL2 full live validation; independent reviews remain open",
+  "result": "Both unchanged full smoke helpers exited 0; no failed inference or tool reruns",
+  "runtime_engine_sha256": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
+  "model": {
+    "name": "gemma4:12b",
+    "digest": "4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c",
+    "ollama_version": "0.33.3"
+  },
+  "hermes": {
+    "sha": "caed552de1c8a8f9983bc555512412a1ac0e0a9e",
+    "platform": "Windows",
+    "python": "3.11.15",
+    "versions": {
+      "hermes-agent": "0.18.2",
+      "openai": "2.24.0",
+      "httpx": "0.28.1"
+    }
+  },
+  "docker": {
+    "server": "28.3.2",
+    "compose": "2.38.2-desktop.1",
+    "daemon_id": "7f6ed163-9102-4041-85eb-959c8952577e",
+    "wsl_python": "3.12.3"
+  },
+  "phases": [
+    {
+      "caller": "Windows",
+      "project": "cg-smoke-win-current-20261006-86e89fd047bc",
+      "command": [
+        "C:\\Users\\pkupr\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+        "scripts/smoke_compose.py",
+        "--context",
+        "desktop-linux",
+        "--project",
+        "cg-smoke-win-current-20261006-86e89fd047bc",
+        "--model",
+        "gemma4:12b",
+        "--reasoning-effort",
+        "none",
+        "--hermes-python",
+        "D:/Sources/creep/.venv/hermes-research/Scripts/python.exe",
+        "--hermes-root",
+        "C:/Users/pkupr/AppData/Local/hermes/hermes-agent"
+      ],
+      "exit_code": 0,
+      "compose_evidence": "live-current-windows-compose.json",
+      "hermes_evidence": "live-current-windows-hermes.json",
+      "backend_image": "sha256:ace0000f2b7631e002f0ba8513694077417767725f2535882891466d119161cc",
+      "app_files_verified": 29,
+      "installed_packages_recorded": 22,
+      "referencing_version": "0.37.0+cg.1",
+      "wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c",
+      "app_sources_match": true,
+      "installed_wheel_members_match": true,
+      "direct_http_exchanges": 7,
+      "direct_tool_executions": 0,
+      "hermes_cases": [
+        {
+          "stream": false,
+          "graph_id": "synthesis",
+          "run_id": "eb1ead21d5ee4a45a5e14b7a1fe2399d",
+          "tool_executions": 2,
+          "verified_continuations": 2,
+          "counts": {
+            "node_executions": 3,
+            "upstream_attempts": 5,
+            "tool_rounds": 2,
+            "hermes_tool_executions": 2
+          },
+          "original_clients": 3,
+          "pinned_hermes_files": 19
+        },
+        {
+          "stream": true,
+          "graph_id": "hermes-ced4b6c2a3be4ea5afcf",
+          "run_id": "10fea3dd52bf4d30bd978254c635af3d",
+          "tool_executions": 2,
+          "verified_continuations": 2,
+          "counts": {
+            "node_executions": 3,
+            "upstream_attempts": 5,
+            "tool_rounds": 2,
+            "hermes_tool_executions": 2
+          },
+          "original_clients": 3,
+          "pinned_hermes_files": 19
+        }
+      ],
+      "waiting_restart_gate": "EXECUTED",
+      "compression_gate": "EXECUTED",
+      "target_wall_seconds": {
+        "diamond": 1.703,
+        "sequential": 1.516
+      },
+      "residue": {
+        "containers": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "ps",
+            "-aq",
+            "--filter",
+            "label=com.docker.compose.project=cg-smoke-win-current-20261006-86e89fd047bc"
+          ],
+          "exit": 0,
+          "output": []
+        },
+        "networks": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "network",
+            "ls",
+            "-q",
+            "--filter",
+            "label=com.docker.compose.project=cg-smoke-win-current-20261006-86e89fd047bc"
+          ],
+          "exit": 0,
+          "output": []
+        },
+        "volume": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "volume",
+            "ls",
+            "-q",
+            "--filter",
+            "name=^cg-smoke-win-current-20261006-86e89fd047bc_cg_data$"
+          ],
+          "exit": 0,
+          "output": [
+            "cg-smoke-win-current-20261006-86e89fd047bc_cg_data"
+          ]
+        }
+      },
+      "started_utc": "2026-10-06T18:53:04Z",
+      "finished_utc": "2026-10-06T18:56:07Z"
+    },
+    {
+      "caller": "Linux",
+      "project": "cg-smoke-wsl-current-20261006-3a026de5ca87",
+      "command": [
+        "C:\\Users\\pkupr\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+        "scripts/dev.py",
+        "smoke-compose",
+        "--project",
+        "cg-smoke-wsl-current-20261006-3a026de5ca87",
+        "--model",
+        "gemma4:12b",
+        "--reasoning-effort",
+        "none",
+        "--hermes-python",
+        "/mnt/d/Sources/creep/.venv/hermes-research/Scripts/python.exe",
+        "--hermes-root",
+        "/mnt/c/Users/pkupr/AppData/Local/hermes/hermes-agent",
+        "--hermes-docker-context",
+        "desktop-linux"
+      ],
+      "exit_code": 0,
+      "compose_evidence": "live-current-wsl-compose.json",
+      "hermes_evidence": "live-current-wsl-hermes.json",
+      "backend_image": "sha256:fda5a824510bbea3dcbe15b8f21867368db95b71ed57b944e7839de603b13d3f",
+      "app_files_verified": 29,
+      "installed_packages_recorded": 22,
+      "referencing_version": "0.37.0+cg.1",
+      "wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c",
+      "app_sources_match": true,
+      "installed_wheel_members_match": true,
+      "direct_http_exchanges": 7,
+      "direct_tool_executions": 0,
+      "hermes_cases": [
+        {
+          "stream": false,
+          "graph_id": "synthesis",
+          "run_id": "67b8a5d5476641f9af0cd1b25cb58d82",
+          "tool_executions": 2,
+          "verified_continuations": 2,
+          "counts": {
+            "node_executions": 3,
+            "upstream_attempts": 5,
+            "tool_rounds": 2,
+            "hermes_tool_executions": 2
+          },
+          "original_clients": 3,
+          "pinned_hermes_files": 19
+        },
+        {
+          "stream": true,
+          "graph_id": "hermes-d2926b5c799f40e8ba6f",
+          "run_id": "3abaa04d819f4e7a9898d1903d334237",
+          "tool_executions": 2,
+          "verified_continuations": 2,
+          "counts": {
+            "node_executions": 3,
+            "upstream_attempts": 5,
+            "tool_rounds": 2,
+            "hermes_tool_executions": 2
+          },
+          "original_clients": 3,
+          "pinned_hermes_files": 19
+        }
+      ],
+      "waiting_restart_gate": "EXECUTED",
+      "compression_gate": "EXECUTED",
+      "target_wall_seconds": {
+        "diamond": 1.536,
+        "sequential": 1.74
+      },
+      "residue": {
+        "containers": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "ps",
+            "-aq",
+            "--filter",
+            "label=com.docker.compose.project=cg-smoke-wsl-current-20261006-3a026de5ca87"
+          ],
+          "exit": 0,
+          "output": []
+        },
+        "networks": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "network",
+            "ls",
+            "-q",
+            "--filter",
+            "label=com.docker.compose.project=cg-smoke-wsl-current-20261006-3a026de5ca87"
+          ],
+          "exit": 0,
+          "output": []
+        },
+        "volume": {
+          "argv": [
+            "docker",
+            "--context",
+            "desktop-linux",
+            "volume",
+            "ls",
+            "-q",
+            "--filter",
+            "name=^cg-smoke-wsl-current-20261006-3a026de5ca87_cg_data$"
+          ],
+          "exit": 0,
+          "output": [
+            "cg-smoke-wsl-current-20261006-3a026de5ca87_cg_data"
+          ]
+        }
+      },
+      "started_utc": "2026-10-06T18:56:31Z",
+      "finished_utc": "2026-10-06T18:57:58Z"
+    }
+  ],
+  "final_readonly_listener_and_process_check": {
+    "exit_code": 0,
+    "ports": [
+      8000,
+      8080,
+      5173
+    ],
+    "listeners": [],
+    "native_smoke_python_processes": []
+  },
+  "acceptance_live_subsets": [
+    "R10",
+    "A01",
+    "A02",
+    "A07",
+    "A09 exact replay/isolation subset",
+    "A10 waiting-ID/completed-history restart subset",
+    "A11 JSON/SSE subset",
+    "A15",
+    "A16 guard/nonroot/local-boundary subset"
+  ],
+  "limitations": [
+    "Delivery-owner evidence is not an independent G5/G6 verdict or whole-MVP acceptance.",
+    "One hardware sample per shape: no speedup promise. WSL sequential right node timestamps produce -0.133643 seconds; wall-clock adjustment makes that individual duration unusable. Monotonic end-to-end wall measurements retained.",
+    "This run did not repeat arbitrary-user-data backup/restore, account authentication policy tests, frontend browser workflows, all accepted graph/control cases, or remote GitHub CI; those require their separate evidence.",
+    "WSL Compose uses the pinned Windows Hermes client through interop; no Linux import of Windows venv."
+  ],
+  "retention": "Only own fresh project containers/networks stopped via helper down without -v; both volumes and isolated Hermes fixture directories retained. Historical live JSON preserved.",
+  "preflight_note": "Bare native metadata probe failed PackageNotFoundError before adding the installed Hermes source venv path. Existing helper-prescribed metadata guard passed0 with exact pins; no installation/configuration change."
+}

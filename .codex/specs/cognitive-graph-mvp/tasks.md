@@ -9,6 +9,27 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+2026-10-06 current wave: G2 PASS6/6 and devops_live_compact terminal success
+harvested. Both current full Windows/WSL2 helpers exited0; source/wheel equality,
+real Hermes continuation/restart/replay/compression, and scoped teardown proven.
+Evidence: live-current-summary.json and its four referenced JSONs. Timing is
+one sample, with an unusable individual WSL wall-clock duration; no speed claim.
+
+G5-delivery cycle1 reservation (consumed1/3 before spawn): review_g5_compact,
+generic Astra/medium consuming installed review-agent role, sole synthesizer.
+Writes review.md append only; exact read-only delivery slice: compose.yaml,
+.env.example, .dockerignore, backend/Dockerfile, frontend/Dockerfile,
+frontend/nginx.conf, .github/workflows/ci.yml, Makefile, scripts/dev.py,
+scripts/smoke_compose.py, scripts/smoke_compose.sh, scripts/smoke_hermes.py,
+README.md, docs/runbook.md, docs/verification.md, docs/hermes-compatibility.md,
+docs/dependencies.md, current live/UI/F6 evidence and referenced prior proofs.
+Acceptance: R10/A01/A07/A10/A15/A16 delivery subsets; frozen configuration,
+external tools/Ollama, exact pins, safe lifecycle/backup docs and CI adequacy.
+Run relevant pinned focused checks; evaluate actual source-matched live proof,
+do not repeat inference/tool effects solely for review. No other writer edits
+the slice; root waits terminal independent verdict before consolidation/G6.
+All prior reservation/wave prose below is historical.
+
 G2 attempt6 result harvested: independent PASS in review.md2198+, F1–F6 closed.
 Root reconciled Low D1 status prose in README.md, docs/api.md,
 docs/dependencies.md and backend/vendor/README.md (exact documentation-only
@@ -50,8 +71,8 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | G2-runtime | DAG, loops, durable state/recovery | G1 | PASS: attempt6 closes F1–F6 | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
-| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |
-| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Historical deterministic/UI/live proof delivered; current-engine reconciliation/review OPEN; G2 F6 BLOCKED | 0/3 |
+| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Current Windows/WSL live PASS; independent review reserved | 1/3 |
+| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Current deterministic/UI/live proof delivered; independent review OPEN | 0/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
 Each product group has its own maximum three synthesizer spawns. Record consumption before spawn. Cycle 3 non-PASS is terminal.

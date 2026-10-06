@@ -8,9 +8,9 @@ authoritative requirements and acceptance definitions remain in
 ## Product status
 
 The implementation is locally testable, but the MVP is not fully accepted.
-The remaining gates are fresh current-source Hermes/Ollama Windows/WSL2
-validation and independent G5/G6
-reviews. Do not report whole-product PASS from the green local suites.
+Current-source Hermes/Ollama Windows/WSL2 validation passed; the remaining gates
+are independent G5/G6 reviews. See live-current-summary.json for exact commands,
+source/dependency identity, teardown and the limited timing sample.
 
 | Group | State | Review budget | Current gate |
 | --- | --- | ---: | --- |
@@ -19,7 +19,7 @@ reviews. Do not report whole-product PASS from the green local suites.
 | G2 runtime | PASS; F1–F6 closed | 6/6 | Independent attempt6; prior quota termination retained |
 | G3 proxy | PASS | 5/5 | User-authorized medium retry; exhausted |
 | G4 UI | PASS | 2/3 | Independent cycle 2 closed assigned findings |
-| G5 delivery | OPEN | 0/3 | Independent review remains; historical/live evidence is separate |
+| G5 delivery | REVIEWING | 1/3 | Current-source live evidence harvested; independent review reserved |
 | G6 integration | OPEN | 0/3 | Cross-group acceptance and current-source live reconciliation remain |
 
 ## Stable F6 evidence
