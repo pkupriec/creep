@@ -1,5 +1,9 @@
 # Cognitive Graph MVP decisions and blockers
 
+> Coordination shortcut: read [`current-state.md`](current-state.md) first.
+> This file retains historical decisions and evidence; consult only the
+> sections relevant to the active task.
+
 ## 2026-10-03 — initialization and team preservation
 
 - User authorized implementation, team delegation, local tests/reversible setup, and Git versioning of these artifacts. No external writes, pushes, cloud deployment, secret access or data deletion authorized.

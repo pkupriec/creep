@@ -1,5 +1,8 @@
 # Cognitive Graph MVP — provisional architecture advisory
 
+> Coordination shortcut: read [`current-state.md`](current-state.md) first.
+> This file retains complete advisory history; inspect only the active slice.
+
 Owner: `sa_g0` (sa-agent). Date: 2026-10-03, Europe/Kiev. Scope: G0 advice for G1.
 
 This report proposes implementation contracts; it does not freeze them, amend

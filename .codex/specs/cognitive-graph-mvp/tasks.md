@@ -1,5 +1,9 @@
 # Cognitive Graph MVP tasks
 
+> Coordination shortcut: read [`current-state.md`](current-state.md) first.
+> This file retains the complete historical task ledger; do not reread it for
+> routine status checks.
+
 Authority: root specification v1.1, section 12; requirement IDs R01–R11 and scenarios A01–A16 remain unchanged.
 Main thread owns artifacts, research consolidation, decisions, and orchestration. No main implementation begins before G0 passes.
 
