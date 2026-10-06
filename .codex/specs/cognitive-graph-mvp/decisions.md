@@ -601,3 +601,13 @@ The coding dispatch for this authorized exception immediately hit the account
 usage limit and produced no source change or verification. The queued G2
 review cannot start without a successful correction handoff. Step1 therefore
 remains open at the exact F6 blocker; no further retry was attempted.
+
+## 2026-10-06 — Authorized F6 continuation after quota refresh
+
+User explicitly requests one step forward with refreshed quota. Continue
+step1, retaining four consumed G2 reviews and the still-unspawned authorized
+attempt5. Fresh lifecycle inventory contains no prior agents and source hashes
+match last reviewed bytes. Replace only unfinished engine/test_loops work with
+Sol/medium coding instance; independent Astra/medium review follows verified
+correction. No team profile change, accepted-schema narrowing or live step2 /
+G5/G6 step3 expansion. Original quota failure remains historical.

@@ -512,3 +512,23 @@ review is included in this request. No automatic further fix/review if non-PASS.
   original12 runtime/storage files and exact new2file delta are read-only.
   Reprove F6 plus F1–F5 closure and assigned G2 acceptance; root reserves the
   counter before dispatch and waits for every requested result.
+
+## 2026-10-06 — Refreshed-quota continuation of authorized step 1
+
+User requests one step forward with refreshed quota. Resume the approved F6
+correction and its queued independent G2 attempt5. Fresh agent inventory has
+only root; prior medium instances are unavailable, so scoped replacements
+are needed. Current engine7a9ccb1e and loopsf574690b hashes match the last
+reviewed state. No partial coding edit or fifth synthesizer spawn occurred
+during the previous quota-failed correction. Review consumption remains4.
+
+- [-] [coding] `coding_g2_f6_oct6` replaces only the unfinished two-file scope:
+  backend/app/runtime/engine.py and backend/tests/runtime/test_loops.py.
+  Generic Sol/medium consumes installed coding-role instructions, preserving
+  the model matrix and explicit reasoning preference. Reproduce exact F6,
+  preserve all schema/reference/literal/policy semantics, prove scheduler /
+  SQLite/reconstruction/replay and invalid-output rejection. Run locked
+  targeted, runtime/full and Ruff checks. All other files are read-only.
+- [ ] [review] Queue one independent generic Astra/medium reviewer for G2
+  attempt5 after correction succeeds. Only review.md append writable. Reserve
+  counter before spawn; no automatic sixth attempt or scope expansion.
