@@ -2384,3 +2384,167 @@ is missing. Counts: Critical0,Severe0,High0,Medium0,Low1,Warning0,Suggestion0.
 D1 is non-blocking post-verdict status reconciliation. Budget remains consumed
 6/6, with no seventh automatic attempt or fix wave. Changed file: this review
 append only. Sole review.md ownership is released at this terminal handoff.
+
+## Task Group G5-delivery - Cycle 1 - 2026-10-06
+Reviewing: current delivery wave, reservation consumed1/3 in tasks.md/decisions.md.
+Synthesizer: review_g5_compact; generic instance consuming installed review-agent
+role and team-review-cycle/team-spec-workflow instructions. No analysts requested.
+Read-only slice: Compose/env/build contexts/Dockerfiles/Nginx/CI/Makefile/dev and
+smoke helpers, README, runbook/verification/Hermes/dependency docs, source-matched
+current evidence and relevant historical backup/review records. Only this append
+is written. No source/config/Git edits or live inference/tool effects occurred.
+
+### Critical / Severe / High
+None.
+
+### Medium / Low / Warning
+- **F1 Medium, blocking required verifier contract** — `scripts/smoke_compose.py:1075`
+  returns from the direct-only branch inside the protected try. If its scoped
+  teardown or residue check fails, `scripts/smoke_compose.py:1383` merely saves
+  cleanup_error in primary_error; the pending return skips the raise at1390.
+  The CLI consequently reports success while its containers/network may remain.
+  Evidence class: **empirically reproduced**, high confidence, with no Docker,
+  socket, HTTP, model or tool effects: locked-Python in-process test replaces
+  external calls, lets direct smoke succeed, makes own `down` raise
+  CommandFailure(exit73), and observes normal return. This violates the delivery
+  requirement that smoke/check/cleanup failures preserve nonzero exit. It does
+  not invalidate the recorded successful full runs, which do reach the raise.
+  Correction: arrange all successful execution branches to reach shared error
+  propagation after finally, or raise a cleanup-only failure from finally while
+  preserving an earlier primary failure. Add no-effect regression cases for
+  direct-only success, down failure, residue failure, and primary+cleanup failure;
+  verify the failing command's status is preserved, not merely a printed warning.
+- **D1 Low, non-blocking documentation drift** — `docs/runbook.md:46` still says
+  G2 BLOCKED4/4 and49 says current-engine reconciliation is open, despite its own
+  current summary and source-matched success. `docs/hermes-compatibility.md:24`
+  still calls F6 blocking, and135 introduces a current F5 blocker; the latter
+  subsection is described as historical above but remains misleadingly titled.
+  `docs/dependencies.md:41` and249–250 still leave current live reconciliation
+  open. `docs/verification.md:13` and Hermes20 also retain pre-reservation0/3.
+  Evidence class: **static-verifiable**, high confidence. Mark old snapshots
+  explicitly historical or replace status prose with the current-state pointer,
+  retaining exact earlier failures and genuine G5/G6 gates. No product criteria
+  or historical exits should be changed. This Low alone would not require FAIL.
+
+### Suggestion
+None.
+
+### Spec Alignment
+R10 and delivery subsets A01/A07/A10/A15/A16 are otherwise supported. Immutable
+image digests, exact dependency locks, local referencing wheel and one Uvicorn
+worker match the frozen configuration. Both actual platforms use only backend
+and frontend, loopback8000/8080, named cg_data:/data and external Ollama/Hermes.
+A01 literal cg/synthesis is the JSON case; SSE uses a separate dedicated graph.
+The two Hermes owners perform two native guarded fixture reads per case, resume
+their own activations, and final synthesis contains both fixture tokens.
+Current full smokes demonstrate waiting-ID backend restart before the first
+native effect, preserved counters/owners/checkpoint, and completed-history
+restart plus volume-preserving down/up. F1 is a helper failure-path defect,
+not a new product/runtime or protocol finding.
+
+### Cross-Task Consistency
+Accepted G0PASS2/G1PASS4/G2PASS6/G3PASS5/G4PASS2 remain their independent results;
+no budget is reset. Source audit here independently matched both live manifests
+against current disk:29 application files and9 input files per platform,
+22-package inventories and installed referencing member hashes against the
+committed wheel. Both manifests contain exit0 and provenance-probe0. Four live
+JSONs and summary agree on current images, IDs, original pinned Hermes files,
+two continuations per case and executed restart/compression. Backup audit uses
+its historically named image; unchanged storage source supports its narrowly
+claimed file/SQLite-copy semantics, not current inference/schema acceptance.
+
+### Security And Operations
+Static controls and live metadata agree on UID10001/101, read-only roots, tmpfs,
+cap-dropALL/no-new-privileges, one worker, no GPU/socket/host-tool mounts, and
+external execution boundaries. Nginx forwards auth/cursors, disables buffering,
+cache/gzip and configures1860second timeouts above1800second budgets. Auth/log/
+queue/limits acceptance retains separate current API/runtime/browser evidence.
+Backup instructions stop the chosen backend, preserve all files/WAL together,
+use immutable image/fresh empty volumes, validate archive paths/UIDs, and retain
+original data. Historical e4f18bc2 audit.json confirms logical SQL equality,
+pre-start file equality and post-restart IDs/checkpoints; failed physical-byte
+assumption remains exit1, corrected read-only audit remains0. No user backup or
+new restore was performed here. F1 must prevent false cleanup success.
+
+### Verification And Test Adequacy
+All fresh commands ran from D:/Sources/creep; exact pinned tooling is inherited
+through uv locked backend. In-process probes run only reviewed script logic.
+
+| Fresh reviewer command | Exit | Outcome |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml scripts/dev.py scripts/smoke_compose.py scripts/smoke_hermes.py` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml scripts/dev.py scripts/smoke_compose.py scripts/smoke_hermes.py` | 0 | Three files formatted |
+| `wsl --exec bash -n /mnt/d/Sources/creep/scripts/smoke_compose.sh` | 0 | Shell syntax |
+| `python scripts/smoke_compose.py --context desktop-linux --validate-only` | 0 | Actual Windows config/target parsing; no runtime claim |
+| `python scripts/dev.py smoke-compose --validate-only` | 0 | Actual Windows-to-WSL path/argument/config dispatch; Linux caller, no runtime claim |
+| `uv --system-certs run --project backend --locked python -c $cgProbe` | 0 | Reproduced F1: normal main return after injected down exit73; this exit0 confirms the bug, not acceptance |
+| `uv --system-certs run --project backend --locked python -c $cgAudit` | 0 | Both29-source/9-input/wheel-member audits;22 package records;19 pinned Hermes files and two verified continuations per case; six fresh residue queries |
+
+The first reviewer probe draft exited1 with an unclosed literal before importing
+or invoking application logic; corrected probe above reproduced F1. First hash
+audit exited1 on a reviewer-assumed key `referencing_member_hashes`; corrected
+actual key `referencing_sources` passed. Neither failed probe changed files.
+Each fresh residue command is the exact argv from the corresponding manifest's
+current_source_provenance containers/networks/volume fields, using
+`docker --context desktop-linux`; all6 exit0 match empty container/network arrays
+and the two retained exact-project volumes.
+
+Reproduction core for the lead (PowerShell here-string $cgProbe, then command
+above; no test file or implementation was written by this reviewer):
+```python
+import importlib.util, json, sys
+from unittest.mock import patch
+from types import SimpleNamespace
+s=importlib.util.spec_from_file_location('smoke','scripts/smoke_compose.py')
+m=importlib.util.module_from_spec(s); s.loader.exec_module(m)
+b={'ports':[{'host_ip':'127.0.0.1','published':8000}], 'volumes':[{'type':'volume','target':'/data','source':'cg_data'}], 'environment':{'CG_DATA_DIR':'/data','WEB_CONCURRENCY':'1'}}
+f={'ports':[{'host_ip':'127.0.0.1','published':8080}]}
+c={'services':{'backend':b,'frontend':f},'volumes':{'cg_data':{'name':'cg-review-cleanup_cg_data'}}}
+seen=[]
+def run(cmd,**kwargs):
+    seen.append(cmd)
+    if 'down' in cmd: raise m.CommandFailure(cmd,73)
+    if 'context' in cmd and 'show' in cmd: return 'desktop-linux'
+    if 'version' in cmd: return 'linux/amd64'
+    if 'config' in cmd and 'json' in cmd: return json.dumps(c)
+    return ''
+class Socket:
+    def __enter__(self): return self
+    def __exit__(self,*args): pass
+    def bind(self,*args): pass
+with patch.object(sys,'argv',['smoke_compose.py','--project','cg-review-cleanup','--model','fixture','--direct-only']), patch.object(m,'run',run), patch.object(m.socket,'socket',Socket), patch.object(m.subprocess,'run',return_value=SimpleNamespace(stdout=json.dumps({'sources':{}}),returncode=0)), patch.object(m,'direct_smoke',return_value={}), patch.dict(m.os.environ,{'CG_DATA_DIR':'/data','COMPOSE_PROFILES':''}):
+    m.main()
+assert any('down' in cmd for cmd in seen)
+print('BUG: main returned normally despite cleanup exit73')
+```
+
+Accepted owner commands, not rerun here: exact two full argv arrays in
+live-current-summary.json phases both exit0, respectively native
+scripts/smoke_compose.py and Windows scripts/dev.py smoke-compose through WSL.
+Each built actual images and exercised seven direct exchanges plus authentic
+Hermes JSON/SSE/replay/compression, with successful scoped down and independent
+residue proof. Source-matched g2-f6-evidence.json records full backend650,
+runtime259, contracts241Python+9frontend and lint51/drift/bothTS, all0;
+current-ui-evidence.json records frontend21, six real-backend Playwright cases
+and build0. CI pins actions/toolchains and executes these wrappers plus Compose
+config; it does not purport to supply external Hermes/Ollama. Static checks
+alone would not satisfy the live gates, but matching executed local evidence is
+present. F1 lacks an adequate cleanup-failure regression in the current gates.
+
+### Open Live Validation
+No additional required G5 successful-path live run is missing. Remote GitHub CI,
+arbitrary-user restore/cutover and WSL host-copy variant were not executed and
+are not required substitutes for the accepted isolated local drill. WSL uses
+Windows-native pinned Hermes via explicit interop, not a Linux Hermes install.
+One WSL UTC node duration is unusable after clock adjustment; no speed claim is
+accepted from one target sample. Fix F1 with no-effect lifecycle regressions;
+repeat live inference/tool effects is unnecessary for this control-flow fix.
+Independent G6 remains separate OPEN0/3, contingent on corrected G5 acceptance.
+
+### Verdict: FAIL
+Reason: reproduced F1 violates required nonzero smoke/cleanup failure reporting.
+Counts: Critical0,Severe0,High0,Medium1,Low1,Warning0,Suggestion0. G5 cycle1/3
+is consumed; one scoped fix wave and cycle2 are available under the existing
+budget. Full live successes are preserved, not relabeled as failures. Changed
+file: this review append only. Sole review.md ownership released at terminal
+handoff; no child workers were spawned or remain active under this reviewer.

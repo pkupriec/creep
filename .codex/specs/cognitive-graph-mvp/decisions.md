@@ -1,5 +1,13 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-06 — G5 cycle1 scoped fix wave
+
+Independent FAIL on reproduced smoke verifier F1; actual successful full live
+runs remain evidence. coding_g5_fix owns only helper+new isolated regressions;
+devops_g5_docs owns four delivery docs for Low D1. Medium Sol generic instances
+consume installed roles, no profile reconfiguration. No live inference rerun;
+root waits both results, then may consume G5 cycle2. G6 stays0/3.
+
 ## 2026-10-06 — Live harvest and G5 cycle1
 
 Both current Windows/WSL full smokes passed with actual application/wheel

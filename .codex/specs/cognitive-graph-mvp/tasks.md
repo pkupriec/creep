@@ -9,6 +9,21 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+G5 cycle1 FAIL harvested (review.md2388): Medium F1 direct-only early return
+swallows cleanup-only failures; full successful live runs remain valid. Low D1
+stale delivery status. Fix wave1 owners, all other files read-only:
+coding_g5_fix: scripts/smoke_compose.py and new
+backend/tests/delivery/test_compose_smoke.py, serial transfer from released
+bootstrap/delivery owners; minimal error propagation and no-effect success,
+down failure, residue failure, combined primary/cleanup regression coverage.
+devops_g5_docs: docs/runbook.md, docs/hermes-compatibility.md,
+docs/dependencies.md, docs/verification.md only; reconcile exact D1 locations,
+retain history and live evidence, current-state pointer. Both consume F1/D1
+and frozen semantics, no inference/tools/resource effects/manifest edits.
+Run locked targeted pytest/Ruff + wrapper lint/test gates as relevant; docs
+UTF8/local-link audit. Root waits BOTH terminal results before cycle2 review;
+no review reservation yet, budget remains1/3. Peer writers are file-disjoint.
+
 2026-10-06 current wave: G2 PASS6/6 and devops_live_compact terminal success
 harvested. Both current full Windows/WSL2 helpers exited0; source/wheel equality,
 real Hermes continuation/restart/replay/compression, and scoped teardown proven.
@@ -71,7 +86,7 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | G2-runtime | DAG, loops, durable state/recovery | G1 | PASS: attempt6 closes F1–F6 | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
-| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Current Windows/WSL live PASS; independent review reserved | 1/3 |
+| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Cycle1 FAIL F1; scoped fix wave1, full live PASS retained | 1/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Current deterministic/UI/live proof delivered; independent review OPEN | 0/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
