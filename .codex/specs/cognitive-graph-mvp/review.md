@@ -2658,3 +2658,144 @@ verification evidence present, no new blocking regression. Counts:
 Critical0,Severe0,High0,Medium0,Low0,Warning0,Suggestion0. Budget remains2/3.
 Changed file: review.md append only. Sole review.md ownership is released at
 this terminal handoff; no child agents were spawned or remain active.
+
+## Task Group G6-integration - Cycle 1 - 2026-10-07
+Reviewing: final integrated MVP, all unchanged R01–R11/A01–A16.
+Synthesizer: G6-cycle1, same independent generic reviewer reused from G5;
+installed review-agent/team-review-cycle/team-spec-workflow procedure. This is
+G6's preplanned distinct group, consumed1/3 before activation at db6bcfd;
+G5 remains PASS2/3. Analysts: none requested or missing. Only this append is
+written. Root waited for this terminal verdict; no concurrent product writer.
+Read the complete authoritative root specification, relevant durable artifacts,
+current acceptance matrix, final G0–G5 verdicts, current source/tests and proof.
+
+### Critical / Severe / High
+None.
+
+### Medium / Low / Warning
+- **G6-D1 Low, optional UI wording correction** —
+  `frontend/src/runs/RunDetail.tsx:53` labels `duration_seconds` as “Active
+  duration”, but `backend/app/api/runs.py:80` computes elapsed wall time from
+  start to end/now, including tool waits. A run with5 seconds active execution
+  and3600 seconds waiting therefore displays3605 seconds as active. This can
+  confuse interpretation of the separate active budget. Evidence class:
+  static-verifiable and empirically confirmed by the no-effect summary probe
+  below. Correct the label to “Elapsed duration” or “Run duration”; no API or
+  runtime redesign is needed. Runtime active/queue/tool-wait accounting and
+  enforced deadlines remain independently correct and tested, so this wording
+  does not fail A14 or another mandatory acceptance criterion.
+
+### Suggestion
+None. Previously recorded React Flow transient handle warnings, Vite directive/
+bundle-size notices and timing caveats remain limitations rather than invented
+blocking defects. No implementation correction was made by this reviewer.
+
+### Spec Alignment And Acceptance Closure
+All required behaviors and verification evidence are present. The following
+map closes the mandatory integrated scenarios, with evidence boundaries stated:
+
+| Scenario | Independently assessed integrated proof and outcome |
+| --- | --- |
+| A01 | CLOSED: both current platform JSON cases select literal cg/synthesis through pinned native Hermes and receive final synthesis. The separate SSE cases use dedicated published graphs.19 exercised Hermes files match the recorded revision; setup/version commands are documented. |
+| A02 | CLOSED: seven real public direct exchanges per platform cover ordinary/multiturn/JSON/SSE/native tool request/manual result through external Ollama; fresh API tests verify forwarding, unknown-model rejection and no graph history/tool execution. |
+| A03 | CLOSED: fresh test_acceptance.py:102 uses a two-expert barrier, checks synthesis starts afterward, lexical alternatives/correctness input order, client constraints and final-node policy. |
+| A04 | CLOSED: fresh test_chat.py:162 and test_runs.py:145 reject missing input before effects; optional-null/run tests and current graph/runtime suites demonstrate named inputs and all-provider readiness/fan-out/fan-in. |
+| A05 | CLOSED: fresh test_acceptance.py:156 runs JSON and SSE seeded draft/critique through two continues then stop, asserts exact prior iteration payloads/constant input and excludes intermediate/control output. Current disjoint-loop and schema-preservation runtime tests supplement it. |
+| A06 | CLOSED: fresh test_acceptance.py:204 proves endless continue fails budget, with no final answer; current validator/runtime checks reject missing/invalid controls, invalid/missing seed, forward/undeclared cycles and overlapping scopes. |
+| A07 | CLOSED: each real native JSON/SSE case performs two guarded fixture reads, maps results to two owning activations and verifies both fixture tokens in final synthesis. Tools execute in Hermes, not the proxy. |
+| A08 | CLOSED: fresh test_acceptance.py:229 proves internal-ID collisions yield distinct external IDs, private owner histories, downstream final payloads and parallel=false one-call delivery. Current partial/full-batch HTTP/SQLite and bridge cases verify waiting/result routing; native cases confirm actual two-owner continuation. |
+| A09 | CLOSED: fresh API/integration tests cover identical independent turns, latest-segment/compressed routing, unknown/cross-model IDs, changed repeated results, exact first-next replay and continuation disconnect. Source-matched bridge/storage tests cover concurrent durable claims; native replays retain counters/effects. |
+| A10 | CLOSED: both live JSON cases restart the actual waiting backend before first tool effect, preserving run/IDs/checkpoint/counters; original IDs then complete. Fresh test_acceptance.py:278 independently proves waiting reconstruction and uncertain active interruption without rerun. Native process/browser and volume recreation proofs retain completed history. |
+| A11 | CLOSED: fresh API tests parse tool deltas/indices/raw arguments/finish/DONE, final-only JSON/SSE equivalence, post-start errors and resource closure. Current provider Unicode/framing/boundary tests and real public/Nginx/native SSE corroborate transport behavior. |
+| A12 | CLOSED: current six Chromium cases use real native FastAPI/HTTP/SQLite, mock Ollama only, and assert persisted CRUD/prompt/ports/feedback/import/export/publication/API reload plus actual process restarts. G4's current key source/test hashes match; current-ui-evidence records all six passing plus21 unit checks/build. |
+| A13 | CLOSED: fresh diamond case edits during execution, rejects stale revision and preserves snapshot; API/graph/browser checks cover immutable hash/publication, no-write conflicts and drafts absent from models. |
+| A14 | CLOSED: fresh API/integration cases cover active/upstream timeout, cancellation/disconnect, fixed tool TTL, before-expiry waiting504 versus new-after-terminal409, no late effects and queue429. Current scheduler/admission/storage checks establish separate queue/active/tool-wait budgets. D1 concerns display wording only. |
+| A15 | CLOSED: both actual current built Windows and WSL2 Compose smokes prove UI/API/external Ollama/native Hermes/history and waiting-ID restart, source/dependency identity, successful scoped down and independent empty container/network residue with retained volumes. WSL uses explicit Windows-native Hermes interop. |
+| A16 | CLOSED: fresh auth/strict JSON/body/tool-result/namespace/token-log/shared-admission tests pass. Current graph/path/atomic-write tests, including Windows junction rejection, and live loopback/non-root/read-only/cap-drop controls complete the boundary proof. |
+
+R01–R03 map to A01/A02/A07–A11; R04–R06 to A03–A06/A11 and UI traces;
+R07–R09 to A12–A14 plus durable graph/history tests; R10 to A15/A16.
+R11 is demonstrated by versioned authoritative artifacts, installed role/workflow
+contracts, executable pinned targets and independent G0–G6 review history.
+The frozen local scope remains unchanged: no cloud/inference server/backend
+executor, one model per graph, external tools, one worker, no effectful retries
+or inference cache. There is no acceptance-profile narrowing.
+
+### Cross-Task Consistency And Source Identity
+G0 PASS2/3, G1 PASS4/4 (user exception), G2 PASS6/6 (user exceptions, F1–F6
+closed), G3 PASS5/5 (user exceptions), G4 PASS2/3 and G5 PASS2/3 were read as
+independent scoped verdicts, with historical no-verdict/FAIL outcomes retained.
+Their formerly open cross-group live gates are now discharged by the current
+whole-stack evidence; older images are not presented as current-source proof.
+
+Fresh G6 audit matched20 non-document G2 implementation/dependency/test hashes,
+all17 recorded G3 source/test hashes and5 explicitly recorded G4 key hashes.
+The immediately preceding independent G5 audit matched both29 application/
+9 input manifests,22 installed package records,15 installed wheel members and
+exact wheel archive. Its three-line helper reversal exactly reproduces the
+prior live helper hash; no product bytes changed between reviews. Four current
+live JSONs/summary agree on projects, run IDs, model/version/source pins and
+restart/compression/replay counters. Each native case has3 original SDK calls,
+2 native reads and2 verified continuations; counters remain3/5/2/2.
+
+Inspected main.py shared component composition; chat/runs/security and bridge
+routing; runtime all-port/loop/owner-history construction; storage transaction/
+claim boundaries; frontend authoritative reload/event subscriptions and native
+browser fixture. These support interaction claims beyond isolated DTO tests.
+The handoff's nonexistent frontend/e2e-server.py was corrected by the lead:
+its actual owned native fixture is embedded in frontend/e2e/mvp.spec.ts.
+The lead also corrected acceptance.md's A01 shorthand during review to distinguish
+literal JSON synthesis from dedicated SSE graph IDs; freshly re-read and accurate.
+
+### Security And Operations
+No credentials, user data, new listener/resource, inference or external tool
+was accessed/executed here. Fresh tests use isolated temporary SQLite/file data
+and mocked upstream only. Real-service proof is explicitly attributed to the
+accepted executed manifests, not to these tests. Authentication, namespace,
+strict limits, tool responsibility, source pins and safe lifecycle remain intact.
+The accepted isolated historical backup/restore drill retains its exact source
+and scope; arbitrary-user restore/migration or remote CI is not claimed.
+
+### Verification And Test Adequacy
+Fresh G6 commands from D:/Sources/creep:
+
+| Exact command | Exit | Outcome |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked pytest backend/tests/integration/test_acceptance.py backend/tests/api -q` | 0 |52 passed in7.01s; actual composed ASGI/SQLite with mock upstream |
+| `uv --system-certs run --project backend --locked python -c $cgG6Audit` | 0 |20 G2,17 G3,5 G4 hashes; both live/native JSON/SSE/source/restart/compression assertions |
+| `uv --system-certs run --project backend --locked python -c $cgTiming` | 0 |No-effect summary probe confirms D1: elapsed3605s versus recorded active5s |
+| `uv --system-certs run --project backend --locked python -c $cgEvidenceKeys` | 0 |Inspected actual manifest keys before dependent assertions |
+
+Accepted current-source broader evidence: g5-fix-evidence full661 backend and
+11 lifecycle tests, full lint52/format/generated drift/bothTS exit0;
+g2-f6-evidence runtime/storage259, contracts241Python+9frontend,28 F6 and10
+integrity cases exit0; current-ui-evidence frontend21, six native-backend browser
+cases and production build exit0. The G5 focused11/Ruff/byte audits just passed
+independently. CI targets collect these scopes and use locked dependencies;
+remote execution is distinct. No broader unchanged suite or live effects were
+repeated merely to duplicate adequate source-matched evidence.
+
+Read-only discovery returned exit1 for the nonexistent handoff server path;
+a separate search named nonexistent test_repository.py before inspecting actual
+storage/test_sqlite.py evidence. Neither was a failed product verification or
+missing acceptance test. No checks were weakened or implementation edited.
+
+### Open Live Validation And Residual Risk
+No required G6/A01–A16 live or deterministic validation gate remains open.
+Remote GitHub CI, arbitrary-user restore/cutover and native-Linux Hermes install
+were not executed and are not claimed. WSL explicitly used pinned Windows-native
+Hermes. Single target timing samples cannot promise speedup; one WSL UTC node
+duration is unusable after wall-clock adjustment, with raw evidence preserved.
+The earlier unexplained Windows native test exception remains historical,
+unassigned and undiagnosed by later green runs; current full/targeted/browser/
+actual-platform evidence does not reproduce a blocking defect. D1 and existing
+bundle/React Flow notices remain optional limitations. Coordinator final status
+reconciliation should preserve these qualifications and all historical exits.
+
+### Verdict: PASS
+G6-integration cycle1 PASS for all mandatory R01–R11/A01–A16 interactions.
+No required group, acceptance criterion, verification or live evidence is missing.
+Counts: Critical0,Severe0,High0,Medium0,Low1,Warning0,Suggestion0. D1 is optional;
+no automatic implementation/fix/review wave is requested. G6 budget stays1/3;
+other group budgets unchanged. Changed file: review.md append only. Review
+ownership released at this terminal handoff; no child agents were spawned.

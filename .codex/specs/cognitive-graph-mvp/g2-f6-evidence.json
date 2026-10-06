@@ -155,10 +155,7 @@
     "nonblocking_low": "D1 stale attempt status prose; reconciled by coordinator after PASS",
     "review_file_appended": true
   },
-  "open_gates": [
-    "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation",
-    "separate G5/G6 independent review"
-  ],
+  "open_gates": [],
   "stable_implementation_source_sha256": {
     "backend/app/runtime/__init__.py": "acc9a4b043216b2fb1b87e8600fa87871f9b0f6921611546e8bc5ae12296c403",
     "backend/app/runtime/engine.py": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
@@ -184,5 +181,11 @@
     ".dockerignore": "c706e9b2fcc874d9968f9f3401ffc49d17ccbd3b1021493b21d85e27360320b9",
     "docs/api.md": "b0c99929ae0d164d5bb2045097ca0c84166471dde741993acbb984d313ad9914",
     "README.md": "f799227eaf9e02fc94ad8431f5e44e52780c755afdb88a18b29a6e641f6950d1"
-  }
+  },
+  "open_gates_at_G2_verdict": [
+    "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation",
+    "separate G5/G6 independent review"
+  ],
+  "final_closure": "2026-10-07: source-matched live proof, G5PASS2/3 and G6PASS1/3 close all mandatory gates; final-evidence.json",
+  "source_snapshot_note": "Review-era hashes retained;20 non-MD implementation files unchanged. Documentation status reconciled after verdicts."
 }

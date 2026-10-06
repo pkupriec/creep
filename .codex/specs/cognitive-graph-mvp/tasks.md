@@ -9,13 +9,24 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+FINAL 2026-10-07: G6 independent PASS1/3 harvested; all R01–R11/A01–A16
+mandatory gates closed, G0–G6 accepted. One optional G6-D1 duration-label issue
+retained in current-state/completion; no new fix/review wave. No implementation
+writer active. Post-verdict status-only documentation ownership transferred to
+root for README.md, docs/api.md, docs/dependencies.md, docs/runbook.md,
+docs/hermes-compatibility.md, docs/verification.md, backend/vendor/README.md
+and durable spec entry points; prior source/hash snapshots remain historical.
+No required runtime/live gate is waived. Root performs final artifact/link/source
+audit and terminal-worker inventory, versions only authorized durable artifacts.
+All reservation/fix prose below is historical; do not restart accepted groups.
+
 G5 cycle2 independent PASS harvested 2026-10-07; F1/D1 closed, zero findings,
 required delivery live gates closed. review.md latest G5 section is authoritative.
 Reserve G6-integration cycle1 consumed1/3 BEFORE activating synthesizer:
 review_g5_cycle2 reused as unique instance G6-cycle1 under installed reviewer
 role/Astra-medium, sole review.md append writer, no analysts/recursive work.
 Read-only entire integrated product slice: backend/app/**, backend/tests/**,
-frontend/src/**, frontend/e2e/**, frontend/e2e-server.py, frontend/playwright.config.ts,
+frontend/src/**, frontend/e2e/**, frontend/playwright.config.ts,
 examples/**, compose.yaml, .env.example, .dockerignore, Dockerfiles/nginx,
 dependency manifests/locks, Makefile, scripts/**, .github/workflows/ci.yml,
 README/docs and authoritative spec/evidence. Writes only review.md.
@@ -123,7 +134,7 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | PASS cycle2, F1/D1 closed; live gates closed | 2/3 |
-| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Independent cycle1 reserved on current integrated evidence | 1/3 |
+| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | PASS cycle1, all mandatory acceptance/live gates closed | 1/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
 Each product group has its own maximum three synthesizer spawns. Record consumption before spawn. Cycle 3 non-PASS is terminal.

@@ -1,73 +1,46 @@
 # Cognitive Graph MVP — Current State
 
-Updated: 2026-10-07. This is the compact coordination entry point. The
-authoritative requirements and acceptance definitions remain in
-`requirements.md`, `spec.md`, and `acceptance.md`; historical detail remains in
-`tasks.md`, `decisions.md`, `review.md`, and `sa-review.md`.
+Updated: 2026-10-07. MVP IMPLEMENTED AND VERIFIED. All mandatory R01–R11 and
+A01–A16 gates closed by independent G6 review; original requirements unchanged.
+Read this compact entry point before historical ledgers.
 
-## Product status
+| Group | Independent result | Consumed review budget |
+| --- | --- | ---: |
+| G0 research | PASS | 2/3 |
+| G1 contracts | PASS | 4/4, explicit user quota exception |
+| G2 runtime | PASS; F1–F6 closed | 6/6, explicit user exceptions |
+| G3 proxy | PASS | 5/5, explicit user exceptions |
+| G4 UI | PASS | 2/3 |
+| G5 delivery | PASS; F1/D1 closed | 2/3 |
+| G6 integration | PASS; A01–A16 closed | 1/3 |
 
-The implementation is locally testable, but the MVP is not fully accepted.
-Current-source Hermes/Ollama Windows/WSL2 validation passed; the remaining gates
-are final independent G6 integration acceptance. See live-current-summary.json for exact commands,
-source/dependency identity, teardown and the limited timing sample.
+Verified evidence, all final checks exit0:
 
-| Group | State | Review budget | Current gate |
-| --- | --- | ---: | --- |
-| G0 research | PASS | 2/3 | Hermes continuation and React Flow selection recorded |
-| G1 contracts | PASS | 4/4 | User-authorized quota recovery; exhausted |
-| G2 runtime | PASS; F1–F6 closed | 6/6 | Independent attempt6; prior quota termination retained |
-| G3 proxy | PASS | 5/5 | User-authorized medium retry; exhausted |
-| G4 UI | PASS | 2/3 | Independent cycle 2 closed assigned findings |
-| G5 delivery | PASS | 2/3 | F1/D1 closed; required delivery/live evidence independently accepted |
-| G6 integration | REVIEWING | 1/3 | Final A01–A16 integration acceptance reserved |
+- [G5 correction](g5-fix-evidence.json): 661 backend tests,11 lifecycle
+  regressions, full lint/52 formats/generated drift/both TypeScript projects.
+- [G2 correction](g2-f6-evidence.json): 259 runtime/storage,241 Python+9
+  frontend contracts,28 F6 regressions,10 wheel integrity checks.
+- [UI evidence](current-ui-evidence.json): 21 unit tests,six real-backend
+  browser scenarios, production build.
+- [Current live summary](live-current-summary.json): both full Windows/WSL2
+  Compose with external Ollama and original pinned Hermes JSON/SSE; authentic
+  fixture reads, owner continuation/replay, waiting-ID restart, compression,
+  history persistence and empty owned container/network residue. Volumes retained.
+  All29 app files and installed corrected wheel match; later three-line helper
+  error-handler correction is exactly reconciled in G5.
+- [Independent reviews](review.md): final G5/G6 sections include fresh11
+  lifecycle/52 API-integration tests and source/native-proof audits.
+- [Acceptance map](acceptance.md), [completion/setup](completion.md).
 
-## Stable F6 evidence
+No mandatory blockers or open live-validation gates. Optional residuals:
+UI “Active duration” displays elapsed time including tool waits (G6-D1 Low);
+existing bundle/React Flow notices; one sample per benchmark shape and one
+unusable WSL UTC node duration; historical unassigned Windows native exception
+not diagnosed by later green suites. Remote GitHub CI, arbitrary user-data
+restore/cutover and native-Linux Hermes installation were not executed/claimed.
+WSL used explicit Windows-native Hermes interop.
 
-The accepted-schema profile and runtime engine are unchanged. The exact local
-wheel `referencing==0.37.0+cg.1` fixes only object-valued Draft3 `extends`
-crawling. Upstream wheel SHA256:
-`381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231`.
-Local wheel SHA256:
-`a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c`.
-Patched source SHA256:
-`d71d7e00650fa3411b1957b1517d95a515461d7d428753eaf7a2719c10482c86`.
-Engine SHA256:
-`7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f`.
-
-Evidence file: `g2-f6-evidence.json`.
-
-## Verified commands
-
-All commands below exited 0 with the pinned project tooling:
-
-```text
-uv --system-certs run --project backend --locked pytest backend/tests -q
-python scripts/dev.py test-runtime
-python scripts/dev.py test-contract
-python scripts/dev.py lint
-docker --context desktop-linux compose -p cg-f6-image-proof-20261006 -f compose.yaml config --quiet
-docker --context desktop-linux build --file backend/Dockerfile --tag cg-f6-backend-proof:20261006-local1 .
-```
-
-Results: backend 650 passed; runtime/storage 259 passed; contract 241 Python
-plus 9 frontend; lint, format, drift, and both TypeScript projects passed. The
-current coordinator checks also passed `npm --prefix frontend test` (21),
-`python scripts/dev.py test-e2e` (six browser cases,15.7s) and
-`python scripts/dev.py build` (typecheck/production build). Browser cases use
-real native backend/SQLite with a mock upstream, separately from live smoke.
-The
-network-isolated image proof passed under UID 10001 with the corrected wheel,
-valid/invalid F6 payloads, immutable input, Draft3/Draft4 crawling, and
-deliberately denied remote retrieval. Image ID:
-`sha256:ffc31653bf7e2ea11ed9cf22497bb67c739ae918c412232f76ebd91cd5c5e07d`.
-
-## Coordination rules for the next step
-
-Read this file plus the relevant requirement/spec sections and evidence JSON.
-Read the full historical ledgers only when reviewing their assigned history.
-G2 attempt6 PASS was harvested; no seventh G2 review or new fix wave is
-authorized automatically. See review.md's final G2 section for exact evidence.
-Do not rerun live inference or tool effects merely to reproduce historical
-evidence. Source-matched live validation must record current source/image
-hashes and remain distinct from static or mock tests.
+Exact local referencing0.37.0+cg.1 patch fixes Draft3 object-valued extends
+without narrowing accepted schemas; pins/provenance/reproduction are preserved.
+All historical FAIL/quota results and non-resetting counters remain in Git/
+tasks/decisions/review. Product remains local; no push/cloud/global team change.

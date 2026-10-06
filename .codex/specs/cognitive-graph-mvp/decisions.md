@@ -1,5 +1,15 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-07 — Final acceptance
+
+Harvest independent G6PASS1/3: all mandatory R01–R11/A01–A16 requirements,
+verification and live gates closed; G0–G6PASS with counters preserved. Retain
+optional Low G6-D1 UI elapsed-time label, warnings/timing and historical native
+exception qualifications. No scope expansion or optional fix/review loop.
+Root owns status-only final docs after reviewers/workers release, compact
+completion/current-state; full histories remain in ledgers/Git. No push or
+product commit authorized by artifact-only versioning; source remains local.
+
 ## 2026-10-07 — G5 PASS and G6 cycle1 reservation
 
 Harvest independent G5PASS2/3; all delivery findings/live gates closed. Reuse

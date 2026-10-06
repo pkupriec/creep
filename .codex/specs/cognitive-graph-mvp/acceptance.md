@@ -1,36 +1,38 @@
 # Acceptance evidence ledger
 
 Current coordination status is [current-state.md](current-state.md).
-2026-10-06: G0–G4 independently PASS; G2 at6/6 closes F1–F6. Both current-source
-Windows/WSL2 full smokes passed. G5 independently PASS2/3; G6 cycle1 is reviewing.
-The matrix below records demonstrated behavior pending final independent
-acceptance. It does not change the authoritative scenarios in spec.md.
+2026-10-07: G0–G6 independently PASS; G2 at6/6 closes F1–F6. Current-source
+Windows/WSL2 full smokes passed. G5 PASS2/3 and G6 PASS1/3 close all mandatory
+R01–R11/A01–A16 gates. The final G6 section of review.md supplies independent
+closure, with one optional Low UI duration-label issue. Definitions in spec.md
+remain unchanged.
 
 ## Current acceptance matrix
 
-Shared current evidence: g2-f6-evidence.json (650 backend,259 runtime/storage,
+Shared current evidence: g5-fix-evidence.json (661 backend,11 lifecycle regressions),
+g2-f6-evidence.json (259 runtime/storage,
 241 Python+9 frontend contracts, lint), current-ui-evidence.json (21 unit,
 six real-backend browser cases, build), live-current-summary.json and four
 referenced platform JSONs (real Hermes/Ollama and source/wheel identity).
 
 | ID | Executed evidence | Independent closure |
 | --- | --- | --- |
-| A01 | Both real Hermes JSON/SSE cases select cg/synthesis; pinned19-file source and final answer recorded | G3 PASS; G6 pending |
-| A02 | Seven direct physical-model exchanges per platform; ordinary/multiturn/tool JSON/SSE, zero proxy tool executions | G3 PASS; G6 pending |
-| A03 | integration/test_acceptance.py HTTP diamond barrier and stable port order | G2 PASS; G6 pending |
-| A04 | Graph/runtime/API tests: named required/optional inputs, fan-out/fan-in and missing-input zero inference | G2/G4 PASS; G6 pending |
-| A05 | HTTP JSON/SSE seeded two-continue loop, iteration isolation and final-only output; F5/F6 format regressions | G2 PASS; G6 pending |
-| A06 | Endless-control budget failure and graph/control/seed/cycle rejection tests | G2/G4 PASS; G6 pending |
-| A07 | Two actual Hermes native fixture reads and owner continuations per JSON/SSE platform case | G3 PASS; G6 pending |
-| A08 | HTTP/SQLite colliding-owner IDs, conservative serialization, partial/full results and parallel=false tests; real two-owner continuation | G2/G3 PASS; G6 pending |
-| A09 | Independent turns, latest-segment/unknown/changed IDs and concurrent replay tests; exact native continuation replays without extra effects | G2/G3 PASS; G6 pending |
-| A10 | Both real backend waiting-ID restarts and completed-history recreation; HTTP/SQLite uncertain-active interruption without rerun | G2/G3 PASS; G6 pending |
-| A11 | Parsed real public JSON/SSE/tool deltas/finish/DONE; provider/API malformed-stream/error/final-only equivalence tests | G3 PASS; G6 pending |
-| A12 | Six real-backend Chromium cases: CRUD/ports/prompts/feedback/import/export/publish/reload and process persistence | G4 PASS; G6 pending |
-| A13 | HTTP/SQLite and browser revision conflict no-write, immutable snapshots, draft hiding | G2/G4 PASS; G6 pending |
-| A14 | Deterministic timeout/upstream/cancel/late-result, fixed TTL, queue429 and separate timing tests | G2/G3 PASS; G6 pending |
-| A15 | Both current built production Windows/WSL2 full smokes: API/UI/external Ollama/native Hermes/restart and independent scoped teardown | G5 PASS; G6 pending |
-| A16 | Strict schema/path/auth/token-log/admission/inference tests, browser auth, live non-root/read-only/cap-drop/loopback boundaries | G1–G5 PASS; G6 pending |
+| A01 | Both platforms' real Hermes JSON cases select literal cg/synthesis; SSE uses dedicated published graphs; pinned19-file source and final answers recorded | G3 PASS; G6 PASS; CLOSED |
+| A02 | Seven direct physical-model exchanges per platform; ordinary/multiturn/tool JSON/SSE, zero proxy tool executions | G3 PASS; G6 PASS; CLOSED |
+| A03 | integration/test_acceptance.py HTTP diamond barrier and stable port order | G2 PASS; G6 PASS; CLOSED |
+| A04 | Graph/runtime/API tests: named required/optional inputs, fan-out/fan-in and missing-input zero inference | G2/G4 PASS; G6 PASS; CLOSED |
+| A05 | HTTP JSON/SSE seeded two-continue loop, iteration isolation and final-only output; F5/F6 format regressions | G2 PASS; G6 PASS; CLOSED |
+| A06 | Endless-control budget failure and graph/control/seed/cycle rejection tests | G2/G4 PASS; G6 PASS; CLOSED |
+| A07 | Two actual Hermes native fixture reads and owner continuations per JSON/SSE platform case | G3 PASS; G6 PASS; CLOSED |
+| A08 | HTTP/SQLite colliding-owner IDs, conservative serialization, partial/full results and parallel=false tests; real two-owner continuation | G2/G3 PASS; G6 PASS; CLOSED |
+| A09 | Independent turns, latest-segment/unknown/changed IDs and concurrent replay tests; exact native continuation replays without extra effects | G2/G3 PASS; G6 PASS; CLOSED |
+| A10 | Both real backend waiting-ID restarts and completed-history recreation; HTTP/SQLite uncertain-active interruption without rerun | G2/G3 PASS; G6 PASS; CLOSED |
+| A11 | Parsed real public JSON/SSE/tool deltas/finish/DONE; provider/API malformed-stream/error/final-only equivalence tests | G3 PASS; G6 PASS; CLOSED |
+| A12 | Six real-backend Chromium cases: CRUD/ports/prompts/feedback/import/export/publish/reload and process persistence | G4 PASS; G6 PASS; CLOSED |
+| A13 | HTTP/SQLite and browser revision conflict no-write, immutable snapshots, draft hiding | G2/G4 PASS; G6 PASS; CLOSED |
+| A14 | Deterministic timeout/upstream/cancel/late-result, fixed TTL, queue429 and separate timing tests | G2/G3 PASS; G6 PASS; CLOSED |
+| A15 | Both current built production Windows/WSL2 full smokes: API/UI/external Ollama/native Hermes/restart and independent scoped teardown | G5 PASS; G6 PASS; CLOSED |
+| A16 | Strict schema/path/auth/token-log/admission/inference tests, browser auth, live non-root/read-only/cap-drop/loopback boundaries | G1–G5 PASS; G6 PASS; CLOSED |
 
 Timing: same-model diamond/sequential measured once on each platform; no speedup
 promise. WSL one node's UTC duration is unusable after host clock adjustment;

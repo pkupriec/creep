@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-07",
+  "status": "MVP_IMPLEMENTED_VERIFIED",
+  "mandatory_requirements": "R01-R11 closed",
+  "acceptance_scenarios": "A01-A16 closed by independent G6",
+  "group_verdicts": {"G0": "PASS2/3", "G1": "PASS4/4 user exception", "G2": "PASS6/6 user exceptions", "G3": "PASS5/5 user exceptions", "G4": "PASS2/3", "G5": "PASS2/3", "G6": "PASS1/3"},
+  "review_authority": "review.md final G5-delivery cycle2 and G6-integration cycle1 sections",
+  "current_source_evidence": ["g2-f6-evidence.json", "g5-fix-evidence.json", "current-ui-evidence.json", "live-current-summary.json"],
+  "results": {"backend": 661, "runtime_storage": 259, "python_contracts": 241, "frontend_contracts": 9, "frontend_unit": 21, "browser_real_backend": 6, "lifecycle_regressions": 11, "independent_G6_API_integration": 52},
+  "all_final_verification_exits": 0,
+  "live_platforms": "Current built Windows and WSL2 Compose with actual external Ollama and original pinned Windows-native Hermes JSON/SSE; source/wheel identity, native effects/continuations/replay/restart/compression/history and teardown proven",
+  "later_helper_change": "Only three-line cleanup-failure handling; reversal yields exact live helper SHA. Independently accepted without repeating unchanged inference/tool effects.",
+  "open_mandatory_gates": [],
+  "blockers": [],
+  "optional_residuals": ["G6-D1 Low: UI Active duration label includes tool waits", "Existing React Flow/Vite warnings", "Single benchmark samples; one WSL UTC node duration unusable after clock adjustment; no speedup promise", "Earlier unassigned native Windows exception remains historical and undiagnosed"],
+  "unexecuted_not_claimed": ["Remote GitHub CI", "Arbitrary user-data restore/cutover", "Native Linux Hermes install; WSL used explicit Windows-native interop"],
+  "deviations": ["Exact local referencing0.37.0+cg.1 fixes upstream Draft3 extends crawler while preserving engine/profile", "Equivalent Python wrapper targets instead of unavailable native Make", "Explicitly authorized quota review exceptions and medium reasoning preserve installed Sol/Astra model matrix"],
+  "final_artifact_audit": {"command": "python .codex/.cache/cg-final-audit.py", "source_hash_comparisons": 76, "current_helper_test_hashes": 2, "acceptance_rows_closed": 16, "utf8_documents": 10, "existing_local_links": 65, "fresh_readonly_residue_queries": 6},
+  "worker_lifecycle": "Final collaboration.list_agents: all listed children terminal completed, no required worker active; no close capability exposed, terminal state confirmed",
+  "documentation_changes_after_review": "Coordinator status-only updates in seven README/API/delivery/vendor docs and compact spec entry points; recorded review-era doc hashes remain historical snapshots",
+  "local_git": "Only authorized durable specification/evidence artifacts committed; product stays in local working tree; no push/cloud deployment/data deletion"
+}
