@@ -2194,3 +2194,193 @@ No fresh real Ollama/Hermes, Windows/WSL2 Compose or production-container execut
 ### Verdict: FAIL
 
 G2-runtime attempt4 FAIL under the explicit user exception: original F5 is corrected, but empirically reproduced Medium F6 leaves required accepted-schema preservation unsatisfied. Counts: Critical0,Severe0,High0,Medium1,Low0,Warning0,Suggestion0. All requested reviewer evidence is present. Original three cycles plus this exception are consumed; G2 remains BLOCKED for user disposition. No automatic attempt5, replacement, fix wave, profile narrowing or artificial split is authorized. Changed file: review.md only (append). Sole review.md ownership is released at this terminal handoff.
+
+## Task Group G2-runtime - Authorized Attempt 6 - 2026-10-06
+
+Reviewing: terminal F6 dependency correction and unchanged G2 runtime/storage
+module acceptance. Sole independent synthesizer: `review_g2_compact`, generic
+instance consuming the installed review-agent role and team-review-cycle /
+team-spec-workflow instructions. Analysts: none requested or missing.
+Reservation: `tasks.md` active attempt6, coordinator reservation `fde0783`;
+explicit human quota-retry exception, consumed **6/6** before spawn. Attempts
+1–5, including attempt5's quota termination without a verdict, remain consumed.
+No seventh automatic review or post-terminal fix wave is authorized.
+
+Read `current-state.md` first, current requirements/spec/design, active task
+reservation, retry decision, G2 F1–F6 review history and `g2-f6-evidence.json`.
+All 24 exact implementation-source keys in that evidence manifest matched
+SHA256 before verification and immediately before this append. The engine
+remains byte-identical to attempt4; the F6 fix is the installed local wheel.
+Only this review append was written; implementation, configuration, Git,
+models, services and peer work were preserved.
+
+### Critical / Severe / High
+
+None.
+
+### Medium / Low / Warning
+
+- **Low D1 — pending-attempt status prose is stale.** `README.md:13–14`,
+  `docs/api.md:46–48` and `docs/dependencies.md:48` still describe attempt5 as
+  pending and prohibit an automatic sixth attempt. Static-verifiable: the
+  current task reservation and top decision explicitly authorize this sixth
+  review after attempt5 terminated without a verdict. This does not affect
+  runtime behavior or invalidate its source-matched verification. Reconcile
+  these status summaries, the vendor README and evidence/acceptance summaries
+  after harvesting this verdict; preserve historical counters and open live
+  gates. This is optional documentation reconciliation for G2 module PASS,
+  not authorization for another review or a whole-product completion claim.
+
+### Suggestion
+
+None.
+
+### Spec Alignment
+
+Unchanged R04/R05/R06/R07/R09 and G2 module portions of
+A03–A06/A08–A10/A13–A14/A16 are demonstrated by current source and executable
+tests. The 259-case suite exercises real scheduler/admission/validator/SQLite:
+concurrent diamond startup and lexical all-input fan-in; optional null and
+missing-required-input rejection before inference; seeded two-continue loops,
+independent scopes and immutable external inputs; strict controls and budgets;
+owner-only histories, serial exposure and durable IDs; partial/duplicate replay,
+atomic response/claim sealing, CAS races, fixed tool TTL, cancellation and late
+results; waiting/queued recovery and interruption of uncertain attempts;
+immutable snapshots/policy, retained history and bounded admission. These are
+module tests with test providers/clocks, not real Hermes/Ollama evidence.
+
+Prior finding dispositions, independently rechecked:
+
+- **F1 closed.** Failed/cancelled/interrupted state precedes saved-envelope
+  delivery. Saved-envelope and blocked-waiter regressions pass, including
+  deadline/cancel transitions; completed replay and exposure-preserving detach
+  retain their distinct behavior.
+- **F2 closed.** Controller/native JSON string and scalar payloads serialize
+  exactly; ordinary provider JSON bytes and valid length finish remain intact.
+  Malformed/non-object/constraint-breaking output fails before a success
+  envelope, including recovered tool continuations.
+- **F3 closed.** Literal const/enum/default/examples and extension values retain
+  their values; actual schema references and dual-use referenced literals are
+  separately exercised. Caller policy remains immutable.
+- **F4 closed.** Original root/nested empty and hash IDs pass. Current tests also
+  exercise absolute/relative resource IDs, declared/nested dialects, anchors,
+  dynamic and recursive scope, and escaped local pointers.
+- **F5 closed.** Draft3 single/list extends and schema-valued type/disallow
+  alternatives preserve original/emitted good/bad validation and replay.
+  Non-Draft3 literal keyword guards remain passing.
+- **F6 closed.** The 28 unchanged regression cases cover original/emitted
+  good/bad schemas, invalid controls, mapping extends, inherited forms,
+  annotation targets, root/legacy/relative/absolute IDs, recursive scope,
+  escaped and percent-encoded pointers and resolver-context boundaries.
+  Actual scheduler/SQLite commits completed envelopes only for valid output;
+  invalid output commits failed/upstream_error with no success envelope.
+  Reconstruction preserves outcome and policy without extra provider calls.
+  An additional independent 12-run probe used default installed validators
+  without Registry overrides or monkeypatches across Draft3/4/6/7/2019-09/
+  2020-12 roots and Draft3 single-extends children, each with good/bad output.
+  All original/emitted/control, persisted outcome, two-call and immutable-policy
+  assertions passed. No accepted-profile narrowing or engine workaround exists.
+
+### Cross-Slice Consistency
+
+The exact local wheel is `referencing==0.37.0+cg.1`; jsonschema remains 4.26.0.
+Manifest/uv source/lock/wheel hash and installed distribution agree. The
+bootstrap owner's 31-package/29-unrelated-block preservation audit is retained
+as attributed evidence at the matching current lock hash. Fresh integrity tests
+verify the local pin and source directly; this reviewer did not regenerate the
+lock or install another dependency.
+
+Independent fetch of ONLY the immutable provenance wheel URL into an OS
+temporary directory verified the upstream SHA. All 19 archive members were
+compared after dist-info name normalization: only `jsonschema.py`, METADATA's
+version and regenerated RECORD contents differ. The sole source change yields
+mapping-valued Draft3 extends once; list traversal and Draft4 combinators remain
+unchanged. License, dependency metadata, tests, type markers and WHEEL bytes
+are preserved. The stdlib rebuild script's `--check` reproduced the shipped
+wheel and provenance byte-for-byte. Its fresh wrong-hash regression rejects
+input without writing output. The temporary upstream archive was removed by
+its own context manager.
+
+Runtime continues to consume shared contracts/provider/bridge interfaces and
+delegates tool execution to the client. Full/contract/lint evidence below is
+accepted only for its recorded source and scope. No requested analyst or G2
+verification result is missing; G5/G6 are separate groups.
+
+### Security And Operations
+
+Dedicated-thread SQLite uses WAL, foreign keys, FULL synchronization, short
+parameterized transactions, durable unique identities and optimistic versions.
+Fresh rollback, race, immutable-result, namespace and committed-event tests
+pass. No transaction spans provider awaits. Final schema validation retains
+the deny-remote registry and sanitized failure before success. No tool executor,
+inference cache, effectful retry or inference-concurrency change was introduced.
+
+The fresh disposable image probe ran with network none, read-only filesystem,
+all capabilities dropped, no-new-privileges and UID10001. It checked installed
+source/engine hashes, original/emitted good/bad payloads, bad controls, immutable
+schema and Draft3/Draft4 traversal; intentional remote retrieval was denied.
+No inference, tools, service, volume or listener was started. `--rm` removed the
+probe container; a subsequent ancestor-filtered container listing was empty.
+No secrets or production data were accessed. Existing project/session policy
+mismatch was not changed or treated as extra authorization.
+
+### Verification And Test Adequacy
+
+All commands ran from `D:/Sources/creep`; native locked environment is Python
+3.11.15 with referencing loaded from `backend/.venv/Lib/site-packages`, not the
+discarded `.f6-probe`. No PYTHONPATH or validator monkeypatch was introduced.
+
+| Fresh reviewer command | Exit | Result |
+| --- | ---: | --- |
+| PowerShell Get-FileHash SHA256 comparison for every manifest source key, before and after checks | 0 | All 24 match |
+| `uv --system-certs run --project backend --locked pytest backend/tests/runtime/test_loops.py -q -k mixed_draft3_single_extends --tb=short` | 0 | 28 passed,138 deselected,4.01s |
+| `uv --system-certs run --project backend --locked pytest backend/tests/contracts/test_referencing_patch.py -q` | 0 | 10 passed,0.29s |
+| `python scripts/dev.py test-runtime` | 0 | Wrapper dispatched locked pytest runtime/storage;259 passed,26.05s |
+| `uv --system-certs run --project backend --locked python -c $cgDefaultProbe` | 0 | Independent 12 default-validator/scheduler/SQLite cases described above |
+| `uv --system-certs run --project backend --locked python -c $cgProbe` | 0 | Immutable upstream hash/19-member audit and rebuild script --check; byte-identical wheel/provenance |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage backend/tests/contracts/test_referencing_patch.py scripts/rebuild_referencing.py` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml backend/app/runtime backend/app/storage backend/tests/runtime backend/tests/storage backend/tests/contracts/test_referencing_patch.py scripts/rebuild_referencing.py` | 0 | 14 files already formatted |
+| `docker --context desktop-linux image inspect cg-f6-backend-proof:20261006-local1 --format '{{.Id}} {{.Config.User}}'` | 0 | Exact recorded image ID;10001:10001 |
+| `docker --context desktop-linux run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges:true --mount 'type=bind,source=D:\Sources\creep\.codex\specs\cognitive-graph-mvp\g2-f6-container-probe.py,target=/proof.py,readonly' --entrypoint python cg-f6-backend-proof:20261006-local1 -c "exec(compile(open('/proof.py').read(), '/proof.py', 'exec'))"` | 0 | All installed-image assertions pass; remote denied with _WrappedReferencingError |
+| `docker --context desktop-linux ps -a --filter ancestor=cg-f6-backend-proof:20261006-local1 --format '{{.ID}} {{.Status}}'` | 0 | Empty; no remaining probe container |
+
+Accepted current-source owner evidence from `g2-f6-evidence.json`, not claimed
+as new reviewer executions: `uv --system-certs run --project backend --locked
+pytest backend/tests -q` exit0,650 passed74.08s; `python scripts/dev.py
+test-contract` exit0,241 Python plus9 frontend and generated drift clean;
+`python scripts/dev.py lint` exit0,Ruff/51-file format/drift/both TypeScript
+projects. Attempt5 independently completed runtime259/contracts249 and lint
+before quota termination; that evidence is not an attempt5 verdict. Full and
+contract suites were not rerun merely to repeat already matched evidence.
+Owner Compose config/build exit0 is corroborated by the fresh actual image
+execution, which proves this dependency install but not the live deployment.
+
+Key SHA256 values (complete24-file map remains in the evidence manifest):
+
+- Engine: `7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f`.
+- F6 runtime tests: `95c7a6ad4e4931cf2b3d92252cd3723ee82d2f55aaf2ed110a0a23f50cc01562`.
+- Lock: `f5240c215933c6b12858f1edb3afbdd122f45b7aa2b2429ca8d09d6fe2e94902`.
+- Upstream wheel: `381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231`.
+- Local wheel: `a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c`.
+- Native/image installed source: `d71d7e00650fa3411b1957b1517d95a515461d7d428753eaf7a2719c10482c86`.
+- Image: `sha256:ffc31653bf7e2ea11ed9cf22497bb67c739ae918c412232f76ebd91cd5c5e07d`.
+
+### Open Live Validation
+
+Fresh source-matched production Hermes/Ollama Windows/WSL2 reconciliation,
+including native client continuation/process restart and integrated delivery,
+remains OPEN, as do independent G5/G6 reviews. They are planned separate gates,
+not waived requirements or missing G2-module proof. Historical images and this
+offline probe do not satisfy them. Remote CI and operator backup/restore remain
+outside this review's executed evidence. The earlier unexplained Windows native
+test exception remains a historical residual risk; later passing tests do not
+diagnose or erase it. No whole-MVP completion or universal-schema proof is made.
+
+### Verdict: PASS
+
+G2-runtime authorized attempt6 **PASS** for its assigned module acceptance.
+F1–F6 are closed by current-source executable evidence; no required G2 evidence
+is missing. Counts: Critical0,Severe0,High0,Medium0,Low1,Warning0,Suggestion0.
+D1 is non-blocking post-verdict status reconciliation. Budget remains consumed
+6/6, with no seventh automatic attempt or fix wave. Changed file: this review
+append only. Sole review.md ownership is released at this terminal handoff.

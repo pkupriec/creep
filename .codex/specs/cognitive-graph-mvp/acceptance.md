@@ -1,5 +1,12 @@
 # Acceptance evidence ledger
 
+Current coordination status is [current-state.md](current-state.md).
+2026-10-06 update: G2 independently PASSed at6/6 (F1–F6 closed); earlier rows
+below retain historical source-scoped evidence and are superseded for current
+group status. Current UI proof is current-ui-evidence.json; fresh production
+proof is live-current-summary.json when the delivery owner returns. G5/G6
+verdicts and unfinished live phases remain OPEN until independently harvested.
+
 Authority: unchanged A01–A16 in `spec.md` and root specification section 10.
 This ledger maps required evidence; planned checks are not executed checks.
 G0 research PASS proves only its pinned experiment, not these production gates.

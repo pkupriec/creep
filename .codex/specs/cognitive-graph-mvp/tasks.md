@@ -9,6 +9,28 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+G2 attempt6 result harvested: independent PASS in review.md2198+, F1–F6 closed.
+Root reconciled Low D1 status prose in README.md, docs/api.md,
+docs/dependencies.md and backend/vendor/README.md (exact documentation-only
+ownership); reviewed code/dependency20 non-MD hashes remain unchanged.
+Current UI tests/build are recorded once in current-ui-evidence.json.
+Live worker remains active; this is individual G2 harvesting, not wave closure.
+
+Active delivery validation: `devops_live_compact` owns only new
+live-current-windows-compose.json, live-current-windows-hermes.json,
+live-current-wsl-compose.json, live-current-wsl-hermes.json,
+live-current-summary.json under this directory, docs/verification.md and
+docs/runbook.md, plus ignored .codex/.cache/current-live/ logs/fixtures.
+Read-only preflight now; execute unique-project Windows then WSL full smoke
+after G2 PASS signal. R10/A01/A02/A07/A09/A10/A11/A15/A16 and current source /
+patched-dependency identity must be proven. Existing scripts are read-only;
+no model/global installs, inference/tool caching/retries, existing resources
+or data deletion. Exact commands from runbook208–244, child-local explicit
+endpoint/model/client/context. Return parsed phase evidence/exit/image/source
+hashes and residue, preserve historical JSON, label any unrun gate OPEN.
+Root waits both agents before consolidation; source/docs in G2 review stay
+unchanged during review.
+
 Active reservation 2026-10-06: `review_g2_compact` is sole synthesizer for
 G2-runtime attempt6, authorized by user's "Ok. Now with shorter context plz
 proceed" after the missing verdict/retry requirement was explained. Writes:
@@ -25,7 +47,7 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | --- | --- | --- | --- | --- |
 | G0-research | Proven Hermes continuation and editor choice | None | PASS | 2/3 |
 | G1-contracts | Frozen schema/API/scheduler/continuation contracts | G0 | PASS: user-authorized quota-recovery attempt 4 | 4/4 (one explicit user exception) |
-| G2-runtime | DAG, loops, durable state/recovery | G1 | F6 delivered; authorized attempt6 reserved | 6/6 (three explicit user review exceptions) |
+| G2-runtime | DAG, loops, durable state/recovery | G1 | PASS: attempt6 closes F1–F6 | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
 | G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Windows/WSL live PASS; independent review OPEN; owner quota failure | 0/3 |

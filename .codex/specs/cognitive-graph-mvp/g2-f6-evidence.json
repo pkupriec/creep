@@ -1,12 +1,12 @@
 {
   "group": "G2-runtime",
   "date": "2026-10-06",
-  "status": "correction_installed_required_checks_passed_independent_attempt5_reserved",
-  "authority": "user-authorized step1 F6 correction and one independent G2 attempt5; no sixth automatic attempt",
+  "status": "independent_attempt6_PASS_F1_through_F6_closed",
+  "authority": "explicit user quota-retry exception authorizes attempt6; prior1–5 retained; no seventh automatic attempt",
   "models": {
     "coding": "gpt-6.1-sol medium",
     "architecture": "gpt-6-astra medium",
-    "review": "gpt-6-astra medium queued"
+    "review": "gpt-6-astra medium; attempt6 completed PASS"
   },
   "baseline_engine_sha256": "7a9ccb1e96d5a6197e7423598d7b29f6cb37557985897c072447bc7308e5088f",
   "regression_test_sha256": "95c7a6ad4e4931cf2b3d92252cd3723ee82d2f55aaf2ed110a0a23f50cc01562",
@@ -145,14 +145,17 @@
     "initial_invocation_failure": "Direct /proof.py invocation exit1 ModuleNotFoundError app.contracts due script-directory sys.path. Corrected python-c uses /app cwd; same image/probe assertions pass."
   },
   "independent_review": {
-    "consumed": 5,
-    "authorized_attempt": 5,
-    "status": "quota_terminated_before_verdict_or_review_append",
-    "fresh_evidence_before_termination": "259 runtime/storage and241 Python+9 frontend contract tests passed",
-    "review_file_appended": false
+    "consumed": 6,
+    "authorized_attempt": 6,
+    "status": "PASS",
+    "reviewer": "review_g2_compact",
+    "review_section": "review.md#task-group-g2-runtime---authorized-attempt-6---2026-10-06",
+    "prior_attempt5": "quota terminated without verdict; runtime259/contracts241Python+9frontend evidence retained",
+    "fresh_checks": "28F6,10integrity,259runtime-storage,12independent default-validator cases,reproduction,scoped lint/format,offline image proof; all exit0",
+    "nonblocking_low": "D1 stale attempt status prose; reconciled by coordinator after PASS",
+    "review_file_appended": true
   },
   "open_gates": [
-    "independent G2 attempt5 verdict unavailable after quota termination; user disposition required",
     "separate fresh source-matched production Hermes/Ollama Windows/WSL2 validation",
     "separate G5/G6 independent review"
   ],

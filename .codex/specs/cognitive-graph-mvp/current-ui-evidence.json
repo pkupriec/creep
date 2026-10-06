@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-06",
+  "owner": "root",
+  "source_context": "current backend local patched dependency and unchanged frontend; G2 attempt6 independently PASS",
+  "verification": [
+    {"command": "npm --prefix frontend test", "exit_code": 0, "result": "21 passed,3 files,335ms"},
+    {"command": "python scripts/dev.py test-e2e", "exit_code": 0, "result": "six Playwright cases passed,15.7s; real native HTTP/backend/SQLite, mock upstream; process restart/durable tools,CRUD/ports/feedback,immutable snapshots,cancel,revision/inspector reload"},
+    {"command": "python scripts/dev.py build", "exit_code": 0, "result": "both TypeScript configs and Vite production build pass; 265 modules;509.13KB JS"}
+  ],
+  "retained_warnings": "React Flow transient missing-handle warnings during edits/import; Vite use-client directive and>500KB bundle warnings. Previously documented; no acceptance check failed.",
+  "cleanup": "E2E owned backend process stopped; fresh8000/8080/5173 listener query empty before live smoke release; fixture data retained in OS temp",
+  "live_gate": "No real inference/tools in these checks; current Windows/WSL Hermes/Ollama proof is separate."
+}
