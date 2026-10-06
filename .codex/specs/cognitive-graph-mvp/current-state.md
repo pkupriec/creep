@@ -1,6 +1,6 @@
 # Cognitive Graph MVP — Current State
 
-Updated: 2026-10-06. This is the compact coordination entry point. The
+Updated: 2026-10-07. This is the compact coordination entry point. The
 authoritative requirements and acceptance definitions remain in
 `requirements.md`, `spec.md`, and `acceptance.md`; historical detail remains in
 `tasks.md`, `decisions.md`, `review.md`, and `sa-review.md`.
@@ -19,7 +19,7 @@ source/dependency identity, teardown and the limited timing sample.
 | G2 runtime | PASS; F1–F6 closed | 6/6 | Independent attempt6; prior quota termination retained |
 | G3 proxy | PASS | 5/5 | User-authorized medium retry; exhausted |
 | G4 UI | PASS | 2/3 | Independent cycle 2 closed assigned findings |
-| G5 delivery | FIXING | 1/3 | Cycle1 FAIL: direct-only cleanup error swallowed; scoped fix wave |
+| G5 delivery | REVIEWING | 2/3 | F1/D1 fix harvested;661 backend and11 lifecycle tests passed |
 | G6 integration | OPEN | 0/3 | Cross-group acceptance and current-source live reconciliation remain |
 
 ## Stable F6 evidence

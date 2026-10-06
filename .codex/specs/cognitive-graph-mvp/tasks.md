@@ -9,6 +9,17 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+G5 fixwave1 fully harvested 2026-10-07: both coding/devops owners terminal and
+scope released. F1 minimal finally correction;11 isolated tests,661 fullbackend,
+lint52/drift/bothTS all0, D1 docs39-link audit0. g5-fix-evidence.json records
+current hashes and exact historical-helper byte reconciliation.
+Reserve G5-delivery cycle2 now2/3 BEFORE synthesizer spawn: review_g5_cycle2,
+generic Astra/medium consuming installed review role; sole review.md append
+writer. Same full delivery slice as cycle1 plus new regression file and evidence;
+focus F1/D1 closure, unchanged successful-path proof and no new blockers.
+No product/doc writer active; root waits terminal verdict before G6. No live
+effects rerun needed for verified three-line failure-handler correction.
+
 2026-10-07 quota recovery: coding_g5_fix explicitly terminated on usage limit,
 leaving partial helper/test edits. Same worker resumed only its unfinished
 scope after user's refreshed-limit instruction; no duplicate owner and no
@@ -92,7 +103,7 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | G2-runtime | DAG, loops, durable state/recovery | G1 | PASS: attempt6 closes F1–F6 | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
-| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Cycle1 FAIL F1; scoped fix wave1, full live PASS retained | 1/3 |
+| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Fixwave1 harvested; independent cycle2 reserved | 2/3 |
 | G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Current deterministic/UI/live proof delivered; independent review OPEN | 0/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.

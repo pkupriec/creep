@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-07",
+  "group": "G5-delivery",
+  "wave": "cycle1 scoped fix wave1",
+  "status": "owners completed; independent cycle2 reserved",
+  "coding_owner": "coding_g5_fix",
+  "docs_owner": "devops_g5_docs",
+  "correction": "Raise cleanup-only failure inside finally; preserve prior primary failure. All other helper bytes unchanged.",
+  "source_sha256": {
+    "scripts/smoke_compose.py": "1712873d6368daae53d3b478ce0f02e84d8a7ad46941c7b6facaf59537a04a6a",
+    "backend/tests/delivery/test_compose_smoke.py": "344ca01a1b699e1d490b75c9f62d2aa3c571e0d233aaa2953791d0496159ebf6",
+    "docs/runbook.md": "9862529d16152d92a902aa2c45f3476c4bf682f70d035aeebfebaf12f4066fb0",
+    "docs/hermes-compatibility.md": "ddf483d8e8a3b47439097b40c545086fecc3f84d0117ef47ecbc507046673096",
+    "docs/dependencies.md": "bcb63b2ea0109baa1b70cd138739566b80e14b7a6327dd4e5f00830231e2fa6b",
+    "docs/verification.md": "c46d06e2aebad9974fc54ade04931772d24d6c88b2d3723fe2e79fe941fc26e2"
+  },
+  "verification": [
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests/delivery/test_compose_smoke.py -q", "exit_code": 0, "result": "11 isolated tests passed; zero Docker/socket/HTTP/inference/tool effects"},
+    {"command": "uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml scripts/smoke_compose.py backend/tests/delivery/test_compose_smoke.py", "exit_code": 0},
+    {"command": "uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml scripts/smoke_compose.py backend/tests/delivery/test_compose_smoke.py", "exit_code": 0},
+    {"command": "python scripts/dev.py lint", "exit_code": 0, "result": "Ruff/52 formats/schema drift/both TypeScript projects"},
+    {"command": "uv --system-certs run --project backend --locked pytest backend/tests -q", "exit_code": 0, "result": "661 passed,45.11s"},
+    {"command": "devops in-memory UTF8/whitespace/local-link audit", "exit_code": 0, "result": "39 existing local links; stale current phrases removed"},
+    {"command": "coordinator current file SHA256 and git diff --check", "exit_code": 0, "result": "all six reported file hashes match"}
+  ],
+  "pre_fix_regressions": "Seven-case suite exit1:3failed4passed; down73 and container/network residue failed DID NOT RAISE. Earlier platform harness and later alias/format check errors corrected, not acceptance successes.",
+  "live_reconciliation": {
+    "prior_helper_sha256": "3bf4204d8d0626c524cdc807703f83db07d96bba4e383829a6ff54f2e7feeedb",
+    "owner_byte_audit_exit": 0,
+    "proof": "Reversing only the three-line finally correction yields exact helper hash in both live manifests; app/dependency sources unchanged. Prior full real live successes preserved; no repeated inference/tool effects.",
+    "evidence": "live-current-summary.json"
+  },
+  "remaining_gate": "independent G5 cycle2 and G6 integration review",
+  "quota_history": "First coding turn quota-terminated with partial edits; same worker resumed after explicit user refresh. No review cycle consumed by implementation resume."
+}

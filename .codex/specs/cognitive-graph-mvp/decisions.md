@@ -1,5 +1,13 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-07 — G5 cycle2 reservation
+
+Both fixwave1 workers harvested; consume2/3 before review_g5_cycle2 spawn.
+Installed reviewer role under generic Astra/medium, exact delivery scope plus
+new no-effect regression file. Preserve prior cycle1FAIL and live snapshot
+hashes; three-line helper-only correction is separately reconciled. Root waits
+independent verdict; G6 remains0/3. No automatic budget reset/live effect retry.
+
 ## 2026-10-07 — Resume unfinished G5 correction
 
 Confirmed coding_g5_fix terminal usage-limit failure and partial source/test
