@@ -1,4 +1,13 @@
-# Cognitive Graph MVP completion report — updated 2026-10-05
+# Cognitive Graph MVP completion report
+
+Current status, 2026-10-06: G0–G4 independently PASS, G2 attempt6 closes F1–F6.
+Fresh current-source Windows/WSL2 full live validation passed. G5 cycle1 review
+is active; G6 remains OPEN0/3, so whole-MVP acceptance remains open. Exact
+current evidence and commands are linked from current-state.md and the current
+matrix in acceptance.md. All sections below are historical 2026-10-05 snapshots;
+their then-open blockers do not override current evidence. A final concise
+completion report will replace this entry point after independent closure;
+Git retains prior versions.
 
 ## Outcome
 

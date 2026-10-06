@@ -1,11 +1,45 @@
 # Acceptance evidence ledger
 
 Current coordination status is [current-state.md](current-state.md).
-2026-10-06 update: G2 independently PASSed at6/6 (F1–F6 closed); earlier rows
-below retain historical source-scoped evidence and are superseded for current
-group status. Current UI proof is current-ui-evidence.json; fresh production
-proof is live-current-summary.json when the delivery owner returns. G5/G6
-verdicts and unfinished live phases remain OPEN until independently harvested.
+2026-10-06: G0–G4 independently PASS; G2 at6/6 closes F1–F6. Both current-source
+Windows/WSL2 full smokes passed. G5 cycle1 is reviewing; G6 remains OPEN0/3.
+The matrix below records demonstrated behavior pending final independent
+acceptance. It does not change the authoritative scenarios in spec.md.
+
+## Current acceptance matrix
+
+Shared current evidence: g2-f6-evidence.json (650 backend,259 runtime/storage,
+241 Python+9 frontend contracts, lint), current-ui-evidence.json (21 unit,
+six real-backend browser cases, build), live-current-summary.json and four
+referenced platform JSONs (real Hermes/Ollama and source/wheel identity).
+
+| ID | Executed evidence | Independent closure |
+| --- | --- | --- |
+| A01 | Both real Hermes JSON/SSE cases select cg/synthesis; pinned19-file source and final answer recorded | G3 PASS; G6 pending |
+| A02 | Seven direct physical-model exchanges per platform; ordinary/multiturn/tool JSON/SSE, zero proxy tool executions | G3 PASS; G6 pending |
+| A03 | integration/test_acceptance.py HTTP diamond barrier and stable port order | G2 PASS; G6 pending |
+| A04 | Graph/runtime/API tests: named required/optional inputs, fan-out/fan-in and missing-input zero inference | G2/G4 PASS; G6 pending |
+| A05 | HTTP JSON/SSE seeded two-continue loop, iteration isolation and final-only output; F5/F6 format regressions | G2 PASS; G6 pending |
+| A06 | Endless-control budget failure and graph/control/seed/cycle rejection tests | G2/G4 PASS; G6 pending |
+| A07 | Two actual Hermes native fixture reads and owner continuations per JSON/SSE platform case | G3 PASS; G6 pending |
+| A08 | HTTP/SQLite colliding-owner IDs, conservative serialization, partial/full results and parallel=false tests; real two-owner continuation | G2/G3 PASS; G6 pending |
+| A09 | Independent turns, latest-segment/unknown/changed IDs and concurrent replay tests; exact native continuation replays without extra effects | G2/G3 PASS; G6 pending |
+| A10 | Both real backend waiting-ID restarts and completed-history recreation; HTTP/SQLite uncertain-active interruption without rerun | G2/G3 PASS; G6 pending |
+| A11 | Parsed real public JSON/SSE/tool deltas/finish/DONE; provider/API malformed-stream/error/final-only equivalence tests | G3 PASS; G6 pending |
+| A12 | Six real-backend Chromium cases: CRUD/ports/prompts/feedback/import/export/publish/reload and process persistence | G4 PASS; G6 pending |
+| A13 | HTTP/SQLite and browser revision conflict no-write, immutable snapshots, draft hiding | G2/G4 PASS; G6 pending |
+| A14 | Deterministic timeout/upstream/cancel/late-result, fixed TTL, queue429 and separate timing tests | G2/G3 PASS; G6 pending |
+| A15 | Both current built production Windows/WSL2 full smokes: API/UI/external Ollama/native Hermes/restart and independent scoped teardown | G5/G6 pending |
+| A16 | Strict schema/path/auth/token-log/admission/inference tests, browser auth, live non-root/read-only/cap-drop/loopback boundaries | G1–G4 PASS; G5/G6 pending |
+
+Timing: same-model diamond/sequential measured once on each platform; no speedup
+promise. WSL one node's UTC duration is unusable after host clock adjustment;
+monotonic end-to-end durations and raw evidence are retained.
+
+## Historical acceptance snapshots
+
+Earlier group statuses/counts below are preserved historical snapshots and are
+superseded by the current matrix and current-state.md.
 
 Authority: unchanged A01–A16 in `spec.md` and root specification section 10.
 This ledger maps required evidence; planned checks are not executed checks.
