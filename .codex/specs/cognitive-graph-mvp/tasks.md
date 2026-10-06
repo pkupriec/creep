@@ -9,6 +9,12 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+2026-10-07 quota recovery: coding_g5_fix explicitly terminated on usage limit,
+leaving partial helper/test edits. Same worker resumed only its unfinished
+scope after user's refreshed-limit instruction; no duplicate owner and no
+additional review cycle. devops_g5_docs completed/released its four docs with
+UTF8/39 local-link audit0; lead inspected them. G5 remains1/3 until fix harvest.
+
 G5 cycle1 FAIL harvested (review.md2388): Medium F1 direct-only early return
 swallows cleanup-only failures; full successful live runs remain valid. Low D1
 stale delivery status. Fix wave1 owners, all other files read-only:

@@ -1,5 +1,11 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-07 — Resume unfinished G5 correction
+
+Confirmed coding_g5_fix terminal usage-limit failure and partial source/test
+edits. User refreshed quota; resumed same exact owner/scope, preserving completed
+devops docs and all review counters. No automatic review-budget exception used.
+
 ## 2026-10-06 — G5 cycle1 scoped fix wave
 
 Independent FAIL on reproduced smoke verifier F1; actual successful full live
