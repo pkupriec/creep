@@ -1,5 +1,15 @@
 # Cognitive Graph MVP decisions and blockers
 
+## 2026-10-07 — G5 PASS and G6 cycle1 reservation
+
+Harvest independent G5PASS2/3; all delivery findings/live gates closed. Reuse
+terminal independent reviewer review_g5_cycle2 as G6-cycle1 synthesizer to save
+context, consume G6's own1/3 BEFORE activation. G5 budget stays2/3; G6 is the
+distinct preplanned integration group, no artificial split/reset. Exact read-only
+whole-product slice and A01–A16 contract in tasks.md; sole review.md writer,
+root waits terminal verdict. No implementation/inference/tool effects authorized
+merely to reproduce unchanged green evidence.
+
 ## 2026-10-07 — G5 cycle2 reservation
 
 Both fixwave1 workers harvested; consume2/3 before review_g5_cycle2 spawn.

@@ -2,7 +2,7 @@
 
 Current coordination status is [current-state.md](current-state.md).
 2026-10-06: G0–G4 independently PASS; G2 at6/6 closes F1–F6. Both current-source
-Windows/WSL2 full smokes passed. G5 cycle1 is reviewing; G6 remains OPEN0/3.
+Windows/WSL2 full smokes passed. G5 independently PASS2/3; G6 cycle1 is reviewing.
 The matrix below records demonstrated behavior pending final independent
 acceptance. It does not change the authoritative scenarios in spec.md.
 
@@ -29,8 +29,8 @@ referenced platform JSONs (real Hermes/Ollama and source/wheel identity).
 | A12 | Six real-backend Chromium cases: CRUD/ports/prompts/feedback/import/export/publish/reload and process persistence | G4 PASS; G6 pending |
 | A13 | HTTP/SQLite and browser revision conflict no-write, immutable snapshots, draft hiding | G2/G4 PASS; G6 pending |
 | A14 | Deterministic timeout/upstream/cancel/late-result, fixed TTL, queue429 and separate timing tests | G2/G3 PASS; G6 pending |
-| A15 | Both current built production Windows/WSL2 full smokes: API/UI/external Ollama/native Hermes/restart and independent scoped teardown | G5/G6 pending |
-| A16 | Strict schema/path/auth/token-log/admission/inference tests, browser auth, live non-root/read-only/cap-drop/loopback boundaries | G1–G4 PASS; G5/G6 pending |
+| A15 | Both current built production Windows/WSL2 full smokes: API/UI/external Ollama/native Hermes/restart and independent scoped teardown | G5 PASS; G6 pending |
+| A16 | Strict schema/path/auth/token-log/admission/inference tests, browser auth, live non-root/read-only/cap-drop/loopback boundaries | G1–G5 PASS; G6 pending |
 
 Timing: same-model diamond/sequential measured once on each platform; no speedup
 promise. WSL one node's UTC duration is unusable after host clock adjustment;

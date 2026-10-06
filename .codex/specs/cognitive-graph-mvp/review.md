@@ -2548,3 +2548,113 @@ is consumed; one scoped fix wave and cycle2 are available under the existing
 budget. Full live successes are preserved, not relabeled as failures. Changed
 file: this review append only. Sole review.md ownership released at terminal
 handoff; no child workers were spawned or remain active under this reviewer.
+
+## Task Group G5-delivery - Cycle 2 - 2026-10-07
+Reviewing: cycle1 scoped fix wave1, consumed2/3 before spawn in tasks.md and
+ decisions.md. Synthesizer: review_g5_cycle2, generic instance consuming the
+installed review-agent role, team-review-cycle and team-spec-workflow.
+Analysts: none requested. Scope: the reserved delivery slice plus its new
+lifecycle regression file and g5-fix-evidence.json. Only this append is written;
+no implementation, Git, resource, inference or external tool effects performed.
+
+### Critical / Severe / High
+None.
+
+### Medium / Low / Warning
+None remaining in the reviewed implementation. Prior F1 and D1 are closed:
+- F1: scripts/smoke_compose.py:1381 now raises a cleanup-only exception directly
+  inside finally. This overrides the pending direct-only return, preserving
+  CommandFailure.exit_code. An existing primary error still reaches the shared
+  raise at1391, and cleanup failure cannot replace it. The successful path,
+  exact-project down without -v, and independent residue queries are unchanged.
+  Evidence: static control-flow inspection and fresh executable regressions.
+- D1: docs/runbook.md:46 and docs/hermes-compatibility.md:18 now identify accepted
+  G2/current-source live evidence. The old F5 section at Hermes136 is explicitly
+  historical; docs/dependencies.md:41 and249 and docs/verification.md:25 retain
+  historical evidence with current-state pointers. No historic failure was
+  relabeled success. Fix-wave status prose predates this cycle's verdict;
+  normal coordinator post-verdict status reconciliation remains, not a product
+  or required verification defect.
+
+### Suggestion
+None.
+
+### Spec Alignment
+R10 and assigned delivery subsets A01/A07/A10/A15/A16 remain demonstrated.
+The helper fix changes failure reporting only. Reviewed root specification,
+requirements/spec/design, frozen environment defaults and delivery interfaces
+remain aligned: backend/frontend only, loopback8000/8080, cg_data:/data, one
+backend worker, external Ollama and Hermes execution, pinned images/toolchains.
+No application/authentication/concurrency/tool policy or dependency changed.
+
+### Cross-Task Consistency
+Fresh byte audit matched all six g5-fix-evidence.json hashes. Reversing exactly
+the finally correction yields prior helper SHA256
+3bf4204d8d0626c524cdc807703f83db07d96bba4e383829a6ff54f2e7feeedb,
+matching BOTH accepted current Windows/WSL manifests. Per platform, all29
+application hashes and9 input hashes reconcile (helper by exact reversal),
+22 installed package records remain present, and all15 referencing wheel
+members equal recorded installed members. The wheel archive itself matches
+its recorded SHA256. Both provenance probes and full helper exits remain0.
+Thus successful-path live evidence remains applicable without repeating effects.
+G0–G4 independent verdicts and budgets are preserved; G6 is separate OPEN0/3.
+
+### Security And Operations
+The correction preserves scoped teardown and volume retention. Tests verify
+project selection, absence of -v/--volumes, label-filtered residue checks,
+primary-error precedence and actual CLI status73/1/29. Existing non-root,
+read-only roots/tmpfs, cap-drop, no-new-privileges, auth forwarding, SSE buffering
+controls, fixed limits and external execution boundaries remain unchanged.
+Cycle1's accepted isolated backup audit and source-matched native Hermes JSON/
+SSE/restart/replay/compression proof retain their explicit source/platform scope.
+This review does not claim a user-data restore or newly executed live smoke.
+
+### Verification And Test Adequacy
+All fresh commands ran from D:/Sources/creep with locked repository tooling:
+
+| Exact command | Exit | Result |
+| --- | ---: | --- |
+| `uv --system-certs run --project backend --locked pytest backend/tests/delivery/test_compose_smoke.py -q` | 0 | 11 passed in0.08s |
+| `uv --system-certs run --project backend --locked ruff check --config backend/pyproject.toml scripts/smoke_compose.py backend/tests/delivery/test_compose_smoke.py` | 0 | All checks passed |
+| `uv --system-certs run --project backend --locked ruff format --check --config backend/pyproject.toml scripts/smoke_compose.py backend/tests/delivery/test_compose_smoke.py` | 0 | Two files formatted |
+| `uv --system-certs run --project backend --locked python -c $cgAudit` | 0 | Six hashes, exact helper reversal, both29-source/9-input/wheel-member audits |
+| `uv --system-certs run --project backend --locked python -c $cgMore` | 0 | Both22-package inventories and installed/wheel member equality |
+
+The first reviewer byte-reversal draft exited1 because it assumed LF in a CRLF
+file; the corrected byte-preserving audit above passed. This was a reviewer
+probe error, not an implementation or evidence mismatch; no file was changed.
+The small inspection commands also exited0. No new validate-only/live invocation
+was necessary for this isolated error-handler change and unchanged delivery
+configuration; cycle1's executed Windows/WSL static dispatch checks are retained.
+
+Regression adequacy: tests at delivery/test_compose_smoke.py:175–265 exercise
+real main control flow with effects forbidden/intercepted, direct success,
+down failure, both residue failures, combined primary/cleanup failures, the
+actual parsed CLI guard and full-path success/cleanup failure. They assert
+numeric exits, not only log messages. Recorded pre-fix3failed/4passed proves the
+original missing-raise cases. CI's test wrapper collects backend/tests, including
+this file; its lint wrapper includes tests/scripts. The mocks intentionally
+prove error control flow, not Docker runtime semantics.
+
+Accepted source-matched owner evidence in g5-fix-evidence.json: full locked
+backend661passed45.11s exit0; python scripts/dev.py lint exit0 (Ruff52 formats,
+schema drift, both TypeScript projects); four-doc UTF8/local-link audit39 exit0.
+Those broader unchanged-source checks were assessed rather than repeated.
+Actual Windows/WSL successful build/health/Ollama/Hermes/restart/teardown proof
+remains in live-current-summary.json and its four manifests, independently
+reviewed in cycle1 and freshly byte-reconciled here. Static tests alone are not
+being substituted for that executed evidence.
+
+### Open Live Validation
+No required G5 live-validation gate remains open. Remote GitHub CI execution,
+arbitrary user-data restore/cutover and the WSL host-copy variant remain unrun
+and explicitly outside the accepted isolated local drill's claims. Existing
+single-sample/WSL wall-clock timing limitations remain; no speed guarantee.
+G6 independent whole-product integration acceptance remains OPEN0/3.
+
+### Verdict: PASS
+G5-delivery cycle2 PASS; F1/D1 closed, required delivery acceptance and
+verification evidence present, no new blocking regression. Counts:
+Critical0,Severe0,High0,Medium0,Low0,Warning0,Suggestion0. Budget remains2/3.
+Changed file: review.md append only. Sole review.md ownership is released at
+this terminal handoff; no child agents were spawned or remain active.

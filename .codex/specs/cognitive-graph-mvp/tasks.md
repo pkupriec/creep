@@ -9,6 +9,25 @@ Main thread owns artifacts, research consolidation, decisions, and orchestration
 
 ## Stable groups and non-resetting review budgets
 
+G5 cycle2 independent PASS harvested 2026-10-07; F1/D1 closed, zero findings,
+required delivery live gates closed. review.md latest G5 section is authoritative.
+Reserve G6-integration cycle1 consumed1/3 BEFORE activating synthesizer:
+review_g5_cycle2 reused as unique instance G6-cycle1 under installed reviewer
+role/Astra-medium, sole review.md append writer, no analysts/recursive work.
+Read-only entire integrated product slice: backend/app/**, backend/tests/**,
+frontend/src/**, frontend/e2e/**, frontend/e2e-server.py, frontend/playwright.config.ts,
+examples/**, compose.yaml, .env.example, .dockerignore, Dockerfiles/nginx,
+dependency manifests/locks, Makefile, scripts/**, .github/workflows/ci.yml,
+README/docs and authoritative spec/evidence. Writes only review.md.
+Acceptance: unchanged R01–R11/A01–A16 and G0–G5 outcomes, all shared contracts,
+all-input/seed/condition/continuation/snapshot/external boundary semantics.
+Run focused locked integration/API checks; evaluate current661 backend,
+contracts241Python+9TS, frontend21, six real-backend Playwright/build/lint and
+actual current live proof with exact three-line helper reconciliation.
+Do not repeat unchanged live effects or historical full suites without a new
+concern. Missing required evidence means FAIL. Root waits terminal verdict;
+no implementation/docs writer active. Earlier reservations below historical.
+
 G5 fixwave1 fully harvested 2026-10-07: both coding/devops owners terminal and
 scope released. F1 minimal finally correction;11 isolated tests,661 fullbackend,
 lint52/drift/bothTS all0, D1 docs39-link audit0. g5-fix-evidence.json records
@@ -103,8 +122,8 @@ writer. Other owners may perform disjoint live preflight without product edits.
 | G2-runtime | DAG, loops, durable state/recovery | G1 | PASS: attempt6 closes F1–F6 | 6/6 (three explicit user review exceptions) |
 | G3-proxy | Ollama, Hermes tool bridge, JSON/SSE | G1; integrate G2 | PASS: user-authorized medium-reasoning attempt 5 | 5/5 (two explicit user exceptions) |
 | G4-ui | Editor, files API, history/traces | G1; integrate G2/G3 | PASS: cycle 2 closes F1/F2 | 2/3 |
-| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | Fixwave1 harvested; independent cycle2 reserved | 2/3 |
-| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Current deterministic/UI/live proof delivered; independent review OPEN | 0/3 |
+| G5-delivery | Compose, CI, runbooks | G1; smoke G2–G4 | PASS cycle2, F1/D1 closed; live gates closed | 2/3 |
+| G6-integration | A01–A16, real Hermes/Windows/WSL2 | G2–G5 | Independent cycle1 reserved on current integrated evidence | 1/3 |
 
 G-TEAM-SETUP is a separate, previously exhausted 3/3 PASS group. No setup reviewer is respawned.
 Each product group has its own maximum three synthesizer spawns. Record consumption before spawn. Cycle 3 non-PASS is terminal.
