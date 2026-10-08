@@ -1,0 +1,28 @@
+name: Locked local checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11.15'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.14.0'
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          version: '0.11.28'
+          enable-cache: false
+      - run: python scripts/dev.py setup
+      - run: npm --prefix frontend run browser:install -- --with-deps
+      - run: python scripts/dev.py lint
+      - run: python scripts/dev.py test-contract
+      - run: python scripts/dev.py test
+      - run: python scripts/dev.py build
+      - run: python scripts/dev.py test-e2e
+      - run: docker compose -p cg-ci -f compose.yaml config --quiet

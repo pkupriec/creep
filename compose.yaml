@@ -1,0 +1,71 @@
+name: cognitive-graph
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434/v1}
+      CG_DATA_DIR: /data
+      CG_API_TOKEN: ${CG_API_TOKEN:-}
+      CG_MAX_PARALLEL_LLM: ${CG_MAX_PARALLEL_LLM:-2}
+      CG_MAX_ACTIVE_RUNS: ${CG_MAX_ACTIVE_RUNS:-4}
+      CG_MAX_QUEUED_RUNS: ${CG_MAX_QUEUED_RUNS:-20}
+      CG_LLM_TIMEOUT_SECONDS: ${CG_LLM_TIMEOUT_SECONDS:-300}
+      CG_RUN_ACTIVE_TIMEOUT_SECONDS: ${CG_RUN_ACTIVE_TIMEOUT_SECONDS:-1800}
+      CG_TOOL_WAIT_TIMEOUT_SECONDS: ${CG_TOOL_WAIT_TIMEOUT_SECONDS:-1800}
+      CG_MAX_NODE_EXECUTIONS: ${CG_MAX_NODE_EXECUTIONS:-100}
+      CG_MAX_TOOL_ROUNDS: ${CG_MAX_TOOL_ROUNDS:-20}
+      CG_HISTORY_RETENTION_DAYS: ${CG_HISTORY_RETENTION_DAYS:-30}
+      WEB_CONCURRENCY: "1"
+    volumes:
+      - cg_data:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 45s
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3).close()"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 6
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    init: true
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      CG_RUN_ACTIVE_TIMEOUT_SECONDS: ${CG_RUN_ACTIVE_TIMEOUT_SECONDS:-1800}
+      CG_TOOL_WAIT_TIMEOUT_SECONDS: ${CG_TOOL_WAIT_TIMEOUT_SECONDS:-1800}
+      CG_LLM_TIMEOUT_SECONDS: ${CG_LLM_TIMEOUT_SECONDS:-300}
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 45s
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, "http://127.0.0.1:8080/health/live"]
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 6
+
+volumes:
+  cg_data:

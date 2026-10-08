@@ -1,6 +1,7 @@
 # Derived state; durable .codex configuration and specs remain versionable.
 .codex/.cache/
 .codex/logs/
+.codex/specs/cognitive-graph-mvp/.f6-probe/
 .cache/
 
 # Local research and product dependency/build output.

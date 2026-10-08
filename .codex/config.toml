@@ -1,0 +1,33 @@
+# Project-only team settings. Authentication, provider and sandbox are inherited.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+approvals_reviewer = "user"
+
+# No external connectors are required for the local team workflow.
+[features]
+apps = false
+
+[apps._default]
+enabled = false
+approvals_reviewer = "user"
+default_tools_approval_mode = "prompt"
+
+[mcp_servers.playwright]
+enabled = false
+command = "npx"
+args = ["@playwright/mcp@0.0.70"]
+default_tools_approval_mode = "prompt"
+
+[mcp_servers.node_repl]
+enabled = false
+command = 'C:\Users\pkupr\AppData\Local\OpenAI\Codex\runtimes\cua_node\45309f9050f7314b\bin\node_repl.exe'
+args = []
+default_tools_approval_mode = "prompt"
+
+[agents]
+max_concurrent_threads_per_session = 3
+max_depth = 1
+
+[plugins."codex-agent-team@creep-local"]
+enabled = true

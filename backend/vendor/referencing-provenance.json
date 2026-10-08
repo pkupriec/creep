@@ -1,0 +1,131 @@
+{
+  "license": "MIT; upstream COPYING retained byte-for-byte",
+  "local_version": "0.37.0+cg.1",
+  "member_delta": [
+    {
+      "content_changed": true,
+      "local": "referencing-0.37.0+cg.1.dist-info/METADATA",
+      "upstream": "referencing-0.37.0.dist-info/METADATA"
+    },
+    {
+      "content_changed": true,
+      "local": "referencing-0.37.0+cg.1.dist-info/RECORD",
+      "upstream": "referencing-0.37.0.dist-info/RECORD"
+    },
+    {
+      "content_changed": false,
+      "local": "referencing-0.37.0+cg.1.dist-info/WHEEL",
+      "upstream": "referencing-0.37.0.dist-info/WHEEL"
+    },
+    {
+      "content_changed": false,
+      "local": "referencing-0.37.0+cg.1.dist-info/licenses/COPYING",
+      "upstream": "referencing-0.37.0.dist-info/licenses/COPYING"
+    },
+    {
+      "content_changed": true,
+      "local": "referencing/jsonschema.py",
+      "upstream": "referencing/jsonschema.py"
+    }
+  ],
+  "members": {
+    "referencing-0.37.0+cg.1.dist-info/METADATA": {
+      "sha256": "e0d37948a4bbab98fb8c079310e857830b2d31c64427ecb4a090c0d0354db999",
+      "size": 2850
+    },
+    "referencing-0.37.0+cg.1.dist-info/RECORD": {
+      "sha256": "f0bb18308fbf29cbcc804667570a30047776230d3d90f4e435a3fae6943064e6",
+      "size": 1602
+    },
+    "referencing-0.37.0+cg.1.dist-info/WHEEL": {
+      "sha256": "aad0b0a12256807936d52d4a6f88a1773236ae527564a688bab4e3fe780e8724",
+      "size": 87
+    },
+    "referencing-0.37.0+cg.1.dist-info/licenses/COPYING": {
+      "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+      "size": 1057
+    },
+    "referencing/__init__.py": {
+      "sha256": "e4864a5da007fc55b20894646939f55dca6d2df83d72f78b6fdbb99d853124ab",
+      "size": 207
+    },
+    "referencing/_attrs.py": {
+      "sha256": "6e04fe28c84354b786b56c4cfd218a61e2da6411734f691454574090e7178bc8",
+      "size": 791
+    },
+    "referencing/_attrs.pyi": {
+      "sha256": "836c17f9a2c4a9002f594facd2a20dd8e30602a8ce03447bd91fee49f7cef3f3",
+      "size": 573
+    },
+    "referencing/_core.py": {
+      "sha256": "d923c67da4efcc0dec46a6e3ff8476c02fbe7e25e8942515a4b14b249eb3759f",
+      "size": 24732
+    },
+    "referencing/exceptions.py": {
+      "sha256": "cc581a120e9688a793e7c310b8a36c8060e71ecce9dba738a11782eac17d8073",
+      "size": 4176
+    },
+    "referencing/jsonschema.py": {
+      "sha256": "d71d7e00650fa3411b1957b1517d95a515461d7d428753eaf7a2719c10482c86",
+      "size": 18772
+    },
+    "referencing/py.typed": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "referencing/retrieval.py": {
+      "sha256": "727f4478075a6936e7303742e094488621295c38df95174708e2c5af0d5984b0",
+      "size": 2729
+    },
+    "referencing/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "referencing/tests/test_core.py": {
+      "sha256": "79aa74080688db7be33086d5c848fddaa2dd769de21c7dc0c42e7908a50de0b5",
+      "size": 37854
+    },
+    "referencing/tests/test_exceptions.py": {
+      "sha256": "ede39d1f2a1b5ccb7bfa1e409e71fbbbc8b0dae1cf687ed4e01b3d2612e08d6a",
+      "size": 934
+    },
+    "referencing/tests/test_jsonschema.py": {
+      "sha256": "e109e35163803009f9c9e03c66d95d264848e78bf02962560742c3ccd771e717",
+      "size": 11687
+    },
+    "referencing/tests/test_referencing_suite.py": {
+      "sha256": "c03eaf78c7cbb14bb4b3830b8e6ee94bc720e1c21f2fb14c044367824ef7cc22",
+      "size": 2335
+    },
+    "referencing/tests/test_retrieval.py": {
+      "sha256": "bdc6e77c0e13a957aa5335b4ef7c0efa72dea9522fd2b41958d5afd33f649b8f",
+      "size": 3719
+    },
+    "referencing/typing.py": {
+      "sha256": "5a351b9d9ea33c0777d5c9c214069e588544373c87b47749c8e95e96fd4663bd",
+      "size": 1445
+    }
+  },
+  "patch": "--- referencing/jsonschema.py (upstream)\n+++ referencing/jsonschema.py (local)\n@@ -250,7 +250,11 @@\n                 yield contents[each]\n         for each in in_subarray:\n             if each in contents:\n-                yield from contents[each]\n+                value = contents[each]\n+                if each == \"extends\" and isinstance(value, Mapping):\n+                    yield value\n+                else:\n+                    yield from value\n         for each in in_subvalues:\n             if each in contents:\n                 yield from contents[each].values()\n",
+  "patched_source_sha256": "d71d7e00650fa3411b1957b1517d95a515461d7d428753eaf7a2719c10482c86",
+  "reason": "F6: Draft3 mapping-valued extends must yield one schema during crawling",
+  "source": "wheel-derived runtime source; not a full upstream checkout",
+  "upstream_sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231",
+  "upstream_source_sha256": "8d767ab7ac7da13bd31cc202d2d4726858d6e6bdaa78739b62ebbb52149f2b74",
+  "upstream_url": "https://files.pythonhosted.org/packages/2c/58/ca301544e1fa93ed4f80d724bf5b194f6e4b945841c5bfd555878eea9fcb/referencing-0.37.0-py3-none-any.whl",
+  "upstream_version": "0.37.0",
+  "wheel_filename": "referencing-0.37.0+cg.1-py3-none-any.whl",
+  "wheel_sha256": "a84fbf0a7365b1a0592392a2859914de38f37258f1bca97d78fce582a102804c",
+  "zip": {
+    "compression": "ZIP_STORED",
+    "mode": "100644",
+    "timestamp": [
+      1980,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  }
+}

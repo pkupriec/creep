@@ -1,0 +1,260 @@
+---
+name: team-spec-workflow
+description: Use when non-trivial work needs durable requirements, architecture decisions, delegated task waves, independent review, or coordinated documentation.
+---
+
+# Team Spec Workflow
+
+## Outcome
+
+Turn an agreed objective into durable, executable team artifacts, then carry
+implementation through file-disjoint task waves, independent review,
+documentation, worker closure, and one evidence-backed final decision.
+
+Use this workflow for work spanning multiple files, meaningful architecture,
+production behavior, infrastructure, security, delegated implementation, or a
+review/fix loop. Small direct edits do not need artificial ceremony.
+
+## Artifact Directory
+
+Use `.codex/specs/<kebab-slug>/`. Prefer:
+
+1. repository-local `.codex/specs/templates/`
+2. user-global `~/.codex/specs/templates/`
+3. the structures below
+
+Create only the artifacts the task needs:
+
+- `requirements.md`: approved users, product behavior, constraints, and
+  exclusions
+- `spec.md`: executable requirements, assumptions, exact interfaces, edge
+  cases, risks, and acceptance
+- `design.md`: architecture, boundaries, data flow, storage, infrastructure,
+  tradeoffs, rollout, and Security Considerations
+- `tasks.md`: task waves, ownership, task status, dependencies, acceptance,
+  commands, and completion evidence
+- `decisions.md`: append-only decisions, blockers, deviations, accepted risks,
+  and open gates
+- `review.md`: synthesizer-owned cycle history and verdicts
+- `sa-review.md`: solution-architecture findings and handoffs
+- optional `prd/` or security evidence required by repository conventions
+
+Do not create parallel copies of the same decision. Link between artifacts and
+name the authoritative section.
+
+## Requirements And Spec
+
+`requirements.md` records approved intent. Do not silently redesign it during
+planning. If research reveals a material product conflict, return to the user
+or record the open question.
+
+`spec.md` should include:
+
+- goal, users, success measures, and traceable requirement identifiers
+- functional and non-functional requirements
+- constraints, assumptions, dependencies, and exclusions
+- exact interfaces and contracts
+- data ownership, schemas, lifecycle, migration, and compatibility
+- errors, edge cases, partial failure, retries, timeouts, and recovery
+- observability and operational behavior
+- acceptance criteria and required verification
+- material unresolved questions
+
+Exact interfaces include signatures, request/response payloads, events,
+schemas, error forms, environment variables, resource outputs, names, ports,
+paths, protocols, and version expectations. Define shared contracts before
+dependent tasks.
+
+## Design
+
+Create `design.md` when component boundaries, repository structure, data flow,
+infrastructure, migration, or tradeoffs matter. Include:
+
+- context and selected architecture
+- components and ownership
+- sequence/data flow
+- repository/module/file placement
+- storage and consistency
+- external integrations
+- deployment and environment model
+- observability and failure handling
+- alternatives considered and why rejected
+- rollout, rollback, and reversibility
+- open design decisions
+
+For local application or operational work, include `## Security Considerations` with
+identity, trust boundaries, secrets, data protection, network exposure,
+classified data, logging/retention, persistent volume, backups, threat/abuse cases,
+and evidence needed for closure.
+
+Engage `sa-agent` for component/API boundaries, persistence, external Ollama, network exposure, reliability and deployment design.
+
+## Task Contract
+
+Use:
+
+```md
+## Wave 1: <outcome>
+Spec refs: `spec.md#interfaces`, `requirements.md#FR-1`
+
+- [ ] [coding] Implement order validation | `src/orders/validate.ts`, `src/orders/validate.test.ts` | Match `OrderInput` and error contracts; cover empty and duplicate IDs. Run: `npm test -- orders/validate`
+- [ ] [devops] Validate container environment | `compose.yaml`, `docs/config.md` | Environment contracts and health checks match design. Run: `docker compose config --quiet`
+```
+
+Every task must contain:
+
+- task status marker
+- role: `[coding]`, `[devops]`, or `[sa]`
+- action and user/system outcome
+- exact writable files and no-edit boundary
+- acceptance criteria linked to the spec
+- produced and consumed interfaces
+- dependencies
+- `Run: <command>` or a precise evidence query
+- expected completion handoff
+
+Use `[skip-verify]` only when no meaningful executable check exists. Analysis
+tasks should still name the artifact and evidence they produce.
+
+Task status semantics:
+
+- `[ ]`: ready or waiting on an explicit dependency
+- `[-]`: in progress, with owner noted
+- `[x]`: completed with exact verification evidence
+- `[!]`: blocked, with cause, attempts, owner, and needed decision
+
+Do not mark `[x]` from a worker's claim alone. Reconcile returned results,
+current files, and fresh command output. Preserve failure evidence in the task
+note.
+
+## Task Groups And Wave Construction
+
+A task group is a stable, independently reviewable planned scope. Give every
+group a durable identifier such as `G1-api` or `G2-infra` in `tasks.md` before
+its first review. A group may contain multiple implementation waves and later
+fix waves, but all of them share that group's review-cycle counter. Separate
+groups only when their acceptance and verdicts are genuinely independent; do
+not rename or split a reviewed group to evade an exhausted budget.
+
+Build the fewest waves with the widest safe file-disjoint work:
+
+- Put tasks with no unmet dependency in the same wave.
+- Front-load shared interface contracts so consumers can fan out.
+- Split broad tasks by module, endpoint, package, stack, workflow, or doc when
+  each slice is independently testable.
+- Run coding and DevOps work together when their files and contracts are
+  independent.
+- No two parallel tasks may write the same file.
+- Serialize overlapping writers or name one explicit merge owner.
+- Add a new wave only for a real data, contract, generation, or ordering
+  dependency.
+
+Pool caps are ceilings, not a reason to invent tasks. Use
+`team-coordination` to size the pool to file-disjoint width and write exact
+handoffs.
+
+## Decisions And Blockers
+
+`decisions.md` is append-only. Record:
+
+- date and decision
+- context and alternatives
+- owner/approver
+- affected requirements, interfaces, tasks, and docs
+- consequences and reversibility
+- validation or follow-up
+
+Record blockers with the exact command/error, attempts, affected task, and
+smallest needed decision. Do not hide a blocker by changing acceptance
+criteria. If a blocker forces degraded single-threaded work, open review, or
+missing live validation, obtain the required user approval and preserve the
+lost assurance.
+
+## Security And Verification
+
+Task acceptance must cover applicable controls:
+
+- application authorization and least privilege
+- encryption at rest and in transit
+- data protection claims matching configuration
+- secret handling
+- network exposure and scoped egress
+- logging, retention, metrics, alarms, and auditability
+- backups/recovery and deletion protection
+- persistent volume encryption/locking/recovery
+- data classification and retention controls
+
+Use current official Python/FastAPI, React, Docker Compose and Ollama documentation when needed. Store evidence under the spec directory. Accepted risks require owner,
+reason, compensating control, expiration/revisit, and reversibility.
+
+Each task runs focused verification and applicable CI-blocking checks. Verify
+the verifier: the command must exercise the claimed behavior with pinned
+repository tooling.
+
+## Live-Validation Gate
+
+Static checks are necessary but not sufficient for IaC, deploy scripts, CI/CD,
+containers with delivery behavior, or shell tooling. Lint, validate, synth,
+plan, and unit tests cannot prove target selection, cloud semantics, config
+precedence, real exit status, smoke target, or teardown residue.
+
+Require deploy/smoke/teardown or the closest safe executable equivalent when
+approved and available. If it cannot run:
+
+- mark affected criteria static-validated only
+- identify the exact unproven behavior
+- record the open live-validation gate in `decisions.md` and `review.md`
+- do not imply runtime PASS
+
+## Review And Fix Flow
+
+After implementation evidence is consolidated:
+
+1. Select the task group and confirm its durable group identifier.
+2. Count every prior synthesizer spawn for that group from `decisions.md` and
+   `review.md`.
+3. Record the group's next cycle before spawning review.
+4. Use `team-review-cycle` with exactly one synthesizer and optional
+   file-disjoint analysts.
+5. Wait for requested analyst evidence and the synthesizer verdict.
+6. On group cycle 1 or 2 FAIL, convert blocking defects or missing required acceptance evidence
+   into one scoped, file-disjoint fix wave for that group.
+7. Re-run affected and regression verification, then consume the group's next
+   review cycle.
+8. Group cycle 3 is terminal. On non-PASS, stop that group's automatic
+   fixes/reviews, close agents no longer needed for it, preserve evidence, and
+   report the task group blocked.
+
+Each task group has its own maximum three-cycle budget. Its counter does not
+reset for a new implementation wave, fix wave, reviewer, review file, retry,
+interruption, or resumed session. A cycle is consumed when that group's
+synthesizer is spawned. Other independent groups may continue, but a required
+blocked group prevents objective completion.
+
+## Documentation
+
+After independent PASS, use `team-documentation` to reconcile affected README,
+API, configuration, deployment, rollback, runbook, architecture, and usage
+surfaces. Task-local docs may be updated during implementation; final
+reconciliation checks cross-task consistency and current names.
+
+## Whole-Run Completion
+
+Complete only when:
+
+- requirements and interfaces are satisfied
+- all required task status entries are `[x]`
+- exact verification and CI evidence is recorded
+- every required task group has one independent synthesizer PASS within that
+  group's three-cycle budget
+- required live-validation gates are closed
+- blockers, decisions, deviations, and accepted risks are durable
+- affected documentation is accurate
+- all requested worker results are harvested
+- agents no longer needed are closed
+- no required worker remains active
+- no billable or temporary verification resource lacks an explicit handoff
+
+If a required task group's cycle 3 ends without PASS, completion is blocked
+rather than partial success. Preserve the same artifact set so the user can
+decide the next action.

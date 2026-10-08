@@ -1,0 +1,196 @@
+{
+  "captured_at_utc": "2026-10-03T17:59:05.655928+00:00",
+  "account": "pkupr",
+  "userprofile": "C:\\Users\\pkupr",
+  "cwd": "D:\\Sources\\creep",
+  "client_version": "codex-cli 0.160.0",
+  "method": "installed codex app-server --strict-config --stdio; initialize, config/read with project cwd, plugin/list with project cwd, skills/list forceReload",
+  "security": "Existing trusted project/user account; no trust/auth/global config changes. Review sandbox remains read-only.",
+  "effective_config": {
+    "model": "gpt-6.1-sol",
+    "model_reasoning_effort": "high",
+    "model_provider": null,
+    "approval_policy": "on-request",
+    "approvals_reviewer": "user",
+    "sandbox_mode": null,
+    "agents": {
+      "enabled": null,
+      "max_concurrent_threads_per_session": 3,
+      "max_depth": 1,
+      "default_subagent_model": null,
+      "default_subagent_reasoning_effort": null,
+      "job_max_runtime_seconds": null,
+      "interrupt_message": null
+    },
+    "apps": {
+      "_default": {
+        "enabled": false,
+        "approvals_reviewer": "user",
+        "destructive_enabled": true,
+        "open_world_enabled": true,
+        "default_tools_approval_mode": "prompt"
+      }
+    }
+  },
+  "apps_feature": false,
+  "mcp_servers": {
+    "node_repl": {
+      "command": "C:\\Users\\pkupr\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\45309f9050f7314b\\bin\\node_repl.exe",
+      "args": [],
+      "enabled": false,
+      "default_tools_approval_mode": "prompt"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@0.0.70"
+      ],
+      "enabled": false,
+      "default_tools_approval_mode": "prompt"
+    }
+  },
+  "project_origins": {
+    "agents.max_concurrent_threads_per_session": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "features.apps": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "model": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "plugins.codex-agent-team@creep-local.enabled": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "mcp_servers.node_repl.enabled": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "mcp_servers.playwright.enabled": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "approval_policy": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "agents.max_depth": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "model_reasoning_effort": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "approvals_reviewer": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    },
+    "apps._default.enabled": {
+      "name": {
+        "type": "project",
+        "dotCodexFolder": "D:\\Sources\\creep\\.codex"
+      },
+      "version": "sha256:9d17522204a3f326c293e2465121cf66e1d7173a4bda65841349c5236d5396a8"
+    }
+  },
+  "plugin": {
+    "id": "codex-agent-team@creep-local",
+    "localVersion": "0.1.0-creep.3",
+    "installed": true,
+    "enabled": true
+  },
+  "skills": [
+    {
+      "name": "codex-agent-team:git-workflow",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\git-workflow\\SKILL.md"
+    },
+    {
+      "name": "codex-agent-team:team-brainstorm",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\team-brainstorm\\SKILL.md"
+    },
+    {
+      "name": "codex-agent-team:team-coordination",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\team-coordination\\SKILL.md"
+    },
+    {
+      "name": "codex-agent-team:team-documentation",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\team-documentation\\SKILL.md"
+    },
+    {
+      "name": "codex-agent-team:team-review-cycle",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\team-review-cycle\\SKILL.md"
+    },
+    {
+      "name": "codex-agent-team:team-spec-workflow",
+      "enabled": true,
+      "path": "C:\\Users\\pkupr\\.codex\\plugins\\cache\\creep-local\\codex-agent-team\\0.1.0-creep.3\\skills\\team-spec-workflow\\SKILL.md"
+    }
+  ],
+  "source_hashes": {
+    "AGENTS.md": "f368a4dc0175fa812f3731e25af06727ce391ea4944060205f6bdbbd1d981c3c",
+    ".codex/config.toml": "143cae072ee1fb342be0e2b22f1c0afe76cb52136ba23c3904517f0ae66643ce",
+    ".codex/agents/coding-agent.toml": "10d6cc8ab5faef6049acb2293ab38bdf797b1f05c50ff94a7eb2cfc8f9522502",
+    ".codex/agents/devops-agent.toml": "8ff10539dea2162cf38bf6f972452ebb7785483c05812073cb6cd0b770d333ab",
+    ".codex/agents/fullstack-agent.toml": "563b4a244feedd967d38b6d0fabedb674848932cf00dd562e488a05cd4a7e799",
+    ".codex/agents/review-agent.toml": "465da7986eb066aa1cf919782b0bbb309c851677485eab17042e8c41066a2f86",
+    ".codex/agents/sa-agent.toml": "b238093a95e7ca9e9bae3dd20e9185fef1326e83454ac9602a932ddf42c6e8e8",
+    ".codex/plugins/codex-agent-team/.codex-plugin/plugin.json": "733aea0dcb447d7aa7f22a925a375e8ceedb43f8eafb7a7472210806d1dd8323",
+    ".codex/plugins/codex-agent-team/commands/brainstorm.md": "61c96d3e361535611ae3d09978725b43761524f2da2a0677f8e35fcf2ee6135d",
+    ".codex/plugins/codex-agent-team/commands/launch-codex-team.md": "ec01b3ed7059c7b693d8b8e09bb4aa4d3cb05c0c50af0fb135f429de81551e34",
+    ".codex/plugins/codex-agent-team/LICENSE": "83236d6853f48fc22d4ff314a208c4b1199c561eb0f918678e912743d07c09cc",
+    ".codex/plugins/codex-agent-team/skills/git-workflow/agents/openai.yaml": "84636083af4de0ba2868f81519f4082f086ad03081aa9575a5909ca57e448c40",
+    ".codex/plugins/codex-agent-team/skills/git-workflow/SKILL.md": "1749451ce8e8231a78b86b1304b2f0c498e6746e52f286d4c626cec3a850fdb8",
+    ".codex/plugins/codex-agent-team/skills/team-brainstorm/agents/openai.yaml": "59510a8c73cc43825f0e88e7ca1a7cc8fb05bbd17f466732f977d6f245076108",
+    ".codex/plugins/codex-agent-team/skills/team-brainstorm/SKILL.md": "af7723c5a47ce1cfe98194f4f5431748a3735d97984e0a9e1ed6d96297cdf54c",
+    ".codex/plugins/codex-agent-team/skills/team-coordination/agents/openai.yaml": "96d322cdd71d2d0e2139763d1d2e131847a6764fbe4e7b197f77aef71260c01c",
+    ".codex/plugins/codex-agent-team/skills/team-coordination/SKILL.md": "bb3921bb567bd85174b91831d22ddfe76e153a31d0b73ae9bbe1d7970efe1eb1",
+    ".codex/plugins/codex-agent-team/skills/team-documentation/agents/openai.yaml": "ed9490bad98fb0f731e05eb0106a6eed25205971bc5e5f6b2ad82ad2974c8e9c",
+    ".codex/plugins/codex-agent-team/skills/team-documentation/SKILL.md": "d8c0f158335b445d17a84c673806784a74f5f522972bc9cdb226d8f1862b4a8b",
+    ".codex/plugins/codex-agent-team/skills/team-review-cycle/agents/openai.yaml": "121de646d141858dbf6c1c822d1555b2bf1488385a6ec3920206b54fbf89c2d3",
+    ".codex/plugins/codex-agent-team/skills/team-review-cycle/SKILL.md": "d522db6c03acdad866a68f66a78936fbfc51a4538801111e33251c7d214c8096",
+    ".codex/plugins/codex-agent-team/skills/team-spec-workflow/agents/openai.yaml": "fdf31f1030e98119a4d4e0b7191d0b95ed932f51aaffda8bdeef4e12e8e0abbb",
+    ".codex/plugins/codex-agent-team/skills/team-spec-workflow/SKILL.md": "526e0d1af884c796ba15d007403872b6c789252a4a6f8b3298c150b9cd5e4671"
+  },
+  "global_config_sha256": "5fcf7a1f0bba8a5405617a1a7b02cba0bb431090be0a5557712dbc2c66b23a3e",
+  "result": "PASS: strict effective project policy, plugin/skill discovery, unchanged global config and exact cache match"
+}

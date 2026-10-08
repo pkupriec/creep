@@ -1,0 +1,305 @@
+---
+name: team-review-cycle
+description: Use when implemented work needs an independent correctness, security, regression, performance, or verification review before completion.
+---
+
+# Team Review Cycle
+
+## Outcome
+
+Produce evidence-backed findings and exactly one independent `PASS` or `FAIL`
+verdict for the current integrated state. Preserve the review history, consume
+one cycle from the named task group's budget, and terminate that group's
+automatic review/fix work after cycle 3.
+
+Review is adversarial validation, not a formality. An implementer, lead, or
+self-authored PASS is a TODO marker rather than an independent verdict.
+
+## Inputs
+
+Every review handoff must contain:
+
+- review role and unique instance name
+- spec directory
+- durable task group identifier, wave, and group cycle number
+- exact modified files or assigned review slice
+- acceptance criteria and interface contracts
+- worker verification commands and outcomes
+- prior unresolved findings for cycle 2 or 3
+- open live-validation gates
+- named analysts/synthesizer and expected results
+
+The reviewer also reads current requirements, spec, design, tasks, decisions,
+files, diff, and review history. Missing scope or evidence is itself a review
+gap; do not infer it from an old summary.
+
+## Roles
+
+Synthesizer:
+
+- Exactly one `review-agent`, normally `review-1`.
+- Sole author of `review.md`.
+- Reviews an assigned slice plus whole-wave cross-slice consistency.
+- Waits for all requested analyst results or records missing evidence.
+- Deduplicates and attributes analyst findings.
+- Runs or evaluates cross-cutting verification.
+- Issues the only authoritative group verdict.
+
+Analyst:
+
+- Optional `review-2` through `review-3`.
+- Reviews one file-disjoint slice.
+- Writes no files and never edits `review.md`.
+- Returns structured findings to the named synthesizer.
+- Gives an advisory slice result only.
+- Identifies assumptions/interfaces requiring cross-slice confirmation.
+
+Small cohesive changes use one synthesizer with no analysts. Parallel analysts
+are useful only when there are independently reviewable slices.
+
+## Analyst Format
+
+```text
+Slice: <module/files> | Wave N, Cycle M
+Critical / Severe / High:
+- [file:line] impact, current evidence, and specific correction
+Medium / Low / Warning:
+- [file:line] impact, current evidence, and specific correction
+Suggestion:
+- [file:line] optional improvement
+Cross-slice concerns: <interfaces/assumptions or none>
+Verification:
+- <exact command, exit code, result>
+Open live validation: <gaps or none>
+Advisory slice result: PASS | FAIL
+```
+
+An empty section says `None`; it is never omitted ambiguously. Analysts return
+their evidence and stop. They do not ask implementers to fix findings directly;
+the coordinator creates the fix wave after synthesis.
+
+## Synthesizer Review File
+
+Append one section per cycle to `.codex/specs/<slug>/review.md`. Preserve prior
+cycles.
+
+```markdown
+## Cycle N - YYYY-MM-DD
+Reviewing: Wave M - <integrated scope>
+Analysts: <instances and slices, including missing results>
+
+### Critical / Severe / High
+- [`file:line`] Impact, evidence class, evidence, and specific correction.
+
+### Medium / Low / Warning
+- [`file:line`] Impact, evidence class, evidence, and specific correction.
+
+### Suggestion
+- [`file:line`] Optional improvement.
+
+### Spec Alignment
+Requirements, acceptance criteria, exclusions, interface contracts.
+
+### Cross-Task Consistency
+Schemas, names, generated artifacts, config, outputs, and ownership.
+
+### Security And Operations
+Trust boundaries, authorization, secrets, network, encryption, logging, rollback.
+
+### Verification And Test Adequacy
+Exact commands, CI coverage, behavior proven, verifier gaps.
+
+### Open Live Validation
+Unrun runtime/cloud/deploy/smoke/teardown evidence.
+
+### Verdict: PASS | FAIL
+Reason: <one line when FAIL>
+```
+
+Tag analyst-sourced findings with the instance. Deduplicate equivalent issues
+without losing evidence or affected files.
+
+## Review Method
+
+### Spec Alignment
+
+- Map changes to requirements and acceptance criteria.
+- Verify exact interfaces, payloads, schemas, errors, environment variables,
+  outputs, names, ports, paths, and version contracts.
+- Check exclusions, assumptions, and decisions.
+
+### Correctness And Reliability
+
+- Edge cases, invalid/empty input, boundary conditions, off-by-one behavior
+- Error handling, retries, timeouts, cancellation, idempotency
+- Race conditions, ordering, shared state, stale writes, deadlocks
+- Cleanup, partial failure, rollback, teardown, leaked resources
+- Compatibility, migration, serialization, timezone/platform behavior
+
+### Security
+
+- Trust-boundary validation, authentication, authorization, injection
+- Secrets, logging, data exposure, unsafe defaults
+- application authorization and least privilege
+- Network exposure and scoped egress
+- Encryption/data protection, classified storage, retention, and auditability
+
+### Performance
+
+- N+1 work, hot paths, resource sizing, connection behavior
+- Sequential uncached bulk external calls
+- Unbounded concurrency, missing backpressure, retry storms, cached failures
+- Data structures, pagination, batching, and lifecycle
+
+### Maintainability And Documentation
+
+- Project conventions, clarity, unnecessary complexity
+- Ownership, observability, actionable failure messages
+- README, API, config, deployment, rollback, runbook, and inline-doc accuracy
+
+### Test Methodology
+
+- Focused unit tests cover logic, errors, and boundaries.
+- Integration tests cover service/framework/storage/process boundaries.
+- Regression tests reproduce the fixed defect.
+- Concurrency and cleanup tests are deterministic.
+- Mocks do not replace the behavior the acceptance criteria require.
+- CI-pinned checks and relevant suites ran.
+
+## Evidence Discipline
+
+Re-read the exact current file before citing `file:line`. Never report a
+remembered snapshot, stale line number, or already-fixed issue.
+
+Empirically test before rating a claim Critical when safe execution can confirm
+or falsify it. If execution is unavailable, classify the finding as requiring
+live validation and normally use Warning unless the severe defect is directly
+provable.
+
+For every finding, identify its evidence class:
+
+- static-verifiable
+- empirically reproduced
+- requires live validation
+
+Verify the verifier. A green command is not enough if it:
+
+- checks the wrong scope
+- omits a CI-pinned linter/type checker/test
+- never exercises the acceptance criterion
+- uses a broken assertion or inadequate script
+- substitutes static validation for required runtime behavior
+
+The finding should close the weak check or preserve the verification gap, not
+only patch observed instances.
+
+For long review/verification commands, return a concise heartbeat through the
+available handoff channel. Quiet execution is not failure and does not justify
+a replacement synthesizer.
+
+## Local Delivery Evidence
+
+Static lint, synth, validate, plan, and unit tests cannot prove runtime account,
+region, profile, workspace, backend, kube-context, config precedence, provider
+semantics, real pipeline status, smoke target, destroy behavior, or residue.
+
+For IaC, deploy scripts, CI/CD, and shell tooling:
+
+- inspect static checks
+- require deploy/smoke/teardown or closest safe executable equivalent when the
+  acceptance criteria require it
+- check rollback and authoritative-state handling
+- require independent residue evidence
+- preserve an open live-validation gate when execution cannot run
+
+Use official Docker Compose, Windows/WSL2 and Ollama sources when runtime behavior is material. No external server mutation without authorization.
+
+## Severity
+
+Critical / Severe / High:
+
+- likely runtime failure or broken required contract
+- data loss/corruption
+- severe/high security vulnerability
+- destructive wrong-target or production-impacting infrastructure defect
+
+Medium / Low / Warning:
+
+- meaningful correctness, security, reliability, performance, race, cleanup,
+  or maintainability defect
+- missing required test, CI check, analyst evidence, or live validation
+- fragile behavior or unjustified spec deviation
+
+Suggestion:
+
+- non-blocking clarity, style, low-risk docs, or optional improvement
+
+Severity reflects impact and evidence, not how easy the fix is or the verdict it
+would produce. Classify findings before determining the verdict. Never escalate
+a Low, Medium, or Warning finding to High, Severe, or Critical to force FAIL.
+Never downgrade a High, Severe, or Critical finding to Medium, Low, Warning, or
+Suggestion to force PASS. If severity is uncertain, state the uncertainty and
+the evidence needed to resolve it instead of manipulating the rating.
+
+## Verdict
+
+Return PASS only when all of the following hold for the assigned task group:
+
+- no current Critical, Severe, or High finding remains
+- all required acceptance criteria and interface contracts are demonstrated
+- all required verification was executed and passed, with adequate evidence
+- all requested reviewer/analyst evidence is collected
+
+Otherwise return FAIL. An executed failing test or missing required acceptance,
+verification, analyst evidence, or live-validation gate blocks PASS independently
+of severity. Record an acceptance-gate failure without inventing or escalating
+defect severity. Optional Low, Medium, Warning and Suggestion findings may remain
+on PASS. A required check cannot be silently relabeled optional to obtain PASS.
+Static checks cannot satisfy an explicitly required runtime check. Unavailable
+required checks mean FAIL with the exact blocker; do not claim runtime PASS.
+
+## Per-Task-Group Cycle Budget
+
+Every independently reviewable task group has a durable group identifier and
+its own non-resetting maximum of three review cycles. Record the identifier in
+`tasks.md`, the review handoff, `decisions.md`, and every `review.md` section. A
+cycle is consumed when that group's synthesizer is spawned, before the result
+is known. The same group's budget counts:
+
+- initial review
+- targeted re-review
+- replacement synthesizer
+- retry after interruption or failure
+
+Derive the next number for the named task group from durable review and
+orchestration evidence before spawn. Do not reset the group for a new
+implementation wave, fix wave, reviewer, review file, process, or resumed
+session. Renaming or artificially splitting an exhausted group does not create
+a new budget. A genuinely distinct group planned as a separate reviewable scope
+has its own counter.
+
+- Cycle 1: full broad adversarial review.
+- Cycle 2: verify cycle-1 fixes, targeted regressions, and new blockers.
+- Cycle 3: terminal final verification of remaining fixes and gates.
+
+Only cycle 1 or 2 FAIL may create one scoped fix wave. After the fix, all
+affected and regression checks run before the next synthesizer spawn.
+
+Cycle 3 is terminal for the affected task group. If it returns FAIL, is
+interrupted, or cannot complete:
+
+1. Stop automatic fix and review work for that group.
+2. Close agents no longer needed for the group.
+3. Preserve unresolved findings, partial results, and verification evidence.
+4. Record affected tasks/docs and open live-validation gates.
+5. Report the task group blocked for user decision.
+
+Other independent task groups may continue, but a required blocked group keeps
+the objective incomplete. Never spawn cycle 4 for a group under this workflow. Preserve exhaustion for user disposition.
+
+## Coordinator Handoff
+
+The synthesizer returns one message with task group identifier, wave, group
+cycle, verdict, counts by severity, commands/outcomes, missing evidence, and
+review path. The coordinator reads the verdict; it does not rewrite or
+aggregate an independent PASS.

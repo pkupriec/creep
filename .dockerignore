@@ -1,0 +1,27 @@
+**
+!backend/
+!backend/app/
+!backend/app/**
+!backend/pyproject.toml
+!backend/uv.lock
+!backend/.python-version
+!backend/Dockerfile
+!backend/vendor/
+!backend/vendor/referencing-0.37.0+cg.1-py3-none-any.whl
+!frontend/
+!frontend/src/
+!frontend/src/**
+!frontend/package.json
+!frontend/package-lock.json
+!frontend/tsconfig.json
+!frontend/tsconfig.node.json
+!frontend/vite.config.ts
+!frontend/index.html
+!frontend/Dockerfile
+!frontend/nginx.conf
+# Never copy local dependency trees, credentials, research traces, or user data.
+**/node_modules/**
+**/.venv/**
+**/__pycache__/**
+**/.env
+**/.env.*

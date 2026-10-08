@@ -1,0 +1,2405 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$ref": "#/$defs/Graph",
+  "$defs": {
+    "ActivationView": {
+      "additionalProperties": false,
+      "properties": {
+        "activation_id": {
+          "minLength": 1,
+          "title": "Activation Id",
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "scope_key": {
+          "title": "Scope Key",
+          "type": "string"
+        },
+        "iteration": {
+          "minimum": 0,
+          "title": "Iteration",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "ready",
+            "running",
+            "waiting_tools",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "ready_ports": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "title": "Ready Ports",
+          "type": "array"
+        },
+        "expected_ports": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "title": "Expected Ports",
+          "type": "array"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "payload": {
+          "$ref": "#/$defs/JsonValue",
+          "default": null
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorDetail"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "usage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Usage"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "activation_id",
+        "node_id",
+        "scope_key",
+        "iteration",
+        "status",
+        "ready_ports",
+        "expected_ports"
+      ],
+      "title": "ActivationView",
+      "type": "object"
+    },
+    "AssistantMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "const": "assistant",
+          "title": "Role",
+          "type": "string"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/$defs/TextPart"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content"
+        },
+        "tool_calls": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ToolCall"
+              },
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Calls"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "title": "AssistantMessage",
+      "type": "object"
+    },
+    "ChatCompletionChunk": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "object": {
+          "const": "chat.completion.chunk",
+          "default": "chat.completion.chunk",
+          "title": "Object",
+          "type": "string"
+        },
+        "created": {
+          "minimum": 0,
+          "title": "Created",
+          "type": "integer"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/StreamChoice"
+          },
+          "maxItems": 1,
+          "title": "Choices",
+          "type": "array"
+        },
+        "usage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Usage"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "model",
+        "choices"
+      ],
+      "title": "ChatCompletionChunk",
+      "type": "object"
+    },
+    "ChatCompletionRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "pattern": "^(cg/[A-Za-z0-9][A-Za-z0-9_-]{0,63}|ollama/[^\\s]+)$",
+          "title": "Model",
+          "type": "string"
+        },
+        "messages": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "assistant": "#/$defs/AssistantMessage",
+                "developer": "#/$defs/SystemMessage",
+                "system": "#/$defs/SystemMessage",
+                "tool": "#/$defs/ToolMessage",
+                "user": "#/$defs/UserMessage"
+              },
+              "propertyName": "role"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/SystemMessage"
+              },
+              {
+                "$ref": "#/$defs/UserMessage"
+              },
+              {
+                "$ref": "#/$defs/AssistantMessage"
+              },
+              {
+                "$ref": "#/$defs/ToolMessage"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Messages",
+          "type": "array"
+        },
+        "tools": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/FunctionTool"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tools"
+        },
+        "tool_choice": {
+          "anyOf": [
+            {
+              "enum": [
+                "none",
+                "auto",
+                "required"
+              ],
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/ForcedToolChoice"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Choice"
+        },
+        "parallel_tool_calls": {
+          "default": true,
+          "title": "Parallel Tool Calls",
+          "type": "boolean"
+        },
+        "stream": {
+          "default": false,
+          "title": "Stream",
+          "type": "boolean"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "maximum": 2,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "top_p": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top P"
+        },
+        "max_tokens": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Tokens"
+        },
+        "stop": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop"
+        },
+        "response_format": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "json_object": "#/$defs/JSONObjectResponseFormat",
+                  "json_schema": "#/$defs/JSONSchemaResponseFormat",
+                  "text": "#/$defs/TextResponseFormat"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/TextResponseFormat"
+                },
+                {
+                  "$ref": "#/$defs/JSONObjectResponseFormat"
+                },
+                {
+                  "$ref": "#/$defs/JSONSchemaResponseFormat"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Response Format"
+        },
+        "stream_options": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StreamOptions"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "n": {
+          "const": 1,
+          "default": 1,
+          "title": "N",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model",
+        "messages"
+      ],
+      "title": "ChatCompletionRequest",
+      "type": "object"
+    },
+    "ChatCompletionResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "object": {
+          "const": "chat.completion",
+          "default": "chat.completion",
+          "title": "Object",
+          "type": "string"
+        },
+        "created": {
+          "minimum": 0,
+          "title": "Created",
+          "type": "integer"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "choices": {
+          "items": {
+            "$ref": "#/$defs/CompletionChoice"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Choices",
+          "type": "array"
+        },
+        "usage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Usage"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "model",
+        "choices"
+      ],
+      "title": "ChatCompletionResponse",
+      "type": "object"
+    },
+    "CompletionChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "const": 0,
+          "default": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "message": {
+          "$ref": "#/$defs/AssistantMessage"
+        },
+        "finish_reason": {
+          "enum": [
+            "stop",
+            "tool_calls",
+            "length"
+          ],
+          "title": "Finish Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "finish_reason"
+      ],
+      "title": "CompletionChoice",
+      "type": "object"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "message",
+        "type",
+        "code"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "ErrorResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "$ref": "#/$defs/ErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "title": "ErrorResponse",
+      "type": "object"
+    },
+    "FeedbackEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Target",
+          "type": "string"
+        },
+        "target_port": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Target Port",
+          "type": "string"
+        },
+        "kind": {
+          "const": "feedback",
+          "title": "Kind",
+          "type": "string"
+        },
+        "loop_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Loop Id",
+          "type": "string"
+        },
+        "initial_value": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "target_port",
+        "kind",
+        "loop_id",
+        "initial_value"
+      ],
+      "title": "FeedbackEdge",
+      "type": "object"
+    },
+    "ForcedToolChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "function",
+          "title": "Type",
+          "type": "string"
+        },
+        "function": {
+          "$ref": "#/$defs/ToolChoiceFunction"
+        }
+      },
+      "required": [
+        "type",
+        "function"
+      ],
+      "title": "ForcedToolChoice",
+      "type": "object"
+    },
+    "ForwardEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "source": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Source",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Target",
+          "type": "string"
+        },
+        "target_port": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Target Port",
+          "type": "string"
+        },
+        "kind": {
+          "const": "forward",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "target_port",
+        "kind"
+      ],
+      "title": "ForwardEdge",
+      "type": "object"
+    },
+    "FunctionCall": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "arguments": {
+          "title": "Arguments",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ],
+      "title": "FunctionCall",
+      "type": "object"
+    },
+    "FunctionDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "parameters": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "strict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strict"
+        }
+      },
+      "required": [
+        "name",
+        "parameters"
+      ],
+      "title": "FunctionDefinition",
+      "type": "object"
+    },
+    "FunctionTool": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "function",
+          "title": "Type",
+          "type": "string"
+        },
+        "function": {
+          "$ref": "#/$defs/FunctionDefinition"
+        }
+      },
+      "required": [
+        "type",
+        "function"
+      ],
+      "title": "FunctionTool",
+      "type": "object"
+    },
+    "Generation": {
+      "additionalProperties": false,
+      "properties": {
+        "temperature": {
+          "anyOf": [
+            {
+              "maximum": 2,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "top_p": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top P"
+        },
+        "max_tokens": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Tokens"
+        },
+        "stop": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 4,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stop"
+        },
+        "reasoning_effort": {
+          "anyOf": [
+            {
+              "enum": [
+                "none",
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoning Effort"
+        }
+      },
+      "title": "Generation",
+      "type": "object"
+    },
+    "Graph": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "revision": {
+          "exclusiveMinimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "base_model": {
+          "minLength": 1,
+          "title": "Base Model",
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/$defs/NamedInput"
+          },
+          "minItems": 1,
+          "title": "Inputs",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "input": "#/$defs/InputNode",
+                "llm": "#/$defs/LLMNode",
+                "output": "#/$defs/OutputNode"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/InputNode"
+              },
+              {
+                "$ref": "#/$defs/LLMNode"
+              },
+              {
+                "$ref": "#/$defs/OutputNode"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Nodes",
+          "type": "array"
+        },
+        "edges": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "feedback": "#/$defs/FeedbackEdge",
+                "forward": "#/$defs/ForwardEdge"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ForwardEdge"
+              },
+              {
+                "$ref": "#/$defs/FeedbackEdge"
+              }
+            ]
+          },
+          "title": "Edges",
+          "type": "array"
+        },
+        "loops": {
+          "items": {
+            "$ref": "#/$defs/Loop"
+          },
+          "title": "Loops",
+          "type": "array"
+        },
+        "output_node_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Output Node Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "name",
+        "revision",
+        "base_model",
+        "inputs",
+        "nodes",
+        "edges",
+        "loops",
+        "output_node_id"
+      ],
+      "title": "Graph",
+      "type": "object"
+    },
+    "GraphListResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "graphs": {
+          "items": {
+            "$ref": "#/$defs/GraphSummary"
+          },
+          "title": "Graphs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "graphs"
+      ],
+      "title": "GraphListResponse",
+      "type": "object"
+    },
+    "GraphSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "revision": {
+          "exclusiveMinimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "published_revision": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published Revision"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "revision"
+      ],
+      "title": "GraphSummary",
+      "type": "object"
+    },
+    "HealthResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "ok",
+            "unavailable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "storage_ready": {
+          "title": "Storage Ready",
+          "type": "boolean"
+        },
+        "ollama_available": {
+          "title": "Ollama Available",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "storage_ready",
+        "ollama_available"
+      ],
+      "title": "HealthResponse",
+      "type": "object"
+    },
+    "InputNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "input",
+          "title": "Type",
+          "type": "string"
+        },
+        "input_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Input Id",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "input_id"
+      ],
+      "title": "InputNode",
+      "type": "object"
+    },
+    "JSONObjectResponseFormat": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "json_object",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "JSONObjectResponseFormat",
+      "type": "object"
+    },
+    "JSONSchemaDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "schema": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Schema",
+          "type": "object"
+        },
+        "strict": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strict"
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ],
+      "title": "JSONSchemaDefinition",
+      "type": "object"
+    },
+    "JSONSchemaResponseFormat": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "json_schema",
+          "title": "Type",
+          "type": "string"
+        },
+        "json_schema": {
+          "$ref": "#/$defs/JSONSchemaDefinition"
+        }
+      },
+      "required": [
+        "type",
+        "json_schema"
+      ],
+      "title": "JSONSchemaResponseFormat",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "LLMNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "llm",
+          "title": "Type",
+          "type": "string"
+        },
+        "system_prompt": {
+          "title": "System Prompt",
+          "type": "string"
+        },
+        "tools_enabled": {
+          "title": "Tools Enabled",
+          "type": "boolean"
+        },
+        "generation": {
+          "$ref": "#/$defs/Generation"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "system_prompt",
+        "tools_enabled",
+        "generation"
+      ],
+      "title": "LLMNode",
+      "type": "object"
+    },
+    "Loop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "node_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Node Ids",
+          "type": "array"
+        },
+        "controller_node_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Controller Node Id",
+          "type": "string"
+        },
+        "continue_value": {
+          "minLength": 1,
+          "title": "Continue Value",
+          "type": "string"
+        },
+        "exit_value": {
+          "minLength": 1,
+          "title": "Exit Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "node_ids",
+        "controller_node_id",
+        "continue_value",
+        "exit_value"
+      ],
+      "title": "Loop",
+      "type": "object"
+    },
+    "ModelInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "object": {
+          "const": "model",
+          "default": "model",
+          "title": "Object",
+          "type": "string"
+        },
+        "created": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Created",
+          "type": "integer"
+        },
+        "owned_by": {
+          "enum": [
+            "cognitive-graph",
+            "ollama"
+          ],
+          "title": "Owned By",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "owned_by"
+      ],
+      "title": "ModelInfo",
+      "type": "object"
+    },
+    "ModelsResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "object": {
+          "const": "list",
+          "default": "list",
+          "title": "Object",
+          "type": "string"
+        },
+        "data": {
+          "items": {
+            "$ref": "#/$defs/ModelInfo"
+          },
+          "title": "Data",
+          "type": "array"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "title": "ModelsResponse",
+      "type": "object"
+    },
+    "NamedInput": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "required"
+      ],
+      "title": "NamedInput",
+      "type": "object"
+    },
+    "OutputNode": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "output",
+          "title": "Type",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "title": "OutputNode",
+      "type": "object"
+    },
+    "PendingToolView": {
+      "additionalProperties": false,
+      "properties": {
+        "tool_call_id": {
+          "minLength": 1,
+          "title": "Tool Call Id",
+          "type": "string"
+        },
+        "activation_id": {
+          "minLength": 1,
+          "title": "Activation Id",
+          "type": "string"
+        },
+        "node_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "arguments": {
+          "title": "Arguments",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "accepted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Result"
+        },
+        "expires_at": {
+          "title": "Expires At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_call_id",
+        "activation_id",
+        "node_id",
+        "name",
+        "arguments",
+        "status",
+        "expires_at"
+      ],
+      "title": "PendingToolView",
+      "type": "object"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "PublishGraphRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "expected_revision"
+      ],
+      "title": "PublishGraphRequest",
+      "type": "object"
+    },
+    "PublishGraphResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "graph_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Graph Id",
+          "type": "string"
+        },
+        "published_revision": {
+          "exclusiveMinimum": 0,
+          "title": "Published Revision",
+          "type": "integer"
+        },
+        "graph_hash": {
+          "title": "Graph Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "graph_id",
+        "published_revision",
+        "graph_hash"
+      ],
+      "title": "PublishGraphResponse",
+      "type": "object"
+    },
+    "RunDetailResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "run": {
+          "$ref": "#/$defs/RunSummary"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/Graph"
+        },
+        "activations": {
+          "items": {
+            "$ref": "#/$defs/ActivationView"
+          },
+          "title": "Activations",
+          "type": "array"
+        },
+        "pending_tools": {
+          "items": {
+            "$ref": "#/$defs/PendingToolView"
+          },
+          "title": "Pending Tools",
+          "type": "array"
+        },
+        "output": {
+          "$ref": "#/$defs/JsonValue",
+          "default": null
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorDetail"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "run",
+        "snapshot",
+        "activations",
+        "pending_tools"
+      ],
+      "title": "RunDetailResponse",
+      "type": "object"
+    },
+    "RunEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "event_id": {
+          "exclusiveMinimum": 0,
+          "title": "Event Id",
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "run.queued",
+            "run.running",
+            "run.waiting_tools",
+            "run.completed",
+            "run.failed",
+            "run.cancelled",
+            "run.interrupted",
+            "activation.ready",
+            "activation.running",
+            "activation.completed",
+            "activation.waiting_tools",
+            "activation.failed",
+            "activation.cancelled",
+            "loop.continued",
+            "loop.stopped",
+            "tools.accepted"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "payload": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Payload",
+          "type": "object"
+        }
+      },
+      "required": [
+        "run_id",
+        "event_id",
+        "type",
+        "created_at",
+        "payload"
+      ],
+      "title": "RunEvent",
+      "type": "object"
+    },
+    "RunListResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "runs": {
+          "items": {
+            "$ref": "#/$defs/RunSummary"
+          },
+          "title": "Runs",
+          "type": "array"
+        },
+        "total": {
+          "minimum": 0,
+          "title": "Total",
+          "type": "integer"
+        },
+        "limit": {
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "offset": {
+          "minimum": 0,
+          "title": "Offset",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runs",
+        "total",
+        "limit",
+        "offset"
+      ],
+      "title": "RunListResponse",
+      "type": "object"
+    },
+    "RunSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "graph_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Graph Id",
+          "type": "string"
+        },
+        "revision": {
+          "exclusiveMinimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "graph_hash": {
+          "title": "Graph Hash",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "waiting_tools",
+            "completed",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Started At"
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ended At"
+        },
+        "duration_seconds": {
+          "minimum": 0,
+          "title": "Duration Seconds",
+          "type": "number"
+        },
+        "queue_seconds": {
+          "minimum": 0,
+          "title": "Queue Seconds",
+          "type": "number"
+        },
+        "node_executions": {
+          "minimum": 0,
+          "title": "Node Executions",
+          "type": "integer"
+        },
+        "upstream_attempts": {
+          "minimum": 0,
+          "title": "Upstream Attempts",
+          "type": "integer"
+        },
+        "tool_rounds": {
+          "minimum": 0,
+          "title": "Tool Rounds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run_id",
+        "graph_id",
+        "revision",
+        "graph_hash",
+        "status",
+        "created_at",
+        "duration_seconds",
+        "queue_seconds",
+        "node_executions",
+        "upstream_attempts",
+        "tool_rounds"
+      ],
+      "title": "RunSummary",
+      "type": "object"
+    },
+    "SaveGraphRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "graph": {
+          "$ref": "#/$defs/Graph"
+        },
+        "expected_revision": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "graph",
+        "expected_revision"
+      ],
+      "title": "SaveGraphRequest",
+      "type": "object"
+    },
+    "StartRunRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "graph_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+          "title": "Graph Id",
+          "type": "string"
+        },
+        "revision": {
+          "exclusiveMinimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "inputs": {
+          "patternProperties": {
+            "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$": {
+              "$ref": "#/$defs/JsonValue"
+            }
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "messages": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "assistant": "#/$defs/AssistantMessage",
+                "developer": "#/$defs/SystemMessage",
+                "system": "#/$defs/SystemMessage",
+                "tool": "#/$defs/ToolMessage",
+                "user": "#/$defs/UserMessage"
+              },
+              "propertyName": "role"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/SystemMessage"
+              },
+              {
+                "$ref": "#/$defs/UserMessage"
+              },
+              {
+                "$ref": "#/$defs/AssistantMessage"
+              },
+              {
+                "$ref": "#/$defs/ToolMessage"
+              }
+            ]
+          },
+          "title": "Messages",
+          "type": "array"
+        },
+        "tools": {
+          "items": {
+            "$ref": "#/$defs/FunctionTool"
+          },
+          "title": "Tools",
+          "type": "array"
+        }
+      },
+      "required": [
+        "graph_id",
+        "revision",
+        "inputs"
+      ],
+      "title": "StartRunRequest",
+      "type": "object"
+    },
+    "StartRunResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "waiting_tools",
+            "completed",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "status"
+      ],
+      "title": "StartRunResponse",
+      "type": "object"
+    },
+    "StreamChoice": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "const": 0,
+          "default": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "delta": {
+          "$ref": "#/$defs/StreamDelta"
+        },
+        "finish_reason": {
+          "anyOf": [
+            {
+              "enum": [
+                "stop",
+                "tool_calls",
+                "length"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Finish Reason"
+        }
+      },
+      "required": [
+        "delta"
+      ],
+      "title": "StreamChoice",
+      "type": "object"
+    },
+    "StreamDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "anyOf": [
+            {
+              "const": "assistant",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content"
+        },
+        "tool_calls": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/StreamToolDelta"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Calls"
+        }
+      },
+      "title": "StreamDelta",
+      "type": "object"
+    },
+    "StreamFunctionDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "arguments": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arguments"
+        }
+      },
+      "title": "StreamFunctionDelta",
+      "type": "object"
+    },
+    "StreamOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "include_usage": {
+          "default": false,
+          "title": "Include Usage",
+          "type": "boolean"
+        }
+      },
+      "title": "StreamOptions",
+      "type": "object"
+    },
+    "StreamToolDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Id"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "const": "function",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type"
+        },
+        "function": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StreamFunctionDelta"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "index"
+      ],
+      "title": "StreamToolDelta",
+      "type": "object"
+    },
+    "SystemMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "system",
+            "developer"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/$defs/TextPart"
+              },
+              "minItems": 1,
+              "type": "array"
+            }
+          ],
+          "title": "Content"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "title": "SystemMessage",
+      "type": "object"
+    },
+    "TextPart": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "title": "TextPart",
+      "type": "object"
+    },
+    "TextResponseFormat": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "TextResponseFormat",
+      "type": "object"
+    },
+    "ToolCall": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "function",
+          "title": "Type",
+          "type": "string"
+        },
+        "function": {
+          "$ref": "#/$defs/FunctionCall"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "function"
+      ],
+      "title": "ToolCall",
+      "type": "object"
+    },
+    "ToolChoiceFunction": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ToolChoiceFunction",
+      "type": "object"
+    },
+    "ToolMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "const": "tool",
+          "title": "Role",
+          "type": "string"
+        },
+        "tool_call_id": {
+          "minLength": 1,
+          "title": "Tool Call Id",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        }
+      },
+      "required": [
+        "role",
+        "tool_call_id",
+        "content"
+      ],
+      "title": "ToolMessage",
+      "type": "object"
+    },
+    "ToolResult": {
+      "additionalProperties": false,
+      "properties": {
+        "tool_call_id": {
+          "minLength": 1,
+          "title": "Tool Call Id",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool_call_id",
+        "content"
+      ],
+      "title": "ToolResult",
+      "type": "object"
+    },
+    "ToolResultsRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/$defs/ToolResult"
+          },
+          "minItems": 1,
+          "title": "Results",
+          "type": "array"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "title": "ToolResultsRequest",
+      "type": "object"
+    },
+    "ToolResultsResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "waiting_tools",
+            "completed",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "accepted_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Ids",
+          "type": "array"
+        },
+        "missing_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "run_id",
+        "status",
+        "accepted_ids",
+        "missing_ids"
+      ],
+      "title": "ToolResultsResponse",
+      "type": "object"
+    },
+    "Usage": {
+      "additionalProperties": false,
+      "properties": {
+        "prompt_tokens": {
+          "minimum": 0,
+          "title": "Prompt Tokens",
+          "type": "integer"
+        },
+        "completion_tokens": {
+          "minimum": 0,
+          "title": "Completion Tokens",
+          "type": "integer"
+        },
+        "total_tokens": {
+          "minimum": 0,
+          "title": "Total Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "prompt_tokens",
+        "completion_tokens",
+        "total_tokens"
+      ],
+      "title": "Usage",
+      "type": "object"
+    },
+    "UserMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "const": "user",
+          "title": "Role",
+          "type": "string"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/$defs/TextPart"
+              },
+              "minItems": 1,
+              "type": "array"
+            }
+          ],
+          "title": "Content"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "title": "UserMessage",
+      "type": "object"
+    },
+    "ValidationIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "node_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Node Id"
+        },
+        "edge_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Edge Id"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ValidationIssue",
+      "type": "object"
+    },
+    "ValidationReport": {
+      "additionalProperties": false,
+      "properties": {
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        },
+        "errors": {
+          "items": {
+            "$ref": "#/$defs/ValidationIssue"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ValidationIssue"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "valid",
+        "errors",
+        "warnings"
+      ],
+      "title": "ValidationReport",
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "qwen38-27b-simple",
+  "name": "Qwen 3.8 27B - simple route",
+  "revision": 1,
+  "base_model": "qwen3.8:27b",
+  "inputs": [{"id": "chat", "required": true}],
+  "nodes": [
+    {"id": "input", "type": "input", "input_id": "chat", "position": {"x": 0, "y": 100}},
+    {"id": "llm", "type": "llm", "system_prompt": "Answer the user's request directly.", "tools_enabled": false, "generation": {}, "position": {"x": 280, "y": 100}},
+    {"id": "output", "type": "output", "position": {"x": 560, "y": 100}}
+  ],
+  "edges": [
+    {"id": "input-llm", "source": "input", "target": "llm", "target_port": "request", "kind": "forward"},
+    {"id": "llm-output", "source": "llm", "target": "output", "target_port": "answer", "kind": "forward"}
+  ],
+  "loops": [],
+  "output_node_id": "output"
+}

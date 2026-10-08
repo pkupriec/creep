@@ -1,0 +1,36 @@
+{
+  "name": "codex-agent-team",
+  "version": "0.1.0-creep.3",
+  "description": "Hybrid Codex team workflow with lead/member agents, spec-driven skills, review-cycle guidance, and local prompt shortcuts.",
+  "author": {
+    "name": "Rubab Khan"
+  },
+  "license": "MIT-0",
+  "keywords": [
+    "codex",
+    "agents",
+    "subagents",
+    "software-development",
+    "security",
+    "review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Agent Team",
+    "shortDescription": "Spec-driven hybrid Codex team workflow",
+    "longDescription": "Local Python/FastAPI, React, Docker Compose and external Ollama team workflow with explicit ownership and persistent bounded review.",
+    "developerName": "Rubab Khan",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Plan this work with the Codex hybrid team",
+      "Break this feature into parallel coding, devops, review, and architecture scopes",
+      "Turn this idea into a `.codex/specs` plan"
+    ],
+    "brandColor": "#145A32"
+  }
+}

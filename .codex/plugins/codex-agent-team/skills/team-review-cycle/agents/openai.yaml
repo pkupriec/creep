@@ -1,0 +1,4 @@
+interface:
+  display_name: "Team Review Cycle"
+  short_description: "Run independent PASS or FAIL team reviews"
+  default_prompt: "Use $team-review-cycle to run an independent, evidence-backed review and issue the authorized verdict."

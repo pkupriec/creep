@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "multiple-inputs",
+  "name": "Question, evidence, and optional constraints",
+  "revision": 1,
+  "base_model": "USER_INSTALLED_MODEL",
+  "inputs": [{"id": "chat", "required": true}, {"id": "evidence", "required": true}, {"id": "constraints", "required": false}],
+  "nodes": [
+    {"id": "question", "type": "input", "input_id": "chat", "position": {"x": 0, "y": 0}},
+    {"id": "evidence", "type": "input", "input_id": "evidence", "position": {"x": 0, "y": 160}},
+    {"id": "constraints", "type": "input", "input_id": "constraints", "position": {"x": 0, "y": 320}},
+    {"id": "a", "type": "llm", "system_prompt": "Analyze correctness against all supplied evidence and constraints. An explicit null constraints value means none were supplied.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 280, "y": 40}},
+    {"id": "b", "type": "llm", "system_prompt": "Analyze alternatives against all supplied evidence and constraints. An explicit null constraints value means none were supplied.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 280, "y": 280}},
+    {"id": "s", "type": "llm", "system_prompt": "Synthesize all expert outputs into the final answer.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 560, "y": 160}},
+    {"id": "output", "type": "output", "position": {"x": 840, "y": 160}}
+  ],
+  "edges": [
+    {"id": "qa", "source": "question", "target": "a", "target_port": "question", "kind": "forward"},
+    {"id": "qb", "source": "question", "target": "b", "target_port": "question", "kind": "forward"},
+    {"id": "ea", "source": "evidence", "target": "a", "target_port": "evidence", "kind": "forward"},
+    {"id": "eb", "source": "evidence", "target": "b", "target_port": "evidence", "kind": "forward"},
+    {"id": "ca", "source": "constraints", "target": "a", "target_port": "constraints", "kind": "forward"},
+    {"id": "cb", "source": "constraints", "target": "b", "target_port": "constraints", "kind": "forward"},
+    {"id": "as", "source": "a", "target": "s", "target_port": "correctness", "kind": "forward"},
+    {"id": "bs", "source": "b", "target": "s", "target_port": "alternatives", "kind": "forward"},
+    {"id": "so", "source": "s", "target": "output", "target_port": "answer", "kind": "forward"}
+  ],
+  "loops": [],
+  "output_node_id": "output"
+}

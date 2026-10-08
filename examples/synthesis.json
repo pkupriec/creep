@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "synthesis",
+  "name": "Two experts and synthesis",
+  "revision": 1,
+  "base_model": "USER_INSTALLED_MODEL",
+  "inputs": [{"id": "chat", "required": true}],
+  "nodes": [
+    {"id": "input", "type": "input", "input_id": "chat", "position": {"x": 0, "y": 120}},
+    {"id": "a", "type": "llm", "system_prompt": "Analyze correctness using the supplied inputs. Use tools when needed.", "tools_enabled": true, "generation": {"temperature": 0.2}, "position": {"x": 280, "y": 0}},
+    {"id": "b", "type": "llm", "system_prompt": "Analyze alternatives using the supplied inputs. Use tools when needed.", "tools_enabled": true, "generation": {"temperature": 0.2}, "position": {"x": 280, "y": 240}},
+    {"id": "s", "type": "llm", "system_prompt": "Synthesize every predecessor output into the final answer. Preserve the user's constraints.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 560, "y": 120}},
+    {"id": "output", "type": "output", "position": {"x": 840, "y": 120}}
+  ],
+  "edges": [
+    {"id": "ia", "source": "input", "target": "a", "target_port": "question", "kind": "forward"},
+    {"id": "ib", "source": "input", "target": "b", "target_port": "question", "kind": "forward"},
+    {"id": "as", "source": "a", "target": "s", "target_port": "correctness", "kind": "forward"},
+    {"id": "bs", "source": "b", "target": "s", "target_port": "alternatives", "kind": "forward"},
+    {"id": "so", "source": "s", "target": "output", "target_port": "answer", "kind": "forward"}
+  ],
+  "loops": [],
+  "output_node_id": "output"
+}

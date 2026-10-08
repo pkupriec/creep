@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "feedback",
+  "name": "Seeded draft and critique",
+  "revision": 1,
+  "base_model": "USER_INSTALLED_MODEL",
+  "inputs": [{"id": "chat", "required": true}],
+  "nodes": [
+    {"id": "input", "type": "input", "input_id": "chat", "position": {"x": 0, "y": 100}},
+    {"id": "draft", "type": "llm", "system_prompt": "Draft an answer using the immutable question and the previous critique. On the seeded first iteration, write an initial draft.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 280, "y": 100}},
+    {"id": "critique", "type": "llm", "system_prompt": "Assess the draft. Return strict JSON with payload and control.decision. Use continue when improvement is needed; use stop when the answer satisfies the question. Payload on continue is the critique for the next draft; payload on stop is the final answer.", "tools_enabled": false, "generation": {"temperature": 0.2}, "position": {"x": 560, "y": 100}},
+    {"id": "output", "type": "output", "position": {"x": 840, "y": 100}}
+  ],
+  "edges": [
+    {"id": "question", "source": "input", "target": "draft", "target_port": "question", "kind": "forward"},
+    {"id": "draft-critique", "source": "draft", "target": "critique", "target_port": "draft", "kind": "forward"},
+    {"id": "critique-draft", "source": "critique", "target": "draft", "target_port": "previous_critique", "kind": "feedback", "loop_id": "refine", "initial_value": "No previous critique; write the initial draft."},
+    {"id": "answer", "source": "critique", "target": "output", "target_port": "answer", "kind": "forward"}
+  ],
+  "loops": [{"id": "refine", "node_ids": ["draft", "critique"], "controller_node_id": "critique", "continue_value": "continue", "exit_value": "stop"}],
+  "output_node_id": "output"
+}
